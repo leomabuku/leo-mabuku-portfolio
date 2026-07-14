@@ -1,0 +1,27 @@
+{
+  "name": "leo-mabuku-portfolio",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "refresh": "node scripts/refresh-content.mjs",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/sitemap": "^3.5.1",
+    "@fontsource/cormorant-garamond": "^5.2.6",
+    "@fontsource/dm-sans": "^5.2.6",
+    "@phosphor-icons/web": "^2.1.2",
+    "astro": "^5.12.8",
+    "shiki": "^4.3.1",
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "vitest": "^3.2.4"
+  }
+}

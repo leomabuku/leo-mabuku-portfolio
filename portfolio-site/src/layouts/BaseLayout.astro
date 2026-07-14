@@ -1,0 +1,48 @@
+---
+import '../styles/global.css';
+import profile from '../data/profile.json';
+const { title = profile.name, description = profile.intro } = Astro.props;
+const path = Astro.url.pathname;
+const nav = [['/','Home'],['/work/','Work'],['/about/','About'],['/resume/','Resume'],['/contact/','Contact']];
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} /><meta name="theme-color" content="#090a0a" />
+    <link rel="canonical" href={canonical} /><link rel="icon" href={profile.avatar} type="image/png" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css" />
+    <meta property="og:type" content="website" /><meta property="og:title" content={title} /><meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} /><meta property="og:image" content={profile.avatar} />
+    <title>{title}</title>
+    <script type="application/ld+json" set:html={JSON.stringify({"@context":"https://schema.org","@type":"Person",name:profile.name,jobTitle:profile.title,email:`mailto:${profile.email}`,address:{"@type":"PostalAddress",addressLocality:"Kitwe",addressCountry:"ZM"},sameAs:[profile.github,profile.linkedin]})} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="monogram" href="/" aria-label="Leo Mabuku home"><span>L</span><b>M</b></a>
+      <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false"><i class="ph ph-list"></i></button>
+      <nav aria-label="Primary navigation">
+        {nav.map(([href,label]) => <a href={href} class:list={{active: path === href}}>{label}</a>)}
+      </nav>
+    </header>
+    <main id="main"><slot /></main>
+    <footer class="site-footer">
+      <div><p class="eyebrow">LET'S CONNECT</p><h2>Let’s build something<br/><em>useful</em> together.</h2></div>
+      <div class="footer-links">
+        <a href={`mailto:${profile.email}`}><i class="ph ph-envelope-simple"></i><span>Email<small>{profile.email}</small></span></a>
+        <a href={profile.github} target="_blank"><i class="ph ph-github-logo"></i><span>GitHub<small>github.com/leomabuku</small></span></a>
+        <a href={profile.linkedin} target="_blank"><i class="ph ph-linkedin-logo"></i><span>LinkedIn<small>Leo Mabuku</small></span></a>
+        <a href={`https://wa.me/${profile.phone.replace('+','')}`} target="_blank"><i class="ph ph-whatsapp-logo"></i><span>WhatsApp<small>{profile.phone}</small></span></a>
+      </div>
+      <p class="copyright">© {new Date().getFullYear()} Leo Mabuku · Kitwe, Zambia</p>
+    </footer>
+    <script>
+      const button = document.querySelector('.menu-toggle'); const nav = document.querySelector('.site-header nav');
+      button?.addEventListener('click', () => { const open = button.getAttribute('aria-expanded') === 'true'; button.setAttribute('aria-expanded', String(!open)); nav?.classList.toggle('open'); });
+      const observer = new IntersectionObserver(entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')), {threshold:.12});
+      document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+    </script>
+  </body>
+</html>

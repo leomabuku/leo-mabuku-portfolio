@@ -1,0 +1,18 @@
+{
+  "Final-year-project-TongaLang-": {
+    "hash": "fe9ee009485d19b1ae029946d1898283b91b41bf2c2cf003130f54cd140d9b65",
+    "summary": "An interpreted programming language designed to make programming concepts accessible through Tonga."
+  },
+  "SERC-Mini-OS-system": {
+    "hash": "82326741433ac39c174ab08d5167b55b8487d897c940b2cad36bea3c4583bbd0",
+    "summary": "A compact operating-system project built to explore systems programming from the ground up."
+  },
+  "LifeHarmonyTracker": {
+    "hash": "d54b22dcd44b4079f32a7ba446a47b61abfe9c2c5b7b317c011d73c3737fc087",
+    "summary": "A personal tracking project focused on bringing everyday routines and reflection into one useful interface."
+  },
+  "ZamTrivia1": {
+    "hash": "f765c36e8aea54a0738104009dc21b724dae4a758216535177230ba487d134d2",
+    "summary": "An Android quiz experience covering Zambian geography, history, culture, sport and more."
+  }
+}

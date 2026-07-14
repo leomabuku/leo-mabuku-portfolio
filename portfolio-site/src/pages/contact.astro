@@ -1,0 +1,5 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'; import profile from '../data/profile.json';
+const links=[['ph-envelope-simple','Email',profile.email,`mailto:${profile.email}`],['ph-github-logo','GitHub','github.com/leomabuku',profile.github],['ph-linkedin-logo','LinkedIn','Leo Mabuku',profile.linkedin],['ph-whatsapp-logo','WhatsApp',profile.phone,`https://wa.me/${profile.phone.replace('+','')}`]];
+---
+<BaseLayout title="Contact — Leo Mabuku"><section class="contact-page"><div class="page-hero" data-reveal><p class="eyebrow">Contact</p><h1>Let’s start a<br/><em>useful conversation.</em></h1><p>For software opportunities, collaborations, practical ventures or a thoughtful conversation about an idea.</p></div><div class="contact-list">{links.map(([icon,label,value,href])=><a href={href} target={href.startsWith('http')?'_blank':undefined}><i class={`ph ${icon}`}></i><span><small>{label}</small>{value}</span><i class="ph ph-arrow-up-right"></i></a>)}</div></section></BaseLayout>

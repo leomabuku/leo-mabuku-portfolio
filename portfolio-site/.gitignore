@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.astro/
+.npm-cache/
+.env
+implementation-*.png
+qa-comparison.png
+*.log

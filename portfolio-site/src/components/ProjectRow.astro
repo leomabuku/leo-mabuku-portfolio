@@ -1,0 +1,12 @@
+---
+const { project, index } = Astro.props;
+const url = `https://github.com/leomabuku/${project.repo}`;
+---
+<article class="project-row" data-reveal>
+  <span class="project-number">{String(index + 1).padStart(2,'0')}</span>
+  <div class="project-title"><p class="eyebrow">{project.type}</p><h3>{project.name}</h3><p>{project.summary}</p></div>
+  <div><p class="label">The problem</p><p>{project.problem}</p></div>
+  <div><p class="label">My contribution</p><p>{project.contribution}</p></div>
+  <div><p class="label">Technology</p><p>{project.stack.join(' · ')}</p></div>
+  <a class="repo-link" href={url} target="_blank" aria-label={`View ${project.name} on GitHub`}><i class="ph ph-github-logo"></i><i class="ph ph-arrow-up-right"></i></a>
+</article>

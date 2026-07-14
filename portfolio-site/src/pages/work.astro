@@ -1,0 +1,4 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'; import ProjectRow from '../components/ProjectRow.astro'; import projects from '../data/projects.json';
+---
+<BaseLayout title="Work — Leo Mabuku" description="Selected software projects by Leo Mabuku."><section class="page-hero" data-reveal><p class="eyebrow">Selected work</p><h1>Practical systems.<br/><em>Evidence in the open.</em></h1><p>Projects spanning language design, systems programming, personal tools and locally relevant Android experiences.</p></section><section class="work-page project-list">{projects.map((p,i)=><ProjectRow project={p} index={i}/>)}</section><section class="private-work" data-reveal><p class="eyebrow">Private work</p><h2>Some work stays private.<br/>The thinking can still be shared.</h2><p>Approved private projects will appear here as curated case studies—without source code, client information or sensitive repository metadata.</p></section></BaseLayout>

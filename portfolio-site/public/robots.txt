@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://leo-mabuku.pages.dev/sitemap-index.xml

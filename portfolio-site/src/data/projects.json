@@ -1,0 +1,71 @@
+[
+  {
+    "slug": "tonga-language",
+    "name": "TongaLang",
+    "repo": "Final-year-project-TongaLang-",
+    "type": "Human-first programming language",
+    "language": null,
+    "summary": "An interpreted programming language designed to make programming concepts accessible through Tonga.",
+    "problem": "Most programming languages begin in English, creating an extra barrier for new developers who think and learn in other languages.",
+    "contribution": "Designed and implemented the language as a final-year computer science project.",
+    "stack": [
+      "Python",
+      "Interpreters",
+      "Language design"
+    ],
+    "featured": true,
+    "updatedAt": "2026-02-24T01:51:11Z",
+    "stars": 0
+  },
+  {
+    "slug": "serc-mini-os",
+    "name": "SERC Mini OS",
+    "repo": "SERC-Mini-OS-system",
+    "type": "Educational operating system",
+    "language": "C",
+    "summary": "A compact operating-system project built to explore systems programming from the ground up.",
+    "problem": "Operating-system concepts can feel abstract without a small system that exposes how the pieces work together.",
+    "contribution": "Built a focused systems project in C to explore low-level software concepts.",
+    "stack": [
+      "C",
+      "Systems programming"
+    ],
+    "featured": true,
+    "updatedAt": "2026-05-06T10:03:21Z",
+    "stars": 2
+  },
+  {
+    "slug": "life-harmony-tracker",
+    "name": "LifeHarmonyTracker",
+    "repo": "LifeHarmonyTracker",
+    "type": "Personal wellbeing tracker",
+    "language": "JavaScript",
+    "summary": "A personal tracking project focused on bringing everyday routines and reflection into one useful interface.",
+    "problem": "Keeping track of different parts of daily life often means switching between disconnected tools.",
+    "contribution": "Created the product concept and developed the JavaScript application.",
+    "stack": [
+      "JavaScript",
+      "Product design"
+    ],
+    "featured": true,
+    "updatedAt": "2025-10-14T21:22:32Z",
+    "stars": 0
+  },
+  {
+    "slug": "zam-trivia",
+    "name": "ZamTrivia",
+    "repo": "ZamTrivia1",
+    "type": "Zambian knowledge quiz",
+    "language": "Kotlin",
+    "summary": "An Android quiz experience covering Zambian geography, history, culture, sport and more.",
+    "problem": "Local knowledge deserves engaging digital experiences that are relevant to Zambian learners and players.",
+    "contribution": "Built the Kotlin Android application and structured its Zambia-focused quiz content.",
+    "stack": [
+      "Kotlin",
+      "Android"
+    ],
+    "featured": true,
+    "updatedAt": "2026-04-22T09:08:20Z",
+    "stars": 0
+  }
+]
