@@ -3,6 +3,10 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '17 4 * * *'
+  push:
+    branches: [master]
+    paths:
+      - '.github/workflows/refresh-portfolio.yml'
 permissions:
   contents: write
   models: read
