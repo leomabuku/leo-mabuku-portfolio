@@ -1,8 +1,4 @@
 {
-  "Final-year-project-TongaLang-": {
-    "hash": "fe9ee009485d19b1ae029946d1898283b91b41bf2c2cf003130f54cd140d9b65",
-    "summary": "An interpreted programming language designed to make programming concepts accessible through Tonga."
-  },
   "SERC-Mini-OS-system": {
     "hash": "82326741433ac39c174ab08d5167b55b8487d897c940b2cad36bea3c4583bbd0",
     "summary": "A compact operating-system project built to explore systems programming from the ground up."
@@ -14,5 +10,9 @@
   "ZamTrivia1": {
     "hash": "f765c36e8aea54a0738104009dc21b724dae4a758216535177230ba487d134d2",
     "summary": "An Android quiz experience covering Zambian geography, history, culture, sport and more."
+  },
+  "leo-mabuku-portfolio": {
+    "hash": "d154cf62dd0a5943314071b88a9ea92ef9f5fa719c0b599dd5542eff79d65227",
+    "summary": "this is repo for Leo Mabuku's portfolio website"
   }
 }

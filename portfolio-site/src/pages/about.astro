@@ -1,4 +1,27 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro'; import profile from '../data/profile.json';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AvailabilityBanner from '../components/AvailabilityBanner.astro';
+import { qualities } from '../data/site';
+const focus = ['Completing the BSc in Computer Science', 'Advancing TongaLang', 'Operating and improving a Starlink internet service', 'Developing SubTrack BH', 'Strengthening web and Android skills', 'Learning networking and cybersecurity'];
 ---
-<BaseLayout title="About — Leo Mabuku"><section class="page-hero about-hero" data-reveal><p class="eyebrow">About Leo</p><h1>Developer’s discipline.<br/><em>Entrepreneur’s perspective.</em></h1><p>I’m Leo Mabuku, a software developer and entrepreneur based in Kitwe. I’m interested in the space where technical problem-solving meets useful, practical value.</p></section><section class="about-grid"><div data-reveal><h2>How I approach work</h2><p>I begin by understanding the real problem, then choose tools that keep the solution clear and maintainable. My public work explores programming languages, operating systems, personal software and Zambian digital experiences.</p><p>I’m continuing to learn, build and turn ideas into systems people can use.</p></div><aside data-reveal><p class="label">Based in</p><p>{profile.location}</p><p class="label">Focus</p><p>Software development<br/>Entrepreneurship<br/>Product thinking</p><p class="label">Currently</p><p>Open to meaningful opportunities and conversations.</p></aside></section></BaseLayout>
+<BaseLayout title="About Leo Mabuku | Developer and Entrepreneur" description="Leo Mabuku’s path from entrepreneurship into Computer Science, software development and practical technology products.">
+  <section class="page-hero about-hero" data-reveal><p class="eyebrow">About Leo</p><h1>Developer’s discipline.<br/><em>Entrepreneur’s perspective.</em></h1><p>My path into technology has been shaped by both entrepreneurship and formal Computer Science education.</p></section>
+  <section class="story section-shell">
+    <aside data-reveal><p class="eyebrow">The short version</p><p class="story-lede">Fourth-year Computer Science student building toward systems-oriented software engineering and technology entrepreneurship.</p></aside>
+    <div class="prose" data-reveal>
+      <h2>Business came first.</h2>
+      <p>In February 2022, I started Leo M. Suppliers as a field-based fleece blanket business. The products were sourced from Botswana with help from my father, while my mother and sister supported field sales. Working directly through communities taught me the value of trust, visibility and customer relationships.</p>
+      <p>The business was registered with PACRA in June 2022. On 14 September, we opened a physical shop at Plot 98, John Hunt Way in Livingstone. It initially operated as a clothing and bedding store before transitioning into furniture toward the end of that year.</p>
+      <p>As owner and an active sales representative, I handled customer engagement, ordering, stock decisions, marketing, deliveries and day-to-day operations. I also learned furniture assembly as the product range changed.</p>
+      <h2>Computer Science connected the pieces.</h2>
+      <p>I began a Bachelor of Science in Computer Science at The Copperbelt University through a special academic calendar on 8 May 2023. After completing the accelerated first-year calendar in December, the cohort joined the mainstream academic calendar in January 2024.</p>
+      <p>Software development became the place where analytical and entrepreneurial interests connected. My projects now span programming languages, Android products, operating-system simulation and tools created from real operating needs.</p>
+      <p>TongaLang explores how Tonga-based syntax can reduce introductory learning friction. SubTrack BH came directly from managing an active Starlink internet service. CBU-FIND applies Android and cloud services to a practical campus problem.</p>
+      <h2>How I build.</h2>
+      <p>My process starts with research and documentation. I break the problem into features and relationships, create a working core, test failure paths and then refine the experience. When a project requires unfamiliar technology, I learn it in context and apply it directly.</p>
+    </div>
+  </section>
+  <section class="qualities section-shell"><div class="section-heading" data-reveal><p class="eyebrow">Core qualities</p><h2>What I bring to<br/><em>the work.</em></h2></div><div class="quality-grid">{qualities.map(([title, text], index) => <article data-reveal><span>{String(index + 1).padStart(2, '0')}</span><h3>{title}</h3><p>{text}</p></article>)}</div></section>
+  <section class="current-focus section-shell" data-reveal><div><p class="eyebrow">Currently focused on</p><h2>Building capability<br/><em>that compounds.</em></h2></div><ul>{focus.map((item) => <li><i class="ph ph-arrow-up-right" aria-hidden="true"></i>{item}</li>)}</ul></section>
+  <AvailabilityBanner />
+</BaseLayout>

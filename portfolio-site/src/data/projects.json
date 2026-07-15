@@ -1,54 +1,18 @@
 [
   {
-    "slug": "tonga-language",
-    "name": "TongaLang",
-    "repo": "Final-year-project-TongaLang-",
-    "type": "Human-first programming language",
-    "language": null,
-    "summary": "An interpreted programming language designed to make programming concepts accessible through Tonga.",
-    "problem": "Most programming languages begin in English, creating an extra barrier for new developers who think and learn in other languages.",
-    "contribution": "Designed and implemented the language as a final-year computer science project.",
+    "slug": "leo-mabuku-portfolio",
+    "name": "leo-mabuku-portfolio",
+    "repo": "leo-mabuku-portfolio",
+    "type": "Astro",
+    "language": "Astro",
+    "summary": "this is repo for Leo Mabuku's portfolio website",
+    "problem": "A practical problem explored through software.",
+    "contribution": "Designed and developed the public project.",
     "stack": [
-      "Python",
-      "Interpreters",
-      "Language design"
+      "Astro"
     ],
     "featured": true,
-    "updatedAt": "2026-02-24T01:51:11Z",
-    "stars": 0
-  },
-  {
-    "slug": "serc-mini-os",
-    "name": "SERC Mini OS",
-    "repo": "SERC-Mini-OS-system",
-    "type": "Educational operating system",
-    "language": "C",
-    "summary": "A compact operating-system project built to explore systems programming from the ground up.",
-    "problem": "Operating-system concepts can feel abstract without a small system that exposes how the pieces work together.",
-    "contribution": "Built a focused systems project in C to explore low-level software concepts.",
-    "stack": [
-      "C",
-      "Systems programming"
-    ],
-    "featured": true,
-    "updatedAt": "2026-05-06T10:03:21Z",
-    "stars": 2
-  },
-  {
-    "slug": "life-harmony-tracker",
-    "name": "LifeHarmonyTracker",
-    "repo": "LifeHarmonyTracker",
-    "type": "Personal wellbeing tracker",
-    "language": "JavaScript",
-    "summary": "A personal tracking project focused on bringing everyday routines and reflection into one useful interface.",
-    "problem": "Keeping track of different parts of daily life often means switching between disconnected tools.",
-    "contribution": "Created the product concept and developed the JavaScript application.",
-    "stack": [
-      "JavaScript",
-      "Product design"
-    ],
-    "featured": true,
-    "updatedAt": "2025-10-14T21:22:32Z",
+    "updatedAt": "2026-07-14T23:11:02Z",
     "stars": 0
   },
   {

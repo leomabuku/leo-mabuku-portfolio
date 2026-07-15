@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
 
-export const FALLBACK_REPOS = ['Final-year-project-TongaLang-', 'SERC-Mini-OS-system', 'LifeHarmonyTracker', 'ZamTrivia1'];
+export const FALLBACK_REPOS = ['CBU-FIND', 'SERC-Mini-OS-system', 'LifeHarmonyTracker', 'ZamTrivia1'];
 export function chooseFeatured(repos) {
   const clean = repos.filter(r => !r.fork && !r.archived && !/^ZamTrivia[.]*$/.test(r.name));
   const tagged = clean.filter(r => r.topics?.includes('portfolio'));

@@ -1,5 +1,39 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro'; import profile from '../data/profile.json';
-const links=[['ph-envelope-simple','Email',profile.email,`mailto:${profile.email}`],['ph-github-logo','GitHub','github.com/leomabuku',profile.github],['ph-linkedin-logo','LinkedIn','Leo Mabuku',profile.linkedin],['ph-whatsapp-logo','WhatsApp',profile.phone,`https://wa.me/${profile.phone.replace('+','')}`]];
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { profile, whatsappUrl } from '../data/site';
+const links = [
+  ['ph-envelope-simple', 'Email', profile.email, `mailto:${profile.email}`],
+  ['ph-github-logo', 'GitHub', 'github.com/leomabuku', profile.github],
+  ['ph-linkedin-logo', 'LinkedIn', 'Leo Mabuku', profile.linkedin],
+  ['ph-whatsapp-logo', 'WhatsApp', profile.phone, whatsappUrl],
+];
 ---
-<BaseLayout title="Contact — Leo Mabuku"><section class="contact-page"><div class="page-hero" data-reveal><p class="eyebrow">Contact</p><h1>Let’s start a<br/><em>useful conversation.</em></h1><p>For software opportunities, collaborations, practical ventures or a thoughtful conversation about an idea.</p></div><div class="contact-list">{links.map(([icon,label,value,href])=><a href={href} target={href.startsWith('http')?'_blank':undefined}><i class={`ph ${icon}`}></i><span><small>{label}</small>{value}</span><i class="ph ph-arrow-up-right"></i></a>)}</div></section></BaseLayout>
+<BaseLayout title="Contact Leo Mabuku" description="Contact Leo Mabuku about graduate software roles, internships, freelance development and technical collaborations.">
+  <section class="contact-page">
+    <div class="page-hero" data-reveal><p class="eyebrow">Contact</p><h1>Let’s start a<br/><em>useful conversation.</em></h1><p>{profile.availability}</p><p class="contact-location"><i class="ph ph-map-pin" aria-hidden="true"></i>{profile.location}</p></div>
+    <div class="contact-panel" data-reveal>
+      <div class="contact-list">{links.map(([icon, label, value, href]) => <a href={href} target={href.startsWith('http') ? '_blank' : undefined} rel={href.startsWith('http') ? 'noreferrer' : undefined}><i class={`ph ${icon}`} aria-hidden="true"></i><span><small>{label}</small><strong>{value}</strong></span><i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>)}</div>
+      <form class="contact-form" aria-labelledby="contact-form-title">
+        <div><p class="eyebrow">Send an email</p><h2 id="contact-form-title">Tell me what you’re working on.</h2><p>Your email application will open with this message—nothing is stored by this website.</p></div>
+        <label>Your name<input name="name" autocomplete="name" required /></label>
+        <label>Your email<input name="email" type="email" autocomplete="email" required /></label>
+        <label>Opportunity or subject<input name="subject" required /></label>
+        <label>Message<textarea name="message" rows="5" required></textarea></label>
+        <button class="button" type="submit">Open email message <i class="ph ph-arrow-right" aria-hidden="true"></i></button>
+        <p class="form-status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+  <script>
+    const form = document.querySelector<HTMLFormElement>('.contact-form');
+    form?.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const data = new FormData(form);
+      const body = `Hello Leo,\n\n${data.get('message')}\n\nFrom: ${data.get('name')} (${data.get('email')})`;
+      window.location.href = `mailto:leokmabuku@gmail.com?subject=${encodeURIComponent(String(data.get('subject')))}&body=${encodeURIComponent(body)}`;
+      const status = form.querySelector<HTMLElement>('.form-status');
+      if (status) status.textContent = 'Your email application should now be opening.';
+    });
+  </script>
+</BaseLayout>

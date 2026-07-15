@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AvailabilityBanner from '../../components/AvailabilityBanner.astro';
+import { projects, type Project } from '../../data/site';
+
+export function getStaticPaths() {
+  return projects.map((project) => ({ params: { slug: project.slug }, props: { project } }));
+}
+
+const { project } = Astro.props as { project: Project };
+const currentIndex = projects.findIndex((item) => item.slug === project.slug);
+const previous = projects[(currentIndex - 1 + projects.length) % projects.length];
+const next = projects[(currentIndex + 1) % projects.length];
+const projectSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareSourceCode',
+  name: project.name,
+  description: project.shortDescription,
+  codeRepository: project.repository || undefined,
+  programmingLanguage: project.technologies,
+  author: { '@type': 'Person', name: 'Leo Mabuku' },
+};
+---
+<BaseLayout title={`${project.name} Case Study | Leo Mabuku`} description={project.shortDescription} schema={projectSchema}>
+  <article class="case-study">
+    <header class="case-hero section-shell">
+      <a class="back-link" href="/work/"><i class="ph ph-arrow-left" aria-hidden="true"></i> Back to work</a>
+      <div class="case-title" data-reveal><p class="eyebrow">{project.type}</p><h1>{project.name}</h1><p>{project.shortDescription}</p><div class="case-badges"><span>{project.status}</span><span>{project.year}</span><span>{project.repositoryVisibility === 'public' ? 'Public repository' : 'Private source'}</span></div></div>
+      {project.cover ? <figure class="case-cover" data-reveal><img src={project.cover} alt={project.coverAlt} /><figcaption>Verified project evidence from the current implementation.</figcaption></figure> : <div class="case-cover case-cover--system" aria-label={`${project.name} system overview`} data-reveal><span>{project.category[0]}</span><strong>{project.name}</strong><small>{project.technologies.join(' · ')}</small></div>}
+      <dl class="case-facts" data-reveal><div><dt>Role</dt><dd>{project.role}</dd></div><div><dt>Status</dt><dd>{project.status}</dd></div><div><dt>Year</dt><dd>{project.year}</dd></div><div><dt>Stack</dt><dd>{project.technologies.join(' · ')}</dd></div></dl>
+    </header>
+
+    <section class="case-section case-problem section-shell" data-reveal><div><p class="eyebrow">01 · Context</p><h2>The problem</h2></div><div><p class="case-lede">{project.problem}</p><h3>The response</h3><p>{project.solution}</p></div></section>
+
+    <section class="case-section section-shell" data-reveal><div><p class="eyebrow">02 · Contribution</p><h2>What I built</h2></div><ul class="numbered-list">{project.contributions.map((item, index) => <li><span>{String(index + 1).padStart(2, '0')}</span><p>{item}</p></li>)}</ul></section>
+
+    <section class="case-features section-shell" data-reveal><div class="section-heading"><p class="eyebrow">03 · Implemented evidence</p><h2>Current<br/><em>capabilities.</em></h2></div><div class="feature-grid">{project.features.map((feature) => <div><i class="ph ph-check" aria-hidden="true"></i><span>{feature}</span></div>)}</div></section>
+
+    {project.slug === 'tongalang' && <section class="architecture section-shell" data-reveal><div class="section-heading"><p class="eyebrow">Execution pipeline</p><h2>From source to<br/><em>feedback.</em></h2></div><ol aria-label="TongaLang interpreter pipeline"><li>Source <small>.tg program</small></li><li>Lexer <small>tokens</small></li><li>Parser <small>grammar</small></li><li>AST <small>structure</small></li><li>Interpreter <small>runtime</small></li><li>Output <small>or bilingual error</small></li></ol></section>}
+
+    {project.challenges.length > 0 && <section class="case-section section-shell" data-reveal><div><p class="eyebrow">04 · Engineering</p><h2>Hard parts,<br/><em>clear decisions.</em></h2></div><div class="challenge-list">{project.challenges.map((challenge) => <article><h3>{challenge.title}</h3><p>{challenge.description}</p></article>)}</div></section>}
+
+    <section class="case-section section-shell" data-reveal><div><p class="eyebrow">05 · Reflection</p><h2>What I learned</h2></div><div><div class="tag-list tag-list--large">{project.lessons.map((lesson) => <span>{lesson}</span>)}</div>{project.plannedFeatures.length > 0 && <div class="planned"><h3>Planned or still in development</h3><ul>{project.plannedFeatures.map((item) => <li>{item}</li>)}</ul></div>}<p class="evidence-note"><i class="ph ph-seal-check" aria-hidden="true"></i>{project.evidence}</p></div></section>
+
+    <section class="case-links section-shell" data-reveal>
+      <div><p class="eyebrow">Project access</p><h2>{project.repositoryVisibility === 'public' ? 'Inspect the source.' : 'Source remains private.'}</h2></div>
+      <div class="actions">{project.repository ? <a class="button" href={project.repository} target="_blank" rel="noreferrer">View on GitHub <i class="ph ph-arrow-up-right" aria-hidden="true"></i></a> : <span class="private-access"><i class="ph ph-lock-key" aria-hidden="true"></i>Private repository · details shared without exposing source</span>}{project.liveDemo && <a class="text-link" href={project.liveDemo} target="_blank" rel="noreferrer">View live project <i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>}</div>
+    </section>
+
+    <nav class="case-nav section-shell" aria-label="Other case studies"><a href={`/work/${previous.slug}/`}><small>Previous project</small><strong><i class="ph ph-arrow-left" aria-hidden="true"></i>{previous.name}</strong></a><a href={`/work/${next.slug}/`}><small>Next project</small><strong>{next.name}<i class="ph ph-arrow-right" aria-hidden="true"></i></strong></a></nav>
+  </article>
+  <AvailabilityBanner />
+</BaseLayout>
