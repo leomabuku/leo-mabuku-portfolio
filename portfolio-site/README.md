@@ -54,6 +54,6 @@ Pushes to `master` deploy automatically through the existing Cloudflare Pages co
 
 ## Public repository refresh
 
-Apply the `portfolio` GitHub topic to public repositories that should be eligible for automated refresh. Private repositories are represented only through manually approved case-study content. The workflow must never fetch or publish private source or subscriber information.
+The repositories used by the current case studies are explicitly included in `scripts/content-utils.mjs`, so they continue to refresh even when a GitHub topic is missing. Apply the `portfolio` topic to any new public repository that should become eligible for automated refresh. Forks, archived repositories and known empty or duplicate repositories remain excluded. The workflow must never fetch or publish private source, subscriber records or credentials.
 
 See `PORTFOLIO_CONTENT_CHECKLIST.md` for remaining launch items.

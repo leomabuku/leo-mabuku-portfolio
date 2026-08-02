@@ -9,13 +9,21 @@ describe('curated portfolio data', () => {
 
   it('never exposes links for private repositories', () => {
     const privateProjects = projects.filter((project) => project.repositoryVisibility === 'private');
-    expect(privateProjects.length).toBeGreaterThan(0);
     privateProjects.forEach((project) => expect(project.repository).toBeNull());
   });
 
   it('keeps every public repository on Leo Mabuku’s GitHub account', () => {
-    projects.filter((project) => project.repository).forEach((project) => {
-      expect(project.repository).toMatch(/^https:\/\/github\.com\/leomabuku\//);
+    const repositoryUrls = projects.flatMap((project) => [
+      ...(project.repository ? [project.repository] : []),
+      ...(project.additionalRepositories ?? []).map((repository) => repository.url),
+    ]);
+    repositoryUrls.forEach((repository) => expect(repository).toMatch(/^https:\/\/github\.com\/leomabuku\//));
+  });
+
+  it('links every current project to public source', () => {
+    projects.forEach((project) => {
+      expect(project.repositoryVisibility).toBe('public');
+      expect(project.repository).toBeTruthy();
     });
   });
 

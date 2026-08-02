@@ -1,11 +1,28 @@
 import { createHash } from 'node:crypto';
 
-export const FALLBACK_REPOS = ['CBU-FIND', 'SERC-Mini-OS-system', 'LifeHarmonyTracker', 'ZamTrivia1'];
+export const PORTFOLIO_REPOS = [
+  'PROJECT',
+  'SubTrackBH',
+  'CBU-FIND',
+  'CBU-FIND-WEB',
+  'ZamTrivia1',
+  'SERC-Mini-OS-system',
+  'LifeHarmonyTracker',
+  'leo-mabuku-portfolio',
+];
+
+const EXCLUDED_REPOS = new Set(['ZamTrivia', 'serc_mini_os']);
+
 export function chooseFeatured(repos) {
-  const clean = repos.filter(r => !r.fork && !r.archived && !/^ZamTrivia[.]*$/.test(r.name));
-  const tagged = clean.filter(r => r.topics?.includes('portfolio'));
-  const selected = tagged.length ? tagged : clean.filter(r => FALLBACK_REPOS.includes(r.name));
-  return selected.sort((a,b) => FALLBACK_REPOS.indexOf(a.name) - FALLBACK_REPOS.indexOf(b.name));
+  const approved = new Set(PORTFOLIO_REPOS);
+  const clean = repos.filter(r => !r.fork && !r.archived && !EXCLUDED_REPOS.has(r.name));
+  const selected = clean.filter(r => approved.has(r.name) || r.topics?.includes('portfolio'));
+  return selected.sort((a, b) => {
+    const aIndex = PORTFOLIO_REPOS.indexOf(a.name);
+    const bIndex = PORTFOLIO_REPOS.indexOf(b.name);
+    if (aIndex !== -1 || bIndex !== -1) return (aIndex === -1 ? Number.MAX_SAFE_INTEGER : aIndex) - (bIndex === -1 ? Number.MAX_SAFE_INTEGER : bIndex);
+    return a.name.localeCompare(b.name);
+  });
 }
 export function contentHash(value) { return createHash('sha256').update(JSON.stringify(value)).digest('hex'); }
 export function safeSummary({ cached, description, generated }) { return generated?.trim() || cached?.trim() || description?.trim() || 'A public software project by Leo Mabuku.'; }

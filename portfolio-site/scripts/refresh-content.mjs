@@ -32,9 +32,9 @@ try {
   for (const repo of repos) {
     const previous=oldProjects.find(p=>p.repo===repo.name)||{}; const text=await readme(repo.name); const hash=contentHash({description:repo.description,text});
     let generated=''; if(cache[repo.name]?.hash!==hash) generated=await generate(repo,text);
-    const summary=safeSummary({generated,cached:cache[repo.name]?.summary||previous.summary,description:repo.description});
+    const summary=safeSummary({generated,cached:previous.summary||cache[repo.name]?.summary,description:repo.description});
     cache[repo.name]={hash,summary};
-    refreshed.push({...previous,slug:previous.slug||repo.name.toLowerCase(),name:previous.name||repo.name,repo:repo.name,type:previous.type||repo.language||'Software project',language:repo.language,summary,problem:previous.problem||'A practical problem explored through software.',contribution:previous.contribution||'Designed and developed the public project.',stack:previous.stack?.length?previous.stack:[repo.language].filter(Boolean),featured:true,updatedAt:repo.pushed_at,stars:repo.stargazers_count});
+    refreshed.push({...previous,slug:previous.slug||repo.name.toLowerCase(),name:previous.name||repo.name,repo:repo.name,repositoryUrl:repo.html_url,description:repo.description,type:previous.type||repo.language||'Software project',language:repo.language,summary,problem:previous.problem||'A practical problem explored through software.',contribution:previous.contribution||'Designed and developed the public project.',stack:previous.stack?.length?previous.stack:[repo.language].filter(Boolean),topics:repo.topics||[],defaultBranch:repo.default_branch,featured:true,updatedAt:repo.pushed_at,stars:repo.stargazers_count,forks:repo.forks_count,openIssues:repo.open_issues_count});
   }
   if(refreshed.length) await fs.writeFile(projectsPath,JSON.stringify(refreshed,null,2)+'\n');
   await fs.writeFile(cachePath,JSON.stringify(cache,null,2)+'\n');

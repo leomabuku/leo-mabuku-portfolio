@@ -1,19 +1,126 @@
 [
   {
-    "slug": "leo-mabuku-portfolio",
-    "name": "leo-mabuku-portfolio",
-    "repo": "leo-mabuku-portfolio",
-    "type": "Astro",
-    "language": "Astro",
-    "summary": "this is repo for Leo Mabuku's portfolio website",
-    "problem": "A practical problem explored through software.",
-    "contribution": "Designed and developed the public project.",
+    "slug": "tongalang",
+    "name": "TongaLang",
+    "repo": "PROJECT",
+    "type": "Educational programming language",
+    "language": "Python",
+    "summary": "An educational interpreted programming language that uses Tonga-based keywords, bilingual feedback and a desktop IDE to support introductory programming.",
+    "problem": "Beginners may need to understand programming concepts and unfamiliar English syntax at the same time.",
+    "contribution": "Researched, designed, implemented and tested the language, interpreter and Tkinter IDE.",
     "stack": [
-      "Astro"
+      "Python",
+      "PLY",
+      "Tkinter",
+      "Pytest"
     ],
     "featured": true,
-    "updatedAt": "2026-08-01T05:29:13Z",
-    "stars": 0
+    "repositoryUrl": "https://github.com/leomabuku/PROJECT",
+    "description": "TongaLang: an educational programming language using Tonga-based keywords, implemented in Python.",
+    "topics": [
+      "educational-software",
+      "portfolio",
+      "programming-language",
+      "python",
+      "tonga"
+    ],
+    "defaultBranch": "main",
+    "updatedAt": "2026-08-02T22:12:24Z",
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0
+  },
+  {
+    "slug": "subtrack-bh",
+    "name": "SubTrack BH",
+    "repo": "SubTrackBH",
+    "type": "Internet-service operations platform",
+    "language": "Kotlin",
+    "summary": "A local-first Android platform for managing subscribers, billing, accounting and service operations for a boarding-house internet service.",
+    "problem": "Subscription, payment, expiry and device records become unreliable when managed across memory, messages and separate records.",
+    "contribution": "Designed the business rules and built separate admin and subscriber applications around a live service workflow.",
+    "stack": [
+      "Kotlin",
+      "Jetpack Compose",
+      "Room",
+      "Firebase"
+    ],
+    "featured": true,
+    "repositoryUrl": "https://github.com/leomabuku/SubTrackBH",
+    "description": "Android subscription, billing, accounting, and subscriber management platform for boarding-house internet services",
+    "topics": [
+      "android",
+      "firebase",
+      "jetpack-compose",
+      "kotlin",
+      "room-database",
+      "subscription-management"
+    ],
+    "defaultBranch": "main",
+    "updatedAt": "2026-07-15T00:04:59Z",
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0
+  },
+  {
+    "slug": "cbu-find",
+    "name": "CBU-FIND Android",
+    "repo": "CBU-FIND",
+    "type": "Campus lost-and-found application",
+    "language": "Kotlin",
+    "summary": "The native Android client for a shared campus lost-and-found service with reports, search, profiles, media and private real-time chat.",
+    "problem": "Lost-property information is fragmented across chats, noticeboards and word of mouth.",
+    "contribution": "Built the Kotlin and Jetpack Compose client against shared Firebase and Cloudinary services.",
+    "stack": [
+      "Kotlin",
+      "Jetpack Compose",
+      "Firebase",
+      "Cloudinary"
+    ],
+    "featured": true,
+    "repositoryUrl": "https://github.com/leomabuku/CBU-FIND",
+    "description": "A vibrant Android lost-and-found app for Copperbelt University students, built with Kotlin, Jetpack Compose, Firebase and Cloudinary.",
+    "topics": [
+      "android",
+      "campus-app",
+      "cloudinary",
+      "firebase",
+      "firestore",
+      "jetpack-compose",
+      "kotlin",
+      "lost-and-found"
+    ],
+    "defaultBranch": "main",
+    "updatedAt": "2026-07-17T15:01:34Z",
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 1
+  },
+  {
+    "slug": "cbu-find-web",
+    "name": "CBU-FIND Web",
+    "repo": "CBU-FIND-WEB",
+    "type": "Responsive campus web client",
+    "language": "TypeScript",
+    "summary": "A responsive TypeScript web client that shares CBU-FIND accounts, reports, conversations and returned-item state with the Android application.",
+    "problem": "The campus service needs to remain accessible to users who do not have the Android application installed.",
+    "contribution": "Built and deployed the companion web client on Cloudflare Workers using the shared Firebase data contract.",
+    "stack": [
+      "TypeScript",
+      "React",
+      "Next.js",
+      "Firebase",
+      "Cloudflare Workers"
+    ],
+    "featured": true,
+    "repositoryUrl": "https://github.com/leomabuku/CBU-FIND-WEB",
+    "description": "Responsive web client for CBU FIND, connected to the Android app through Firebase.",
+    "topics": [],
+    "defaultBranch": "main",
+    "updatedAt": "2026-07-17T15:00:24Z",
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 1
   },
   {
     "slug": "zam-trivia",
@@ -21,15 +128,105 @@
     "repo": "ZamTrivia1",
     "type": "Zambian knowledge quiz",
     "language": "Kotlin",
-    "summary": "An Android quiz experience covering Zambian geography, history, culture, sport and more.",
+    "summary": "An Android quiz experience covering ten Zambia-focused categories with timed play, skipped-question review and a local leaderboard.",
     "problem": "Local knowledge deserves engaging digital experiences that are relevant to Zambian learners and players.",
     "contribution": "Built the Kotlin Android application and structured its Zambia-focused quiz content.",
     "stack": [
       "Kotlin",
-      "Android"
+      "Android",
+      "ViewModel",
+      "SharedPreferences"
     ],
     "featured": true,
+    "repositoryUrl": "https://github.com/leomabuku/ZamTrivia1",
+    "description": "ZamTrivia is an Android quiz application built in Kotlin that tests users on Zambia based knowledge across categories such as geography, politics, history, culture, tourism, sports, education, pop culture, national symbols, and current affairs.",
+    "topics": [
+      "portfolio",
+      "portfolio-website",
+      "quiz-app"
+    ],
+    "defaultBranch": "master",
     "updatedAt": "2026-04-22T09:08:20Z",
-    "stars": 0
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0
+  },
+  {
+    "slug": "serc-mini-os",
+    "name": "SERC Mini-OS",
+    "repo": "SERC-Mini-OS-system",
+    "type": "Operating-systems simulator",
+    "language": "C",
+    "summary": "A C-based emergency-response simulator that makes CPU scheduling, memory allocation, IPC and deadlock-safety concepts visible.",
+    "problem": "Core operating-system algorithms are difficult to understand when process and resource state remains abstract.",
+    "contribution": "Implemented the systems algorithms, console workflow, Raylib dashboard and regression targets.",
+    "stack": [
+      "C",
+      "Raylib",
+      "Win32",
+      "GCC"
+    ],
+    "featured": true,
+    "repositoryUrl": "https://github.com/leomabuku/SERC-Mini-OS-system",
+    "description": null,
+    "topics": [],
+    "defaultBranch": "main",
+    "updatedAt": "2026-05-06T10:03:21Z",
+    "stars": 2,
+    "forks": 0,
+    "openIssues": 0
+  },
+  {
+    "slug": "lifeharmonytracker",
+    "name": "LifeHarmonyTracker",
+    "repo": "LifeHarmonyTracker",
+    "type": "Personal productivity prototype",
+    "language": "JavaScript",
+    "summary": "A React Native and Flask prototype combining calendar, focus, finance, notification and screen-time workflows with synchronisation foundations.",
+    "problem": "Daily planning, focus, spending and screen-time information often live in disconnected tools.",
+    "contribution": "Developed the mobile modules, API routes, persistence models and offline-sync structure.",
+    "stack": [
+      "JavaScript",
+      "React Native",
+      "Flask",
+      "SQLAlchemy"
+    ],
+    "featured": true,
+    "repositoryUrl": "https://github.com/leomabuku/LifeHarmonyTracker",
+    "description": null,
+    "topics": [],
+    "defaultBranch": "main",
+    "updatedAt": "2025-10-14T21:22:32Z",
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0
+  },
+  {
+    "slug": "leo-mabuku-portfolio",
+    "name": "Leo Mabuku Portfolio",
+    "repo": "leo-mabuku-portfolio",
+    "type": "Astro portfolio website",
+    "language": "Astro",
+    "summary": "A responsive editorial portfolio presenting verified software case studies, business experience, resume information and direct contact paths.",
+    "problem": "A repository list alone does not explain technical decisions, product thinking or entrepreneurial experience.",
+    "contribution": "Designed and developed the content architecture, responsive interface, SEO and automated repository refresh workflow.",
+    "stack": [
+      "Astro",
+      "TypeScript",
+      "CSS",
+      "Cloudflare Pages"
+    ],
+    "featured": true,
+    "repositoryUrl": "https://github.com/leomabuku/leo-mabuku-portfolio",
+    "description": "this is repo for Leo Mabuku's portfolio website",
+    "topics": [
+      "portfolio",
+      "portfolio-website"
+    ],
+    "defaultBranch": "master",
+    "updatedAt": "2026-08-02T21:32:58Z",
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0
   }
 ]

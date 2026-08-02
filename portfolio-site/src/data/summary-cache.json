@@ -1,18 +1,34 @@
 {
   "SERC-Mini-OS-system": {
     "hash": "82326741433ac39c174ab08d5167b55b8487d897c940b2cad36bea3c4583bbd0",
-    "summary": "A compact operating-system project built to explore systems programming from the ground up."
+    "summary": "A C-based emergency-response simulator that makes CPU scheduling, memory allocation, IPC and deadlock-safety concepts visible."
   },
   "LifeHarmonyTracker": {
     "hash": "d54b22dcd44b4079f32a7ba446a47b61abfe9c2c5b7b317c011d73c3737fc087",
-    "summary": "A personal tracking project focused on bringing everyday routines and reflection into one useful interface."
+    "summary": "A React Native and Flask prototype combining calendar, focus, finance, notification and screen-time workflows with synchronisation foundations."
   },
   "ZamTrivia1": {
     "hash": "f765c36e8aea54a0738104009dc21b724dae4a758216535177230ba487d134d2",
-    "summary": "An Android quiz experience covering Zambian geography, history, culture, sport and more."
+    "summary": "An Android quiz experience covering ten Zambia-focused categories with timed play, skipped-question review and a local leaderboard."
   },
   "leo-mabuku-portfolio": {
     "hash": "d154cf62dd0a5943314071b88a9ea92ef9f5fa719c0b599dd5542eff79d65227",
-    "summary": "this is repo for Leo Mabuku's portfolio website"
+    "summary": "A responsive editorial portfolio presenting verified software case studies, business experience, resume information and direct contact paths."
+  },
+  "PROJECT": {
+    "hash": "97f1aae002df1bff65a62937089542af033e34cb5795866707d56dd20b6d6349",
+    "summary": "An educational interpreted programming language that uses Tonga-based keywords, bilingual feedback and a desktop IDE to support introductory programming."
+  },
+  "SubTrackBH": {
+    "hash": "0c9fc789701e91d89d6fb06fbfcf840f313e2145184b4d4f6498b8031964f117",
+    "summary": "A local-first Android platform for managing subscribers, billing, accounting and service operations for a boarding-house internet service."
+  },
+  "CBU-FIND": {
+    "hash": "5b79ba71a0f7885e543aab40a5bee46d65a2128de935e2d31289b056ed52f73e",
+    "summary": "The native Android client for a shared campus lost-and-found service with reports, search, profiles, media and private real-time chat."
+  },
+  "CBU-FIND-WEB": {
+    "hash": "8f4028d60075729465b406d44e9330f82508d6736688c77623753066a34b6b89",
+    "summary": "A responsive TypeScript web client that shares CBU-FIND accounts, reports, conversations and returned-item state with the Android application."
   }
 }
