@@ -90,6 +90,16 @@ export type Project = {
   liveDemo: string | null;
   cover: string | null;
   coverAlt: string;
+  updatedOn?: string;
+  updateSummary?: string;
+  media?: {
+    type: 'image' | 'video';
+    src: string;
+    alt: string;
+    caption: string;
+    poster?: string;
+    layout?: 'wide' | 'portrait';
+  }[];
   problem: string;
   solution: string;
   contributions: string[];
@@ -115,8 +125,32 @@ export const projects: Project[] = [
     repository: 'https://github.com/leomabuku/PROJECT',
     repositoryVisibility: 'public',
     liveDemo: null,
-    cover: null,
-    coverAlt: '',
+    cover: '/images/projects/tongalang/source-editor.png',
+    coverAlt: 'TongaLang educational IDE showing a Tonga-language source program',
+    updatedOn: '2026-08-03',
+    updateSummary: 'Published current IDE evidence, a one-minute walkthrough, the source-linked AST explorer and the failure-discovery Test Lab alongside the audited language implementation.',
+    media: [
+      {
+        type: 'video',
+        src: '/images/projects/tongalang/tongalang-demo.mp4',
+        poster: '/images/projects/tongalang/source-editor.png',
+        alt: 'One-minute walkthrough of the TongaLang educational IDE',
+        caption: 'One-minute walkthrough of the editor, runtime and educational tooling.',
+        layout: 'wide',
+      },
+      {
+        type: 'image',
+        src: '/images/projects/tongalang/ast-explorer.png',
+        alt: 'TongaLang graphical abstract syntax tree with source-linked nodes',
+        caption: 'The AST explorer connects executable structure back to the learner\'s source code.',
+      },
+      {
+        type: 'image',
+        src: '/images/projects/tongalang/test-lab.png',
+        alt: 'TongaLang Test Lab showing all checks passing',
+        caption: 'The Test Lab turns regression results, weakness probes and coverage into visible evidence.',
+      },
+    ],
     problem: 'Beginner programmers may need to learn programming concepts and interpret unfamiliar English syntax at the same time, adding linguistic and cognitive load.',
     solution: 'TongaLang explores introductory programming through Tonga-based keywords while preserving familiar computational concepts. It is an educational language, not a replacement for mainstream production languages.',
     contributions: ['Researched minimal languages and interpreter construction before implementation.', 'Mapped programming concepts into Tonga through linguistic research and consultation with native speakers.', 'Built a terminal interpreter, then separated the language engine from a Tkinter IDE-style interface.', 'Created automated, integration and deliberately invalid programs to test normal and hostile behaviour.'],
@@ -175,8 +209,26 @@ export const projects: Project[] = [
     additionalRepositories: [{ label: 'Web client source', url: 'https://github.com/leomabuku/CBU-FIND-WEB' }],
     repositoryVisibility: 'public',
     liveDemo: 'https://cbu-find-web.leokmabuku.workers.dev',
-    cover: '/images/projects/cbu-find/home-report.png',
-    coverAlt: 'CBU-FIND Android home screen showing a lost-item report',
+    cover: '/images/projects/cbu-find/home-redesign.jpg',
+    coverAlt: 'Redesigned CBU Find Android home screen with report actions, search and a recent lost-item report',
+    updatedOn: '2026-08-03',
+    updateSummary: 'Refreshed the Android product evidence to show the branded dashboard, clearer lost-or-found reporting flow and private report conversations now present in the current build.',
+    media: [
+      {
+        type: 'image',
+        src: '/images/projects/cbu-find/create-report.jpg',
+        alt: 'CBU Find create-report form for a lost or found item',
+        caption: 'The guided report flow captures category, location, photos, identifying details and a safe contact path.',
+        layout: 'portrait',
+      },
+      {
+        type: 'image',
+        src: '/images/projects/cbu-find/private-chat.jpg',
+        alt: 'CBU Find private conversation screen for a reported item',
+        caption: 'Private, item-linked messaging helps students coordinate a return without publishing the conversation.',
+        layout: 'portrait',
+      },
+    ],
     problem: 'Lost-property information shared through chats, noticeboards and word of mouth is fragmented, difficult to search and easy to miss.',
     solution: 'CBU-FIND creates a shared Firebase-backed record where students can publish, search and discuss lost or found items from a native Android app or a responsive web client.',
     contributions: ['Built the native Android interface with Jetpack Compose and Material 3.', 'Implemented authentication, student profiles, report feeds and private Firestore-backed conversations.', 'Added Cloudinary uploads for report images and chat attachments.', 'Built a separate TypeScript web client and deployed it to Cloudflare Workers against the same Firebase data contract.'],

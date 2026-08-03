@@ -24,6 +24,9 @@ const projectSchema = {
   programmingLanguage: project.technologies,
   author: { '@type': 'Person', name: 'Leo Mabuku' },
 };
+const formattedUpdatedOn = project.updatedOn
+  ? new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(`${project.updatedOn}T00:00:00`))
+  : null;
 ---
 <BaseLayout title={`${project.name} Case Study | Leo Mabuku`} description={project.shortDescription} schema={projectSchema}>
   <article class="case-study">
@@ -32,6 +35,7 @@ const projectSchema = {
       <div class="case-title" data-reveal><p class="eyebrow">{project.type}</p><h1>{project.name}</h1><p>{project.shortDescription}</p><div class="case-badges"><span>{project.status}</span><span>{project.year}</span><span>{repositories.length > 1 ? `${repositories.length} public repositories` : project.repositoryVisibility === 'public' ? 'Public repository' : 'Private source'}</span></div></div>
       {project.cover ? <figure class="case-cover" data-reveal><img src={project.cover} alt={project.coverAlt} /><figcaption>Verified project evidence from the current implementation.</figcaption></figure> : <div class="case-cover case-cover--system" aria-label={`${project.name} system overview`} data-reveal><span>{project.category[0]}</span><strong>{project.name}</strong><small>{project.technologies.join(' · ')}</small></div>}
       <dl class="case-facts" data-reveal><div><dt>Role</dt><dd>{project.role}</dd></div><div><dt>Status</dt><dd>{project.status}</dd></div><div><dt>Year</dt><dd>{project.year}</dd></div><div><dt>Stack</dt><dd>{project.technologies.join(' · ')}</dd></div></dl>
+      {project.updatedOn && <aside class="project-update" data-reveal><p class="eyebrow">Latest project update</p><div><time datetime={project.updatedOn}>{formattedUpdatedOn}</time><p>{project.updateSummary}</p></div></aside>}
     </header>
 
     <section class="case-section case-problem section-shell" data-reveal><div><p class="eyebrow">01 · Context</p><h2>The problem</h2></div><div><p class="case-lede">{project.problem}</p><h3>The response</h3><p>{project.solution}</p></div></section>
@@ -39,6 +43,8 @@ const projectSchema = {
     <section class="case-section section-shell" data-reveal><div><p class="eyebrow">02 · Contribution</p><h2>What I built</h2></div><ul class="numbered-list">{project.contributions.map((item, index) => <li><span>{String(index + 1).padStart(2, '0')}</span><p>{item}</p></li>)}</ul></section>
 
     <section class="case-features section-shell" data-reveal><div class="section-heading"><p class="eyebrow">03 · Implemented evidence</p><h2>Current<br/><em>capabilities.</em></h2></div><div class="feature-grid">{project.features.map((feature) => <div><i class="ph ph-check" aria-hidden="true"></i><span>{feature}</span></div>)}</div></section>
+
+    {project.media && project.media.length > 0 && <section class="project-media section-shell" data-reveal><div class="section-heading"><p class="eyebrow">Product evidence</p><h2>See the work<br/><em>in context.</em></h2><p>Current, privacy-reviewed captures from the implemented product.</p></div><div class="media-grid">{project.media.map((item) => <figure class:list={['media-card', item.layout && `media-card--${item.layout}`, item.type === 'video' && 'media-card--video']}>{item.type === 'video' ? <video controls preload="metadata" poster={item.poster} aria-label={item.alt}><source src={item.src} type="video/mp4" />Your browser does not support embedded video. <a href={item.src}>Download the walkthrough</a>.</video> : <img src={item.src} alt={item.alt} loading="lazy" />}<figcaption>{item.caption}</figcaption></figure>)}</div></section>}
 
     {project.slug === 'tongalang' && <section class="architecture section-shell" data-reveal><div class="section-heading"><p class="eyebrow">Execution pipeline</p><h2>From source to<br/><em>feedback.</em></h2></div><ol aria-label="TongaLang interpreter pipeline"><li>Source <small>.tg program</small></li><li>Lexer <small>tokens</small></li><li>Parser <small>grammar</small></li><li>AST <small>structure</small></li><li>Interpreter <small>runtime</small></li><li>Output <small>or bilingual error</small></li></ol></section>}
 
