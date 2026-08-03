@@ -30,4 +30,20 @@ describe('curated portfolio data', () => {
   it('does not reference the deleted TongaLang repository', () => {
     expect(JSON.stringify(projects)).not.toContain('Final-year-project-TongaLang-');
   });
+
+  it('keeps dated project updates complete and machine-readable', () => {
+    projects.filter((project) => project.updatedOn).forEach((project) => {
+      expect(project.updatedOn).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      expect(project.updateSummary?.trim().length).toBeGreaterThan(40);
+    });
+  });
+
+  it('keeps project media local, described and supported', () => {
+    projects.flatMap((project) => project.media ?? []).forEach((item) => {
+      expect(item.src).toMatch(/^\/images\/projects\//);
+      expect(['image', 'video']).toContain(item.type);
+      expect(item.alt.trim().length).toBeGreaterThan(10);
+      expect(item.caption.trim().length).toBeGreaterThan(20);
+    });
+  });
 });
