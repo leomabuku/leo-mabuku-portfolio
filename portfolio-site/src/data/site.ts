@@ -16,7 +16,13 @@ export const skillGroups = [
   { title: 'Programming languages', items: ['C', 'C++', 'Python', 'Java', 'Kotlin', 'JavaScript', 'HTML', 'CSS', 'SQL'] },
   { title: 'Application development', items: ['Android Studio', 'Jetpack Compose', 'XML layouts', 'Tkinter', 'Node.js', 'Express', 'Material Design'] },
   { title: 'Data, testing & delivery', items: ['Room / SQLite', 'PostgreSQL', 'Firebase', 'Git & GitHub', 'Pytest', 'Cloudflare Pages'] },
-  { title: 'Technical practice', items: ['Problem decomposition', 'Debugging', 'Automated testing', 'Interpreter development', 'Systems programming', 'Technical documentation'] },
+  { title: 'Technical practice', items: ['Problem decomposition', 'Debugging', 'Automated testing', 'Interpreter development', 'Systems programming', 'Networking fundamentals', 'Hardware diagnostics & repair', 'Component replacement & soldering', 'Technical documentation'] },
+];
+
+export const certifications = [
+  { name: 'Prompt Engineering for Everyone', issuer: 'IBM Skills Network / Cognitive Class', period: 'Oct 2025' },
+  { name: 'Data Analytics Traineeship', issuer: 'MedTourEasy', period: 'Sep 2025' },
+  { name: 'Marketing & Sales · Money Skills · Entrepreneurial Skills', issuer: 'Absa Skills', period: 'Business courses' },
 ];
 
 export const education = [
@@ -24,8 +30,8 @@ export const education = [
     qualification: 'Bachelor of Science in Computer Science',
     institution: 'The Copperbelt University',
     location: 'Kitwe, Zambia',
-    period: '2023–2026',
-    detail: 'Fourth-year student. Entered through a special academic calendar beginning on 8 May 2023 before joining the mainstream calendar in January 2024.',
+    period: '2023–Present',
+    detail: 'Fourth-year student with expected programme completion in September 2026. Entered through a special academic calendar beginning on 8 May 2023 before joining the mainstream calendar in January 2024.',
   },
   {
     qualification: 'Senior Secondary Certificate',
@@ -49,17 +55,25 @@ export const experience = [
     title: 'Founder · Sales & Operations',
     organisation: 'Leo M. Suppliers',
     location: 'Livingstone, Zambia',
-    period: 'Feb 2022–Present',
-    summary: 'Started as a field-based fleece blanket business, registered with PACRA in June 2022 and opened a shop at Plot 98, John Hunt Way on 14 September 2022.',
+    period: 'Feb 2022–Apr 2026',
+    summary: 'Started as a field-based fleece blanket business, registered with PACRA in June 2022 and opened a shop at Plot 98, John Hunt Way on 14 September 2022. Operations closed in April 2026.',
     bullets: ['Handled sales, procurement, stock decisions, customer relationships, online marketing and deliveries.', 'Helped move the business from field selling to formal retail operations.', 'Adapted the product model from clothing and bedding to furniture and learned furniture assembly.'],
   },
   {
-    title: 'Independent Technical Support',
-    organisation: 'Computer Repair & Software Assistance',
+    title: 'Independent Software Development & Technical Tutoring',
+    organisation: 'Self-employed',
     location: 'Zambia',
-    period: 'Since first year',
-    summary: 'Provide paid diagnostics, troubleshooting, repair and technical guidance for computer hardware, software and student programming projects.',
-    bullets: ['Diagnose operating-system, driver, storage, memory, Wi-Fi and performance issues.', 'Replace repairable components and perform soldering where appropriate.', 'Provide programming tutoring, debugging and project customisation without misrepresenting assessed work.'],
+    period: '2024–Present',
+    summary: 'Provide paid programming guidance, debugging, setup and feature customisation while helping learners understand project structure and code.',
+    bullets: ['Explain programming concepts and software structure.', 'Troubleshoot build, configuration and implementation problems.', 'Support project customisation without misrepresenting assessed work.'],
+  },
+  {
+    title: 'Data Analytics Trainee',
+    organisation: 'MedTourEasy',
+    location: 'Remote',
+    period: 'Sep 2025',
+    summary: 'Completed a four-week training programme and live analytics project.',
+    bullets: ['Applied structured analysis to a practical project.', 'Worked with professional confidentiality expectations and guided training modules.'],
   },
 ];
 
@@ -335,7 +349,7 @@ export const projects: Project[] = [
     features: ['Responsive multi-page site', 'Structured project case studies', 'SEO, sitemap and structured data', 'Google Search Console verification', 'Automated GitHub refresh', 'Reduced-motion support'],
     challenges: [],
     lessons: ['Portfolio storytelling', 'Astro content architecture', 'Responsive editorial design', 'Static deployment'],
-    plannedFeatures: ['Custom domain', 'Final PDF resume', 'Additional verified project screenshots'],
+    plannedFeatures: ['Custom domain', 'Additional verified project screenshots'],
     evidence: 'Public Astro repository and Cloudflare Pages deployment verified on 3 August 2026. The site includes seven project case studies, a generated sitemap and Google Search Console verification.',
   },
 ];
