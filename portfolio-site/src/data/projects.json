@@ -18,14 +18,18 @@
     "repositoryUrl": "https://github.com/leomabuku/PROJECT",
     "description": "TongaLang: an educational programming language using Tonga-based keywords, implemented in Python.",
     "topics": [
+      "beginner-friendly",
+      "educational",
       "educational-software",
+      "interpreter",
       "portfolio",
       "programming-language",
       "python",
+      "tkinter",
       "tonga"
     ],
     "defaultBranch": "main",
-    "updatedAt": "2026-08-03T02:06:05Z",
+    "updatedAt": "2026-08-09T12:55:37Z",
     "stars": 0,
     "forks": 0,
     "openIssues": 0
@@ -224,7 +228,7 @@
       "portfolio-website"
     ],
     "defaultBranch": "master",
-    "updatedAt": "2026-08-08T04:38:33Z",
+    "updatedAt": "2026-08-09T04:45:11Z",
     "stars": 0,
     "forks": 0,
     "openIssues": 0
