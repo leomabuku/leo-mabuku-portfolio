@@ -210,7 +210,7 @@
     "name": "Leo Mabuku Portfolio",
     "repo": "leo-mabuku-portfolio",
     "type": "Astro portfolio website",
-    "language": "Astro",
+    "language": "TypeScript",
     "summary": "A responsive editorial portfolio presenting verified software case studies, business experience, resume information and direct contact paths.",
     "problem": "A repository list alone does not explain technical decisions, product thinking or entrepreneurial experience.",
     "contribution": "Designed and developed the content architecture, responsive interface, SEO and automated repository refresh workflow.",
@@ -222,13 +222,17 @@
     ],
     "featured": true,
     "repositoryUrl": "https://github.com/leomabuku/leo-mabuku-portfolio",
-    "description": "this is repo for Leo Mabuku's portfolio website",
+    "description": "Leo Mabuku's editorial portfolio of software engineering, Android, web, and programming-language projects.",
     "topics": [
+      "astro",
+      "case-studies",
+      "cloudflare-pages",
       "portfolio",
-      "portfolio-website"
+      "portfolio-website",
+      "typescript"
     ],
     "defaultBranch": "master",
-    "updatedAt": "2026-08-09T04:45:11Z",
+    "updatedAt": "2026-08-09T13:07:32Z",
     "stars": 0,
     "forks": 0,
     "openIssues": 0
