@@ -6,9 +6,23 @@ Professional Astro portfolio for Leo Mabuku: a fourth-year Computer Science stud
 
 - Astro and TypeScript
 - Scoped/static CSS with Fontsource and Phosphor icons
+- GSAP ScrollTrigger and Flip for scroll scenes, filtering and coordinated transitions
+- Three.js for the deferred homepage portrait signal layer
 - Vitest for content-refresh utilities
 - GitHub Actions for scheduled public-repository refreshes
 - Cloudflare Pages for static hosting
+
+## Experience architecture
+
+The interface keeps native scrolling and progressively enhances static Astro HTML. `src/scripts/experience.ts` is the route-level entry point: it initializes declarative `data-motion`, `data-scene`, `data-project-slug` and related hooks after Astro navigation, and disposes every listener, observer and timeline before the next route swap.
+
+Motion is selected through the internal `MotionMode` contract:
+
+- `full` enables the pinned hero scene, richer GSAP choreography and deferred WebGL portrait layer.
+- `lite` keeps purposeful transitions while omitting WebGL and high-cost pointer effects on smaller, coarse-pointer, data-saving or lower-memory devices.
+- `reduced` honors `prefers-reduced-motion` and keeps content immediately readable without motion dependency.
+
+The original portrait, project evidence, navigation and contact paths always render without JavaScript or WebGL. Audio is never started, video previews are muted, and scrolling is never intercepted.
 
 ## Local development
 
@@ -23,6 +37,8 @@ Quality checks:
 npm test
 npm run build
 ```
+
+Motion-system coverage lives in `scripts/motion-system.test.ts`, including mode selection, session-only introductions, project filtering and cleanup idempotency. Visual comparison evidence and the final design audit live in `qa/` and `design-qa.md`.
 
 ## Content locations
 
@@ -58,6 +74,12 @@ Approved public contact information lives in `src/data/site.ts`. The contact for
 - Production URL: `https://leo-mabuku-portfolio.pages.dev`
 
 Pushes to `master` deploy automatically through the existing Cloudflare Pages connection.
+
+For an authenticated manual production deployment of the already-built output:
+
+```sh
+npx wrangler pages deploy ./dist --project-name leo-mabuku-portfolio --branch master
+```
 
 ## Public repository refresh
 

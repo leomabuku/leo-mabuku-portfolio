@@ -6,26 +6,12 @@ import { projects } from '../data/site';
 const filters = ['All', 'Android', 'Systems', 'Programming Language', 'Web', 'Business Tools'];
 ---
 <BaseLayout title="Selected Work | Leo Mabuku" description="Case studies across Android, programming languages, systems programming and practical business software by Leo Mabuku.">
-  <section class="page-hero work-hero" data-reveal><p class="eyebrow">Selected work</p><h1>Practical systems.<br/><em>Evidence you can inspect.</em></h1><p>Projects are presented by the problem, decisions and contribution behind them—not only by repository metadata.</p></section>
-  <section class="work-catalog section-shell">
+  <section class="page-hero work-hero" data-motion data-scene="work-index"><p class="eyebrow">Selected work · 07 systems</p><h1>Practical systems.<br/><em>Evidence you can inspect.</em></h1><p>Projects are presented by the problem, decisions and contribution behind them—not only by repository metadata.</p><div class="page-hero-status" aria-hidden="true"><span>Filter</span><span>Inspect</span><span>Enter case study</span></div></section>
+  <section class="work-catalog section-shell" data-scene="project-grid">
     <div class="filter-bar" role="group" aria-label="Filter projects">{filters.map((filter, index) => <button type="button" class:list={{ active: index === 0 }} data-filter={filter.toLowerCase()} aria-pressed={index === 0 ? 'true' : 'false'}>{filter}</button>)}</div>
     <p class="filter-result" aria-live="polite">Showing all {projects.length} projects</p>
     <div class="project-grid project-grid--work">{projects.map((project, index) => <ProjectCard project={project} index={index} />)}</div>
     <div class="empty-state" hidden><i class="ph ph-magnifying-glass" aria-hidden="true"></i><h2>No projects in this view</h2><p>Choose another category to see the available case studies.</p></div>
   </section>
   <AvailabilityBanner />
-  <script>
-    const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
-    const cards = document.querySelectorAll<HTMLElement>('[data-project-card]');
-    const result = document.querySelector<HTMLElement>('.filter-result');
-    const empty = document.querySelector<HTMLElement>('.empty-state');
-    buttons.forEach((button) => button.addEventListener('click', () => {
-      const filter = button.dataset.filter || 'all';
-      let visible = 0;
-      buttons.forEach((item) => { item.classList.toggle('active', item === button); item.setAttribute('aria-pressed', String(item === button)); });
-      cards.forEach((card) => { const show = filter === 'all' || (card.dataset.categories || '').includes(filter); card.hidden = !show; if (show) visible += 1; });
-      if (result) result.textContent = filter === 'all' ? `Showing all ${visible} projects` : `Showing ${visible} ${button.textContent} project${visible === 1 ? '' : 's'}`;
-      if (empty) empty.hidden = visible !== 0;
-    }));
-  </script>
 </BaseLayout>

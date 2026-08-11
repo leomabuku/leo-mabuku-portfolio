@@ -1,0 +1,51 @@
+---
+import { projects } from '../data/site';
+
+const primaryCommands = [
+  { label: 'Home', detail: 'Start the cinematic journey', href: '/', icon: 'ph-house' },
+  { label: 'Selected work', detail: 'Inspect projects and case studies', href: '/work/', icon: 'ph-stack' },
+  { label: 'About Leo', detail: 'Developer and entrepreneur story', href: '/about/', icon: 'ph-user' },
+  { label: 'Resume', detail: 'Skills, experience and education', href: '/resume/', icon: 'ph-file-text' },
+  { label: 'Contact', detail: 'Start a useful conversation', href: '/contact/', icon: 'ph-paper-plane-tilt' },
+];
+---
+<dialog class="command-palette" data-command-palette aria-labelledby="command-title">
+  <div class="command-shell">
+    <header>
+      <div>
+        <p class="eyebrow">Navigate the system</p>
+        <h2 id="command-title">Where should we go?</h2>
+      </div>
+      <button type="button" class="command-close" data-command-close aria-label="Close command menu"><i class="ph ph-x" aria-hidden="true"></i></button>
+    </header>
+    <label class="command-search">
+      <i class="ph ph-magnifying-glass" aria-hidden="true"></i>
+      <span class="sr-only">Search pages and projects</span>
+      <input type="search" placeholder="Search pages and projects" autocomplete="off" data-command-search />
+      <kbd>Esc</kbd>
+    </label>
+    <div class="command-results">
+      <section aria-labelledby="command-pages-title">
+        <h3 id="command-pages-title">Pages</h3>
+        <ul>
+          {primaryCommands.map((command) => (
+            <li data-command-item data-search={`${command.label} ${command.detail}`.toLowerCase()}>
+              <a href={command.href}><i class={`ph ${command.icon}`} aria-hidden="true"></i><span><strong>{command.label}</strong><small>{command.detail}</small></span><i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+            </li>
+          ))}
+        </ul>
+      </section>
+      <section aria-labelledby="command-projects-title">
+        <h3 id="command-projects-title">Projects</h3>
+        <ul>
+          {projects.map((project) => (
+            <li data-command-item data-search={`${project.name} ${project.type} ${project.category.join(' ')}`.toLowerCase()}>
+              <a href={`/work/${project.slug}/`}><i class="ph ph-cube" aria-hidden="true"></i><span><strong>{project.name}</strong><small>{project.type}</small></span><i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>
+            </li>
+          ))}
+        </ul>
+      </section>
+      <p class="command-empty" data-command-empty hidden>No matching page or project.</p>
+    </div>
+  </div>
+</dialog>
