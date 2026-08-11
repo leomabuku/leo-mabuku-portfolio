@@ -11,3 +11,8 @@ When implementing from a selected generated mock, treat that image as the source
 - The selected direction is a merge of the lime, portrait-led editorial concept and the structured cinematic project-system concept.
 - Do not use the blue Swiss-grid concept; the user explicitly rejected it.
 - Preserve near-black surfaces, warm-white serif display type, electric-lime accents, strong project evidence, and equal entrepreneur/developer positioning.
+- The experience should persuade employers and clients first while still feeling like a distinctive digital art piece.
+- Use a hybrid structure: an immersive, cinematic homepage leading into focused Work, case-study, About, Resume and Contact routes.
+- The signature interaction is an adaptive portrait data-shift. Use full WebGL and scroll choreography only on capable desktops, with lighter mobile and reduced-motion treatments.
+- Motion intensity should feel spectacular at showcase moments and remain present across the site without compromising readable proof sections.
+- Keep the experience silent by default, preserve the native cursor and native scrolling, and reframe existing copy without inventing new facts.

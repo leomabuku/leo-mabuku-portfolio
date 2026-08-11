@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
+import CommandPalette from '../components/CommandPalette.astro';
 import { profile, whatsappUrl } from '../data/site';
 const {
   title = `${profile.name} | Software Developer and Computer Science Student`,
@@ -44,19 +46,24 @@ const personSchema = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
     <title>{title}</title>
+    <ClientRouter fallback="animate" />
     <script type="application/ld+json" is:inline set:html={JSON.stringify(personSchema)} />
   </head>
-  <body>
+  <body data-page={path === '/' ? 'home' : path.split('/').filter(Boolean)[0] ?? 'home'}>
     <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header">
+    <div class="experience-rail" aria-hidden="true"><span data-experience-progress></span></div>
+    <header class="site-header" transition:name="site-header">
       <a class="monogram" href="/" aria-label="Leo Mabuku home"><span>L</span><b>M</b></a>
-      <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-nav"><i class="ph ph-list" aria-hidden="true"></i></button>
       <nav id="primary-nav" aria-label="Primary navigation">
         {nav.map(([href, label]) => <a href={href} class:list={{ active: href === '/' ? path === '/' : path.startsWith(href) }}>{label}</a>)}
       </nav>
+      <div class="header-actions">
+        <button type="button" class="command-trigger" data-command-open aria-label="Open quick navigation"><i class="ph ph-command" aria-hidden="true"></i><span>Quick find</span><kbd>⌘K</kbd></button>
+        <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-nav"><i class="ph ph-list" aria-hidden="true"></i></button>
+      </div>
     </header>
-    <main id="main"><slot /></main>
-    <footer class="site-footer">
+    <main id="main" data-route={path}><slot /></main>
+    <footer class="site-footer" data-motion>
       <div><p class="eyebrow">Let’s connect</p><h2>Build something<br/><em>useful</em> together.</h2><p class="footer-note">Available for graduate roles, internships, freelance work and technical collaborations.</p></div>
       <div class="footer-links">
         <a href={`mailto:${profile.email}`}><i class="ph ph-envelope-simple" aria-hidden="true"></i><span>Email<small>{profile.email}</small></span></a>
@@ -66,19 +73,14 @@ const personSchema = {
       </div>
       <p class="copyright">© {new Date().getFullYear()} Leo Mabuku · Kitwe, Zambia</p>
     </footer>
+    <CommandPalette />
     <script>
-      const button = document.querySelector<HTMLButtonElement>('.menu-toggle');
-      const nav = document.querySelector<HTMLElement>('.site-header nav');
-      const closeMenu = () => { button?.setAttribute('aria-expanded', 'false'); nav?.classList.remove('open'); };
-      button?.addEventListener('click', () => {
-        const open = button.getAttribute('aria-expanded') === 'true';
-        button.setAttribute('aria-expanded', String(!open));
-        nav?.classList.toggle('open');
-      });
-      nav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
-      document.addEventListener('keydown', (event) => event.key === 'Escape' && closeMenu());
-      const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add('visible')), { threshold: .08 });
-      document.querySelectorAll('[data-reveal]').forEach((element) => observer.observe(element));
+      import { destroyExperience, initExperience } from '../scripts/experience';
+
+      const startExperience = () => initExperience();
+      document.addEventListener('astro:page-load', startExperience);
+      document.addEventListener('astro:before-swap', destroyExperience);
+      startExperience();
     </script>
   </body>
 </html>

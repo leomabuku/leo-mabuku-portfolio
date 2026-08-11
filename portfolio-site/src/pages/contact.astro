@@ -9,10 +9,11 @@ const links = [
 ];
 ---
 <BaseLayout title="Contact Leo Mabuku" description="Contact Leo Mabuku about graduate software roles, internships, freelance development and technical collaborations.">
-  <section class="contact-page">
-    <div class="page-hero" data-reveal><p class="eyebrow">Contact</p><h1>Let’s start a<br/><em>useful conversation.</em></h1><p>{profile.availability}</p><p class="contact-location"><i class="ph ph-map-pin" aria-hidden="true"></i>{profile.location}</p></div>
-    <div class="contact-panel" data-reveal>
-      <div class="contact-list">{links.map(([icon, label, value, href]) => <a href={href} target={href.startsWith('http') ? '_blank' : undefined} rel={href.startsWith('http') ? 'noreferrer' : undefined}><i class={`ph ${icon}`} aria-hidden="true"></i><span><small>{label}</small><strong>{value}</strong></span><i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>)}</div>
+  <section class="contact-page" data-scene="contact">
+    <div class="contact-page-signal" aria-hidden="true"><span>Available</span><b>Kitwe · Zambia</b></div>
+    <div class="page-hero" data-motion><p class="eyebrow">Contact · Open channel</p><h1>Let’s start a<br/><em>useful conversation.</em></h1><p>{profile.availability}</p><p class="contact-location"><i class="ph ph-map-pin" aria-hidden="true"></i>{profile.location}</p></div>
+    <div class="contact-panel" data-motion>
+      <div class="contact-list" data-motion-stagger>{links.map(([icon, label, value, href]) => <a href={href} target={href.startsWith('http') ? '_blank' : undefined} rel={href.startsWith('http') ? 'noreferrer' : undefined}><i class={`ph ${icon}`} aria-hidden="true"></i><span><small>{label}</small><strong>{value}</strong></span><i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>)}</div>
       <form class="contact-form" aria-labelledby="contact-form-title">
         <div><p class="eyebrow">Send an email</p><h2 id="contact-form-title">Tell me what you’re working on.</h2><p>Your email application will open with this message—nothing is stored by this website.</p></div>
         <label>Your name<input name="name" autocomplete="name" required /></label>
@@ -24,16 +25,4 @@ const links = [
       </form>
     </div>
   </section>
-  <script>
-    const form = document.querySelector<HTMLFormElement>('.contact-form');
-    form?.addEventListener('submit', (event) => {
-      event.preventDefault();
-      if (!form.reportValidity()) return;
-      const data = new FormData(form);
-      const body = `Hello Leo,\n\n${data.get('message')}\n\nFrom: ${data.get('name')} (${data.get('email')})`;
-      window.location.href = `mailto:leokmabuku@gmail.com?subject=${encodeURIComponent(String(data.get('subject')))}&body=${encodeURIComponent(body)}`;
-      const status = form.querySelector<HTMLElement>('.form-status');
-      if (status) status.textContent = 'Your email application should now be opening.';
-    });
-  </script>
 </BaseLayout>

@@ -1,15 +1,18 @@
 ---
 import type { Project } from '../data/site';
 const { project, index = 0 } = Astro.props as { project: Project; index?: number };
+const preview = project.media?.find((item) => item.type === 'video');
 ---
-<article class="project-card" data-project-card data-categories={project.category.join('|').toLowerCase()} data-reveal>
-  <a class:list={['project-cover', { 'project-cover--empty': !project.cover }]} href={`/work/${project.slug}/`} aria-label={`Read the ${project.name} case study`}>
+<article class="project-card" data-project-card data-project-slug={project.slug} data-categories={project.category.join('|').toLowerCase()} data-motion>
+  <a class:list={['project-cover', { 'project-cover--empty': !project.cover }]} href={`/work/${project.slug}/`} aria-label={`Read the ${project.name} case study`} transition:name={`project-visual-${project.slug}`}>
     {project.cover ? <img src={project.cover} alt={project.coverAlt} loading={index > 1 ? 'lazy' : 'eager'} /> : <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>}
+    {preview && <video class="project-preview" data-project-preview muted loop playsinline preload="metadata" poster={preview.poster ?? project.cover ?? undefined} aria-hidden="true"><source src={preview.src} type="video/mp4" /></video>}
+    <span class="project-scan" aria-hidden="true"></span>
     <div class="project-cover-meta"><small>{project.type}</small><strong>{project.status}</strong></div>
   </a>
   <div class="project-card-copy">
     <p class="eyebrow">{project.category.slice(0, 2).join(' · ')}</p>
-    <h2><a href={`/work/${project.slug}/`}>{project.name}</a></h2>
+    <h2 transition:name={`project-title-${project.slug}`}><a href={`/work/${project.slug}/`}>{project.name}</a></h2>
     <p>{project.shortDescription}</p>
     <div class="tag-list">{project.technologies.slice(0, 4).map((technology) => <span>{technology}</span>)}</div>
     <div class="card-actions">
