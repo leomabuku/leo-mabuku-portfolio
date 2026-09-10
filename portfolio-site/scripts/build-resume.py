@@ -278,9 +278,9 @@ def build_resume():
     add_project(
         document,
         "CBU-FIND",
-        "Kotlin, Next.js, Firebase",
-        "https://cbu-find-web.leokmabuku.workers.dev",
-        "Cross-platform campus lost-and-found with authentication, image reports, search and private item-linked conversations.",
+        "Kotlin, React, Firebase, Cloudflare",
+        "https://cbu-find-web-staging.leokmabuku.workers.dev",
+        "Completed cross-platform campus lost-and-found with verified claims, private handover messaging, signed media, push notifications, moderation and report resolution.",
     )
     add_project(
         document,
@@ -400,7 +400,7 @@ def build_pdf():
     story.extend([
         p(f'<link href="https://github.com/leomabuku/PROJECT" color="#1F4D78"><font name="{bold_font}">TongaLang</font></link> | <font name="{bold_font}" color="#545C63">Python, PLY, Tkinter, Pytest</font> — Educational interpreted language with a custom lexer, parser, AST, interpreter, IDE tools, bilingual errors, 17 examples and 147 passing automated tests.', "project"),
         p(f'<link href="https://github.com/leomabuku/SubTrackBH" color="#1F4D78"><font name="{bold_font}">SubTrack BH</font></link> | <font name="{bold_font}" color="#545C63">Kotlin, Compose, Room, Firebase</font> — Local-first subscriber and payment workspace designed around the active 29-subscriber internet service.', "project"),
-        p(f'<link href="https://cbu-find-web.leokmabuku.workers.dev" color="#1F4D78"><font name="{bold_font}">CBU-FIND</font></link> | <font name="{bold_font}" color="#545C63">Kotlin, Next.js, Firebase</font> — Cross-platform campus lost-and-found with authentication, image reports, search and private item-linked conversations.', "project"),
+        p(f'<link href="https://cbu-find-web-staging.leokmabuku.workers.dev" color="#1F4D78"><font name="{bold_font}">CBU-FIND</font></link> | <font name="{bold_font}" color="#545C63">Kotlin, React, Firebase, Cloudflare</font> — Completed cross-platform campus lost-and-found with verified claims, private handover messaging, signed media and moderation.', "project"),
         p(f'<link href="https://github.com/leomabuku/SERC-Mini-OS-system" color="#1F4D78"><font name="{bold_font}">SERC Mini-OS</font></link> | <font name="{bold_font}" color="#545C63">C, Raylib, Win32</font> — Operating-systems simulator covering four CPU schedulers, memory allocation, paging, IPC, deadlock safety and regression tests.', "project"),
     ])
 
