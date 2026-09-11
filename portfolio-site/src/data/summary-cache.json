@@ -24,7 +24,7 @@
     "summary": "A local-first Android platform for managing subscribers, billing, accounting and service operations for a boarding-house internet service."
   },
   "CBU-FIND": {
-    "hash": "5b79ba71a0f7885e543aab40a5bee46d65a2128de935e2d31289b056ed52f73e",
+    "hash": "fb472743fadc85be641612b4ffab29f6e59652bbd8a7369adbf9b92222ca80da",
     "summary": "The native Android client for a shared campus lost-and-found service with reports, search, profiles, media and private real-time chat."
   },
   "CBU-FIND-WEB": {
