@@ -20,7 +20,7 @@ const projectSchema = {
   '@type': 'SoftwareSourceCode',
   name: project.name,
   description: project.shortDescription,
-  codeRepository: repositories.length ? repositories.map((repository) => repository.url) : undefined,
+  codeRepository: project.repository || undefined,
   programmingLanguage: project.technologies,
   author: { '@type': 'Person', name: 'Leo Mabuku' },
 };
@@ -41,7 +41,7 @@ const caseSections = [
   <article class="case-study" data-project-slug={project.slug}>
     <header class="case-hero section-shell">
       <a class="back-link" href="/work/"><i class="ph ph-arrow-left" aria-hidden="true"></i> Back to work</a>
-      <div class="case-title" data-motion><p class="eyebrow">{project.type}</p><h1 transition:name={`project-title-${project.slug}`}>{project.name}</h1><p>{project.shortDescription}</p><div class="case-badges"><span>{project.status}</span><span>{project.year}</span><span>{repositories.length > 1 ? `${repositories.length} public repositories` : project.repositoryVisibility === 'public' ? 'Public repository' : 'Private source'}</span></div></div>
+      <div class="case-title" data-motion><p class="eyebrow">{project.type}</p><h1 transition:name={`project-title-${project.slug}`}>{project.name}</h1><p>{project.shortDescription}</p><div class="case-badges"><span>{project.status}</span><span>{project.year}</span><span>{repositories.length > 1 ? `${repositories.length} project links` : project.repositoryVisibility === 'public' ? 'Public repository' : 'Private source'}</span></div></div>
       {project.cover ? <figure class="case-cover" data-motion transition:name={`project-visual-${project.slug}`}><img src={project.cover} alt={project.coverAlt} /><span class="case-cover-scan" aria-hidden="true"></span><figcaption>Verified project evidence from the current implementation.</figcaption></figure> : <div class="case-cover case-cover--system" aria-label={`${project.name} system overview`} data-motion transition:name={`project-visual-${project.slug}`}><span>{project.category[0]}</span><strong>{project.name}</strong><small>{project.technologies.join(' · ')}</small></div>}
       <dl class="case-facts" data-motion><div><dt>Role</dt><dd>{project.role}</dd></div><div><dt>Status</dt><dd>{project.status}</dd></div><div><dt>Year</dt><dd>{project.year}</dd></div><div><dt>Stack</dt><dd>{project.technologies.join(' · ')}</dd></div></dl>
       {project.updatedOn && <aside class="project-update" data-motion><p class="eyebrow">Latest project update</p><div><time datetime={project.updatedOn}>{formattedUpdatedOn}</time><p>{project.updateSummary}</p></div></aside>}
