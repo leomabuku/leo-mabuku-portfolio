@@ -131,7 +131,7 @@ export const projects: Project[] = [
     shortDescription: 'A beginner-focused interpreted programming language with Tonga-derived keywords, guided error recovery and an installable desktop IDE.',
     category: ['Programming Language', 'Educational Software', 'Python'],
     type: 'Final-year Computer Science project',
-    status: 'Active development',
+    status: 'Completed',
     year: '2025–2026',
     featured: true,
     role: 'Developer & Researcher',
@@ -147,7 +147,7 @@ export const projects: Project[] = [
     cover: '/images/projects/tongalang/source-editor.png',
     coverAlt: 'TongaLang educational IDE showing a Tonga-language source program',
     updatedOn: '2026-09-11',
-    updateSummary: 'Published TongaLang 0.2.0 with its new visual identity, a per-user Windows installer, bundled examples and documented Linux setup, alongside the guided diagnostics and shared Problems/Program Input workflow.',
+    updateSummary: 'Completed TongaLang 0.2.0 and published its new visual identity, per-user Windows installer, bundled examples and documented Linux setup, alongside guided diagnostics and the shared Problems/Program Input workflow.',
     media: [
       {
         type: 'video',
