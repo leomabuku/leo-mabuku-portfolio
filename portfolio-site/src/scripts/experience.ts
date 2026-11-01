@@ -46,6 +46,18 @@ function setSessionValue(key: string, value: string) {
   }
 }
 
+function initializeHeaderState() {
+  const header = document.querySelector<HTMLElement>('[data-site-header]');
+  if (!header) return;
+  const sync = () => {
+    header.classList.toggle('is-scrolled', window.scrollY > 24);
+  };
+  sync();
+  const options: AddEventListenerOptions = { passive: true };
+  window.addEventListener('scroll', sync, options);
+  registry?.add(() => window.removeEventListener('scroll', sync, options));
+}
+
 function initializeNavigation() {
   const button = document.querySelector<HTMLButtonElement>('.menu-toggle');
   const nav = document.querySelector<HTMLElement>('.site-header nav');
@@ -447,6 +459,7 @@ export function initExperience() {
   document.documentElement.dataset.motionMode = mode;
   document.body.dataset.motionMode = mode;
 
+  initializeHeaderState();
   initializeNavigation();
   initializeCommandPalette();
   initializeContactForm();

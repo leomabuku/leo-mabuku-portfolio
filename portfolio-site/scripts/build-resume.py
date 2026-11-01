@@ -33,9 +33,10 @@ FONT = "Calibri"
 
 
 SUMMARY = (
-    "Fourth-year BSc Computer Science student and software developer building Android, web, systems and programming-language projects. "
-    "Combines C/C++, Python and Kotlin development with entrepreneurship, live network operations, testing and user-focused problem solving. "
-    "Open to graduate, internship and junior software engineering opportunities."
+    "Computer Science graduate from The Copperbelt University awaiting degree conferment, building Android, web, IoT and systems software. "
+    "Combines Kotlin, Python, TypeScript and C development with entrepreneurship, a live 37-subscriber network operation, automated testing and user-focused problem solving. "
+    "Currently completing an IoT internship with CodeAlpha. "
+    "Seeking internships, graduate software roles and technical collaborations in Zambia or remote."
 )
 
 
@@ -216,7 +217,7 @@ def build_resume():
 
     role = document.add_paragraph()
     role.paragraph_format.space_after = Pt(1.8)
-    role_run = role.add_run("SOFTWARE DEVELOPER | COMPUTER SCIENCE STUDENT | ENTREPRENEUR")
+    role_run = role.add_run("SOFTWARE DEVELOPER | COMPUTER SCIENCE GRADUATE | ENTREPRENEUR")
     set_cell_safe_font(role_run, size=10.0, bold=True, color=BLUE)
 
     contact = document.add_paragraph()
@@ -240,15 +241,16 @@ def build_resume():
     set_cell_safe_font(summary_run, size=9.55, color=DARK)
 
     section_heading(document, "Technical Skills")
-    add_label_line(document, "Languages", "C, C++, Python, Kotlin, Java, JavaScript, SQL, HTML and CSS")
-    add_label_line(document, "Mobile & web", "Android Studio, Jetpack Compose, Room/SQLite, Firebase, Node.js, Express and Astro")
-    add_label_line(document, "Systems & delivery", "Git/GitHub, Pytest, PLY, Tkinter, PostgreSQL, Cloudflare Pages and technical documentation")
-    add_label_line(document, "Additional", "Networking fundamentals, hardware diagnostics and repair, component replacement and soldering")
+    add_label_line(document, "Languages", "Python, TypeScript, JavaScript, Kotlin, C, C++, PHP, SQL, HTML and CSS")
+    add_label_line(document, "Mobile & web", "Android, Jetpack Compose, React, Astro, Tailwind CSS, Vite and Astro")
+    add_label_line(document, "Systems & delivery", "FastAPI, Node.js, Express, REST APIs, PostgreSQL, SQLite, Supabase, Git/GitHub, Cloudflare Pages and Vercel")
+    add_label_line(document, "Additional", "MikroTik RouterOS automation, LAN setup, Ethernet termination, ESP32 IoT, hardware diagnostics and repair, soldering")
 
     section_heading(document, "Experience")
-    entry_heading(document, "Founder & Network Service Operator", "Starlink Internet Service", "Kitwe | Feb 2026–Present")
-    add_bullet(document, "Operate a Starlink Mini and ARRIS mesh service for 29 subscribers, covering a boarding house and approximately 30 metres beyond the property.")
-    add_bullet(document, "Manage onboarding, payments, subscription periods and connectivity support; designed SubTrack BH to centralise operational records.")
+    entry_heading(document, "Internet of Things (IoT) Intern", "CodeAlpha", "Remote | 20 Oct–20 Nov 2026")
+    add_bullet(document, "Selected for CodeAlpha's IoT internship track, working through applied sensor, prototyping and technical-reporting tasks.")
+    add_bullet(document, "Operate a Starlink Mini and ARRIS mesh service for 37 paying subscribers, with subscriber access automated through a MikroTik hEX router.")
+    add_bullet(document, "Built SubTrack BH, a working subscription platform that verifies mobile payments and provisions router bandwidth automatically across the subscriber base.")
 
     entry_heading(document, "Founder, Sales & Operations", "Leo M. Suppliers", "Livingstone | Feb 2022–Apr 2026")
     add_bullet(document, "Developed a field-based bedding venture into a PACRA-registered business with a physical shop opened in September 2022.")
@@ -272,7 +274,7 @@ def build_resume():
         "TongaLang",
         "Python, PLY, Tkinter, Pytest",
         "https://github.com/leomabuku/PROJECT",
-        "Educational interpreted language with a custom lexer, parser, AST, interpreter, IDE tools, bilingual errors, 17 examples and 147 passing automated tests.",
+        "Final-year academic project: educational interpreted language with a custom lexer, parser, AST, interpreter, IDE tools, bilingual errors, 17 examples and 147 passing automated tests.",
     )
     add_project(
         document,
@@ -286,7 +288,7 @@ def build_resume():
         "SubTrack BH",
         "Kotlin, Compose, Room, Firebase",
         "https://github.com/leomabuku/SubTrackBH",
-        "Local-first subscriber and payment workspace designed around the active 29-subscriber internet service.",
+        "Live subscription platform for a 37-subscriber internet service: verified mobile payments, automatic MikroTik bandwidth provisioning and a Kotlin/Compose admin and subscriber app on Firebase.",
     )
     add_project(
         document,
@@ -304,8 +306,8 @@ def build_resume():
     )
 
     section_heading(document, "Education & Professional Development")
-    entry_heading(document, "BSc Computer Science", "The Copperbelt University", "2023–Present | Expected Sep 2026")
-    add_label_line(document, "Training", "Prompt Engineering for Everyone — IBM Skills Network / Cognitive Class, Oct 2025; Data Analytics Traineeship — MedTourEasy, Sep 2025")
+    entry_heading(document, "BSc Computer Science", "The Copperbelt University", "Completed | Awaiting conferment")
+    add_label_line(document, "Training", "Huawei Datacom (networking); IBM Prompt Engineering, Oct 2025; Microsoft Power BI workshop; Microsoft Learn Student Ambassadors workshops; MedTourEasy Data Analytics Traineeship, Sep 2025")
     add_label_line(document, "Business courses", "Marketing & Sales, Money Skills and Entrepreneurial Skills — Absa Skills")
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -340,7 +342,7 @@ def build_pdf():
         bottomMargin=0.52 * inch,
         title="Leo Mabuku Resume",
         author="Leo Mabuku",
-        subject="Software Developer, Computer Science Student and Entrepreneur",
+        subject="Software Developer, Computer Science Graduate and Entrepreneur",
     )
 
     styles = {
@@ -366,7 +368,7 @@ def build_pdf():
 
     story = [
         p("LEO MABUKU", "name"),
-        p("SOFTWARE DEVELOPER | COMPUTER SCIENCE STUDENT | ENTREPRENEUR", "role"),
+        p("SOFTWARE DEVELOPER | COMPUTER SCIENCE GRADUATE | ENTREPRENEUR", "role"),
         p(
             'Kitwe, Zambia | +260 770 464 736 | '
             '<link href="mailto:leokmabuku@gmail.com" color="#1F4D78">leokmabuku@gmail.com</link> | '
@@ -383,17 +385,21 @@ def build_pdf():
 
     story += section("Technical Skills")
     story.extend([
-        p(f'<font name="{bold_font}" color="#1F4D78">Languages:</font> C, C++, Python, Kotlin, Java, JavaScript, SQL, HTML and CSS', "label"),
-        p(f'<font name="{bold_font}" color="#1F4D78">Mobile &amp; web:</font> Android Studio, Jetpack Compose, Room/SQLite, Firebase, Node.js, Express and Astro', "label"),
-        p(f'<font name="{bold_font}" color="#1F4D78">Systems &amp; delivery:</font> Git/GitHub, Pytest, PLY, Tkinter, PostgreSQL, Cloudflare Pages and technical documentation', "label"),
-        p(f'<font name="{bold_font}" color="#1F4D78">Additional:</font> Networking fundamentals, hardware diagnostics and repair, component replacement and soldering', "label"),
+        p(f'<font name="{bold_font}" color="#1F4D78">Languages:</font> Python, TypeScript, JavaScript, Kotlin, C, C++, PHP, SQL, HTML and CSS', "label"),
+        p(f'<font name="{bold_font}" color="#1F4D78">Mobile &amp; web:</font> Android, Jetpack Compose, React, Astro, Tailwind CSS, Vite and Firebase', "label"),
+        p(f'<font name="{bold_font}" color="#1F4D78">Systems &amp; delivery:</font> FastAPI, Node.js, Express, REST APIs, PostgreSQL, SQLite, Supabase, Git/GitHub, Cloudflare Pages and Vercel', "label"),
+        p(f'<font name="{bold_font}" color="#1F4D78">Additional:</font> MikroTik RouterOS automation, LAN setup, Ethernet termination, ESP32 IoT, hardware diagnostics and repair, soldering', "label"),
     ])
 
     story += section("Experience")
     story.append(KeepTogether([
+        p(f'<font name="{bold_font}" color="#1F4D78">Internet of Things (IoT) Intern</font> | <font name="{bold_font}">CodeAlpha</font> — Remote | 20 Oct–20 Nov 2026', "entry"),
+        bullet("Selected for CodeAlpha's IoT internship track, working through applied sensor, prototyping and technical-reporting tasks."),
+    ]))
+    story.append(KeepTogether([
         p(f'<font name="{bold_font}" color="#1F4D78">Founder &amp; Network Service Operator</font> | <font name="{bold_font}">Starlink Internet Service</font> — Kitwe | Feb 2026–Present', "entry"),
-        bullet("Operate a Starlink Mini and ARRIS mesh service for 29 subscribers, covering a boarding house and approximately 30 metres beyond the property."),
-        bullet("Manage onboarding, payments, subscription periods and connectivity support; designed SubTrack BH to centralise operational records."),
+        bullet("Operate a Starlink Mini and ARRIS mesh service for 37 paying subscribers, with subscriber access automated through a MikroTik hEX router."),
+        bullet("Built SubTrack BH, a working subscription platform that verifies mobile payments and provisions router bandwidth automatically across the subscriber base."),
     ]))
     story.append(KeepTogether([
         p(f'<font name="{bold_font}" color="#1F4D78">Founder, Sales &amp; Operations</font> | <font name="{bold_font}">Leo M. Suppliers</font> — Livingstone | Feb 2022–Apr 2026', "entry"),
@@ -418,17 +424,17 @@ def build_pdf():
 
     story += section("Selected Projects")
     story.extend([
-        p(f'<link href="https://github.com/leomabuku/PROJECT" color="#1F4D78"><font name="{bold_font}">TongaLang</font></link> | <font name="{bold_font}" color="#545C63">Python, PLY, Tkinter, Pytest</font> — Educational interpreted language with a custom lexer, parser, AST, interpreter, IDE tools, bilingual errors, 17 examples and 147 passing automated tests.', "project"),
+        p(f'<link href="https://github.com/leomabuku/PROJECT" color="#1F4D78"><font name="{bold_font}">TongaLang</font></link> | <font name="{bold_font}" color="#545C63">Python, PLY, Tkinter, Pytest</font> — Final-year academic project: educational interpreted language with a custom lexer, parser, AST, interpreter, IDE tools, bilingual errors, 17 examples and 147 passing automated tests.', "project"),
         p(f'<link href="https://github.com/leomabuku/majismart-zambia" color="#1F4D78"><font name="{bold_font}">SmartWater Zambia</font></link> | <font name="{bold_font}" color="#545C63">Kotlin, Compose, React, Node.js, Supabase</font> — IoT water-monitoring and community reporting platform built in 48 hours at GreenCode: ESP32 telemetry, calibrated tank levels, SSE live dashboard, incident map and native Android customer app.', "project"),
-        p(f'<link href="https://github.com/leomabuku/SubTrackBH" color="#1F4D78"><font name="{bold_font}">SubTrack BH</font></link> | <font name="{bold_font}" color="#545C63">Kotlin, Compose, Room, Firebase</font> — Local-first subscriber and payment workspace designed around the active 29-subscriber internet service.', "project"),
+        p(f'<link href="https://github.com/leomabuku/SubTrackBH" color="#1F4D78"><font name="{bold_font}">SubTrack BH</font></link> | <font name="{bold_font}" color="#545C63">Kotlin, Compose, Room, Firebase</font> — Live subscription platform for a 37-subscriber internet service: verified mobile payments, automatic MikroTik bandwidth provisioning and a Kotlin/Compose admin and subscriber app on Firebase.', "project"),
         p(f'<link href="https://cbu-find-web-staging.leokmabuku.workers.dev" color="#1F4D78"><font name="{bold_font}">CBU-FIND</font></link> | <font name="{bold_font}" color="#545C63">Kotlin, React, Firebase, Cloudflare</font> — Completed cross-platform campus lost-and-found with verified claims, private handover messaging, signed media and moderation.', "project"),
         p(f'<link href="https://github.com/leomabuku/SERC-Mini-OS-system" color="#1F4D78"><font name="{bold_font}">SERC Mini-OS</font></link> | <font name="{bold_font}" color="#545C63">C, Raylib, Win32</font> — Operating-systems simulator covering four CPU schedulers, memory allocation, paging, IPC, deadlock safety and regression tests.', "project"),
     ])
 
     story += section("Education & Professional Development")
     story.extend([
-        p(f'<font name="{bold_font}" color="#1F4D78">BSc Computer Science</font> | <font name="{bold_font}">The Copperbelt University</font> — 2023–Present | Expected Sep 2026', "entry"),
-        p(f'<font name="{bold_font}" color="#1F4D78">Training:</font> Prompt Engineering for Everyone — IBM Skills Network / Cognitive Class, Oct 2025; Data Analytics Traineeship — MedTourEasy, Sep 2025', "label"),
+        p(f'<font name="{bold_font}" color="#1F4D78">BSc Computer Science</font> | <font name="{bold_font}">The Copperbelt University</font> — Completed | Awaiting degree conferment', "entry"),
+        p(f'<font name="{bold_font}" color="#1F4D78">Training:</font> Huawei Datacom; IBM Prompt Engineering, Oct 2025; Microsoft Power BI workshop; Microsoft Learn Student Ambassadors workshops; MedTourEasy Data Analytics Traineeship, Sep 2025', "label"),
         p(f'<font name="{bold_font}" color="#1F4D78">Business courses:</font> Marketing &amp; Sales, Money Skills and Entrepreneurial Skills — Absa Skills', "label"),
     ])
 

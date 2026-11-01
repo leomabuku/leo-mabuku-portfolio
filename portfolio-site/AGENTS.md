@@ -17,3 +17,6 @@ When implementing from a selected generated mock, treat that image as the source
 - Motion intensity should feel spectacular at showcase moments and remain present across the site without compromising readable proof sections.
 - Keep the experience silent by default, preserve the native cursor and native scrolling, and reframe existing copy without inventing new facts.
 - Hackathons and awards are first-class content: a recognition band on the homepage, records on About and Resume, and a badge linking a case study back to the event it was built at. Keep the award wording factual and certificate-backed.
+- November 2026: the site was rebuilt on a "Signal" design system — fixed scroll-aware header, kinetic hero with a capability marquee, editorial project cards, sticky case-study chapters, and a single token-driven stylesheet in `src/styles/global.css`. Preserve the near-black surfaces, warm-white serif display type and electric-lime accent.
+- Motion stays declarative (`data-motion`, `data-motion-stagger`, `data-count`, `data-scene`) so the full/lite/reduced contract keeps working. New sections must use those hooks rather than bespoke scripts.
+- Case studies may carry optional audience, market, production-path and limitations blocks; only publish them when the claims can be backed by evidence or clearly labelled as simulation.

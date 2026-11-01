@@ -4,8 +4,8 @@ import { ClientRouter } from 'astro:transitions';
 import CommandPalette from '../components/CommandPalette.astro';
 import { profile, whatsappUrl } from '../data/site';
 const {
-  title = `${profile.name} | Software Developer and Computer Science Student`,
-  description = 'Portfolio of Leo Mabuku, a Computer Science student and software developer building web, Android, systems and educational software projects in Zambia.',
+  title = `${profile.name} | Software Developer and Computer Science Graduate`,
+  description = 'Portfolio of Leo Mabuku, a Computer Science graduate and software developer building web, Android, IoT and systems projects in Zambia.',
   image = '/og.png',
   schema = {},
 } = Astro.props;
@@ -17,7 +17,7 @@ const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: profile.name,
-  jobTitle: 'Software Developer and Computer Science Student',
+  jobTitle: 'Software Developer and Computer Science Graduate',
   email: `mailto:${profile.email}`,
   url: Astro.site?.toString(),
   address: { '@type': 'PostalAddress', addressLocality: 'Kitwe', addressCountry: 'ZM' },
@@ -40,7 +40,7 @@ const personSchema = {
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={socialImage} />
-    <meta property="og:image:alt" content="Leo Mabuku — software developer, Computer Science student and entrepreneur" />
+    <meta property="og:image:alt" content="Leo Mabuku — software developer, Computer Science graduate and entrepreneur" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
@@ -52,7 +52,7 @@ const personSchema = {
   <body data-page={path === '/' ? 'home' : path.split('/').filter(Boolean)[0] ?? 'home'}>
     <a class="skip-link" href="#main">Skip to content</a>
     <div class="experience-rail" aria-hidden="true"><span data-experience-progress></span></div>
-    <header class="site-header" transition:name="site-header">
+    <header class="site-header" data-site-header transition:name="site-header">
       <a class="monogram" href="/" aria-label="Leo Mabuku home"><span>L</span><b>M</b></a>
       <nav id="primary-nav" aria-label="Primary navigation">
         {nav.map(([href, label]) => <a href={href} class:list={{ active: href === '/' ? path === '/' : path.startsWith(href) }}>{label}</a>)}
@@ -64,14 +64,14 @@ const personSchema = {
     </header>
     <main id="main" data-route={path}><slot /></main>
     <footer class="site-footer" data-motion>
-      <div><p class="eyebrow">Let’s connect</p><h2>Build something<br/><em>useful</em> together.</h2><p class="footer-note">Available for graduate roles, internships, freelance work and technical collaborations.</p></div>
+      <div><p class="eyebrow">Let’s connect</p><h2>Build something<br/><em>useful</em> together.</h2><p class="footer-note">{profile.status}. Available for internships, graduate roles, freelance builds and technical collaborations.</p></div>
       <div class="footer-links">
         <a href={`mailto:${profile.email}`}><i class="ph ph-envelope-simple" aria-hidden="true"></i><span>Email<small>{profile.email}</small></span></a>
         <a href={profile.github} target="_blank" rel="noreferrer"><i class="ph ph-github-logo" aria-hidden="true"></i><span>GitHub<small>github.com/leomabuku</small></span></a>
         <a href={profile.linkedin} target="_blank" rel="noreferrer"><i class="ph ph-linkedin-logo" aria-hidden="true"></i><span>LinkedIn<small>Leo Mabuku</small></span></a>
         <a href={whatsappUrl} target="_blank" rel="noreferrer"><i class="ph ph-whatsapp-logo" aria-hidden="true"></i><span>WhatsApp<small>{profile.phone}</small></span></a>
       </div>
-      <p class="copyright">© {new Date().getFullYear()} Leo Mabuku · Kitwe, Zambia</p>
+      <p class="copyright">© {new Date().getFullYear()} Leo Mabuku · {profile.location}</p>
     </footer>
     <CommandPalette />
     <script>
