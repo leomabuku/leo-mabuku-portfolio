@@ -2281,3 +2281,10 @@ html[data-motion-mode='reduced'] .project-card { transform: none; }
   .project-row { grid-template-columns: 1fr; gap: 0.7rem; }
   .project-grid--work { grid-template-columns: 1fr; }
 }
+
+/* Experience timeline document link (offer letters, evidence PDFs) */
+.timeline .text-link {
+  margin-top: 0.7rem;
+  color: var(--text);
+}
+.timeline .text-link i.ph-file-pdf { transform: none; }

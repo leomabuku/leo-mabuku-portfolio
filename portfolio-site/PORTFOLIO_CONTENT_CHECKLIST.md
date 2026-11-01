@@ -14,9 +14,9 @@
 ## To confirm after the November 2026 update
 
 - [ ] Programme dates: the CV says BSc 2022–2025, the About story says enrolment began 8 May 2023 through a special calendar. The site currently shows "Completed 2025" with the 2023 entry narrative.
-- [ ] TongaLang is now described as an independent project, with StudySense as the final-year academic project.
+- [x] TongaLang is described as the final-year Computer Science project.
 - [ ] SubTrack BH is listed at 37 paying subscribers (previously 29) and with MikroTik access automation; the Lenco payment integration is still described as planned.
-- [ ] Add product screenshots for TongaLang (already present), StudySense and the remaining projects.
+- [ ] Add product screenshots for the remaining projects.
 
 ## Still required from Leo
 

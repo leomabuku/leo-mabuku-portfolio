@@ -25,6 +25,8 @@ const marquee = [
 ];
 
 const spotlightProjects = featuredProjects.slice(0, 6);
+const numberWords: Record<number, string> = { 6: 'Six', 7: 'Seven', 8: 'Eight', 9: 'Nine', 10: 'Ten', 11: 'Eleven', 12: 'Twelve' };
+const projectCountWord = numberWords[projects.length] ?? String(projects.length);
 ---
 <BaseLayout>
   <div class="intro-sequence" data-intro-sequence hidden aria-hidden="true">
@@ -68,6 +70,7 @@ const spotlightProjects = featuredProjects.slice(0, 6);
 
   <section class="credibility-strip" aria-label="Professional summary" data-motion-stagger>
     <span>Computer Science graduate · CBU</span>
+    <span>IoT intern · CodeAlpha</span>
     <span>{profile.location}</span>
     <span>Web · Android · IoT · Systems</span>
     <span>Open to internships &amp; graduate roles</span>
@@ -95,7 +98,7 @@ const spotlightProjects = featuredProjects.slice(0, 6);
     <div class="section-heading section-heading--row" data-motion>
       <div>
         <p class="eyebrow">02 · Selected evidence</p>
-        <h2>Nine projects.<br/><em>Inspect the evidence.</em></h2>
+        <h2>{projectCountWord} projects.<br/><em>Inspect the evidence.</em></h2>
       </div>
       <a class="text-link" href="/work/">All {projects.length} case studies <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
     </div>
