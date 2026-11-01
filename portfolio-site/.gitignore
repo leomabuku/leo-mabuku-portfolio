@@ -7,3 +7,6 @@ tmp/
 implementation-*.png
 qa-comparison.png
 *.log
+
+# Windows-only npm cache path written by local installs
+C:\\Users\\*

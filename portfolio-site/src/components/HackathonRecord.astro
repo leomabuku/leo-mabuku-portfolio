@@ -1,0 +1,25 @@
+---
+import type { Hackathon } from '../data/site';
+const { hackathon } = Astro.props as { hackathon: Hackathon };
+---
+<article class="hackathon-record">
+  <div class="timeline-meta"><span>{hackathon.period}</span><small>{hackathon.location}</small></div>
+  <div>
+    <span class="hackathon-result"><i class="ph ph-trophy" aria-hidden="true"></i>{hackathon.result}</span>
+    <h3>{hackathon.name} · {hackathon.edition}</h3>
+    <h4>{hackathon.organisers.join(' × ')} · {hackathon.format}</h4>
+    <p>{hackathon.summary}</p>
+    <ul>{hackathon.contributions.map((item) => <li>{item}</li>)}</ul>
+    <div class="hackathon-detail">
+      <div>
+        <p class="eyebrow">Award</p>
+        <p>{hackathon.awardSummary}</p>
+      </div>
+      <div>
+        <p class="eyebrow">Certificates held</p>
+        <ul class="hackathon-certificates">{hackathon.certificates.map((certificate) => <li><i class="ph ph-certificate" aria-hidden="true"></i><span>{certificate.label}<small>{certificate.issuer}</small></span></li>)}</ul>
+      </div>
+    </div>
+    <div class="tag-list">{hackathon.skills.map((skill) => <span>{skill}</span>)}</div>
+  </div>
+</article>

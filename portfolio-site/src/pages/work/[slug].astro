@@ -1,13 +1,14 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import AvailabilityBanner from '../../components/AvailabilityBanner.astro';
-import { projects, type Project } from '../../data/site';
+import { projects, hackathons, type Project } from '../../data/site';
 
 export function getStaticPaths() {
   return projects.map((project) => ({ params: { slug: project.slug }, props: { project } }));
 }
 
 const { project } = Astro.props as { project: Project };
+const hackathon = project.hackathonSlug ? hackathons.find((item) => item.slug === project.hackathonSlug) : null;
 const currentIndex = projects.findIndex((item) => item.slug === project.slug);
 const previous = projects[(currentIndex - 1 + projects.length) % projects.length];
 const next = projects[(currentIndex + 1) % projects.length];
@@ -41,7 +42,7 @@ const caseSections = [
   <article class="case-study" data-project-slug={project.slug}>
     <header class="case-hero section-shell">
       <a class="back-link" href="/work/"><i class="ph ph-arrow-left" aria-hidden="true"></i> Back to work</a>
-      <div class="case-title" data-motion><p class="eyebrow">{project.type}</p><h1 transition:name={`project-title-${project.slug}`}>{project.name}</h1><p>{project.shortDescription}</p><div class="case-badges"><span>{project.status}</span><span>{project.year}</span><span>{repositories.length > 1 ? `${repositories.length} project links` : project.repositoryVisibility === 'public' ? 'Public repository' : 'Private source'}</span></div></div>
+      <div class="case-title" data-motion><p class="eyebrow">{project.type}</p><h1 transition:name={`project-title-${project.slug}`}>{project.name}</h1><p>{project.shortDescription}</p><div class="case-badges"><span>{project.status}</span>{hackathon && <a class="case-badge-accent" href={`/about/#hackathons`}>{hackathon.resultShort} · {hackathon.name} {hackathon.edition}</a>}<span>{project.year}</span><span>{repositories.length > 1 ? `${repositories.length} project links` : project.repositoryVisibility === 'public' ? 'Public repository' : 'Private source'}</span></div></div>
       {project.cover ? <figure class="case-cover" data-motion transition:name={`project-visual-${project.slug}`}><img src={project.cover} alt={project.coverAlt} /><span class="case-cover-scan" aria-hidden="true"></span><figcaption>Verified project evidence from the current implementation.</figcaption></figure> : <div class="case-cover case-cover--system" aria-label={`${project.name} system overview`} data-motion transition:name={`project-visual-${project.slug}`}><span>{project.category[0]}</span><strong>{project.name}</strong><small>{project.technologies.join(' · ')}</small></div>}
       <dl class="case-facts" data-motion><div><dt>Role</dt><dd>{project.role}</dd></div><div><dt>Status</dt><dd>{project.status}</dd></div><div><dt>Year</dt><dd>{project.year}</dd></div><div><dt>Stack</dt><dd>{project.technologies.join(' · ')}</dd></div></dl>
       {project.updatedOn && <aside class="project-update" data-motion><p class="eyebrow">Latest project update</p><div><time datetime={project.updatedOn}>{formattedUpdatedOn}</time><p>{project.updateSummary}</p></div></aside>}
@@ -61,7 +62,8 @@ const caseSections = [
 
     {project.challenges.length > 0 && <section id="engineering" class="case-section section-shell" data-case-section data-motion><div><p class="eyebrow">04 · Engineering</p><h2>Hard parts,<br/><em>clear decisions.</em></h2></div><div class="challenge-list" data-motion-stagger>{project.challenges.map((challenge) => <article><h3>{challenge.title}</h3><p>{challenge.description}</p></article>)}</div></section>}
 
-    <section id="reflection" class="case-section section-shell" data-case-section data-motion><div><p class="eyebrow">05 · Reflection</p><h2>What I learned</h2></div><div><div class="tag-list tag-list--large">{project.lessons.map((lesson) => <span>{lesson}</span>)}</div>{project.plannedFeatures.length > 0 && <div class="planned"><h3>Planned or still in development</h3><ul>{project.plannedFeatures.map((item) => <li>{item}</li>)}</ul></div>}<p class="evidence-note"><i class="ph ph-seal-check" aria-hidden="true"></i>{project.evidence}</p></div></section>
+    <section id="reflection" class="case-section section-shell" data-case-section data-motion><div><p class="eyebrow">05 · Reflection</p><h2>What I learned</h2></div><div><div class="tag-list tag-list--large">{project.lessons.map((lesson) => <span>{lesson}</span>)}</div>{project.plannedFeatures.length > 0 && <div class="planned"><h3>Planned or still in development</h3><ul>{project.plannedFeatures.map((item) => <li>{item}</li>)}</ul></div>}<p class="evidence-note"><i class="ph ph-seal-check" aria-hidden="true"></i>{project.evidence}</p>
+      {hackathon && <p class="hackathon-reference"><i class="ph ph-trophy" aria-hidden="true"></i>Built at the <a href="/about/#hackathons">{hackathon.name} · {hackathon.edition}</a>, {hackathon.period} in {hackathon.location} — {hackathon.result.toLowerCase()}.</p>}</div></section>
 
     <section class="case-links section-shell" data-motion>
       <div><p class="eyebrow">Project access</p><h2>{project.repositoryVisibility === 'public' ? 'Inspect the source.' : 'Source remains private.'}</h2></div>

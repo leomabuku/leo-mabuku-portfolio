@@ -42,12 +42,15 @@ Motion-system coverage lives in `scripts/motion-system.test.ts`, including mode 
 
 ## Content locations
 
-- `src/data/site.ts` — professional profile, skills, education, experience and full case studies
+- `src/data/site.ts` — professional profile, skills, education, experience, hackathons/awards and full case studies
 - `src/data/projects.json` — generated public-repository cache used by the refresh workflow
 - `src/pages/` — Home, Work, About, Resume and Contact routes
 - `src/pages/work/[slug].astro` — static project case-study routes
 - `public/images/projects/` — approved project evidence and screenshots
+- `public/images/hackathons/` — event photographs and certificate scans
 - `public/documents/` — downloadable resume in PDF and Word formats
+
+Hackathons and awards are maintained in the `hackathons` array in `src/data/site.ts` and render on the homepage, About and Resume routes.
 
 To add or update a project, edit its record in `src/data/site.ts`. Never add private source, subscriber records, credentials or unapproved client information. Public repository metadata may be refreshed independently without overriding the curated case-study content.
 

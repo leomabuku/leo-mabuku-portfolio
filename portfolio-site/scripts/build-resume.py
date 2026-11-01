@@ -260,6 +260,12 @@ def build_resume():
     entry_heading(document, "Data Analytics Trainee", "MedTourEasy", "Remote | Sep 2025")
     add_bullet(document, "Completed a four-week training programme and live analytics project, applying structured analysis while observing professional confidentiality.")
 
+    section_heading(document, "Hackathons & Awards")
+    entry_heading(document, "GreenCode Hackathon — Top Six Team", "Garage48 × BongoHive", "Lusaka | 30 Oct–1 Nov 2026")
+    add_bullet(document, "Selected among the six winning teams out of roughly 100 Zambian builders, earning follow-on support from Garage48 and BongoHive and a share of the €6,000 award fund.")
+    add_bullet(document, "Co-built SmartWater Zambia, an IoT water-monitoring and community reporting platform, and presented the working prototype to the judging panel.")
+    add_bullet(document, "Certified participant and top-six team certificate holder for the Zambia edition of the GreenCode Hackathon.")
+
     section_heading(document, "Selected Projects")
     add_project(
         document,
@@ -267,6 +273,13 @@ def build_resume():
         "Python, PLY, Tkinter, Pytest",
         "https://github.com/leomabuku/PROJECT",
         "Educational interpreted language with a custom lexer, parser, AST, interpreter, IDE tools, bilingual errors, 17 examples and 147 passing automated tests.",
+    )
+    add_project(
+        document,
+        "SmartWater Zambia",
+        "Kotlin, Compose, React, Node.js, Express, Supabase",
+        "https://github.com/leomabuku/majismart-zambia",
+        "IoT water-monitoring and community reporting platform built in 48 hours at GreenCode: ESP32 telemetry, calibrated tank levels, SSE live dashboard, incident map and native Android customer app.",
     )
     add_project(
         document,
@@ -396,9 +409,17 @@ def build_pdf():
         bullet("Completed a four-week training programme and live analytics project, applying structured analysis while observing professional confidentiality."),
     ]))
 
+    story += section("Hackathons & Awards")
+    story.append(KeepTogether([
+        p(f'<font name="{bold_font}" color="#1F4D78">GreenCode Hackathon — Top Six Team</font> | <font name="{bold_font}">Garage48 &amp; BongoHive</font> — Lusaka | 30 Oct–1 Nov 2026', "entry"),
+        bullet("Selected among the six winning teams out of roughly 100 Zambian builders, earning follow-on support from Garage48 and BongoHive and a share of the €6,000 award fund."),
+        bullet("Co-built SmartWater Zambia, an IoT water-monitoring and community reporting platform, and presented the working prototype to the judging panel."),
+    ]))
+
     story += section("Selected Projects")
     story.extend([
         p(f'<link href="https://github.com/leomabuku/PROJECT" color="#1F4D78"><font name="{bold_font}">TongaLang</font></link> | <font name="{bold_font}" color="#545C63">Python, PLY, Tkinter, Pytest</font> — Educational interpreted language with a custom lexer, parser, AST, interpreter, IDE tools, bilingual errors, 17 examples and 147 passing automated tests.', "project"),
+        p(f'<link href="https://github.com/leomabuku/majismart-zambia" color="#1F4D78"><font name="{bold_font}">SmartWater Zambia</font></link> | <font name="{bold_font}" color="#545C63">Kotlin, Compose, React, Node.js, Supabase</font> — IoT water-monitoring and community reporting platform built in 48 hours at GreenCode: ESP32 telemetry, calibrated tank levels, SSE live dashboard, incident map and native Android customer app.', "project"),
         p(f'<link href="https://github.com/leomabuku/SubTrackBH" color="#1F4D78"><font name="{bold_font}">SubTrack BH</font></link> | <font name="{bold_font}" color="#545C63">Kotlin, Compose, Room, Firebase</font> — Local-first subscriber and payment workspace designed around the active 29-subscriber internet service.', "project"),
         p(f'<link href="https://cbu-find-web-staging.leokmabuku.workers.dev" color="#1F4D78"><font name="{bold_font}">CBU-FIND</font></link> | <font name="{bold_font}" color="#545C63">Kotlin, React, Firebase, Cloudflare</font> — Completed cross-platform campus lost-and-found with verified claims, private handover messaging, signed media and moderation.', "project"),
         p(f'<link href="https://github.com/leomabuku/SERC-Mini-OS-system" color="#1F4D78"><font name="{bold_font}">SERC Mini-OS</font></link> | <font name="{bold_font}" color="#545C63">C, Raylib, Win32</font> — Operating-systems simulator covering four CPU schedulers, memory allocation, paging, IPC, deadlock safety and regression tests.', "project"),
