@@ -1,27 +1,33 @@
 export const profile = {
   name: 'Leo Mabuku',
-  title: 'Software Developer, Computer Science Student & Entrepreneur',
-  shortTitle: 'Software Developer · Computer Science Student · Entrepreneur',
-  location: 'Kitwe, Copperbelt, Zambia',
+  title: 'Software Developer & Computer Science Graduate',
+  shortTitle: 'Software Developer · Computer Science Graduate · Entrepreneur',
+  location: 'Lusaka, Zambia · open to Kitwe and remote',
   email: 'leokmabuku@gmail.com',
   phone: '+260770464736',
   github: 'https://github.com/leomabuku',
   linkedin: 'https://www.linkedin.com/in/leo-mabuku-7a2645330/',
   avatar: '/leo-mabuku-portrait.png',
-  intro: 'I analyse real problems and turn them into practical software systems across web, Android and systems development.',
-  availability: 'Open to graduate software roles, internships, freelance projects, remote work, local business systems, startup partnerships and technical collaborations.',
+  intro: 'I build systems end to end — Android apps, web platforms, APIs and the hardware at the edge. My degree is finished and my evidence is shipped, working software.',
+  availability: 'Open to internships, graduate software roles, hackathons, freelance builds and technical collaborations — in Zambia or remote.',
+  status: 'Computer Science graduate · available for internships and graduate roles',
 };
 
 export const skillGroups = [
-  { title: 'Programming languages', items: ['C', 'C++', 'Python', 'Java', 'Kotlin', 'JavaScript', 'HTML', 'CSS', 'SQL'] },
-  { title: 'Application development', items: ['Android Studio', 'Jetpack Compose', 'XML layouts', 'Tkinter', 'Node.js', 'Express', 'Material Design'] },
-  { title: 'Data, testing & delivery', items: ['Room / SQLite', 'PostgreSQL', 'Firebase', 'Git & GitHub', 'Pytest', 'Cloudflare Pages'] },
-  { title: 'Technical practice', items: ['Problem decomposition', 'Debugging', 'Automated testing', 'Interpreter development', 'Systems programming', 'Networking fundamentals', 'Hardware diagnostics & repair', 'Component replacement & soldering', 'Technical documentation'] },
+  { title: 'Languages', items: ['Python', 'JavaScript', 'TypeScript', 'Kotlin', 'C', 'C++', 'PHP', 'SQL', 'HTML', 'CSS'] },
+  { title: 'Frontend & mobile', items: ['React', 'Astro', 'Tailwind CSS', 'Vite', 'Android', 'Jetpack Compose', 'Chart.js', 'Leaflet'] },
+  { title: 'Backend & data', items: ['FastAPI', 'Node.js', 'Express', 'REST APIs', 'PostgreSQL', 'SQLite', 'SQLAlchemy', 'Supabase', 'Firebase'] },
+  { title: 'Networking & hardware', items: ['MikroTik RouterOS automation', 'LAN design', 'Ethernet termination', 'ESP32 IoT', 'Server-Sent Events'] },
+  { title: 'Practice & delivery', items: ['Git & GitHub', 'Linux CLI', 'Automated testing', 'Cloudflare Pages', 'Vercel', 'Power BI', 'Technical documentation'] },
 ];
 
 export const certifications = [
+  { name: 'Huawei Datacom Training', issuer: 'Networking and data communications', period: 'Training' },
   { name: 'Prompt Engineering for Everyone', issuer: 'IBM Skills Network / Cognitive Class', period: 'Oct 2025' },
+  { name: 'Microsoft Power BI', issuer: 'Data analytics workshop', period: 'Workshop' },
+  { name: 'Microsoft Learn Student Ambassadors', issuer: 'AI-powered apps with AI agents · Microsoft Learn and Power Platform', period: 'Workshops' },
   { name: 'Data Analytics Traineeship', issuer: 'MedTourEasy', period: 'Sep 2025' },
+  { name: 'ICTAZ', issuer: 'Information and Communications Technology Association of Zambia', period: 'Member / participant' },
   { name: 'Marketing & Sales · Money Skills · Entrepreneurial Skills', issuer: 'Absa Skills', period: 'Business courses' },
 ];
 
@@ -30,8 +36,8 @@ export const education = [
     qualification: 'Bachelor of Science in Computer Science',
     institution: 'The Copperbelt University',
     location: 'Kitwe, Zambia',
-    period: '2023–Present',
-    detail: 'Fourth-year student with expected programme completion in September 2026. Entered through a special academic calendar beginning on 8 May 2023 before joining the mainstream calendar in January 2024.',
+    period: 'Completed 2025',
+    detail: 'Academic programme fully completed and awaiting official degree conferment. Entered through a special academic calendar beginning on 8 May 2023 before joining the mainstream calendar in January 2024.',
   },
   {
     qualification: 'Senior Secondary Certificate',
@@ -48,8 +54,8 @@ export const experience = [
     organisation: 'Starlink Internet Service',
     location: 'Kopa Street, Kitwe',
     period: 'Feb 2026–Present',
-    summary: 'Launched and operate a Starlink-powered internet service covering a boarding house and approximately 30 metres beyond the property, currently serving 29 subscribers.',
-    bullets: ['Configured Starlink Mini and ARRIS SURFboard Max W121 mesh equipment.', 'Manage subscriber onboarding, payments, subscription periods and connectivity support.', 'Turned the operation’s record-management needs into the SubTrack BH Android product.'],
+    summary: 'Launched and operate a Starlink-powered internet service covering a boarding house and approximately 30 metres beyond the property, currently serving 37 paying subscribers.',
+    bullets: ['Configured Starlink Mini and ARRIS SURFboard Max W121 mesh equipment.', 'Automated subscriber network access through a MikroTik hEX router, so paid subscriptions map to real bandwidth limits.', 'Manage onboarding, payments, subscription periods and connectivity support across 37 paying subscribers.', 'Turned the operation’s record-management and access-control needs into the SubTrack BH Android product.'],
   },
   {
     title: 'Founder · Sales & Operations',
@@ -104,6 +110,7 @@ export type Hackathon = {
   projectSlug: string | null;
   contributions: string[];
   skills: string[];
+  acknowledgement?: string;
   certificates: { label: string; issuer: string; image: string | null; alt?: string }[];
   media: {
     type: 'image';
@@ -140,6 +147,8 @@ export const hackathons: Hackathon[] = [
       'Pitched the finished prototype to the judging panel and finished in the top six, the group awarded follow-on support and a share of the award fund.',
     ],
     skills: ['Rapid prototyping', 'Product validation', 'Team collaboration', 'Pitching', 'Green technology'],
+    acknowledgement:
+      'Built at the GreenCode Hackathon Zambia Edition, run by Garage48 and BongoHive with ESTDEV, in Lusaka from 30 October to 1 November 2026. Thank you to the organisers for putting a hundred Zambian developers, designers and sustainability practitioners in one room with a real brief and real mentors; to the mentors and judges who pushed every team to validate before building; and to the six-team follow-on programme that gives this prototype a route beyond the weekend. Finishing in the top six is an opportunity rather than a trophy — the intent is to keep going: calibrate the hardware, harden the platform and put SmartWater Zambia in front of a Zambian utility or institution as a paid pilot.',
     certificates: [
       {
         label: 'Certificate of participation · Leo Mabuku',
@@ -193,6 +202,10 @@ export type Project = {
   additionalRepositories?: { label: string; url: string }[];
   repositoryVisibility: 'public' | 'private';
   hackathonSlug?: string;
+  audience?: { who: string; why: string }[];
+  marketPoints?: string[];
+  productionPath?: string[];
+  limitations?: string[];
   liveDemo: string | null;
   cover: string | null;
   coverAlt: string;
@@ -222,7 +235,7 @@ export const projects: Project[] = [
     name: 'TongaLang',
     shortDescription: 'A beginner-focused interpreted programming language with Tonga-derived keywords, guided error recovery and an installable desktop IDE.',
     category: ['Programming Language', 'Educational Software', 'Python'],
-    type: 'Final-year Computer Science project',
+    type: 'Independent programming-language project',
     status: 'Completed',
     year: '2025–2026',
     featured: true,
@@ -332,9 +345,34 @@ export const projects: Project[] = [
     evidence: 'Public repository verified on 11 September 2026 at merged commit 956909b: TongaLang 0.2.0 includes 17 runnable examples and passes all 179 automated tests. The Windows installer is published with SHA-256 265e4a204bd56d9326b67c144f4fda966484b29bb8ea076a8c3292453b38f0ec. The silent H.264 walkthrough is 1280×720, 30 fps, 52.03 seconds and 4.15 MB.',
   },
   {
+    slug: 'studysense',
+    name: 'StudySense',
+    shortDescription: 'A full-stack learning platform that turns uploaded course material into structured topics, targeted assessments and tracked mastery.',
+    category: ['Web', 'Education', 'AI'],
+    type: 'Final-year academic project',
+    status: 'Completed',
+    year: '2025–2026',
+    featured: true,
+    role: 'Full-stack developer & researcher',
+    technologies: ['React', 'Python', 'FastAPI', 'PostgreSQL', 'SQLAlchemy', 'OpenAI API', 'Groq API'],
+    repository: null,
+    repositoryVisibility: 'private',
+    liveDemo: null,
+    cover: null,
+    coverAlt: '',
+    problem: 'Digital learning systems usually deliver the same material and the same feedback to every learner, so someone who is behind on one topic and ahead on another gets identical guidance. Lecturers see activity rather than mastery.',
+    solution: 'StudySense accepts uploaded course documents, parses them into structured topics, generates evaluations aimed at those topics, and tracks mastery per learner through an adaptive backend.',
+    contributions: ['Built the React front end for document upload, topic review, assessment and progress views.', 'Designed the PostgreSQL schema and SQLAlchemy models for documents, topics, questions, attempts and mastery state.', 'Implemented the FastAPI REST backend that parses uploaded material into structured topics and serves adaptive assessments.', 'Put the LLM providers behind a service boundary, so parsing and question generation stay replaceable rather than welded to one vendor.'],
+    features: ['PDF and notes upload', 'Document parsing into structured topics', 'Generated topic-targeted evaluations', 'Per-learner mastery tracking', 'Progress and performance analytics', 'Typed REST API', 'Relational schema for documents, topics, questions and attempts', 'Provider-agnostic LLM integration'],
+    challenges: [{ title: 'Turning prose into structure', description: 'Course material arrives as unstructured documents. The pipeline has to produce stable topics and questions that map back to the source, because an assessment a learner cannot trace to their own notes is not feedback.' }],
+    lessons: ['Relational modelling', 'FastAPI service design', 'LLM output validation', 'Adaptive assessment logic', 'Owning a feature end to end'],
+    plannedFeatures: ['Automated test coverage across the API', 'A deployment for a pilot cohort'],
+    evidence: 'Final-year academic project, verified against the submitted project documentation: React front end, FastAPI backend, PostgreSQL persistence, and LLM-backed parsing and question generation. Source is not public.',
+  },
+  {
     slug: 'smartwater-zambia',
     name: 'SmartWater Zambia',
-    shortDescription: 'An IoT water-monitoring and community reporting platform linking ESP32 tank sensors, an operator dashboard and a native Android app.',
+    shortDescription: 'IoT water telemetry and community incident reporting, built as one platform across an ESP32 sensor, an operator dashboard and a native Android app.',
     category: ['IoT', 'Android', 'Web', 'Water Technology'],
     type: 'GreenCode Hackathon team project',
     status: 'Top 6 team · working prototype',
@@ -347,20 +385,61 @@ export const projects: Project[] = [
     repositoryVisibility: 'public',
     hackathonSlug: 'greencode-2026',
     liveDemo: null,
-    cover: null,
-    coverAlt: '',
+    cover: '/images/projects/smartwater-zambia/web/dashboard-overview.jpg',
+    coverAlt: 'SmartWater Zambia operator dashboard showing station totals, tank states and the latest sensor reading',
+    media: [
+      { type: 'image', src: '/images/projects/smartwater-zambia/web/dashboard-overview.jpg', alt: 'Operator dashboard with active stations, tank state counts, offline devices, open reports and a live reading banner', caption: 'The operator view: station and tank state, offline device count, open reports, and the most recent telemetry reading with device and tank identity.', layout: 'wide' },
+      { type: 'image', src: '/images/projects/smartwater-zambia/web/tank-analytics.jpg', alt: 'Tank analytics page showing current level, period minimum and maximum, paired ESP32 status and a 24-hour trend chart', caption: 'Per-tank analytics: current depth and volume, period minimum and maximum, the paired device and its last contact, and a trend against low and critical thresholds.', layout: 'wide' },
+      { type: 'image', src: '/images/projects/smartwater-zambia/web/incident-map.jpg', alt: 'Leaflet map showing monitoring stations, storage tanks and citizen incident markers across Lusaka', caption: 'Stations, tanks and citizen incidents on one map, so a report and a reservoir can be seen as the same place.', layout: 'wide' },
+      { type: 'image', src: '/images/projects/smartwater-zambia/web/report-detail.jpg', alt: 'Community report detail with description, category, location, map pin, accuracy, photo evidence and directions action', caption: 'A report carries its category, coordinates and accuracy, the citizen\u2019s own description, photo evidence and a directions handoff for the crew.', layout: 'wide' },
+      { type: 'image', src: '/images/projects/smartwater-zambia/web/community-reports.jpg', alt: 'Community water reports table with categories, incident titles, reporters, submission dates, statuses and management actions', caption: 'The report queue: category, incident, reporter, submission time and status, with filters and per-report case management.', layout: 'wide' },
+      { type: 'image', src: '/images/projects/smartwater-zambia/web/report-intelligence.jpg', alt: 'Report intelligence page with totals, open and resolved counts, median response time, category mix and a written analysis', caption: 'Report intelligence turns the queue into a decision: volume, resolution, median first response, dominant issue and the locations carrying the most cases.', layout: 'wide' },
+      { type: 'image', src: '/images/projects/smartwater-zambia/web/tank-grid.jpg', alt: 'Grid of tank cards with level percentages, depth, capacity, device identifiers and timestamps', caption: 'Tank cards label every reading as simulated or live-sensor, so demo data is never mistaken for measured water.', layout: 'wide' },
+      { type: 'image', src: '/images/projects/smartwater-zambia/mobile/levels-overview.jpg', alt: 'Android app levels screen showing telemetry connection, total storage, online sensors and district filters', caption: 'Android · residents see the same telemetry operators do, with district filters and sensor health.', layout: 'portrait' },
+      { type: 'image', src: '/images/projects/smartwater-zambia/mobile/tank-levels.jpg', alt: 'Android app tank cards showing live volume against capacity with tank identifiers and sensor names', caption: 'Android · live volume against capacity per tank, with the tank code and the sensor reporting it.', layout: 'portrait' },
+      { type: 'image', src: '/images/projects/smartwater-zambia/mobile/report-category.jpg', alt: 'Android report form with burst pipe, pipe leak, no water and water quality categories and a location picker', caption: 'Android · reporting starts with a category and a mapped location, not a free-text phone call.', layout: 'portrait' },
+      { type: 'image', src: '/images/projects/smartwater-zambia/mobile/report-evidence.jpg', alt: 'Android report form with GPS pin, photo evidence capture, urgency level and description field', caption: 'Android · GPS pin, photo evidence and urgency, so a crew knows what to expect before it leaves.', layout: 'portrait' },
+      { type: 'image', src: '/images/projects/smartwater-zambia/mobile/my-reports.jpg', alt: 'Android my reports screen showing pending and resolved reports with logged, dispatched and resolved stages and dispatch notes', caption: 'Android · the closure loop: every report carries its status history and the crew note that resolved it.', layout: 'portrait' },
+    ],
     problem: 'Zambian utilities keep instrumentation at treatment works and district meters but very little between the district meter and the customer, so leaks and shortages surface as phone calls and reconciled bills days later. Residents have no dependable signal for how much water is actually in a shared tank, and incident reports arrive without consistent categories, locations or a record of what was checked.',
     solution: 'SmartWater Zambia puts three layers on one data contract: an ESP32 ultrasonic sensor posts calibrated readings to an authenticated API, an operator dashboard tracks levels, alerts and community reports in real time, and a native Android app gives residents the same picture plus a route onto the incident map.',
-    contributions: ['Built the Express API behind the platform: JWT role authentication plus per-device API keys, IoT ingestion, threshold alerting, heartbeat and offline detection, and a Server-Sent Events hub with a polling fallback.', 'Built the React administration dashboard: live tank cards, Chart.js history, a Leaflet incident map, community report case management, the alerts centre, the hardware simulator and the installation and calibration screens.', 'Built the native Android customer app in Kotlin and Jetpack Compose: live level gauges, saved locations, map-based report submission, notifications and Google sign-in.', 'Added the ESP32 firmware sketch and a Node telemetry simulator so the platform could be demonstrated end to end without field hardware, and extended the backend and web test suites used in CI.'],
-    features: ['Device-authenticated IoT ingestion with raw payload retention', 'Calibrated depth, tank geometry and volume estimation', 'Live tank levels over Server-Sent Events', 'Threshold alerts and stale-reading detection', 'Community incident reports with photos and coordinates', 'Report case lifecycle with full status history', 'Leaflet incident and installation map', 'Installation and calibration records per tank', 'Sensor fault logging without fabricated readings', 'Native Android app with live gauges and notifications', 'Role-based access for administrators, customers and technicians', 'Hardware simulator and telemetry presets', 'Automated backend and web test suites in CI'],
+    contributions: ['Built the Express API behind the platform: JWT role authentication plus per-device API keys, IoT ingestion, threshold alerting, heartbeat and offline detection, and a Server-Sent Events hub with a polling fallback.', 'Built the React administration dashboard: live tank cards, Chart.js history, a Leaflet incident map, community report case management and analytics, the alerts centre, the hardware simulator and the installation and calibration screens.', 'Built the native Android customer app in Kotlin and Jetpack Compose: live level gauges, saved locations, map-based report submission, notifications and Google sign-in.', 'Wired the physical demo: one ESP32 ultrasonic sensor on a real tank streaming into the same API the dashboard and app read, with the remaining tanks simulated so the operator view could be shown at realistic scale.'],
+    features: ['Device-authenticated IoT ingestion with raw payload retention', 'Calibrated depth, tank geometry and volume estimation', 'Live tank levels over Server-Sent Events', 'Threshold alerts and stale-reading detection', 'Community incident reports with photos and coordinates', 'Report case lifecycle with full status history', 'Leaflet incident and installation map', 'Report intelligence with response and category analysis', 'Installation and calibration records per tank', 'Sensor fault logging without fabricated readings', 'Native Android app with live gauges and notifications', 'Role-based access for administrators, customers and technicians', 'Hardware simulator and telemetry presets'],
     challenges: [
-      { title: 'Telemetry that does not invent data', description: 'A sensor timeout, a bad reading and a genuinely empty tank look similar from a distance. The platform records sensor faults as their own event, flags stale readings instead of repeating the last value, and labels simulated or demo telemetry so an operator can separate what was measured from what was seeded.' },
+      { title: 'Telemetry that does not invent data', description: 'A sensor timeout, a bad reading and a genuinely empty tank look similar from a distance. The platform records sensor faults as their own event, flags stale readings instead of repeating the last value, and labels every simulated tank so an operator can separate what was measured from what was seeded.' },
       { title: 'One contract, three clients', description: 'Firmware, dashboard and Android app had to agree on distance, depth, level and volume while the device side stayed minimal. Calibration and geometry live on the server, so the ESP32 posts centimetres and both clients read the same derived state over REST and SSE.' },
       { title: 'A 48-hour build that still behaved like a system', description: 'The stack ran on SQLite locally and Supabase PostgreSQL in deployment, so every schema change had to survive both; realtime used SSE with a polling fallback, because a dropped stream must not look like a tank that stopped changing.' },
     ],
     lessons: ['IoT ingestion design', 'ESP32 firmware and sensor calibration', 'Realtime delivery with SSE', 'Supabase and PostgreSQL migrations', 'Role-based API security', 'Compose UI state', 'Cross-client data contracts', 'Building to a demo deadline'],
-    plannedFeatures: ['Physical sensor calibration against manual measurements', 'Field hardening for production utility deployments', 'Expanded technician and repair workflows'],
-    evidence: 'Public repository audited on 1 November 2026 at commit 3143c77: ESP32 firmware, the Express and Supabase API, the React/Vite dashboard and the Kotlin/Jetpack Compose Android app are all present alongside backend and web test suites. The team placed in the top six at the GreenCode Hackathon Zambia Edition.',
+    plannedFeatures: ['Field calibration of the sensor against manual measurements', 'Per-device provisioning at utility scale', 'SMS and USSD channels for residents without smartphones', 'Integration with utility billing and district-metering systems'],
+    audience: [
+      { who: 'Commercial water utilities', why: 'Zambia’s eleven commercial utilities and six private schemes hold instrumentation at treatment works and district meters, and very little between that and the customer. This targets exactly that gap: storage visibility plus a queue of citizen-reported incidents carrying a location and a photo.' },
+      { who: 'Institutions with stored water', why: 'Campuses, hospitals, boarding houses, hotels, mines and commercial farms all store water in tanks someone has to walk to and read. A sensor and a dashboard replace that trip with a timestamped number and an alert.' },
+      { who: 'Landlords and estate managers', why: 'Buildings with per-block storage can see level and consumption per tank, and route tenant complaints into one case history instead of scattered phone calls.' },
+      { who: 'WASH programmes and funders', why: 'Programmes need verifiable reporting on what was installed, what was measured and what was fixed. The installation, calibration and case-history records exist to produce that trail.' },
+      { who: 'Residents', why: 'The people at the end of the pipe are beneficiaries rather than buyers: see the level in your own tank, report a burst pipe with a pin and a photo, and follow the case to resolution.' },
+    ],
+    marketPoints: [
+      'Sector non-revenue water reached 57% in 2023 against a regulator benchmark of under 20% for good performance — no Zambian utility is close.',
+      'The water that is billed costs about K12.61 per unit to deliver and sells for an average of K7.90, and all eleven utilities sit below 100% cost coverage by collection.',
+      'The national strategy put revenue lost to non-revenue water at ZMW 998.6 million on a 2020 baseline, against a benchmark loss of ZMW 474.5 million.',
+      'Lusaka produced roughly 350,000 m³/day against 480,000 m³/day of demand, dropping to about 265,000 during the 2025 drought — when supply is intermittent, tank-level certainty stops being a convenience.',
+      'Roughly 8.36 million people live inside commercial-utility service areas, and coverage fractions fell as population grew faster than connections. Utilities are running to stand still without better information at the edge.',
+    ],
+    productionPath: [
+      'Field calibration: run the recorded empty/full reference protocol against a physical tank and log the error, because an uncalibrated ultrasonic reading is a guess with a timestamp.',
+      'Hardware hardening: enclosure, power, sensor dead zones and per-device provisioning at scale.',
+      'Security review before exposure: server-side enforcement instead of relying on row-level security alone, authenticated realtime streams and credential rotation.',
+      'Integration with what utilities already run — billing systems and district metering — so a reading becomes revenue or a work order rather than another dashboard.',
+      'Channels that match the user: SMS and USSD paths for residents without smartphones, alongside the Android app.',
+      'A pilot with one institution or one utility zone, with a baseline, a measured outcome and an exit decision.',
+    ],
+    limitations: [
+      'One physical ESP32 sensor was connected at the hackathon and monitored a real tank (TANK_001, the tank used in the live demo). Additional tanks and stations were simulated so the operator view could be shown at realistic scale, and every simulated record is labelled as such in the interface.',
+      'Report-intelligence figures in these captures come from a seeded demo cohort, not a live utility dataset.',
+      'Calibration against manual measurements, production deployment and utility integration are still to be done.',
+    ],
+    evidence: 'Repository audited on 1 November 2026 at commit 3143c77: ESP32 firmware, the Express and Supabase API, the React/Vite dashboard and the Kotlin/Jetpack Compose Android app are all present alongside backend and web test suites. The team placed in the top six at the GreenCode Hackathon Zambia Edition.',
   },
   {
     slug: 'subtrack-bh',
@@ -379,7 +458,7 @@ export const projects: Project[] = [
     cover: '/images/projects/subtrack-bh/logo.png',
     coverAlt: 'SubTrack BH internet subscription manager logo',
     problem: 'Subscriber names, packages, payments, expiry dates, balances and reconnections become unreliable when managed through memory, messages or separate records.',
-    solution: 'SubTrack BH centralises the administration of Leo’s active Starlink service, which currently serves 29 subscribers. Room is the local source of truth, with Firebase services supporting the project’s remote-service direction.',
+    solution: 'SubTrack BH centralises the administration of Leo’s active Starlink service, which currently serves 37 paying subscribers. Room is the local source of truth, with Firebase services supporting the project’s remote-service direction.',
     contributions: ['Modelled subscribers, rooms, plans, devices, payments, expenses, reminders and subscription windows.', 'Separated administration, subscriber, core, backend and Firebase concerns across project modules.', 'Added accounting, reconciliation, reporting, backup, PDF and synchronisation foundations.', 'Designed the product around the actual workflow of operating the service.'],
     features: ['Separate admin and subscriber Android apps', 'Room as the admin app\'s local source of truth', 'Subscriber, room, plan and device records', 'Payments, balances and subscription windows', 'Accounting, reports, backups and PDF utilities', 'Firebase authentication, Firestore, Storage and messaging', 'WorkManager background operations', 'Salted PIN security and failed-attempt lockout'],
     challenges: [
@@ -496,7 +575,7 @@ export const projects: Project[] = [
     coverAlt: '',
     problem: 'Operating-system algorithms are difficult to understand when scheduling, allocation and resource state remain abstract.',
     solution: 'The simulator makes process management, CPU scheduling, memory allocation, IPC and deadlock safety visible through console and graphical interfaces.',
-    contributions: ['Implemented process creation, suspension, resumption and termination.', 'Added FCFS, SJF, Priority and Round Robin scheduling with comparison metrics and persistent Gantt data.', 'Modelled contiguous allocation, paging, IPC and Banker’s Algorithm-style safety checks.', 'Built console, Raylib dashboard and regression-test targets.'],
+    contributions: ['Implemented process creation, suspension, resumption and termination.', 'Added FCFS, SJF, Priority and Round Robin scheduling with comparison metrics and persistent Gantt data.', 'Modelled contiguous allocation, paging, IPC and Banker’s Algorithm-style safety checks.', 'Built console, Raylib dashboard and regression-test targets.', 'Customised and delivered 15 builds for 11 paying student clients while keeping the shared core engine stable.'],
     features: ['PCB process state', 'Four scheduling algorithms', 'Waiting and turnaround metrics', 'Gantt data and replay', 'First/Best/Worst Fit allocation', 'Paging', 'Message-passing IPC', 'Deadlock safety validation', 'File reports and logs', 'Regression tests'],
     challenges: [{ title: 'Compare without mutating live state', description: 'Scheduler comparison needed to compute multiple outcomes while preserving the active process table and saved Gantt result.' }],
     lessons: ['Scheduling algorithms', 'Memory-management models', 'IPC and resource safety', 'C modularisation', 'Algorithm visualisation'],

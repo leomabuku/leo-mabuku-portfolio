@@ -9,7 +9,14 @@
 - [x] Add certificate scans: individual certificate for Leo Mabuku and the team certificate for SmartWater Zambia
 - [x] Publish the SmartWater Zambia repository — `github.com/leomabuku/majismart-zambia`
 - [x] Confirm Leo's individual contribution: web dashboard, Android app and backend
-- [ ] Add SmartWater Zambia product screenshots as the case-study cover and media
+- [x] Add SmartWater Zambia product screenshots: seven web dashboard captures and five Android screens
+
+## To confirm after the November 2026 update
+
+- [ ] Programme dates: the CV says BSc 2022–2025, the About story says enrolment began 8 May 2023 through a special calendar. The site currently shows "Completed 2025" with the 2023 entry narrative.
+- [ ] TongaLang is now described as an independent project, with StudySense as the final-year academic project.
+- [ ] SubTrack BH is listed at 37 paying subscribers (previously 29) and with MikroTik access automation; the Lenco payment integration is still described as planned.
+- [ ] Add product screenshots for TongaLang (already present), StudySense and the remaining projects.
 
 ## Still required from Leo
 

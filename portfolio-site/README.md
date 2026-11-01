@@ -42,11 +42,11 @@ Motion-system coverage lives in `scripts/motion-system.test.ts`, including mode 
 
 ## Content locations
 
-- `src/data/site.ts` — professional profile, skills, education, experience, hackathons/awards and full case studies
+- `src/data/site.ts` — professional profile, skills, education, experience, hackathons/awards and full case studies (including optional audience, market and production-path blocks)
 - `src/data/projects.json` — generated public-repository cache used by the refresh workflow
 - `src/pages/` — Home, Work, About, Resume and Contact routes
 - `src/pages/work/[slug].astro` — static project case-study routes
-- `public/images/projects/` — approved project evidence and screenshots
+- `public/images/projects/` — approved project evidence and screenshots (SmartWater Zambia has `web/` and `mobile/` sets)
 - `public/images/hackathons/` — event photographs and certificate scans
 - `public/documents/` — downloadable resume in PDF and Word formats
 

@@ -20,11 +20,19 @@ describe('curated portfolio data', () => {
     repositoryUrls.forEach((repository) => expect(repository).toMatch(/^https:\/\/github\.com\/leomabuku\//));
   });
 
-  it('links every current project to public source', () => {
-    projects.forEach((project) => {
-      expect(project.repositoryVisibility).toBe('public');
-      expect(project.repository).toBeTruthy();
-    });
+  it('links every public project to public source', () => {
+    projects
+      .filter((project) => project.repositoryVisibility === 'public')
+      .forEach((project) => expect(project.repository).toBeTruthy());
+  });
+
+  it('states plainly when a project has no public source', () => {
+    projects
+      .filter((project) => project.repositoryVisibility === 'private')
+      .forEach((project) => {
+        expect(project.repository).toBeNull();
+        expect(project.evidence.toLowerCase()).toContain('not public');
+      });
   });
 
   it('does not reference the deleted TongaLang repository', () => {

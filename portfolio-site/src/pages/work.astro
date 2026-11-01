@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import AvailabilityBanner from '../components/AvailabilityBanner.astro';
 import { projects } from '../data/site';
-const filters = ['All', 'Android', 'Systems', 'Programming Language', 'Web', 'Business Tools'];
+const filters = ['All', 'Android', 'Web', 'IoT', 'AI', 'Systems', 'Programming Language', 'Business Tools'];
 ---
 <BaseLayout title="Selected Work | Leo Mabuku" description="Case studies across Android, programming languages, systems programming and practical business software by Leo Mabuku.">
   <section class="page-hero work-hero" data-motion data-scene="work-index"><p class="eyebrow">Selected work · {String(projects.length).padStart(2, '0')} systems</p><h1>Practical systems.<br/><em>Evidence you can inspect.</em></h1><p>Projects are presented by the problem, decisions and contribution behind them—not only by repository metadata.</p><div class="page-hero-status" aria-hidden="true"><span>Filter</span><span>Inspect</span><span>Enter case study</span></div></section>
