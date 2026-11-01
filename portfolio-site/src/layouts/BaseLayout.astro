@@ -10,7 +10,7 @@ const {
   schema = {},
 } = Astro.props;
 const path = Astro.url.pathname;
-const nav = [['/', 'Home'], ['/work/', 'Work'], ['/about/', 'About'], ['/resume/', 'Resume'], ['/contact/', 'Contact']];
+const nav = [['/', 'Home'], ['/work/', 'Work'], ['/about/', 'About'], ['/resume/', 'Resume'], ['/notes/', 'Notes'], ['/contact/', 'Contact']];
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const socialImage = new URL(image, Astro.site);
 const personSchema = {

@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AvailabilityBanner from '../../components/AvailabilityBanner.astro';
+
+const published = '2 November 2026';
+const readingTime = '7 min read';
+---
+
+<BaseLayout
+  title="What 48 hours at GreenCode taught me about shipping | Leo Mabuku"
+  description="A first-person account of building SmartWater Zambia, an IoT water-monitoring platform, in 48 hours at the GreenCode Hackathon in Lusaka — and finishing in the top six of roughly 100 builders."
+>
+  <article>
+    <section class="page-hero" data-motion data-scene="notes">
+      <p class="eyebrow">Notes · {published} · {readingTime}</p>
+      <h1>What 48 hours<br/><em>actually taught me.</em></h1>
+      <p>We had two days, a water problem and no working prototype. Here is what survived contact with the clock — and what I would do differently.</p>
+      <div class="page-hero-status" aria-hidden="true"><span>Scope</span><span>Build</span><span>Pitch</span></div>
+    </section>
+
+    <section class="section-shell">
+      <div class="prose" data-motion>
+        <p>At the end of October I joined roughly 100 Zambian builders for the GreenCode Hackathon in Lusaka, organised by Garage48 and BongoHive with ESTDEV. Two days later, six teams were selected for follow-on support. Ours was one of them. This is the honest version of how that happened, because the useful part of a hackathon is never the certificate.</p>
+
+        <h2>The brief arrived before the idea did</h2>
+        <p>Hackathon briefs are usually broad on purpose. Ours pointed at green technology and left the problem open. That is harder than it sounds: with forty-eight hours on the clock, choosing the wrong problem costs you a full day before you write a line of code.</p>
+        <p>We went looking for something that already hurts people in a measurable way, and found water.</p>
+        <p>Non-revenue water — water that is treated and pumped but never paid for, because of leaks, theft or metering failures — sits at roughly 57% nationally in NWASCO's 2023 sector reporting, with utilities targeting a figure closer to 34%. In plain terms: more than half of the water a utility produces does not earn. Meanwhile communities experience the other side of that same number as dry taps and unexplained bills.</p>
+        <p>That gap is not a technology problem. It is an information problem. Nobody can act on a leak they cannot see, and nobody trusts a bill they cannot check.</p>
+
+        <h2>What we decided to build</h2>
+        <p>SmartWater Zambia is one platform with three faces:</p>
+        <ul>
+          <li><strong>An ESP32 sensor at the tank</strong>, reporting level and flow so an operator can see supply in something close to real time.</li>
+          <li><strong>An operator dashboard</strong> that streams live readings, flags abnormal consumption and shows the network on a map.</li>
+          <li><strong>A native Android app</strong> where a resident reports a leak, a dry tap or a burst pipe, and tracks what happened to that report.</li>
+        </ul>
+        <p>The logic was simple: give the utility visibility, and give the community a channel. A leak reported by a resident at 7am is cheaper to fix than one discovered by a crew three weeks later.</p>
+
+        <h2>Where we were honest, and why it helped</h2>
+        <p>We had one real sensor and a working dashboard. The other tanks on screen were simulated, and we labelled them as simulated on the interface itself — <em>TANK_001</em> was the physical unit, the rest carried a clear demo marker.</p>
+        <p>That decision felt risky in the moment. Judges have seen a hundred prototypes with fake data. But in a room full of technical people, the team that says “this part is real, this part is simulated, and here is exactly what it would take to make it real” is the team they can actually back. Overclaiming does not survive the first question.</p>
+
+        <h2>What 48 hours does to a feature list</h2>
+        <p>By the second morning we had more ideas than hours. The cut list was the most valuable document we produced. Anything that did not make the demo clearer came out: no accounts and roles, no historical analytics beyond the live window, no second sensor type. What stayed had to earn its place in a three-minute pitch.</p>
+        <p>It is the same discipline I now use on paid work, just compressed: decide what the story is, then build only what the story needs, then test the failure paths that would embarrass you live.</p>
+
+        <h2>The pitch is a story, not a feature list</h2>
+        <p>We opened with a household whose taps run dry while the utility reports losses it cannot locate. Then we showed the same problem as two screens: the operator's live view, and the resident's report. Only after that did we talk about ESP32s and server-sent events.</p>
+        <p>The order matters. Nobody remembers your stack. People remember the moment they understood the problem.</p>
+
+        <h2>Top six, and what it means</h2>
+        <p>Being selected among the six winning teams out of roughly 100 builders earned the team follow-on support from Garage48 and BongoHive and a share of the €6,000 award fund. It does not mean SmartWater Zambia is finished. It means a group of people who know this space think the direction is worth a second look.</p>
+        <p>What I took from it is narrower and more useful than a trophy: a working prototype in forty-eight hours, a team that shipped under pressure, and proof that I can stand in front of judges and defend a build.</p>
+
+        <h2>What I would do differently</h2>
+        <ul>
+          <li><strong>Test the hardware on hour one, not hour ten.</strong> Every hour of sensor debugging cost us a feature later.</li>
+          <li><strong>Cut one more feature than felt comfortable.</strong> We still had a screen in the demo that added polish but no argument.</li>
+          <li><strong>Rehearse the pitch five times.</strong> We rehearsed twice. The third run is where the words stop getting in the way.</li>
+        </ul>
+
+        <p>The full build — architecture, screenshots and the parts we deliberately left out — is in the <a href="/work/smartwater-zambia/">SmartWater Zambia case study</a>. If you are building something at the edge of hardware and community data in Zambia, I would like to hear about it.</p>
+
+        <p class="article-byline">Written by Leo Mabuku · Computer Science graduate, currently an IoT intern at CodeAlpha · <a href="/contact/">Get in touch</a></p>
+      </div>
+    </section>
+
+    <AvailabilityBanner />
+  </article>
+</BaseLayout>
