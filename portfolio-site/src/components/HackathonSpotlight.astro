@@ -1,13 +1,22 @@
 ---
-import { hackathons, projects } from '../data/site';
+import { hackathons, projects, type Hackathon } from '../data/site';
 const { hackathon = hackathons[0], eyebrow = '04 · Hackathons & recognition' } = Astro.props;
 const caseStudy = projects.find((project) => project.slug === hackathon.projectSlug);
+const ceremonyPhoto = (hackathon as Hackathon).media.find((item) => item.layout === 'portrait') ?? hackathon.media[0];
 ---
 <section class="recognition section-shell" data-scene="recognition">
-  <div class="recognition-mark" data-motion>
-    <span class="eyebrow">Result</span>
-    <strong>{hackathon.resultShort}</strong>
-    <small>{hackathon.name}<br/>{hackathon.edition}</small>
+  <div class="recognition-aside" data-motion>
+    <div class="recognition-mark">
+      <span class="eyebrow">Result</span>
+      <strong>{hackathon.resultShort}</strong>
+      <small>{hackathon.name}<br/>{hackathon.edition}</small>
+    </div>
+    {ceremonyPhoto && (
+      <figure class="recognition-photo">
+        <img src={ceremonyPhoto.src} alt={ceremonyPhoto.alt} loading="lazy" />
+        <figcaption>{hackathon.projectName} · {hackathon.location}</figcaption>
+      </figure>
+    )}
   </div>
   <div class="recognition-copy" data-motion>
     <p class="eyebrow">{eyebrow}</p>

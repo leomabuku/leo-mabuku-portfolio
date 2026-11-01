@@ -120,7 +120,7 @@ export const hackathons: Hackathon[] = [
     slug: 'greencode-2026',
     name: 'GreenCode Hackathon',
     edition: 'Zambia Edition',
-    organisers: ['Garage48', 'BongoHive'],
+    organisers: ['Garage48', 'BongoHive', 'ESTDEV'],
     location: 'Lusaka, Zambia',
     period: '30 Oct – 1 Nov 2026',
     startDate: '2026-10-30',
@@ -141,12 +141,37 @@ export const hackathons: Hackathon[] = [
     ],
     skills: ['Rapid prototyping', 'Product validation', 'Team collaboration', 'Pitching', 'Green technology'],
     certificates: [
-      { label: 'Certificate of participation', issuer: 'Garage48 · BongoHive', image: null },
-      { label: 'Team certificate · top six teams', issuer: 'Garage48 · BongoHive', image: null },
+      {
+        label: 'Certificate of participation · Leo Mabuku',
+        issuer: 'GreenCode Hackathon · ESTDEV, BongoHive, Garage48',
+        image: '/images/hackathons/greencode/certificate-individual.jpg',
+        alt: 'GreenCode Hackathon certificate of participation presented to Leo Mabuku, Lusaka, 30 October to 1 November 2026',
+      },
+      {
+        label: 'Team certificate · SmartWater Zambia',
+        issuer: 'GreenCode Hackathon · ESTDEV, BongoHive, Garage48',
+        image: '/images/hackathons/greencode/certificate-team-smartwater-zambia.jpg',
+        alt: 'GreenCode Hackathon team certificate presented to SmartWater Zambia, Lusaka, 30 October to 1 November 2026',
+      },
     ],
-    media: [],
+    media: [
+      {
+        type: 'image',
+        src: '/images/hackathons/greencode/leo-mabuku-certificate.jpg',
+        alt: 'Leo Mabuku holding his GreenCode Hackathon certificate in front of the event backdrop',
+        caption: 'Holding the individual GreenCode Hackathon certificate at the closing ceremony in Lusaka.',
+        layout: 'portrait',
+      },
+      {
+        type: 'image',
+        src: '/images/hackathons/greencode/team-group.jpg',
+        alt: 'Three SmartWater Zambia team members in front of the GreenCode Hackathon backdrop',
+        caption: 'The SmartWater Zambia team at the GreenCode Hackathon Zambia Edition, 30 October – 1 November 2026.',
+        layout: 'wide',
+      },
+    ],
     evidence:
-      'Held 30 October – 1 November 2026 in Lusaka. Participation is evidenced by an individual certificate of participation and the team certificate awarded to the six winning GreenCode teams.',
+      'Held 30 October – 1 November 2026 in Lusaka, Zambia. Participation is evidenced by the individual certificate presented to Leo Mabuku and the team certificate presented to SmartWater Zambia, both issued by the GreenCode Hackathon with ESTDEV, BongoHive and Garage48.',
   },
 ];
 
