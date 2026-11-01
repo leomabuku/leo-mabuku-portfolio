@@ -1,0 +1,39 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import type { Hackathon } from '../data/site';
+
+const { hackathon, showCertificates = true } = Astro.props as {
+  hackathon: Hackathon;
+  showCertificates?: boolean;
+};
+
+const assetExists = (src: string) => fs.existsSync(path.join(process.cwd(), 'public', src.replace(/^\//, '')));
+const photos = hackathon.media.filter((item) => assetExists(item.src));
+const certificates = showCertificates ? hackathon.certificates.filter((item) => item.image && assetExists(item.image)) : [];
+const hasEvidence = photos.length > 0 || certificates.length > 0;
+---
+{hasEvidence && (
+  <section class="hackathon-evidence" aria-label={`${hackathon.name} evidence`}>
+    {certificates.length > 0 && (
+      <div class="certificate-grid">
+        {certificates.map((certificate) => (
+          <figure class="certificate-card">
+            <img src={certificate.image as string} alt={certificate.alt ?? certificate.label} loading="lazy" />
+            <figcaption><strong>{certificate.label}</strong><small>{certificate.issuer}</small></figcaption>
+          </figure>
+        ))}
+      </div>
+    )}
+    {photos.length > 0 && (
+      <div class="hackathon-photo-grid">
+        {photos.map((photo) => (
+          <figure class:list={['hackathon-photo', photo.layout && `hackathon-photo--${photo.layout}`]}>
+            <img src={photo.src} alt={photo.alt} loading="lazy" />
+            <figcaption>{photo.caption}</figcaption>
+          </figure>
+        ))}
+      </div>
+    )}
+  </section>
+)}

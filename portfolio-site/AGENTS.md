@@ -16,3 +16,4 @@ When implementing from a selected generated mock, treat that image as the source
 - The signature interaction is an adaptive portrait data-shift. Use full WebGL and scroll choreography only on capable desktops, with lighter mobile and reduced-motion treatments.
 - Motion intensity should feel spectacular at showcase moments and remain present across the site without compromising readable proof sections.
 - Keep the experience silent by default, preserve the native cursor and native scrolling, and reframe existing copy without inventing new facts.
+- Hackathons and awards are first-class content: a recognition band on the homepage, records on About and Resume, and a badge linking a case study back to the event it was built at. Keep the award wording factual and certificate-backed.

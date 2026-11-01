@@ -86,6 +86,72 @@ export const qualities = [
   ['Customer awareness', 'Business experience keeps my software focused on real users, constraints and practical value.'],
 ];
 
+export type Hackathon = {
+  slug: string;
+  name: string;
+  edition: string;
+  organisers: string[];
+  location: string;
+  period: string;
+  startDate: string;
+  format: string;
+  fieldSize: string;
+  result: string;
+  resultShort: string;
+  awardSummary: string;
+  summary: string;
+  projectName: string;
+  projectSlug: string | null;
+  contributions: string[];
+  skills: string[];
+  certificates: { label: string; issuer: string; image: string | null; alt?: string }[];
+  media: {
+    type: 'image';
+    src: string;
+    alt: string;
+    caption: string;
+    layout?: 'wide' | 'portrait';
+  }[];
+  evidence: string;
+};
+
+export const hackathons: Hackathon[] = [
+  {
+    slug: 'greencode-2026',
+    name: 'GreenCode Hackathon',
+    edition: 'Zambia Edition',
+    organisers: ['Garage48', 'BongoHive'],
+    location: 'Lusaka, Zambia',
+    period: '30 Oct – 1 Nov 2026',
+    startDate: '2026-10-30',
+    format: '48-hour green-technology hackathon',
+    fieldSize: 'About 100 builders from Zambia',
+    result: 'Top 6 team',
+    resultShort: 'Top 6',
+    awardSummary:
+      'Finished among the six winning teams, earning follow-on support from Garage48 and BongoHive and a share of the €6,000 award fund.',
+    summary:
+      'Took SmartWater Zambia from an idea pitched on stage to a working prototype in 48 hours, then presented it to the judging panel as part of one of the six teams selected for follow-on support.',
+    projectName: 'SmartWater Zambia',
+    projectSlug: 'smartwater-zambia',
+    contributions: [
+      'Joined a cross-disciplinary team around a practical water problem and helped scope what a credible prototype could deliver inside 48 hours.',
+      'Built and iterated on the SmartWater Zambia prototype through Garage48’s validation, prototyping and pitching process with local and international mentors.',
+      'Pitched the finished prototype to the judging panel and finished in the top six, the group awarded follow-on support and a share of the award fund.',
+    ],
+    skills: ['Rapid prototyping', 'Product validation', 'Team collaboration', 'Pitching', 'Green technology'],
+    certificates: [
+      { label: 'Certificate of participation', issuer: 'Garage48 · BongoHive', image: null },
+      { label: 'Team certificate · top six teams', issuer: 'Garage48 · BongoHive', image: null },
+    ],
+    media: [],
+    evidence:
+      'Held 30 October – 1 November 2026 in Lusaka. Participation is evidenced by an individual certificate of participation and the team certificate awarded to the six winning GreenCode teams.',
+  },
+];
+
+export const latestHackathon = hackathons[0];
+
 export type Project = {
   slug: string;
   name: string;
@@ -101,6 +167,7 @@ export type Project = {
   repositoryLabel?: string;
   additionalRepositories?: { label: string; url: string }[];
   repositoryVisibility: 'public' | 'private';
+  hackathonSlug?: string;
   liveDemo: string | null;
   cover: string | null;
   coverAlt: string;
@@ -238,6 +305,37 @@ export const projects: Project[] = [
     lessons: ['Compiler and interpreter fundamentals', 'Grammar and AST design', 'Beginner-centred diagnostic writing', 'Guarded source-edit design', 'Thread-safe GUI execution', 'Stateful Tkinter workspace architecture', 'Windows and Linux desktop packaging', 'Release checksums and reproducible builds', 'Automated and adversarial testing', 'Accessible educational language design'],
     plannedFeatures: ['Add progressive beginner lessons, expected output and resettable examples', 'Add keyword and native-function autocomplete with short contextual help', 'Add a variable inspector and simple step-through execution', 'Persist settings, dock sizes, recent files and safe session recovery', 'Arrange a Tonga educator review and formal Narrator or NVDA accessibility testing', 'Add release CI, Windows code signing and distribution packages for major Linux formats'],
     evidence: 'Public repository verified on 11 September 2026 at merged commit 956909b: TongaLang 0.2.0 includes 17 runnable examples and passes all 179 automated tests. The Windows installer is published with SHA-256 265e4a204bd56d9326b67c144f4fda966484b29bb8ea076a8c3292453b38f0ec. The silent H.264 walkthrough is 1280×720, 30 fps, 52.03 seconds and 4.15 MB.',
+  },
+  {
+    slug: 'smartwater-zambia',
+    name: 'SmartWater Zambia',
+    shortDescription: 'An IoT water-monitoring and community reporting platform linking ESP32 tank sensors, an operator dashboard and a native Android app.',
+    category: ['IoT', 'Android', 'Web', 'Water Technology'],
+    type: 'GreenCode Hackathon team project',
+    status: 'Top 6 team · working prototype',
+    year: '2026',
+    featured: true,
+    role: 'Full-stack developer — web dashboard, Android app and API',
+    technologies: ['Kotlin', 'Jetpack Compose', 'React', 'Vite', 'Node.js', 'Express', 'Supabase', 'PostgreSQL', 'Server-Sent Events', 'ESP32'],
+    repository: 'https://github.com/leomabuku/majismart-zambia',
+    repositoryLabel: 'Source code, firmware and architecture notes',
+    repositoryVisibility: 'public',
+    hackathonSlug: 'greencode-2026',
+    liveDemo: null,
+    cover: null,
+    coverAlt: '',
+    problem: 'Zambian utilities keep instrumentation at treatment works and district meters but very little between the district meter and the customer, so leaks and shortages surface as phone calls and reconciled bills days later. Residents have no dependable signal for how much water is actually in a shared tank, and incident reports arrive without consistent categories, locations or a record of what was checked.',
+    solution: 'SmartWater Zambia puts three layers on one data contract: an ESP32 ultrasonic sensor posts calibrated readings to an authenticated API, an operator dashboard tracks levels, alerts and community reports in real time, and a native Android app gives residents the same picture plus a route onto the incident map.',
+    contributions: ['Built the Express API behind the platform: JWT role authentication plus per-device API keys, IoT ingestion, threshold alerting, heartbeat and offline detection, and a Server-Sent Events hub with a polling fallback.', 'Built the React administration dashboard: live tank cards, Chart.js history, a Leaflet incident map, community report case management, the alerts centre, the hardware simulator and the installation and calibration screens.', 'Built the native Android customer app in Kotlin and Jetpack Compose: live level gauges, saved locations, map-based report submission, notifications and Google sign-in.', 'Added the ESP32 firmware sketch and a Node telemetry simulator so the platform could be demonstrated end to end without field hardware, and extended the backend and web test suites used in CI.'],
+    features: ['Device-authenticated IoT ingestion with raw payload retention', 'Calibrated depth, tank geometry and volume estimation', 'Live tank levels over Server-Sent Events', 'Threshold alerts and stale-reading detection', 'Community incident reports with photos and coordinates', 'Report case lifecycle with full status history', 'Leaflet incident and installation map', 'Installation and calibration records per tank', 'Sensor fault logging without fabricated readings', 'Native Android app with live gauges and notifications', 'Role-based access for administrators, customers and technicians', 'Hardware simulator and telemetry presets', 'Automated backend and web test suites in CI'],
+    challenges: [
+      { title: 'Telemetry that does not invent data', description: 'A sensor timeout, a bad reading and a genuinely empty tank look similar from a distance. The platform records sensor faults as their own event, flags stale readings instead of repeating the last value, and labels simulated or demo telemetry so an operator can separate what was measured from what was seeded.' },
+      { title: 'One contract, three clients', description: 'Firmware, dashboard and Android app had to agree on distance, depth, level and volume while the device side stayed minimal. Calibration and geometry live on the server, so the ESP32 posts centimetres and both clients read the same derived state over REST and SSE.' },
+      { title: 'A 48-hour build that still behaved like a system', description: 'The stack ran on SQLite locally and Supabase PostgreSQL in deployment, so every schema change had to survive both; realtime used SSE with a polling fallback, because a dropped stream must not look like a tank that stopped changing.' },
+    ],
+    lessons: ['IoT ingestion design', 'ESP32 firmware and sensor calibration', 'Realtime delivery with SSE', 'Supabase and PostgreSQL migrations', 'Role-based API security', 'Compose UI state', 'Cross-client data contracts', 'Building to a demo deadline'],
+    plannedFeatures: ['Physical sensor calibration against manual measurements', 'Field hardening for production utility deployments', 'Expanded technician and repair workflows'],
+    evidence: 'Public repository audited on 1 November 2026 at commit 3143c77: ESP32 firmware, the Express and Supabase API, the React/Vite dashboard and the Kotlin/Jetpack Compose Android app are all present alongside backend and web test suites. The team placed in the top six at the GreenCode Hackathon Zambia Edition.',
   },
   {
     slug: 'subtrack-bh',

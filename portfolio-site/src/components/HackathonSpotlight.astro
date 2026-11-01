@@ -1,0 +1,29 @@
+---
+import { hackathons, projects } from '../data/site';
+const { hackathon = hackathons[0], eyebrow = '04 · Hackathons & recognition' } = Astro.props;
+const caseStudy = projects.find((project) => project.slug === hackathon.projectSlug);
+---
+<section class="recognition section-shell" data-scene="recognition">
+  <div class="recognition-mark" data-motion>
+    <span class="eyebrow">Result</span>
+    <strong>{hackathon.resultShort}</strong>
+    <small>{hackathon.name}<br/>{hackathon.edition}</small>
+  </div>
+  <div class="recognition-copy" data-motion>
+    <p class="eyebrow">{eyebrow}</p>
+    <h2>Selected among six<br/><em>winning teams.</em></h2>
+    <p>{hackathon.summary}</p>
+    <dl class="recognition-facts">
+      <div><dt>Event</dt><dd>{hackathon.name} · {hackathon.edition}</dd></div>
+      <div><dt>Hosts</dt><dd>{hackathon.organisers.join(' × ')}</dd></div>
+      <div><dt>Sprint</dt><dd>{hackathon.period} · {hackathon.location}</dd></div>
+      <div><dt>Built</dt><dd>{hackathon.projectName}</dd></div>
+    </dl>
+    <div class="actions">
+      {caseStudy
+        ? <a class="button" href={`/work/${caseStudy.slug}/`}>Read the {caseStudy.name} case study <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+        : <span class="recognition-pending"><i class="ph ph-hourglass-medium" aria-hidden="true"></i>{hackathon.projectName} case study in progress</span>}
+      <a class="text-link" href="/resume/#hackathons">Full record on the resume <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+    </div>
+  </div>
+</section>

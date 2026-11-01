@@ -1,5 +1,16 @@
 # Portfolio content checklist
 
+## Hackathon record (GreenCode 2026)
+
+- [x] Confirm event: GreenCode Hackathon · Zambia Edition, 30 Oct – 1 Nov 2026, Lusaka
+- [x] Confirm result: top six team, follow-on support from Garage48 and BongoHive
+- [x] Add individual certificate of participation and team certificate to the Resume and About records
+- [ ] Add event photographs to `public/images/hackathons/greencode/`
+- [ ] Add certificate scans and set the `image` paths in `hackathons[0].certificates`
+- [x] Publish the SmartWater Zambia repository — `github.com/leomabuku/majismart-zambia`
+- [x] Confirm Leo's individual contribution: web dashboard, Android app and backend
+- [ ] Add SmartWater Zambia product screenshots as the case-study cover and media
+
 ## Still required from Leo
 
 - [x] Final approved resume PDF and editable Word version

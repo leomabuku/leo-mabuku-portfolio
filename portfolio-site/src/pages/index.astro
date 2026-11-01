@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import AvailabilityBanner from '../components/AvailabilityBanner.astro';
+import HackathonSpotlight from '../components/HackathonSpotlight.astro';
 import { profile, featuredProjects } from '../data/site';
 const services = [
   ['ph-code', 'Software development', 'I translate requirements into clear, maintainable applications and systems.'],
@@ -49,8 +50,10 @@ const services = [
     <div class="project-grid">{featuredProjects.map((project, index) => <ProjectCard project={project} index={index} />)}</div>
   </section>
 
+  <HackathonSpotlight eyebrow="03 · Hackathons &amp; recognition" />
+
   <section class="business-proof" data-motion data-scene="operations">
-    <div><p class="eyebrow">03 · Built through code and business</p><h2>Technical decisions grounded in <em>real operations.</em></h2></div>
+    <div><p class="eyebrow">04 · Built through code and business</p><h2>Technical decisions grounded in <em>real operations.</em></h2></div>
     <div><p>Before and during university, I have managed retail operations, handled procurement and customer relationships, repaired computers and launched a Starlink-powered internet service. Those experiences influence how I build software: around actual users, constraints and workflows.</p><dl><div><dt data-count="29">29</dt><dd>active internet-service subscribers</dd></div><div><dt data-count="2022">2022</dt><dd>Leo M. Suppliers formally registered</dd></div><div><dt data-count="3">3</dt><dd>connected disciplines: software, business and networking</dd></div></dl></div>
   </section>
 

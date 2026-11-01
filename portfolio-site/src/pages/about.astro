@@ -1,7 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import AvailabilityBanner from '../components/AvailabilityBanner.astro';
-import { qualities } from '../data/site';
+import HackathonRecord from '../components/HackathonRecord.astro';
+import HackathonEvidence from '../components/HackathonEvidence.astro';
+import { qualities, hackathons } from '../data/site';
 const focus = ['Completing the BSc in Computer Science', 'Advancing TongaLang', 'Operating and improving a Starlink internet service', 'Developing SubTrack BH', 'Strengthening web and Android skills', 'Learning networking and cybersecurity'];
 ---
 <BaseLayout title="About Leo Mabuku | Developer and Entrepreneur" description="Leo Mabuku’s path from entrepreneurship into Computer Science, software development and practical technology products.">
@@ -20,6 +22,11 @@ const focus = ['Completing the BSc in Computer Science', 'Advancing TongaLang', 
       <h2 data-story-step="03">How I build.</h2>
       <p>My process starts with research and documentation. I break the problem into features and relationships, create a working core, test failure paths and then refine the experience. When a project requires unfamiliar technology, I learn it in context and apply it directly.</p>
     </div>
+  </section>
+  <section class="hackathon-section section-shell" id="hackathons" data-scene="recognition">
+    <div class="section-heading" data-motion><p class="eyebrow">Hackathons &amp; awards</p><h2>Prototypes built<br/><em>under pressure.</em></h2><p>Forty-eight hours, a real brief and a working demo to defend at the end of it.</p></div>
+    <div class="timeline" data-motion-stagger>{hackathons.map((item) => <HackathonRecord hackathon={item} />)}</div>
+    <div data-motion>{hackathons.map((item) => <HackathonEvidence hackathon={item} />)}</div>
   </section>
   <section class="qualities section-shell" data-scene="qualities"><div class="section-heading" data-motion><p class="eyebrow">Core qualities</p><h2>What I bring to<br/><em>the work.</em></h2></div><div class="quality-grid" data-motion-stagger>{qualities.map(([title, text], index) => <article><span>{String(index + 1).padStart(2, '0')}</span><h3>{title}</h3><p>{text}</p></article>)}</div></section>
   <section class="current-focus section-shell" data-motion data-scene="focus"><div><p class="eyebrow">Currently focused on</p><h2>Building capability<br/><em>that compounds.</em></h2></div><ul data-motion-stagger>{focus.map((item) => <li><i class="ph ph-arrow-up-right" aria-hidden="true"></i>{item}</li>)}</ul></section>
