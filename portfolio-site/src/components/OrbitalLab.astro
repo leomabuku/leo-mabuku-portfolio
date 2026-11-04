@@ -62,7 +62,8 @@ const examples = [
 </section>
 
 <script>
-  const lab = document.querySelector('.orbital-lab');
+  function initializeOrbitalLab() {
+    const lab = document.querySelector('.orbital-lab');
   if (lab && !lab.hasAttribute('data-lab-ready')) {
     lab.setAttribute('data-lab-ready', 'true');
     const examples = [
@@ -98,7 +99,10 @@ const examples = [
       status.textContent = level < 20 ? 'Critical · refill needed' : level < 40 ? 'Low · monitor closely' : level > 90 ? 'Near capacity' : 'Healthy range';
       status.dataset.state = level < 20 ? 'critical' : level < 40 ? 'low' : level > 90 ? 'high' : 'healthy';
     });
+    }
   }
+  document.addEventListener('astro:page-load', initializeOrbitalLab);
+  initializeOrbitalLab();
 </script>
 
 <style>
