@@ -1137,3 +1137,78 @@ main,
   outline: 2px solid rgb(var(--accent-rgb) / 70%);
   outline-offset: 3px;
 }
+
+
+/* ============================================================
+   ORBITAL — neon-lime signal layer
+   Retains the existing layouts and motion contract while unifying
+   the palette around near-black, electric lime and ultraviolet.
+   ============================================================ */
+:root {
+  --bg: #080b0a;
+  --bg-elevated: #0d1210;
+  --surface: #111915;
+  --surface-2: #18221c;
+  --line: rgb(224 255 225 / 13%);
+  --line-soft: rgb(224 255 225 / 7%);
+  --line-strong: rgb(199 255 61 / 38%);
+  --text: #f1f5ed;
+  --text-dim: #c8d2c7;
+  --muted: #8d9a8d;
+  --accent: #c7ff3d;
+  --accent-ink: #0a1005;
+  --accent-rgb: 199 255 61;
+  --accent-soft: rgb(199 255 61 / 12%);
+  --accent-line: rgb(199 255 61 / 42%);
+  --accent-2: #9b7cff;
+  --accent-2-rgb: 155 124 255;
+  --deep-rgb: 14 30 22;
+  --parchment-rgb: 241 245 237;
+  --radius-lg: 22px;
+  --shadow-glow: 0 0 0 1px rgb(199 255 61 / 20%), 0 24px 70px -32px rgb(199 255 61 / 25%);
+}
+body {
+  background-color: #080b0a;
+  background-image:
+    radial-gradient(1000px 760px at 84% -12%, rgb(155 124 255 / 15%), transparent 62%),
+    radial-gradient(900px 680px at 8% 10%, rgb(199 255 61 / 8%), transparent 64%),
+    radial-gradient(1100px 760px at 50% 110%, rgb(18 40 25 / 55%), transparent 72%);
+}
+body::before {
+  background-image:
+    linear-gradient(rgb(199 255 61 / 4%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(199 255 61 / 4%) 1px, transparent 1px);
+  background-size: 84px 84px;
+  opacity: .42;
+}
+.hero {
+  background: radial-gradient(110% 130% at 78% 40%, rgb(13 20 15 / 96%) 0%, rgb(13 20 15 / 84%) 44%, transparent 78%);
+}
+.hero-portrait img { filter: grayscale(1) contrast(1.08) brightness(.92); }
+.hero-portrait::before {
+  background: linear-gradient(145deg, #c7ff3d 0%, #9b7cff 58%, #152a20 100%);
+  mix-blend-mode: color;
+  opacity: .34;
+}
+.hero-portrait::after {
+  background:
+    radial-gradient(120% 100% at 68% 26%, transparent 38%, rgb(8 11 10 / 58%) 100%),
+    linear-gradient(180deg, transparent 62%, rgb(8 11 10 / 72%) 100%);
+}
+.hero::before {
+  background:
+    radial-gradient(46% 44% at 82% 12%, rgb(155 124 255 / 18%), transparent 66%),
+    radial-gradient(38% 34% at 8% 78%, rgb(199 255 61 / 8%), transparent 70%);
+}
+.button {
+  background: linear-gradient(135deg, #d8ff79, #b7f52c);
+  color: #0a1005;
+  box-shadow: 0 0 0 1px rgb(199 255 61 / 42%), 0 18px 44px -22px rgb(199 255 61 / 54%);
+}
+.button:hover { box-shadow: 0 0 0 1px rgb(199 255 61 / 70%), 0 24px 58px -24px rgb(199 255 61 / 70%); }
+.site-header { border-color: rgb(199 255 61 / 16%); }
+.monogram { background: linear-gradient(145deg, rgb(199 255 61 / 14%), rgb(155 124 255 / 16%)); }
+.hero-status::before { background: var(--accent); }
+@media (prefers-reduced-motion: reduce) {
+  .hero-status::before { animation: none; }
+}

@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import AvailabilityBanner from '../components/AvailabilityBanner.astro';
 import HackathonSpotlight from '../components/HackathonSpotlight.astro';
+import OrbitalLab from '../components/OrbitalLab.astro';
 import { profile, projects } from '../data/site';
 
 const services = [
@@ -139,6 +140,8 @@ const projectCountWord = numberWords[projects.length] ?? String(projects.length)
   </section>
 
   <HackathonSpotlight eyebrow="03 · Hackathons & recognition" />
+
+  <OrbitalLab />
 
   <section class="business-proof" data-motion data-scene="operations">
     <div>
