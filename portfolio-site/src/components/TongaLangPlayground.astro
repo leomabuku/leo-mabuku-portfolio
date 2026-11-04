@@ -48,7 +48,7 @@ const examples = [{"name":"Hello, TongaLang","source":"mulimo matalikilo() {\n  
   const MODULES = ['ast_nodes.py','environment.py','errors.py','interpreter.py','lexer.py','native_functions.py','parser.py'];
   let enginePromise;
   const runnerCode = [
-    'import builtins, contextlib, io, json',
+    'import builtins, contextlib, io, json, time',
     'from tongalang.parser import parse_source',
     'from tongalang.interpreter import Interpreter',
     'def _run_tongalang(source, stdin_text):',
@@ -58,12 +58,13 @@ const examples = [{"name":"Hello, TongaLang","source":"mulimo matalikilo() {\n  
     '    def read_input():',
     '        try: return next(values)',
     '        except StopIteration: raise EOFError("Program requested input, but no input value was supplied.")',
+    '    started = time.monotonic()',
     '    try:',
     '        with contextlib.redirect_stdout(output):',
     '            builtins.input = read_input',
     '            try:',
     '                program = parse_source(source)',
-    '                Interpreter(max_loop_iterations=1000, max_call_depth=100).interpret(program)',
+    '                Interpreter(max_loop_iterations=1000, max_call_depth=100, should_stop=lambda: time.monotonic() - started > 2.5).interpret(program)',
     '            finally: builtins.input = original_input',
     '        return json.dumps({"ok": True, "output": output.getvalue()})',
     '    except Exception as error:',
