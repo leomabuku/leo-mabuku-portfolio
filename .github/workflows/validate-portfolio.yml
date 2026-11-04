@@ -1,0 +1,43 @@
+name: Validate portfolio
+
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - "portfolio-site/**"
+      - ".github/workflows/validate-portfolio.yml"
+  push:
+    branches: [orbital-redesign]
+    paths:
+      - "portfolio-site/**"
+      - ".github/workflows/validate-portfolio.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: portfolio-validation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Tests and production build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: portfolio-site
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: portfolio-site/package-lock.json
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Run unit tests
+        run: npm test
+      - name: Run Astro checks and production build
+        run: npm run build
