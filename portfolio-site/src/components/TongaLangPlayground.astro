@@ -1,5 +1,4 @@
 ---
-const sourceRevision = '956909b5f64d9114b2796397727be4f665726703';
 const examples = [{"name":"Hello, TongaLang","source":"mulimo matalikilo() {\n    amba(\"Muli bwanji, TongaLang!\")\n    amba(\"This is the real interpreter.\")\n}","input":""},{"name":"Variables and types","source":"zina zyina = \"Leo\"\nzina myaka = 20\nzina musikwiiya = iiyi\n\nmulimo matalikilo() {\n    amba(\"Zyina: \" + zyina)\n    amba(\"Myaka: \" + myaka)\n    amba(\"Musikwiiya: \" + musikwiiya)\n}","input":""},{"name":"Functions and conditions","source":"mulimo yungizya(a, b) {\n    pilula a + b\n}\n\nmulimo matalikilo() {\n    zina zyoonse = yungizya(10, 20)\n    kuti (zyoonse inda 25) {\n        amba(\"The result is greater than 25\")\n    } nakunyina {\n        amba(\"The result is 25 or less\")\n    }\n    amba(\"Result: \" + zyoonse)\n}","input":""},{"name":"Range loop","source":"mulimo matalikilo() {\n    induluka i kuzwa 1 kusika 5 {\n        amba(\"Iteration: \" + i)\n    }\n}","input":""},{"name":"Interactive input · bala()","source":"mulimo matalikilo() {\n    zina cipimo = bala(\"Enter a mark (0–100): \")\n    kuti (cipimo >= 70) {\n        amba(\"Result: Kabotu loko\")\n    } naaba (cipimo >= 60) {\n        amba(\"Result: Kabotu\")\n    } naaba (cipimo >= 50) {\n        amba(\"Result: Wazwidilila\")\n    } nakunyina {\n        amba(\"Result: Kobweza alimwi\")\n    }\n}","input":"82"}];
 ---
 <section class="tongalang-playground section-shell" id="tongalang-playground" data-scene="tongalang-playground">
@@ -11,7 +10,7 @@ const examples = [{"name":"Hello, TongaLang","source":"mulimo matalikilo() {\n  
     </div>
     <div class="engine-stamp"><span class="engine-pulse"></span><span>REAL LANGUAGE ENGINE</span><strong>v0.2.0</strong><small>Source-pinned · Browser-local</small></div>
   </div>
-  <div class="playground-shell" data-tg-playground>
+  <div class="playground-shell" data-tg-playground data-examples={JSON.stringify(examples)}>
     <div class="playground-topbar">
       <div class="playground-brand"><span class="tg-mark">T</span><span><strong>TongaLang Studio</strong><small>Interactive language playground</small></span></div>
       <div class="playground-engine-status" data-tg-status><i></i><span data-tg-status-text>Engine not loaded</span></div>
@@ -44,8 +43,7 @@ const examples = [{"name":"Hello, TongaLang","source":"mulimo matalikilo() {\n  
   </div>
   <p class="playground-note">The Python runtime and TongaLang engine are downloaded on first use. Code runs in a browser-side WebAssembly Python runtime with loop and call-depth limits. This is an educational sandbox, not a secure environment for secrets or sensitive data.</p>
 </section>
-<script>
-  import { loadPyodide } from 'https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.mjs';
+<script is:inline type="module">
   const REVISION = '956909b5f64d9114b2796397727be4f665726703';
   const MODULES = ['ast_nodes.py','environment.py','errors.py','interpreter.py','lexer.py','native_functions.py','parser.py'];
   let enginePromise;
@@ -76,7 +74,8 @@ const examples = [{"name":"Hello, TongaLang","source":"mulimo matalikilo() {\n  
   async function loadEngine() {
     if (!enginePromise) {
       enginePromise = (async () => {
-        const py = await loadPyodide({indexURL:'https://cdn.jsdelivr.net/pyodide/v0.27.7/full/'});
+        const pyodideModule = await import('https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.mjs');
+        const py = await pyodideModule.loadPyodide({indexURL:'https://cdn.jsdelivr.net/pyodide/v0.27.7/full/'});
         await py.loadPackage('micropip');
         await py.runPythonAsync("import micropip\nawait micropip.install('ply==3.11')");
         py.FS.mkdirTree('/home/pyodide/tongalang');
@@ -108,7 +107,7 @@ const examples = [{"name":"Hello, TongaLang","source":"mulimo matalikilo() {\n  
     const state = root.querySelector('[data-tg-run-state]');
     const duration = root.querySelector('[data-tg-duration]');
     const lineCount = root.querySelector('[data-tg-line-count]');
-    const examples = [{"name":"Hello, TongaLang","source":"mulimo matalikilo() {\n    amba(\"Muli bwanji, TongaLang!\")\n    amba(\"This is the real interpreter.\")\n}","input":""},{"name":"Variables and types","source":"zina zyina = \"Leo\"\nzina myaka = 20\nzina musikwiiya = iiyi\n\nmulimo matalikilo() {\n    amba(\"Zyina: \" + zyina)\n    amba(\"Myaka: \" + myaka)\n    amba(\"Musikwiiya: \" + musikwiiya)\n}","input":""},{"name":"Functions and conditions","source":"mulimo yungizya(a, b) {\n    pilula a + b\n}\n\nmulimo matalikilo() {\n    zina zyoonse = yungizya(10, 20)\n    kuti (zyoonse inda 25) {\n        amba(\"The result is greater than 25\")\n    } nakunyina {\n        amba(\"The result is 25 or less\")\n    }\n    amba(\"Result: \" + zyoonse)\n}","input":""},{"name":"Range loop","source":"mulimo matalikilo() {\n    induluka i kuzwa 1 kusika 5 {\n        amba(\"Iteration: \" + i)\n    }\n}","input":""},{"name":"Interactive input · bala()","source":"mulimo matalikilo() {\n    zina cipimo = bala(\"Enter a mark (0–100): \")\n    kuti (cipimo >= 70) {\n        amba(\"Result: Kabotu loko\")\n    } naaba (cipimo >= 60) {\n        amba(\"Result: Kabotu\")\n    } naaba (cipimo >= 50) {\n        amba(\"Result: Wazwidilila\")\n    } nakunyina {\n        amba(\"Result: Kobweza alimwi\")\n    }\n}","input":"82"}];
+    const examples = JSON.parse(root.dataset.examples || '[]');
     const setStatus = (message, kind='') => { status.textContent=message; statusBox.dataset.state=kind; };
     const updateLines = () => { const n=editor.value.split('\n').length; lineCount.textContent=n+(n===1?' line':' lines'); };
     const showOutput = (text, failed=false) => { output.replaceChildren(); const pre=document.createElement('pre'); pre.className=failed?'terminal-text terminal-error':'terminal-text'; pre.textContent=text||'Program completed with no output.'; output.append(pre); };
