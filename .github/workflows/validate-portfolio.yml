@@ -7,7 +7,7 @@ on:
       - "portfolio-site/**"
       - ".github/workflows/validate-portfolio.yml"
   push:
-    branches: [orbital-redesign]
+    branches: [orbital-v2-experience]
     paths:
       - "portfolio-site/**"
       - ".github/workflows/validate-portfolio.yml"
@@ -27,17 +27,14 @@ jobs:
       run:
         working-directory: portfolio-site
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-      - name: Set up Node.js 22
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
           cache-dependency-path: portfolio-site/package-lock.json
-      - name: Install locked dependencies
-        run: npm ci
-      - name: Run unit tests
+      - run: npm ci
+      - name: Unit tests
         run: npm test
-      - name: Run Astro checks and production build
+      - name: Astro check and production build
         run: npm run build
