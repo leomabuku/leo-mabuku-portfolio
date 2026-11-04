@@ -40,8 +40,8 @@ body {
   background-image:
     radial-gradient(115% 80% at 84% -12%, rgb(var(--accent-2-rgb) / 34%), transparent 58%),
     radial-gradient(70% 55% at 6% 4%, rgb(var(--accent-rgb) / 9%), transparent 56%),
-    radial-gradient(120% 100% at 50% 112%, rgb(var(--plum-rgb) / 62%), transparent 62%),
-    radial-gradient(80% 60% at 14% 92%, rgb(var(--plum-rgb) / 45%), transparent 60%);
+    radial-gradient(120% 100% at 50% 112%, rgb(var(--deep-rgb) / 62%), transparent 62%),
+    radial-gradient(80% 60% at 14% 92%, rgb(var(--deep-rgb) / 45%), transparent 60%);
   background-attachment: fixed;
   color: var(--text);
 }
@@ -223,6 +223,11 @@ main,
   width: min(100%, var(--page));
   margin-inline: auto;
   min-height: 100svh;
+  /* The hero keeps its own warm room: an espresso pool sits behind the portrait
+     and dissolves into the navy page field at its edges, so the approved
+     portrait light survives the palette change without a visible seam. */
+  background:
+    radial-gradient(120% 132% at 78% 40%, rgb(18 12 16 / 96%) 0%, rgb(18 12 16 / 84%) 44%, rgb(18 12 16 / 0%) 78%);
   padding: calc(var(--header-h) + 3.2rem) var(--gutter) clamp(1.5rem, 3vw, 2.5rem);
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -282,8 +287,8 @@ main,
   inset: 0;
   z-index: 2;
   background:
-    radial-gradient(120% 100% at 68% 26%, transparent 38%, rgb(var(--bg-rgb) / 55%) 100%),
-    linear-gradient(180deg, transparent 62%, rgb(var(--bg-rgb) / 62%) 100%);
+    radial-gradient(120% 100% at 68% 26%, transparent 38%, rgb(18 12 16 / 55%) 100%),
+    linear-gradient(180deg, transparent 62%, rgb(18 12 16 / 62%) 100%);
 }
 
 .hero::before {
@@ -293,8 +298,11 @@ main,
   z-index: 1;
   pointer-events: none;
   background:
-    radial-gradient(46% 44% at 82% 12%, rgb(var(--accent-2-rgb) / 22%), transparent 66%),
-    radial-gradient(38% 34% at 8% 78%, rgb(var(--accent-rgb) / 7%), transparent 70%);
+    /* Hero-only colour, kept off the palette tokens on purpose: the portrait's
+       warm wine/bronze light stays exactly as approved while the rest of the
+       site runs on navy. */
+    radial-gradient(46% 44% at 82% 12%, rgb(138 42 60 / 22%), transparent 66%),
+    radial-gradient(38% 34% at 8% 78%, rgb(201 154 88 / 7%), transparent 70%);
 }
 
 .hero-copy {
@@ -863,7 +871,7 @@ main,
     -webkit-mask-image: linear-gradient(to bottom, rgb(0 0 0 / 92%) 0%, rgb(0 0 0 / 40%) 52%, transparent 88%);
   }
   .hero-portrait::after {
-    background: linear-gradient(180deg, rgb(var(--bg-rgb) / 42%) 0%, rgb(var(--bg-rgb) / 6%) 34%, rgb(var(--bg-rgb) / 62%) 66%, var(--bg) 96%);
+    background: linear-gradient(180deg, rgb(18 12 16 / 42%) 0%, rgb(18 12 16 / 6%) 34%, rgb(18 12 16 / 55%) 62%, rgb(var(--bg-rgb) / 88%) 92%, var(--bg) 100%);
   }
   .hero-portrait img { object-position: 62% 12%; }
   .hero-foot { flex-direction: column; align-items: flex-start; gap: 1rem; }
@@ -925,7 +933,7 @@ main,
   border-radius: var(--radius-lg);
   border: 1px solid var(--line);
   background:
-    linear-gradient(100deg, rgb(var(--accent-2-rgb) / 30%), rgb(var(--plum-rgb) / 34%)),
+    linear-gradient(100deg, rgb(var(--accent-2-rgb) / 30%), rgb(var(--deep-rgb) / 34%)),
     linear-gradient(100deg, rgb(var(--surface-rgb) / 90%), rgb(var(--surface-rgb) / 66%)),
     url('/about-copperbelt-background.png') center / cover fixed;
   box-shadow: var(--shadow-lift);
@@ -1093,7 +1101,7 @@ main,
   background:
     radial-gradient(52% 56% at 100% 2%, rgb(var(--accent-rgb) / 8%), transparent 72%),
     linear-gradient(180deg, rgb(var(--surface-rgb) / 55%), transparent 22%),
-    linear-gradient(0deg, rgb(var(--plum-rgb) / 18%), transparent 26%);
+    linear-gradient(0deg, rgb(var(--deep-rgb) / 18%), transparent 26%);
 }
 
 /* Anchor sections get a hairline tint so long scrolls have rhythm */
@@ -1113,7 +1121,7 @@ main,
 
 .site-footer {
   background:
-    radial-gradient(80% 120% at 50% 0%, rgb(var(--plum-rgb) / 42%), transparent 70%),
+    radial-gradient(80% 120% at 50% 0%, rgb(var(--deep-rgb) / 42%), transparent 70%),
     linear-gradient(180deg, rgb(var(--surface-rgb) / 46%), rgb(var(--bg-rgb) / 96%));
 }
 

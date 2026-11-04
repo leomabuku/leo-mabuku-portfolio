@@ -51,7 +51,7 @@ const fragmentShader = `
 
     vec2 pixel = 1.0 / max(uImageResolution, vec2(1.0));
     float edge = abs(luminance - dot(texture2D(uImage, uv + vec2(pixel.x * 2.0, 0.0)).rgb, vec3(0.299, 0.587, 0.114)));
-    vec3 bronze = vec3(0.79, 0.60, 0.34);
+    vec3 bronze = vec3(0.79, 0.66, 0.42);
     vec3 colour = mix(vec3(luminance), image, 0.08);
     colour += bronze * edge * (2.4 + uProgress * 4.0);
     colour += bronze * pointerField * 0.045;
