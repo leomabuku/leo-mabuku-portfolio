@@ -475,6 +475,41 @@ export function initializeLaunchSurfaces(mode: MotionMode) {
     listenElement(surface, 'pointermove', move, { passive: true });
   });
 
+  // Pointer parallax on the home hero stage: devices drift against the cursor.
+  const stage = document.querySelector<HTMLElement>('[data-stage]');
+  if (stage) {
+    const move = (event: PointerEvent) => {
+      const rect = stage.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+      stage.style.setProperty('--px', x.toFixed(3));
+      stage.style.setProperty('--py', y.toFixed(3));
+    };
+    const reset = () => {
+      stage.style.setProperty('--px', '0');
+      stage.style.setProperty('--py', '0');
+    };
+    listenElement(stage, 'pointermove', move, { passive: true });
+    listenElement(stage, 'pointerleave', reset);
+    registry?.add(reset);
+  }
+
+  // Magnetic buttons: a few pixels of pull, never enough to feel loose.
+  document.querySelectorAll<HTMLElement>('.button').forEach((button) => {
+    const move = (event: PointerEvent) => {
+      const rect = button.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+      button.style.transform = `translate(${(x * 8).toFixed(2)}px, ${(y * 6 - 2).toFixed(2)}px)`;
+    };
+    const reset = () => {
+      button.style.transform = '';
+    };
+    listenElement(button, 'pointermove', move, { passive: true });
+    listenElement(button, 'pointerleave', reset);
+    registry?.add(reset);
+  });
+
   document.querySelectorAll<HTMLElement>('[data-tilt]').forEach((surface) => {
     const move = (event: PointerEvent) => {
       const rect = surface.getBoundingClientRect();
