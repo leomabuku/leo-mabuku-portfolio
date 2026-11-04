@@ -71,10 +71,10 @@ const examples = [
       { code: 'ika x = 12\nika y = 8\nsonya(x + y)', output: '20' },
       { code: 'ika level = 82\nsaka (level > 70) {\n  sonya(“Tank is healthy”)\n}', output: 'Tank is healthy' },
     ];
-    const selector = lab.querySelector('#tongalang-example');
-    const code = lab.querySelector('[data-tg-code]');
-    const output = lab.querySelector('[data-tg-output]');
-    const run = lab.querySelector('[data-tg-run]');
+    const selector = lab.querySelector<HTMLSelectElement>('#tongalang-example');
+    const code = lab.querySelector<HTMLElement>('[data-tg-code]');
+    const output = lab.querySelector<HTMLElement>('[data-tg-output]');
+    const run = lab.querySelector<HTMLButtonElement>('[data-tg-run]');
     const renderExample = () => {
       const example = examples[Number(selector.value)] ?? examples[0];
       code.textContent = example.code;
@@ -86,11 +86,11 @@ const examples = [
       output.textContent = example.output;
       run.innerHTML = '<i class="ph ph-check" aria-hidden="true"></i> Example complete';
     });
-    const slider = lab.querySelector('[data-tank-slider]');
-    const water = lab.querySelector('[data-tank-water]');
-    const value = lab.querySelector('[data-tank-value]');
-    const valueOutput = lab.querySelector('[data-tank-output]');
-    const status = lab.querySelector('[data-tank-status]');
+    const slider = lab.querySelector<HTMLInputElement>('[data-tank-slider]');
+    const water = lab.querySelector<HTMLElement>('[data-tank-water]');
+    const value = lab.querySelector<HTMLElement>('[data-tank-value]');
+    const valueOutput = lab.querySelector<HTMLOutputElement>('[data-tank-output]');
+    const status = lab.querySelector<HTMLElement>('[data-tank-status]');
     slider?.addEventListener('input', () => {
       const level = Number(slider.value);
       water.style.height = level + '%';
