@@ -1,7 +1,4 @@
 /* Orbital v2 — spatial interface system. Loaded last to replace the previous template skin. */
-@import '@fontsource/space-grotesk/400.css';
-@import '@fontsource/space-grotesk/500.css';
-@import '@fontsource/space-grotesk/600.css';
 
 :root {
   --bg: #050711;
@@ -30,7 +27,7 @@
   --deep-rgb: 8 14 36;
   --parchment-rgb: 243 245 255;
   --serif: 'Cormorant Garamond', Georgia, serif;
-  --sans: 'Space Grotesk', 'DM Sans', sans-serif;
+  --sans: 'DM Sans', 'Arial', sans-serif;
   --mono: 'SFMono-Regular', Consolas, monospace;
   --radius-lg: 22px;
   --radius-md: 14px;
