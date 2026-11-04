@@ -2,244 +2,833 @@
   {
     "slug": "tongalang",
     "name": "TongaLang",
-    "repo": "PROJECT",
-    "type": "Educational programming language",
-    "language": "Python",
-    "summary": "An educational interpreted programming language that uses Tonga-based keywords, bilingual feedback and a desktop IDE to support introductory programming.",
-    "problem": "Beginners may need to understand programming concepts and unfamiliar English syntax at the same time.",
-    "contribution": "Researched, designed, implemented and tested the language, interpreter and Tkinter IDE.",
-    "stack": [
+    "shortDescription": "A beginner-focused interpreted programming language with Tonga-derived keywords, guided error recovery and an installable desktop IDE.",
+    "category": [
+      "Programming Language",
+      "Educational Software",
+      "Python"
+    ],
+    "type": "Final-year Computer Science project",
+    "status": "Completed",
+    "year": "2025–2026",
+    "featured": true,
+    "role": "Developer & Researcher",
+    "technologies": [
       "Python",
       "PLY",
       "Tkinter",
-      "Pytest"
+      "Pytest",
+      "PyInstaller",
+      ".tg files"
     ],
+    "repository": "https://github.com/leomabuku/PROJECT",
+    "repositoryLabel": "Source code and documentation",
+    "additionalRepositories": [
+      {
+        "label": "Download TongaLang 0.2.0 for Windows",
+        "url": "https://github.com/leomabuku/PROJECT/releases/download/v0.2.0/TongaLang-Setup-0.2.0.exe"
+      },
+      {
+        "label": "Windows and Linux installation guide",
+        "url": "https://github.com/leomabuku/PROJECT/blob/main/docs/INSTALLATION.md"
+      }
+    ],
+    "repositoryVisibility": "public",
+    "liveDemo": null,
+    "cover": "/images/projects/tongalang/source-editor.png",
+    "coverAlt": "TongaLang educational IDE showing a Tonga-language source program",
+    "updatedOn": "2026-09-11",
+    "updateSummary": "Completed TongaLang 0.2.0 and published its new visual identity, per-user Windows installer, bundled examples and documented Linux setup, alongside guided diagnostics and the shared Problems/Program Input workflow.",
+    "media": [
+      {
+        "type": "video",
+        "src": "/images/projects/tongalang/tongalang-demo.mp4",
+        "poster": "/images/projects/tongalang/source-editor.png",
+        "alt": "Captioned walkthrough of TongaLang beginner diagnostics, program input, settings and project guide",
+        "caption": "A silent, captioned walkthrough from semantic editing and Apply Fix through bala() input, scrolling and the structured About guide.",
+        "layout": "wide"
+      },
+      {
+        "type": "image",
+        "src": "/images/projects/tongalang/installer-setup.png",
+        "alt": "TongaLang Setup selecting a per-user Windows installation folder",
+        "caption": "The Windows installer uses the TongaLang identity throughout, installs without administrator access and includes the example programs in the application directory."
+      },
+      {
+        "type": "image",
+        "src": "/images/projects/tongalang/beginner-diagnostics.png",
+        "alt": "TongaLang Problems dock explaining an unnecessary semicolon and offering a guarded Apply Fix action",
+        "caption": "Problems translates a precise source error into bilingual guidance and offers an edit only when the correction is deterministic."
+      },
+      {
+        "type": "image",
+        "src": "/images/projects/tongalang/program-input.png",
+        "alt": "TongaLang Output view with the shared Program Input dock waiting for a bala value",
+        "caption": "When bala() needs a value, TongaLang keeps Output visible, opens one focused input surface and pauses only the interpreter worker."
+      },
+      {
+        "type": "image",
+        "src": "/images/projects/tongalang/output-transcript.png",
+        "alt": "TongaLang Output showing a completed program and the value entered through Program Input",
+        "caption": "Submitted values are echoed into the authoritative Output transcript before execution continues, making interactive programs easier to follow and explain."
+      },
+      {
+        "type": "image",
+        "src": "/images/projects/tongalang/settings-scrolled.png",
+        "alt": "Scrollable TongaLang Settings showing grouped execution controls and semantic syntax colours",
+        "caption": "Scrollable, collapsible settings expose safety limits, language tools and accessible colours without clipping at smaller window sizes."
+      },
+      {
+        "type": "image",
+        "src": "/images/projects/tongalang/about-guide.png",
+        "alt": "Structured TongaLang About screen with author, academic and project information",
+        "caption": "The project guide explains the author, academic context, purpose, architecture, quick start, features and current safety scope."
+      },
+      {
+        "type": "image",
+        "src": "/images/projects/tongalang/light-theme.png",
+        "alt": "TongaLang source editor using the light theme and semantic reserved-word colours",
+        "caption": "Dark and light editor themes give each reserved-word family a consistent semantic colour while preserving string and comment precedence."
+      },
+      {
+        "type": "image",
+        "src": "/images/projects/tongalang/ast-explorer.png",
+        "alt": "TongaLang graphical abstract syntax tree with source-linked nodes",
+        "caption": "The AST explorer connects executable structure back to the learner's source code."
+      },
+      {
+        "type": "image",
+        "src": "/images/projects/tongalang/console.png",
+        "alt": "TongaLang internal console showing project and runtime information",
+        "caption": "The internal Console provides a clear place to inspect IDE messages and runtime details without mixing them into learner program output."
+      },
+      {
+        "type": "image",
+        "src": "/images/projects/tongalang/grammar.png",
+        "alt": "TongaLang Grammar reference showing language rules and keyword examples",
+        "caption": "The built-in Grammar reference keeps language rules and examples close to the editor for learners who need a quick reminder."
+      },
+      {
+        "type": "image",
+        "src": "/images/projects/tongalang/test-lab.png",
+        "alt": "TongaLang Test Lab showing all checks passing",
+        "caption": "The Test Lab turns regression results, weakness probes and coverage into visible evidence."
+      }
+    ],
+    "problem": "Beginner programmers may need to learn programming concepts and interpret unfamiliar English syntax at the same time, adding linguistic and cognitive load.",
+    "solution": "TongaLang combines Tonga-derived vocabulary with a small interpreted language and a guided desktop workspace. Learners see concepts in context, receive a plain-language recovery step when code is wrong, and stay in control of every suggested edit. Version 0.2.0 can be installed directly on Windows, while documented source and native bundle paths support Linux. It remains an educational language rather than a replacement for mainstream production tools.",
+    "contributions": [
+      "Researched minimal languages and interpreter construction, then mapped core programming concepts into Tonga-derived vocabulary through linguistic research and native-speaker consultation.",
+      "Built the lexer, parser, abstract syntax tree, interpreter, runtime environment and native functions before separating the language engine from its Tkinter IDE.",
+      "Designed a pure diagnostics model with stable codes, exact source spans, bilingual explanations and guarded edits that never execute or silently rewrite learner code.",
+      "Added debounced live analysis and a collapsible Problems workflow with precise highlighting, Go to Code, Copy Details and undoable Apply Fix actions.",
+      "Reworked graphical input around one thread-safe shared dock so bala() pauses only the interpreter, keeps the interface responsive and echoes submitted values into Output.",
+      "Created the TongaLang visual identity and applied it consistently to the IDE window, executable, desktop shortcut and setup experience.",
+      "Built a reproducible Windows installer that installs per user, includes 17 examples and supports clean uninstallation without requiring administrator access.",
+      "Documented Linux source installation and native bundle creation, then published the checksum-verified v0.2.0 release with privacy-reviewed product evidence."
+    ],
+    "features": [
+      "Custom lexer, parser, AST and interpreter",
+      "Variables, arithmetic, Boolean logic, conditions, loops, functions and scope",
+      "Side-effect-free lexical, syntax and semantic diagnostics",
+      "Bilingual error codes, exact source highlighting and guarded Apply Fix actions",
+      "Shared Problems/Program Input dock across Editor and Output",
+      "Responsive bala() pause and resume with a visible input transcript",
+      "Semantic colours for eight reserved-word groups in dark and light themes",
+      "Back and Forward history plus a collapsible navigation menu",
+      "Scrollable grouped Settings and structured About guide",
+      "AST explorer, Grammar reference, internal console and execution safety limits",
+      "Windows installer, Start menu entry, desktop shortcut and uninstaller",
+      "Linux source installer and documented native bundle build",
+      "17 example .tg programs included with source and desktop installations",
+      "179 automated regression, adversarial and GUI integration tests"
+    ],
+    "challenges": [
+      {
+        "title": "Helpful fixes without unsafe guessing",
+        "description": "The IDE needed broad recovery advice while editing only deterministic mistakes. Suggested edits therefore carry the expected original text, reject stale source and leave ambiguous choices to the learner."
+      },
+      {
+        "title": "Input without freezing the IDE",
+        "description": "bala() must pause execution, not navigation or scrolling. A worker-thread input provider and single-use queue handoff keep Tkinter responsive and prevent repeated submissions."
+      },
+      {
+        "title": "One dock across changing views",
+        "description": "Problems and Program Input share state, expansion and sash size while Editor and Output change underneath them. Runtime failures, successful runs, pending input and manual inspection each require a distinct transition."
+      },
+      {
+        "title": "Growing without regressions",
+        "description": "Diagnostics, tokens, grammar, runtime behaviour, highlighting and existing programs affect one another, so changes are protected by error-contract, adversarial and GUI integration tests."
+      },
+      {
+        "title": "Packaging a complete learning environment",
+        "description": "The desktop release needed more than a frozen executable. The build now carries the logo, runtime assets and examples into a per-user installer, documents reproducible builds and publishes a checksum for independent verification."
+      }
+    ],
+    "lessons": [
+      "Compiler and interpreter fundamentals",
+      "Grammar and AST design",
+      "Beginner-centred diagnostic writing",
+      "Guarded source-edit design",
+      "Thread-safe GUI execution",
+      "Stateful Tkinter workspace architecture",
+      "Windows and Linux desktop packaging",
+      "Release checksums and reproducible builds",
+      "Automated and adversarial testing",
+      "Accessible educational language design"
+    ],
+    "plannedFeatures": [
+      "Add progressive beginner lessons, expected output and resettable examples",
+      "Add keyword and native-function autocomplete with short contextual help",
+      "Add a variable inspector and simple step-through execution",
+      "Persist settings, dock sizes, recent files and safe session recovery",
+      "Arrange a Tonga educator review and formal Narrator or NVDA accessibility testing",
+      "Add release CI, Windows code signing and distribution packages for major Linux formats"
+    ],
+    "evidence": "Public repository verified on 11 September 2026 at merged commit 956909b: TongaLang 0.2.0 includes 17 runnable examples and passes all 179 automated tests. The Windows installer is published with SHA-256 265e4a204bd56d9326b67c144f4fda966484b29bb8ea076a8c3292453b38f0ec. The silent H.264 walkthrough is 1280×720, 30 fps, 52.03 seconds and 4.15 MB."
+  },
+  {
+    "slug": "smartwater-zambia",
+    "name": "SmartWater Zambia",
+    "shortDescription": "IoT water telemetry and community incident reporting, built as one platform across an ESP32 sensor, an operator dashboard and a native Android app.",
+    "category": [
+      "IoT",
+      "Android",
+      "Web",
+      "Water Technology"
+    ],
+    "type": "GreenCode Hackathon team project",
+    "status": "Top 6 team · working prototype",
+    "year": "2026",
     "featured": true,
-    "repositoryUrl": "https://github.com/leomabuku/PROJECT",
-    "description": "TongaLang: an educational programming language using Tonga-based keywords, implemented in Python.",
-    "topics": [
-      "beginner-friendly",
-      "educational",
-      "educational-software",
-      "interpreter",
-      "portfolio",
-      "programming-language",
-      "python",
-      "tkinter",
-      "tonga"
+    "role": "Full-stack developer — web dashboard, Android app and API",
+    "technologies": [
+      "Kotlin",
+      "Jetpack Compose",
+      "React",
+      "Vite",
+      "Node.js",
+      "Express",
+      "Supabase",
+      "PostgreSQL",
+      "Server-Sent Events",
+      "ESP32"
     ],
-    "defaultBranch": "main",
-    "updatedAt": "2026-09-11T06:39:02Z",
-    "stars": 0,
-    "forks": 0,
-    "openIssues": 0
+    "repository": "https://github.com/leomabuku/majismart-zambia",
+    "repositoryLabel": "Source code, firmware and architecture notes",
+    "repositoryVisibility": "public",
+    "hackathonSlug": "greencode-2026",
+    "liveDemo": null,
+    "cover": "/images/projects/smartwater-zambia/web/dashboard-overview.jpg",
+    "coverAlt": "SmartWater Zambia operator dashboard showing station totals, tank states and the latest sensor reading",
+    "media": [
+      {
+        "type": "image",
+        "src": "/images/projects/smartwater-zambia/web/dashboard-overview.jpg",
+        "alt": "Operator dashboard with active stations, tank state counts, offline devices, open reports and a live reading banner",
+        "caption": "The operator view: station and tank state, offline device count, open reports, and the most recent telemetry reading with device and tank identity.",
+        "layout": "wide"
+      },
+      {
+        "type": "image",
+        "src": "/images/projects/smartwater-zambia/web/tank-analytics.jpg",
+        "alt": "Tank analytics page showing current level, period minimum and maximum, paired ESP32 status and a 24-hour trend chart",
+        "caption": "Per-tank analytics: current depth and volume, period minimum and maximum, the paired device and its last contact, and a trend against low and critical thresholds.",
+        "layout": "wide"
+      },
+      {
+        "type": "image",
+        "src": "/images/projects/smartwater-zambia/web/incident-map.jpg",
+        "alt": "Leaflet map showing monitoring stations, storage tanks and citizen incident markers across Lusaka",
+        "caption": "Stations, tanks and citizen incidents on one map, so a report and a reservoir can be seen as the same place.",
+        "layout": "wide"
+      },
+      {
+        "type": "image",
+        "src": "/images/projects/smartwater-zambia/web/report-detail.jpg",
+        "alt": "Community report detail with description, category, location, map pin, accuracy, photo evidence and directions action",
+        "caption": "A report carries its category, coordinates and accuracy, the citizen’s own description, photo evidence and a directions handoff for the crew.",
+        "layout": "wide"
+      },
+      {
+        "type": "image",
+        "src": "/images/projects/smartwater-zambia/web/community-reports.jpg",
+        "alt": "Community water reports table with categories, incident titles, reporters, submission dates, statuses and management actions",
+        "caption": "The report queue: category, incident, reporter, submission time and status, with filters and per-report case management.",
+        "layout": "wide"
+      },
+      {
+        "type": "image",
+        "src": "/images/projects/smartwater-zambia/web/report-intelligence.jpg",
+        "alt": "Report intelligence page with totals, open and resolved counts, median response time, category mix and a written analysis",
+        "caption": "Report intelligence turns the queue into a decision: volume, resolution, median first response, dominant issue and the locations carrying the most cases.",
+        "layout": "wide"
+      },
+      {
+        "type": "image",
+        "src": "/images/projects/smartwater-zambia/web/tank-grid.jpg",
+        "alt": "Grid of tank cards with level percentages, depth, capacity, device identifiers and timestamps",
+        "caption": "Tank cards label every reading as simulated or live-sensor, so demo data is never mistaken for measured water.",
+        "layout": "wide"
+      },
+      {
+        "type": "image",
+        "src": "/images/projects/smartwater-zambia/mobile/levels-overview.jpg",
+        "alt": "Android app levels screen showing telemetry connection, total storage, online sensors and district filters",
+        "caption": "Android · residents see the same telemetry operators do, with district filters and sensor health.",
+        "layout": "portrait"
+      },
+      {
+        "type": "image",
+        "src": "/images/projects/smartwater-zambia/mobile/tank-levels.jpg",
+        "alt": "Android app tank cards showing live volume against capacity with tank identifiers and sensor names",
+        "caption": "Android · live volume against capacity per tank, with the tank code and the sensor reporting it.",
+        "layout": "portrait"
+      },
+      {
+        "type": "image",
+        "src": "/images/projects/smartwater-zambia/mobile/report-category.jpg",
+        "alt": "Android report form with burst pipe, pipe leak, no water and water quality categories and a location picker",
+        "caption": "Android · reporting starts with a category and a mapped location, not a free-text phone call.",
+        "layout": "portrait"
+      },
+      {
+        "type": "image",
+        "src": "/images/projects/smartwater-zambia/mobile/report-evidence.jpg",
+        "alt": "Android report form with GPS pin, photo evidence capture, urgency level and description field",
+        "caption": "Android · GPS pin, photo evidence and urgency, so a crew knows what to expect before it leaves.",
+        "layout": "portrait"
+      },
+      {
+        "type": "image",
+        "src": "/images/projects/smartwater-zambia/mobile/my-reports.jpg",
+        "alt": "Android my reports screen showing pending and resolved reports with logged, dispatched and resolved stages and dispatch notes",
+        "caption": "Android · the closure loop: every report carries its status history and the crew note that resolved it.",
+        "layout": "portrait"
+      }
+    ],
+    "problem": "Zambian utilities keep instrumentation at treatment works and district meters but very little between the district meter and the customer, so leaks and shortages surface as phone calls and reconciled bills days later. Residents have no dependable signal for how much water is actually in a shared tank, and incident reports arrive without consistent categories, locations or a record of what was checked.",
+    "solution": "SmartWater Zambia puts three layers on one data contract: an ESP32 ultrasonic sensor posts calibrated readings to an authenticated API, an operator dashboard tracks levels, alerts and community reports in real time, and a native Android app gives residents the same picture plus a route onto the incident map.",
+    "contributions": [
+      "Built the Express API behind the platform: JWT role authentication plus per-device API keys, IoT ingestion, threshold alerting, heartbeat and offline detection, and a Server-Sent Events hub with a polling fallback.",
+      "Built the React administration dashboard: live tank cards, Chart.js history, a Leaflet incident map, community report case management and analytics, the alerts centre, the hardware simulator and the installation and calibration screens.",
+      "Built the native Android customer app in Kotlin and Jetpack Compose: live level gauges, saved locations, map-based report submission, notifications and Google sign-in.",
+      "Wired the physical demo: one ESP32 ultrasonic sensor on a real tank streaming into the same API the dashboard and app read, with the remaining tanks simulated so the operator view could be shown at realistic scale."
+    ],
+    "features": [
+      "Device-authenticated IoT ingestion with raw payload retention",
+      "Calibrated depth, tank geometry and volume estimation",
+      "Live tank levels over Server-Sent Events",
+      "Threshold alerts and stale-reading detection",
+      "Community incident reports with photos and coordinates",
+      "Report case lifecycle with full status history",
+      "Leaflet incident and installation map",
+      "Report intelligence with response and category analysis",
+      "Installation and calibration records per tank",
+      "Sensor fault logging without fabricated readings",
+      "Native Android app with live gauges and notifications",
+      "Role-based access for administrators, customers and technicians",
+      "Hardware simulator and telemetry presets"
+    ],
+    "challenges": [
+      {
+        "title": "Telemetry that does not invent data",
+        "description": "A sensor timeout, a bad reading and a genuinely empty tank look similar from a distance. The platform records sensor faults as their own event, flags stale readings instead of repeating the last value, and labels every simulated tank so an operator can separate what was measured from what was seeded."
+      },
+      {
+        "title": "One contract, three clients",
+        "description": "Firmware, dashboard and Android app had to agree on distance, depth, level and volume while the device side stayed minimal. Calibration and geometry live on the server, so the ESP32 posts centimetres and both clients read the same derived state over REST and SSE."
+      },
+      {
+        "title": "A 48-hour build that still behaved like a system",
+        "description": "The stack ran on SQLite locally and Supabase PostgreSQL in deployment, so every schema change had to survive both; realtime used SSE with a polling fallback, because a dropped stream must not look like a tank that stopped changing."
+      }
+    ],
+    "lessons": [
+      "IoT ingestion design",
+      "ESP32 firmware and sensor calibration",
+      "Realtime delivery with SSE",
+      "Supabase and PostgreSQL migrations",
+      "Role-based API security",
+      "Compose UI state",
+      "Cross-client data contracts",
+      "Building to a demo deadline"
+    ],
+    "plannedFeatures": [
+      "Field calibration of the sensor against manual measurements",
+      "Per-device provisioning at utility scale",
+      "SMS and USSD channels for residents without smartphones",
+      "Integration with utility billing and district-metering systems"
+    ],
+    "audience": [
+      {
+        "who": "Commercial water utilities",
+        "why": "Zambia’s eleven commercial utilities and six private schemes hold instrumentation at treatment works and district meters, and very little between that and the customer. This targets exactly that gap: storage visibility plus a queue of citizen-reported incidents carrying a location and a photo."
+      },
+      {
+        "who": "Institutions with stored water",
+        "why": "Campuses, hospitals, boarding houses, hotels, mines and commercial farms all store water in tanks someone has to walk to and read. A sensor and a dashboard replace that trip with a timestamped number and an alert."
+      },
+      {
+        "who": "Landlords and estate managers",
+        "why": "Buildings with per-block storage can see level and consumption per tank, and route tenant complaints into one case history instead of scattered phone calls."
+      },
+      {
+        "who": "WASH programmes and funders",
+        "why": "Programmes need verifiable reporting on what was installed, what was measured and what was fixed. The installation, calibration and case-history records exist to produce that trail."
+      },
+      {
+        "who": "Residents",
+        "why": "The people at the end of the pipe are beneficiaries rather than buyers: see the level in your own tank, report a burst pipe with a pin and a photo, and follow the case to resolution."
+      }
+    ],
+    "marketPoints": [
+      "Sector non-revenue water reached 57% in 2023 against a regulator benchmark of under 20% for good performance — no Zambian utility is close.",
+      "The water that is billed costs about K12.61 per unit to deliver and sells for an average of K7.90, and all eleven utilities sit below 100% cost coverage by collection.",
+      "The national strategy put revenue lost to non-revenue water at ZMW 998.6 million on a 2020 baseline, against a benchmark loss of ZMW 474.5 million.",
+      "Lusaka produced roughly 350,000 m³/day against 480,000 m³/day of demand, dropping to about 265,000 during the 2025 drought — when supply is intermittent, tank-level certainty stops being a convenience.",
+      "Roughly 8.36 million people live inside commercial-utility service areas, and coverage fractions fell as population grew faster than connections. Utilities are running to stand still without better information at the edge."
+    ],
+    "productionPath": [
+      "Field calibration: run the recorded empty/full reference protocol against a physical tank and log the error, because an uncalibrated ultrasonic reading is a guess with a timestamp.",
+      "Hardware hardening: enclosure, power, sensor dead zones and per-device provisioning at scale.",
+      "Security review before exposure: server-side enforcement instead of relying on row-level security alone, authenticated realtime streams and credential rotation.",
+      "Integration with what utilities already run — billing systems and district metering — so a reading becomes revenue or a work order rather than another dashboard.",
+      "Channels that match the user: SMS and USSD paths for residents without smartphones, alongside the Android app.",
+      "A pilot with one institution or one utility zone, with a baseline, a measured outcome and an exit decision."
+    ],
+    "limitations": [
+      "One physical ESP32 sensor was connected at the hackathon and monitored a real tank (TANK_001, the tank used in the live demo). Additional tanks and stations were simulated so the operator view could be shown at realistic scale, and every simulated record is labelled as such in the interface.",
+      "Report-intelligence figures in these captures come from a seeded demo cohort, not a live utility dataset.",
+      "Calibration against manual measurements, production deployment and utility integration are still to be done."
+    ],
+    "evidence": "Repository audited on 1 November 2026 at commit 3143c77: ESP32 firmware, the Express and Supabase API, the React/Vite dashboard and the Kotlin/Jetpack Compose Android app are all present alongside backend and web test suites. The team placed in the top six at the GreenCode Hackathon Zambia Edition."
   },
   {
     "slug": "subtrack-bh",
     "name": "SubTrack BH",
-    "repo": "SubTrackBH",
-    "type": "Internet-service operations platform",
-    "language": "Kotlin",
-    "summary": "A local-first Android platform for managing subscribers, billing, accounting and service operations for a boarding-house internet service.",
-    "problem": "Subscription, payment, expiry and device records become unreliable when managed across memory, messages and separate records.",
-    "contribution": "Designed the business rules and built separate admin and subscriber applications around a live service workflow.",
-    "stack": [
+    "shortDescription": "A local-first Android workspace for operating a boarding-house internet subscription service.",
+    "category": [
+      "Android",
+      "Business Tools",
+      "Networking"
+    ],
+    "type": "Live-operation product",
+    "status": "Live · in daily operation",
+    "year": "2026",
+    "featured": true,
+    "role": "Founder & Lead Developer",
+    "technologies": [
       "Kotlin",
       "Jetpack Compose",
       "Room",
-      "Firebase"
+      "Firebase",
+      "WorkManager",
+      "MikroTik RouterOS API",
+      "Payment webhooks"
     ],
-    "featured": true,
-    "repositoryUrl": "https://github.com/leomabuku/SubTrackBH",
-    "description": "Android subscription, billing, accounting, and subscriber management platform for boarding-house internet services",
-    "topics": [
-      "android",
-      "firebase",
-      "jetpack-compose",
-      "kotlin",
-      "room-database",
-      "subscription-management"
+    "repository": "https://github.com/leomabuku/SubTrackBH",
+    "repositoryVisibility": "public",
+    "liveDemo": null,
+    "cover": "/images/projects/subtrack-bh/logo.png",
+    "coverAlt": "SubTrack BH internet subscription manager logo",
+    "problem": "Subscriber names, packages, payments, expiry dates, balances and reconnections become unreliable when managed through memory, messages or separate records.",
+    "solution": "SubTrack BH runs Leo’s live Starlink service end to end for 37 paying subscribers: a subscriber signs up, pays, and the platform verifies the payment and provisions or suspends network access on the router automatically. Room is the local source of truth, with Firebase services for accounts and messaging.",
+    "contributions": [
+      "Modelled subscribers, rooms, plans, devices, payments, expenses, reminders and subscription windows.",
+      "Separated administration, subscriber, core, backend and Firebase concerns across project modules.",
+      "Added accounting, reconciliation, reporting, backup and PDF utilities.",
+      "Wired payment verification to router automation, so a confirmed subscription maps to real MikroTik bandwidth limits without manual work.",
+      "Designed the product around the actual workflow of operating the service."
     ],
-    "defaultBranch": "main",
-    "updatedAt": "2026-09-10T15:23:22Z",
-    "stars": 0,
-    "forks": 0,
-    "openIssues": 0
+    "features": [
+      "Separate admin and subscriber Android apps",
+      "Room as the admin app's local source of truth",
+      "Subscriber, room, plan and device records",
+      "Payments, balances and subscription windows",
+      "Accounting, reports, backups and PDF utilities",
+      "Firebase authentication, Firestore, Storage and messaging",
+      "WorkManager background operations",
+      "Salted PIN security and failed-attempt lockout",
+      "Payment verification through provider webhooks",
+      "Automatic MikroTik access provisioning and suspension",
+      "Google sign-in for subscribers"
+    ],
+    "challenges": [
+      {
+        "title": "Consistent account state",
+        "description": "Payments, package duration, balances, expiry and reconnection rules must agree across screens instead of relying on a manually edited status label."
+      },
+      {
+        "title": "Admin/subscriber boundaries",
+        "description": "The subscriber app must expose only account-safe, read-oriented functions while financial writes and business controls remain in the admin app."
+      },
+      {
+        "title": "Offline-first financial records",
+        "description": "Local operation is essential during connectivity problems, while future synchronisation must avoid duplicate or conflicting financial records."
+      }
+    ],
+    "lessons": [
+      "Local-first Android architecture",
+      "Business-rule modelling",
+      "Room persistence",
+      "App boundary and permission design",
+      "Operational product development"
+    ],
+    "plannedFeatures": [
+      "Complete subscriber invoices and payment history",
+      "Expanded closing, reconciliation and asset-management interfaces"
+    ],
+    "evidence": "Fully operational in the live 37-subscriber service as of November 2026: payments are verified and network access is provisioned automatically. The public repository was last audited on 3 August 2026 at commit 19edd62."
   },
   {
     "slug": "cbu-find",
-    "name": "CBU-FIND Android",
-    "repo": "CBU-FIND",
-    "type": "Campus lost-and-found application",
-    "language": "Kotlin",
-    "summary": "The native Android client for a shared campus lost-and-found service with reports, search, profiles, media and private real-time chat.",
-    "problem": "Lost-property information is fragmented across chats, noticeboards and word of mouth.",
-    "contribution": "Built the Kotlin and Jetpack Compose client against shared Firebase and Cloudinary services.",
-    "stack": [
+    "name": "CBU-FIND",
+    "shortDescription": "A completed cross-platform lost-and-found system that moves campus recovery from scattered group updates into a searchable, verified workflow.",
+    "category": [
+      "Android & Web",
+      "Campus Utility",
+      "Cloud Platform"
+    ],
+    "type": "Cross-platform campus platform",
+    "status": "Completed",
+    "year": "2026",
+    "featured": true,
+    "role": "Product Designer & Full-Stack Developer",
+    "technologies": [
       "Kotlin",
       "Jetpack Compose",
+      "Vinext / React",
+      "TypeScript",
       "Firebase",
+      "Cloudflare Workers",
       "Cloudinary"
     ],
-    "featured": true,
-    "repositoryUrl": "https://github.com/leomabuku/CBU-FIND",
-    "description": "Cross-platform CBU lost-and-found for Android and web with Firebase, Cloudflare Workers, Cloudinary, claims, private chat, notifications and moderation.",
-    "topics": [
-      "android",
-      "campus-app",
-      "cloudflare-workers",
-      "cloudinary",
-      "fcm",
-      "firebase",
-      "firestore",
-      "hono",
-      "jetpack-compose",
-      "kotlin",
-      "lost-and-found",
-      "react",
-      "typescript"
+    "repository": "https://github.com/leomabuku/CBU-FIND",
+    "repositoryLabel": "Unified Android, web and Worker source",
+    "repositoryVisibility": "public",
+    "liveDemo": "https://cbu-find-web-staging.leokmabuku.workers.dev",
+    "cover": "/images/projects/cbu-find/web-report-feed.png",
+    "coverAlt": "Responsive CBU Find report feed populated with meaningful lost and found items and matched report states",
+    "updatedOn": "2026-09-11",
+    "updateSummary": "Completed and verified the shared Android/web workflow with meaningful reports, deterministic claim acceptance, private handover conversations, message controls, report resolution, moderation and resilient error states.",
+    "media": [
+      {
+        "type": "image",
+        "src": "/images/projects/cbu-find/web-report-feed.png",
+        "alt": "CBU Find web report feed showing four meaningful campus reports and matched states",
+        "caption": "The responsive web feed exposes the same searchable lost-and-found records as Android, including clear lost, found, active and matched states.",
+        "layout": "wide"
+      },
+      {
+        "type": "image",
+        "src": "/images/projects/cbu-find/create-report.jpg",
+        "alt": "CBU Find Android create-report form for a lost or found item",
+        "caption": "The Android report flow captures type, category, campus location, compressed photos, a useful description and private handover details.",
+        "layout": "portrait"
+      },
+      {
+        "type": "image",
+        "src": "/images/projects/cbu-find/web-accepted-claims.png",
+        "alt": "CBU Find claims page showing accepted found-it and ownership claims",
+        "caption": "A deterministic claim must be accepted by the report owner before the matching report changes state and a private conversation becomes available.",
+        "layout": "wide"
+      },
+      {
+        "type": "image",
+        "src": "/images/projects/cbu-find/web-private-handover-chat.png",
+        "alt": "CBU Find private handover conversation with meaningful messages and report resolution control",
+        "caption": "Accepted participants can arrange a safe campus handover, edit or delete their own messages, report abuse and close the report when the item is returned.",
+        "layout": "wide"
+      }
     ],
-    "defaultBranch": "main",
-    "updatedAt": "2026-11-02T15:24:28Z",
-    "stars": 0,
-    "forks": 0,
-    "openIssues": 0
+    "problem": "Lost-property information shared through chats, noticeboards and word of mouth is fragmented, difficult to search and easy to miss.",
+    "solution": "CBU-FIND gives Android and web users one Firebase-backed campus record for publishing reports, verifying ownership claims, opening private handover chats only after acceptance, and closing the recovery loop when an item is returned.",
+    "contributions": [
+      "Designed and built the native Android experience with Kotlin, Jetpack Compose, Material 3 and adaptive light/dark themes.",
+      "Built the responsive Vinext/React web client against the same authentication, report, claim, conversation and moderation contracts.",
+      "Implemented a trusted Hono, Zod and JOSE Cloudflare Worker API for validation, rate limiting, notification queues, audit-safe errors and sensitive mutations.",
+      "Integrated Firebase Authentication, Firestore real-time listeners, Cloud Messaging, App Check and Crashlytics across the system.",
+      "Implemented short-lived signed Cloudinary uploads for report media and chat attachments while retaining compatibility with legacy URL-only records.",
+      "Created security rules, additive migration tools and automated Worker, web, Android and Firestore-rule tests."
+    ],
+    "features": [
+      "Email/password and Google authentication with password recovery",
+      "Android and responsive web clients sharing live data",
+      "Lost/found reports with signed images, search and filters",
+      "Deterministic found-it and ownership claims",
+      "Owner acceptance before private messaging",
+      "Real-time inbox, unread state and media attachments",
+      "Sender-controlled message editing and deletion",
+      "Blocking, abuse reporting and privacy-limited moderation",
+      "Push-notification preferences and private message previews",
+      "Matched, resolved and reopened report lifecycle",
+      "Queued account deletion and history anonymisation",
+      "Light, dark and system appearance modes"
+    ],
+    "challenges": [
+      {
+        "title": "Real-time reads with trusted writes",
+        "description": "Firestore listeners preserve immediate cross-client updates, while business mutations pass through the Worker so claim races, suspensions, blocks, notifications and audit errors follow one policy."
+      },
+      {
+        "title": "Compatibility without destructive migration",
+        "description": "Additive schemas and fallback reads preserve existing users, URL-only images, reports and conversations while new records gain structured assets, claims and moderation metadata."
+      },
+      {
+        "title": "Production behavior on free infrastructure",
+        "description": "The backend combines Firebase Spark, Cloudflare Workers and Queues, and Cloudinary signed media while surfacing quota or connectivity failures as actionable states instead of false empty screens."
+      }
+    ],
+    "lessons": [
+      "Cross-platform contract design",
+      "Compose and responsive React architecture",
+      "Firebase real-time security",
+      "Trusted edge API design",
+      "Race-safe claim workflows",
+      "Queued FCM delivery",
+      "Privacy-limited moderation",
+      "Legacy schema migration"
+    ],
+    "plannedFeatures": [],
+    "evidence": "The unified public repository was verified on 11 September 2026. A two-account acceptance run created four meaningful reports, matched reciprocal claims and exchanged three-message private handover conversations through the live web client backed by the same Firebase project used by Android."
   },
   {
-    "slug": "cbu-find-web",
-    "name": "CBU-FIND Web",
-    "repo": "CBU-FIND-WEB",
-    "type": "Responsive campus web client",
-    "language": "TypeScript",
-    "summary": "A responsive TypeScript web client that shares CBU-FIND accounts, reports, conversations and returned-item state with the Android application.",
-    "problem": "The campus service needs to remain accessible to users who do not have the Android application installed.",
-    "contribution": "Built and deployed the companion web client on Cloudflare Workers using the shared Firebase data contract.",
-    "stack": [
-      "TypeScript",
-      "React",
-      "Next.js",
-      "Firebase",
-      "Cloudflare Workers"
-    ],
-    "featured": true,
-    "repositoryUrl": "https://github.com/leomabuku/CBU-FIND-WEB",
-    "description": "Responsive web client for CBU FIND, connected to the Android app through Firebase.",
-    "topics": [],
-    "defaultBranch": "main",
-    "updatedAt": "2026-09-10T15:30:48Z",
-    "stars": 0,
-    "forks": 0,
-    "openIssues": 0
-  },
-  {
-    "slug": "zam-trivia",
+    "slug": "zamtrivia",
     "name": "ZamTrivia",
-    "repo": "ZamTrivia1",
-    "type": "Zambian knowledge quiz",
-    "language": "Kotlin",
-    "summary": "An Android quiz experience covering ten Zambia-focused categories with timed play, skipped-question review and a local leaderboard.",
-    "problem": "Local knowledge deserves engaging digital experiences that are relevant to Zambian learners and players.",
-    "contribution": "Built the Kotlin Android application and structured its Zambia-focused quiz content.",
-    "stack": [
-      "Kotlin",
+    "shortDescription": "A Zambia-focused Android quiz with timed play, category selection and local leaderboards.",
+    "category": [
       "Android",
+      "Educational Game",
+      "Kotlin"
+    ],
+    "type": "Personal Android project",
+    "status": "Completed prototype",
+    "year": "2026",
+    "featured": true,
+    "role": "Android Developer",
+    "technologies": [
+      "Kotlin",
+      "XML layouts",
+      "ViewBinding",
       "ViewModel",
+      "LiveData",
+      "Gson",
       "SharedPreferences"
     ],
-    "featured": true,
-    "repositoryUrl": "https://github.com/leomabuku/ZamTrivia1",
-    "description": "ZamTrivia is an Android quiz application built in Kotlin that tests users on Zambia based knowledge across categories such as geography, politics, history, culture, tourism, sports, education, pop culture, national symbols, and current affairs.",
-    "topics": [
-      "portfolio",
-      "portfolio-website",
-      "quiz-app"
+    "repository": "https://github.com/leomabuku/ZamTrivia1",
+    "repositoryVisibility": "public",
+    "liveDemo": null,
+    "cover": "/images/projects/zamtrivia/cover.png",
+    "coverAlt": "Dark ZamTrivia app artwork",
+    "problem": "Many quiz applications centre generic international content rather than knowledge that feels locally relevant to Zambian players.",
+    "solution": "ZamTrivia packages Zambia-focused questions across ten categories with random play, timed answers, score calculation and a device-local leaderboard.",
+    "contributions": [
+      "Created category and random quiz modes.",
+      "Implemented timer, scoring, answer feedback, skipping and skipped-question review.",
+      "Stored leaderboard entries locally with SharedPreferences.",
+      "Structured packaged questions as JSON and separated UI state through ViewModels."
     ],
-    "defaultBranch": "master",
-    "updatedAt": "2026-04-22T09:08:20Z",
-    "stars": 0,
-    "forks": 0,
-    "openIssues": 0
+    "features": [
+      "Ten Zambia-focused categories",
+      "Random and category modes",
+      "Timed questions",
+      "Attempt and scoring rules",
+      "Skip and retry flow",
+      "Correct/incorrect feedback",
+      "Results screen",
+      "Local leaderboard"
+    ],
+    "challenges": [
+      {
+        "title": "Quiz state across many paths",
+        "description": "Timer expiry, incorrect attempts, skips and replaying skipped questions all needed to advance consistently without losing the final score."
+      }
+    ],
+    "lessons": [
+      "Android fragments and lifecycle",
+      "ViewModel state",
+      "Local persistence",
+      "Timer-driven UX",
+      "Structured content modelling"
+    ],
+    "plannedFeatures": [],
+    "evidence": "Public source audited on 3 August 2026 at commit 7509611: ten question categories, timed play, skipped-question review, packaged JSON content and a SharedPreferences leaderboard are implemented."
   },
   {
     "slug": "serc-mini-os",
     "name": "SERC Mini-OS",
-    "repo": "SERC-Mini-OS-system",
-    "type": "Operating-systems simulator",
-    "language": "C",
-    "summary": "A C-based emergency-response simulator that makes CPU scheduling, memory allocation, IPC and deadlock-safety concepts visible.",
-    "problem": "Core operating-system algorithms are difficult to understand when process and resource state remains abstract.",
-    "contribution": "Implemented the systems algorithms, console workflow, Raylib dashboard and regression targets.",
-    "stack": [
+    "shortDescription": "A C-based Smart Emergency Response Center simulator for core operating-system concepts.",
+    "category": [
+      "Systems",
+      "C",
+      "Academic"
+    ],
+    "type": "Operating-systems assignment",
+    "status": "Completed academic project",
+    "year": "2026",
+    "featured": true,
+    "role": "Systems Developer",
+    "technologies": [
       "C",
       "Raylib",
       "Win32",
-      "GCC"
+      "GCC",
+      "Make"
     ],
-    "featured": true,
-    "repositoryUrl": "https://github.com/leomabuku/SERC-Mini-OS-system",
-    "description": null,
-    "topics": [],
-    "defaultBranch": "main",
-    "updatedAt": "2026-05-06T10:03:21Z",
-    "stars": 2,
-    "forks": 0,
-    "openIssues": 0
+    "repository": "https://github.com/leomabuku/SERC-Mini-OS-system",
+    "repositoryVisibility": "public",
+    "liveDemo": null,
+    "cover": null,
+    "coverAlt": "",
+    "problem": "Operating-system algorithms are difficult to understand when scheduling, allocation and resource state remain abstract.",
+    "solution": "The simulator makes process management, CPU scheduling, memory allocation, IPC and deadlock safety visible through console and graphical interfaces.",
+    "contributions": [
+      "Implemented process creation, suspension, resumption and termination.",
+      "Added FCFS, SJF, Priority and Round Robin scheduling with comparison metrics and persistent Gantt data.",
+      "Modelled contiguous allocation, paging, IPC and Banker’s Algorithm-style safety checks.",
+      "Built console, Raylib dashboard and regression-test targets.",
+      "Customised and delivered 15 builds for 11 paying student clients while keeping the shared core engine stable."
+    ],
+    "features": [
+      "PCB process state",
+      "Four scheduling algorithms",
+      "Waiting and turnaround metrics",
+      "Gantt data and replay",
+      "First/Best/Worst Fit allocation",
+      "Paging",
+      "Message-passing IPC",
+      "Deadlock safety validation",
+      "File reports and logs",
+      "Regression tests"
+    ],
+    "challenges": [
+      {
+        "title": "Compare without mutating live state",
+        "description": "Scheduler comparison needed to compute multiple outcomes while preserving the active process table and saved Gantt result."
+      }
+    ],
+    "lessons": [
+      "Scheduling algorithms",
+      "Memory-management models",
+      "IPC and resource safety",
+      "C modularisation",
+      "Algorithm visualisation"
+    ],
+    "plannedFeatures": [],
+    "evidence": "Canonical public repository audited on 3 August 2026 at commit 40e9a7a. Console, Raylib and legacy Win32 implementations are present; the empty duplicate repository remains excluded."
   },
   {
     "slug": "lifeharmonytracker",
     "name": "LifeHarmonyTracker",
-    "repo": "LifeHarmonyTracker",
-    "type": "Personal productivity prototype",
-    "language": "JavaScript",
-    "summary": "A React Native and Flask prototype combining calendar, focus, finance, notification and screen-time workflows with synchronisation foundations.",
-    "problem": "Daily planning, focus, spending and screen-time information often live in disconnected tools.",
-    "contribution": "Developed the mobile modules, API routes, persistence models and offline-sync structure.",
-    "stack": [
+    "shortDescription": "A personal productivity prototype combining calendar, focus, finance and screen-time tools.",
+    "category": [
+      "JavaScript",
+      "Productivity",
+      "Prototype"
+    ],
+    "type": "Supporting personal project",
+    "status": "Prototype",
+    "year": "2025",
+    "featured": false,
+    "role": "Product Developer",
+    "technologies": [
       "JavaScript",
       "React Native",
       "Flask",
-      "SQLAlchemy"
+      "SQLAlchemy",
+      "JWT",
+      "PostgreSQL"
     ],
-    "featured": true,
-    "repositoryUrl": "https://github.com/leomabuku/LifeHarmonyTracker",
-    "description": null,
-    "topics": [],
-    "defaultBranch": "main",
-    "updatedAt": "2025-10-14T21:22:32Z",
-    "stars": 0,
-    "forks": 0,
-    "openIssues": 0
+    "repository": "https://github.com/leomabuku/LifeHarmonyTracker",
+    "repositoryVisibility": "public",
+    "liveDemo": null,
+    "cover": null,
+    "coverAlt": "",
+    "problem": "Daily planning, focus, spending and screen-time information often live in disconnected tools.",
+    "solution": "A prototype workspace exploring how those personal-management activities could share one interface.",
+    "contributions": [
+      "Developed calendar, focus, finance, notification and screen-time modules.",
+      "Created a Flask API with authentication, persistence and device-synchronisation foundations.",
+      "Modelled events, expenses, focus sessions, app usage, notifications and device state."
+    ],
+    "features": [
+      "React Native dashboard and navigation",
+      "Calendar and event workflows",
+      "Focus timer and session records",
+      "Expense tracking",
+      "Notifications and screen-time views",
+      "Flask API and SQLAlchemy models",
+      "JWT and OAuth-oriented authentication",
+      "Offline synchronisation and conflict fields"
+    ],
+    "challenges": [],
+    "lessons": [
+      "Feature decomposition",
+      "Mobile navigation",
+      "API and data modelling",
+      "Offline-sync design",
+      "Product scope management"
+    ],
+    "plannedFeatures": [
+      "Add automated test coverage",
+      "Define and validate a stable release scope"
+    ],
+    "evidence": "Public repository audited on 3 August 2026 at commit c51a71d: 40 JavaScript files, ten Python files, React Native screens and a Flask/SQLAlchemy backend are present."
   },
   {
-    "slug": "leo-mabuku-portfolio",
-    "name": "Leo Mabuku Portfolio",
-    "repo": "leo-mabuku-portfolio",
-    "type": "Astro portfolio website",
-    "language": "TypeScript",
-    "summary": "A responsive editorial portfolio presenting verified software case studies, business experience, resume information and direct contact paths.",
-    "problem": "A repository list alone does not explain technical decisions, product thinking or entrepreneurial experience.",
-    "contribution": "Designed and developed the content architecture, responsive interface, SEO and automated repository refresh workflow.",
-    "stack": [
+    "slug": "portfolio-website",
+    "name": "Portfolio Website",
+    "shortDescription": "This responsive, content-driven portfolio deployed through Cloudflare Pages.",
+    "category": [
+      "Web",
+      "Astro",
+      "Personal Brand"
+    ],
+    "type": "Live web project",
+    "status": "Live",
+    "year": "2026",
+    "featured": false,
+    "role": "Designer & Developer",
+    "technologies": [
       "Astro",
       "TypeScript",
       "CSS",
+      "GitHub Actions",
       "Cloudflare Pages"
     ],
-    "featured": true,
-    "repositoryUrl": "https://github.com/leomabuku/leo-mabuku-portfolio",
-    "description": "Leo Mabuku's editorial portfolio of software engineering, Android, web, and programming-language projects.",
-    "topics": [
-      "astro",
-      "case-studies",
-      "cloudflare-pages",
-      "portfolio",
-      "portfolio-website",
-      "typescript"
+    "repository": "https://github.com/leomabuku/leo-mabuku-portfolio",
+    "repositoryVisibility": "public",
+    "liveDemo": "https://leo-mabuku-portfolio.pages.dev",
+    "cover": "/leo-mabuku-portrait.png",
+    "coverAlt": "Black-and-white portrait used in Leo Mabuku’s portfolio",
+    "problem": "A repository list alone does not communicate technical decisions, entrepreneurial experience or professional direction.",
+    "solution": "A structured portfolio that presents verified project evidence, case studies, experience and contact paths through a distinctive editorial identity.",
+    "contributions": [
+      "Designed the content model and multi-page information architecture.",
+      "Implemented responsive pages, metadata, accessibility support and automated repository refresh.",
+      "Added Google ownership verification and submitted the generated sitemap for discovery.",
+      "Deployed through GitHub and Cloudflare Pages."
     ],
-    "defaultBranch": "master",
-    "updatedAt": "2026-11-03T04:23:00Z",
-    "stars": 0,
-    "forks": 0,
-    "openIssues": 0
+    "features": [
+      "Responsive multi-page site",
+      "Structured project case studies",
+      "SEO, sitemap and structured data",
+      "Google Search Console verification",
+      "Automated GitHub refresh",
+      "Reduced-motion support"
+    ],
+    "challenges": [],
+    "lessons": [
+      "Portfolio storytelling",
+      "Astro content architecture",
+      "Responsive editorial design",
+      "Static deployment"
+    ],
+    "plannedFeatures": [
+      "Custom domain",
+      "Additional verified project screenshots"
+    ],
+    "evidence": "Public Astro repository and Cloudflare Pages deployment verified on 3 August 2026. The site includes seven project case studies, a generated sitemap and Google Search Console verification."
   }
 ]

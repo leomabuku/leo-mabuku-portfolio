@@ -89,3 +89,24 @@ npx wrangler pages deploy ./dist --project-name leo-mabuku-portfolio --branch ma
 The repositories used by the current case studies are explicitly included in `scripts/content-utils.mjs`, so they continue to refresh even when a GitHub topic is missing. Apply the `portfolio` topic to any new public repository that should become eligible for automated refresh. Forks, archived repositories and known empty or duplicate repositories remain excluded. The workflow must never fetch or publish private source, subscriber records or credentials.
 
 See `PORTFOLIO_CONTENT_CHECKLIST.md` for remaining launch items.
+
+## Content, editing from a phone, and the résumé pipeline
+
+All site content lives in `src/data/*.json` and is validated with Zod inside `src/data/site.ts`. Astro pages, the résumé generator and the tests all read the same files, so there is only one place to edit.
+
+**Editing from a phone.** `.pages.yml` (repository root) configures [Pages CMS](https://pagescms.org). Sign in at `app.pagescms.org` with GitHub, choose this repository, and you get forms for projects, experience, education, certifications, skills, hackathons, the profile and the résumé. Saving commits to GitHub, which triggers the Cloudflare build — roughly 1–2 minutes until it is live. `settings.content.merge: true` keeps every key the config does not describe, so saving a project cannot silently drop its media or audience blocks.
+
+**Adding work.** Add an object to `projects.json` (or fill the form) with a unique `slug`; the case-study route, `/work/` listing, home page count and résumé options all pick it up on the next build. A malformed entry fails the build with a readable error instead of shipping.
+
+**Résumé.** `npm run build` runs `scripts/build-resume.mjs` first (`prebuild`), rendering `public/documents/Leo-Mabuku-Resume.pdf` from the same JSON. `src/data/resume.json` controls the summary, which projects and roles appear, and the order.
+
+**Your own PDF wins.** Set `source` to `"uploaded"` in `resume.json` (and point `uploaded.file` at a PDF under `public/uploads/`), or run:
+
+```sh
+npm run resume:upload -- ~/Downloads/Leo-Mabuku-CV.pdf   # ships your file untouched
+npm run resume:revert                                    # back to the generated one
+```
+
+In `uploaded` mode the generator copies your file to `public/documents/Leo-Mabuku-Resume.pdf` and does not render anything, so a deploy can never overwrite a résumé you uploaded. The download URL never changes, so previously shared links keep working. `scripts/resume-pipeline.test.ts` fails if the generated PDF drifts from the data, or if an uploaded PDF does not match the file it is supposed to ship.
+
+**Images.** Uploads from the CMS go to `public/uploads/` (served at `/uploads/...`). Keep large media there rather than in `public/images/`.

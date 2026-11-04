@@ -2300,3 +2300,13 @@ html[data-motion-mode='reduced'] .project-card { transform: none; }
 .note-row .text-link { margin-top: 1rem; }
 .prose blockquote { border-left: 2px solid var(--accent); padding-left: 1.2rem; margin: 2rem 0; font-family: var(--serif); font-size: 1.35rem; line-height: 1.45; color: var(--text); }
 .article-byline { margin-top: 2.4rem; padding-top: 1.2rem; border-top: 1px solid var(--line); font-size: 0.88rem; color: var(--muted); }
+
+/* Resume download source note */
+.resume-source-note {
+  align-self: center;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}

@@ -9,7 +9,11 @@
     "preview": "astro preview",
     "check": "astro check",
     "refresh": "node scripts/refresh-content.mjs",
-    "test": "vitest run"
+    "test": "vitest run",
+    "resume": "node scripts/build-resume.mjs",
+    "resume:upload": "node scripts/resume-source.mjs upload",
+    "resume:revert": "node scripts/resume-source.mjs revert",
+    "prebuild": "node scripts/build-resume.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -19,9 +23,11 @@
     "@phosphor-icons/web": "^2.1.2",
     "astro": "^5.12.8",
     "gsap": "^3.15.0",
+    "pdfkit": "^0.20.2",
     "shiki": "^4.3.1",
     "three": "^0.185.1",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "vitest": "^3.2.4",

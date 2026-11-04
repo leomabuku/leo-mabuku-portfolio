@@ -1,0 +1,66 @@
+[
+  {
+    "title": "Languages",
+    "items": [
+      "Python",
+      "JavaScript",
+      "TypeScript",
+      "Kotlin",
+      "C",
+      "C++",
+      "PHP",
+      "SQL",
+      "HTML",
+      "CSS"
+    ]
+  },
+  {
+    "title": "Frontend & mobile",
+    "items": [
+      "React",
+      "Astro",
+      "Tailwind CSS",
+      "Vite",
+      "Android",
+      "Jetpack Compose",
+      "Chart.js",
+      "Leaflet"
+    ]
+  },
+  {
+    "title": "Backend & data",
+    "items": [
+      "FastAPI",
+      "Node.js",
+      "Express",
+      "REST APIs",
+      "PostgreSQL",
+      "SQLite",
+      "SQLAlchemy",
+      "Supabase",
+      "Firebase"
+    ]
+  },
+  {
+    "title": "Networking & hardware",
+    "items": [
+      "MikroTik RouterOS automation",
+      "LAN design",
+      "Ethernet termination",
+      "ESP32 IoT",
+      "Server-Sent Events"
+    ]
+  },
+  {
+    "title": "Practice & delivery",
+    "items": [
+      "Git & GitHub",
+      "Linux CLI",
+      "Automated testing",
+      "Cloudflare Pages",
+      "Vercel",
+      "Power BI",
+      "Technical documentation"
+    ]
+  }
+]

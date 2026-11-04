@@ -1,1 +1,14 @@
-{"name":"Leo Mabuku","title":"Entrepreneur & Software Developer","location":"Kitwe, Copperbelt, Zambia","email":"leokmabuku@gmail.com","phone":"+260770464736","github":"https://github.com/leomabuku","linkedin":"https://www.linkedin.com/in/leo-mabuku-7a2645330/","avatar":"/leo-mabuku-portrait.png","intro":"I build purposeful software that solves real problems. From systems to practical digital tools, I focus on clear thinking, useful interfaces and work that creates value.","skills":["Software development","JavaScript","Python","Kotlin","C","Android","Systems programming","Product thinking"]}
+{
+  "name": "Leo Mabuku",
+  "title": "Software Developer & Computer Science Graduate",
+  "shortTitle": "Software Developer · Computer Science Graduate · Entrepreneur",
+  "location": "Lusaka, Zambia · open to Kitwe and remote",
+  "email": "leokmabuku@gmail.com",
+  "phone": "+260770464736",
+  "github": "https://github.com/leomabuku",
+  "linkedin": "https://www.linkedin.com/in/leo-mabuku-7a2645330/",
+  "avatar": "/leo-mabuku-portrait.png",
+  "intro": "I build systems end to end — Android apps, web platforms, APIs and the hardware at the edge. My degree is finished and my evidence is shipped, working software.",
+  "availability": "Open to internships, graduate software roles, hackathons, freelance builds and technical collaborations — in Zambia or remote.",
+  "status": "IoT intern at CodeAlpha · Computer Science graduate"
+}
