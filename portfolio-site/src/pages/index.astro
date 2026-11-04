@@ -1,9 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ProjectCard from '../components/ProjectCard.astro';
 import AvailabilityBanner from '../components/AvailabilityBanner.astro';
 import HackathonSpotlight from '../components/HackathonSpotlight.astro';
-import { profile, featuredProjects, projects } from '../data/site';
+import { profile, projects } from '../data/site';
 
 const services = [
   ['ph-device-mobile', 'Android & mobile', 'Kotlin and Jetpack Compose products built around real operator and customer workflows.'],
@@ -24,41 +23,67 @@ const marquee = [
   'Realtime delivery with SSE',
 ];
 
-const spotlightProjects = featuredProjects.slice(0, 6);
+/**
+ * Honest proof points per project. Every number here is verifiable in the
+ * case study or the repository — no invented metrics.
+ */
+const proofPoints: Record<string, [string, string][]> = {
+  'subtrack-bh': [['37', 'paying subscribers'], ['Live', 'in daily operation']],
+  'smartwater-zambia': [['Top 6', 'of ~100 builders'], ['48h', 'pitch to prototype']],
+  tongalang: [['147', 'automated tests'], ['17', 'example programs']],
+  'cbu-find': [['2', 'platforms'], ['Live', 'staging build']],
+  'serc-mini-os': [['4', 'CPU schedulers'], ['15', 'builds shipped']],
+  zamtrivia: [['10', 'Zambia categories'], ['Offline', 'leaderboard']],
+};
+
+const showcase = projects
+  .filter((project) => ['subtrack-bh', 'smartwater-zambia', 'tongalang'].includes(project.slug))
+  .map((project) => ({
+    project,
+    badges: proofPoints[project.slug] ?? [['Live', 'case study']],
+  }));
+
 const numberWords: Record<number, string> = { 6: 'Six', 7: 'Seven', 8: 'Eight', 9: 'Nine', 10: 'Ten', 11: 'Eleven', 12: 'Twelve' };
 const projectCountWord = numberWords[projects.length] ?? String(projects.length);
 ---
-<BaseLayout>
-  <div class="intro-sequence" data-intro-sequence hidden aria-hidden="true">
-    <div class="intro-mark" data-intro-mark><span>L</span><span>M</span></div>
-    <span class="intro-line" data-intro-line></span>
-    <p>Developer · Graduate · Entrepreneur</p>
-  </div>
 
+<BaseLayout>
   <section class="hero" data-home-hero data-scene="identity">
     <div class="hero-copy" data-motion>
       <p class="hero-status">{profile.status}</p>
-      <h1><span>Leo</span><em>Mabuku</em></h1>
-      <p class="role">Software Developer <span>·</span> Computer Science Graduate <span>·</span> Entrepreneur</p>
+      <h1><span class="sr-only">Leo Mabuku — </span><span>Software that</span><em>actually ships.</em></h1>
+      <p class="role">Android · Web · IoT · Systems</p>
       <div class="rule" data-hero-signal></div>
-      <p class="intro">{profile.intro}</p>
+      <p class="intro">{profile.intro} Every project below is something a person or a business depends on.</p>
       <div class="actions">
-        <a class="button" href="#featured">See the evidence <i class="ph ph-arrow-down" aria-hidden="true"></i></a>
-        <a class="text-link" href="/documents/Leo-Mabuku-Resume.pdf" download>Download resume <i class="ph ph-download-simple" aria-hidden="true"></i></a>
+        <a class="button" href="#featured">See the work <i class="ph ph-arrow-down" aria-hidden="true"></i></a>
+        <a class="button button--ghost" href="/documents/Leo-Mabuku-Resume.pdf" download><i class="ph ph-download-simple" aria-hidden="true"></i> Download résumé</a>
       </div>
       <dl class="hero-stats">
         <div><dt data-count={projects.length}>{projects.length}</dt><dd>shipped projects</dd></div>
-        <div><dt data-count="37">37</dt><dd>paying subscribers live</dd></div>
+        <div><dt data-count="37">37</dt><dd>paying subscribers</dd></div>
         <div><dt data-count="6">6</dt><dd>top six · GreenCode</dd></div>
       </dl>
-      <a class="scroll-cue" href="#capabilities"><span>Scroll to explore</span><i class="ph ph-arrow-down" aria-hidden="true"></i></a>
     </div>
 
-    <div class="hero-image" data-portrait-stage data-motion>
-      <img data-portrait-image src={profile.avatar} alt="Leo Mabuku in a dark suit, photographed in black and white" fetchpriority="high" />
-      <canvas class="portrait-canvas" data-portrait-canvas aria-hidden="true"></canvas>
-      <div class="portrait-scan" aria-hidden="true"></div>
-      <div class="portrait-readout" aria-hidden="true"><span>LM / Identity signal</span><strong>Live system</strong></div>
+    <div class="hero-stage" data-motion data-stage>
+      <span class="stage-orbit" aria-hidden="true"></span>
+
+      <figure class="portrait-frame" data-stage-card>
+        <img src={profile.avatar} alt="Leo Mabuku in a dark suit, photographed in black and white" fetchpriority="high" />
+        <figcaption class="portrait-tag"><span>Leo Mabuku · Zambia</span><strong>Open to work</strong></figcaption>
+      </figure>
+
+      <figure class="device device--phone device--back" data-stage-card data-float="0.6">
+        <img src="/images/projects/smartwater-zambia/mobile/tank-levels.jpg" alt="SmartWater Zambia app showing live tank levels" loading="lazy" />
+      </figure>
+
+      <figure class="device device--phone device--main" data-stage-card data-float="1">
+        <img src="/images/projects/smartwater-zambia/mobile/my-reports.jpg" alt="SmartWater Zambia app showing a resident's reported water incidents" loading="lazy" />
+      </figure>
+
+      <span class="stage-chip stage-chip--a"><i class="ph ph-users-three" aria-hidden="true"></i>37 paying subscribers</span>
+      <span class="stage-chip stage-chip--c"><i class="ph ph-trophy" aria-hidden="true"></i>Top 6 · GreenCode</span>
     </div>
 
     <div class="hero-marquee" aria-hidden="true">
@@ -73,13 +98,13 @@ const projectCountWord = numberWords[projects.length] ?? String(projects.length)
     <span>IoT intern · CodeAlpha</span>
     <span>{profile.location}</span>
     <span>Web · Android · IoT · Systems</span>
-    <span>Open to internships &amp; graduate roles</span>
+    <span>Open to graduate roles &amp; remote work</span>
   </section>
 
   <section class="section-shell services-section" id="capabilities" data-scene="capabilities">
     <div class="section-heading" data-motion>
       <p class="eyebrow">01 · What I build</p>
-      <h2>From a real problem to<br/><em>running software.</em></h2>
+      <h2>From a real problem<br/><em>to running software.</em></h2>
       <p>Every project here started with an operational problem, not a tutorial. The common thread is a system that has to hold up when someone depends on it.</p>
     </div>
     <div class="services-grid" data-motion-stagger>
@@ -102,8 +127,30 @@ const projectCountWord = numberWords[projects.length] ?? String(projects.length)
       </div>
       <a class="text-link" href="/work/">All {projects.length} case studies <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
     </div>
-    <div class="project-grid">
-      {spotlightProjects.map((project, index) => <ProjectCard project={project} index={index} />)}
+
+    <div class="launch-grid">
+      {showcase.map(({ project, badges }) => (
+        <article class="launch-card" data-spotlight data-tilt>
+          <a class:list={["launch-card-media", { "launch-card-media--contain": project.cover?.includes("logo") }]} href={`/work/${project.slug}/`} aria-label={`Read the ${project.name} case study`}>
+            {project.cover && <img src={project.cover} alt={project.coverAlt} loading="lazy" />}
+          </a>
+          <div class="launch-card-body">
+            <p class="eyebrow">{project.category.slice(0, 2).join(' · ')}</p>
+            <h3><a href={`/work/${project.slug}/`}>{project.name}</a></h3>
+            <p>{project.shortDescription}</p>
+            <div class="tag-list">{project.technologies.slice(0, 3).map((technology) => <span>{technology}</span>)}</div>
+          </div>
+          <div class="launch-badges">
+            {badges.map(([value, label]) => (
+              <span class="badge"><strong>{value}</strong><small>{label}</small></span>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="launch-footer" data-motion>
+      <a class="text-link" href="/work/">Explore all {projects.length} case studies <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
     </div>
   </section>
 

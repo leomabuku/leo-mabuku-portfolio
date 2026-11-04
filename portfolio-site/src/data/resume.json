@@ -1,0 +1,24 @@
+{
+  "source": "generated",
+  "summary": "Computer Science graduate from The Copperbelt University awaiting degree conferment, building Android, web, IoT and systems software. Combines Kotlin, Python, TypeScript and C development with entrepreneurship, a live 37-subscriber network operation, automated testing and user-focused problem solving. Currently completing an IoT internship with CodeAlpha.",
+  "projectSlugs": [
+    "tongalang",
+    "smartwater-zambia",
+    "subtrack-bh",
+    "cbu-find",
+    "serc-mini-os"
+  ],
+  "experienceTitles": [
+    "Internet of Things (IoT) Intern",
+    "Founder · Network Service Operator",
+    "Founder · Sales & Operations",
+    "Data Analytics Trainee"
+  ],
+  "showHackathon": true,
+  "showCertifications": true,
+  "uploaded": {
+    "file": "resume-uploaded.pdf",
+    "label": "Uploaded résumé",
+    "uploadedOn": null
+  }
+}

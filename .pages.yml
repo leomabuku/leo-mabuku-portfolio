@@ -1,0 +1,374 @@
+# Pages CMS — edit the portfolio from your phone.
+#
+# Open https://app.pagescms.org, sign in with GitHub, pick this repository and
+# branch. Every save commits to GitHub, which triggers the Cloudflare Pages build.
+# Roughly 1–2 minutes after saving, the change is live.
+#
+# Content lives in portfolio-site/src/data/*.json. `settings.content.merge`
+# preserves any keys this file does not describe, so editing a project in the CMS
+# cannot silently drop its media, audience or limitations blocks.
+
+media:
+  input: portfolio-site/public/uploads
+  output: /uploads
+
+settings:
+  content:
+    merge: true
+  commit:
+    templates:
+      create: "content(create): {path} via Pages CMS"
+      update: "content(update): {path} via Pages CMS"
+
+content:
+  - name: projects
+    label: Projects
+    type: file
+    path: portfolio-site/src/data/projects.json
+    format: json
+    list: true
+    view:
+      primary: name
+    fields:
+      - name: slug
+        label: URL slug
+        type: string
+        required: true
+        help: Lowercase letters, numbers and hyphens. Changing this breaks existing links.
+      - name: name
+        label: Project name
+        type: string
+        required: true
+      - name: shortDescription
+        label: One-line description
+        type: text
+        required: true
+      - name: category
+        label: Categories
+        type: string
+        list: true
+        required: true
+      - name: type
+        label: Project type
+        type: string
+        required: true
+      - name: status
+        label: Status
+        type: string
+        required: true
+        help: e.g. "Live · in daily operation", "Completed"
+      - name: year
+        label: Year
+        type: string
+        required: true
+      - name: featured
+        label: Featured on the home page
+        type: boolean
+      - name: role
+        label: Your role
+        type: string
+      - name: technologies
+        label: Technologies
+        type: string
+        list: true
+      - name: repository
+        label: Repository URL
+        type: string
+        help: Leave empty (blank) for a private or unpublished project.
+      - name: repositoryVisibility
+        label: Repository visibility
+        type: select
+        options:
+          values:
+            - public
+            - private
+      - name: liveDemo
+        label: Live demo URL
+        type: string
+      - name: cover
+        label: Cover image path
+        type: string
+        help: Upload in Media, then paste the path (e.g. /uploads/subtrack-cover.jpg).
+      - name: coverAlt
+        label: Cover image description
+        type: string
+      - name: problem
+        label: Problem
+        type: text
+        required: true
+      - name: solution
+        label: Solution
+        type: text
+        required: true
+      - name: contributions
+        label: What you built
+        type: text
+        list: true
+      - name: features
+        label: Features
+        type: text
+        list: true
+      - name: evidence
+        label: Evidence / verification note
+        type: text
+        required: true
+
+  - name: experience
+    label: Experience
+    type: file
+    path: portfolio-site/src/data/experience.json
+    format: json
+    list: true
+    view:
+      primary: title
+    fields:
+      - name: title
+        label: Job title
+        type: string
+        required: true
+      - name: organisation
+        label: Organisation
+        type: string
+        required: true
+      - name: location
+        label: Location
+        type: string
+      - name: period
+        label: Period
+        type: string
+        required: true
+        help: e.g. "Feb 2026–Present"
+      - name: summary
+        label: Summary
+        type: text
+        required: true
+      - name: bullets
+        label: Details
+        type: text
+        list: true
+      - name: document
+        label: Attached document (offer letter, contract)
+        type: object
+        fields:
+          - name: label
+            label: Link label
+            type: string
+          - name: url
+            label: File path or URL
+            type: string
+
+  - name: education
+    label: Education
+    type: file
+    path: portfolio-site/src/data/education.json
+    format: json
+    list: true
+    view:
+      primary: qualification
+    fields:
+      - name: qualification
+        label: Qualification
+        type: string
+        required: true
+      - name: institution
+        label: Institution
+        type: string
+        required: true
+      - name: location
+        label: Location
+        type: string
+      - name: period
+        label: Period
+        type: string
+      - name: detail
+        label: Detail
+        type: text
+
+  - name: certifications
+    label: Certifications & training
+    type: file
+    path: portfolio-site/src/data/certifications.json
+    format: json
+    list: true
+    view:
+      primary: name
+    fields:
+      - name: name
+        label: Name
+        type: string
+        required: true
+      - name: issuer
+        label: Issuer
+        type: string
+        required: true
+      - name: period
+        label: Period
+        type: string
+
+  - name: skills
+    label: Skill groups
+    type: file
+    path: portfolio-site/src/data/skillGroups.json
+    format: json
+    list: true
+    view:
+      primary: title
+    fields:
+      - name: title
+        label: Group title
+        type: string
+        required: true
+      - name: items
+        label: Skills
+        type: string
+        list: true
+        required: true
+
+  - name: hackathons
+    label: Hackathons & awards
+    type: file
+    path: portfolio-site/src/data/hackathons.json
+    format: json
+    list: true
+    view:
+      primary: name
+    fields:
+      - name: name
+        label: Event name
+        type: string
+        required: true
+      - name: edition
+        label: Edition
+        type: string
+      - name: organisers
+        label: Organisers
+        type: string
+        list: true
+      - name: location
+        label: Location
+        type: string
+      - name: period
+        label: Period
+        type: string
+      - name: fieldSize
+        label: Field size
+        type: string
+        help: e.g. "About 100 builders from Zambia"
+      - name: result
+        label: Result
+        type: string
+      - name: resultShort
+        label: Result (short)
+        type: string
+      - name: awardSummary
+        label: Award summary
+        type: text
+      - name: summary
+        label: Summary
+        type: text
+      - name: projectName
+        label: Project built
+        type: string
+      - name: acknowledgement
+        label: Acknowledgement
+        type: text
+      - name: evidence
+        label: Evidence note
+        type: text
+
+  - name: profile
+    label: Profile & contact
+    type: file
+    path: portfolio-site/src/data/profile.json
+    format: json
+    fields:
+      - name: name
+        label: Name
+        type: string
+        required: true
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: shortTitle
+        label: Short title
+        type: string
+        required: true
+      - name: location
+        label: Location
+        type: string
+      - name: email
+        label: Email
+        type: string
+      - name: phone
+        label: Phone
+        type: string
+      - name: github
+        label: GitHub URL
+        type: string
+      - name: linkedin
+        label: LinkedIn URL
+        type: string
+      - name: avatar
+        label: Portrait path
+        type: string
+      - name: intro
+        label: Home page intro
+        type: text
+      - name: availability
+        label: Availability line
+        type: text
+      - name: status
+        label: Status line
+        type: string
+        help: Shown in the header, e.g. "IoT intern at CodeAlpha · Computer Science graduate"
+
+  - name: resume
+    label: Résumé
+    type: file
+    path: portfolio-site/src/data/resume.json
+    format: json
+    fields:
+      - name: source
+        label: What should the download button serve?
+        type: select
+        required: true
+        options:
+          values:
+            - generated
+            - uploaded
+        help: "generated = rebuilt from this data on every deploy. uploaded = your own PDF, shipped untouched."
+      - name: summary
+        label: Résumé summary paragraph
+        type: text
+        required: true
+      - name: projectSlugs
+        label: Projects on the résumé
+        type: string
+        list: true
+        help: Project slugs, in the order they should appear.
+      - name: experienceTitles
+        label: Roles on the résumé
+        type: string
+        list: true
+        help: Exact job titles from Experience, in order.
+      - name: showHackathon
+        label: Include hackathon & recognition
+        type: boolean
+      - name: showCertifications
+        label: Include training & certifications
+        type: boolean
+      - name: uploaded
+        label: Uploaded résumé
+        type: object
+        fields:
+          - name: file
+            label: Path to your PDF
+            type: string
+            help: Upload the PDF in Media, then paste the path here (e.g. /uploads/leo-mabuku-cv.pdf).
+          - name: label
+            label: Label shown on the site
+            type: string
+          - name: uploadedOn
+            label: Uploaded on
+            type: string

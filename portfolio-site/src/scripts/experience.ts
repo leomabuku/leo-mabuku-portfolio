@@ -362,25 +362,33 @@ function initializeMotion(mode: MotionMode) {
     const hero = document.querySelector<HTMLElement>('[data-home-hero]');
     if (hero && mode === 'full') {
       const copy = hero.querySelector<HTMLElement>('.hero-copy');
-      const image = hero.querySelector<HTMLElement>('.hero-image');
+      const stage = hero.querySelector<HTMLElement>('[data-stage]');
       const role = hero.querySelector<HTMLElement>('.role');
       const signal = hero.querySelector<HTMLElement>('[data-hero-signal]');
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: hero,
-          start: 'top top-=2',
-          end: '+=62%',
-          scrub: 0.75,
-          pin: true,
-          anticipatePin: 1,
-          onUpdate: (self) => portraitScene?.setProgress(self.progress),
-        },
+      const scroll = (element: Element | null, vars: gsap.TweenVars) => {
+        if (!element) return;
+        gsap.to(element, {
+          ...vars,
+          ease: 'none',
+          scrollTrigger: { trigger: hero, start: 'top top', end: '+=72%', scrub: 0.6 },
+        });
+      };
+
+      scroll(copy, { yPercent: -7, opacity: 0.6 });
+      scroll(stage, { yPercent: -3, scale: 1.015 });
+      scroll(role, { letterSpacing: '0.22em' });
+      if (signal) {
+        gsap.to(signal, {
+          scaleX: 1,
+          ease: 'none',
+          scrollTrigger: { trigger: hero, start: 'top top', end: '+=40%', scrub: 0.5 },
+        });
+      }
+
+      hero.querySelectorAll<HTMLElement>('[data-float]').forEach((card) => {
+        const depth = Number(card.dataset.float ?? '1');
+        scroll(card, { yPercent: -9 * depth });
       });
-      timeline
-        .to(copy, { yPercent: -8, opacity: 0.58, ease: 'none' }, 0)
-        .to(image, { scale: 1.035, ease: 'none' }, 0)
-        .to(role, { letterSpacing: '0.2em', ease: 'none' }, 0)
-        .to(signal, { scaleX: 1, ease: 'none' }, 0);
     }
 
     const strip = document.querySelector<HTMLElement>('.credibility-strip');
@@ -451,6 +459,73 @@ export function destroyExperience() {
 }
 
 /** Initialize every declarative interaction for the currently rendered route. */
+/**
+ * Launch layer: pointer spotlight on cards and a light 3D tilt.
+ * Deliberately cheap — one pointer listener per surface, no re-layout.
+ */
+export function initializeLaunchSurfaces(mode: MotionMode) {
+  if (mode !== 'full') return;
+
+  document.querySelectorAll<HTMLElement>('[data-spotlight]').forEach((surface) => {
+    const move = (event: PointerEvent) => {
+      const rect = surface.getBoundingClientRect();
+      surface.style.setProperty('--mx', `${((event.clientX - rect.left) / rect.width) * 100}%`);
+      surface.style.setProperty('--my', `${((event.clientY - rect.top) / rect.height) * 100}%`);
+    };
+    listenElement(surface, 'pointermove', move, { passive: true });
+  });
+
+  // Pointer parallax on the home hero stage: devices drift against the cursor.
+  const stage = document.querySelector<HTMLElement>('[data-stage]');
+  if (stage) {
+    const move = (event: PointerEvent) => {
+      const rect = stage.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+      stage.style.setProperty('--px', x.toFixed(3));
+      stage.style.setProperty('--py', y.toFixed(3));
+    };
+    const reset = () => {
+      stage.style.setProperty('--px', '0');
+      stage.style.setProperty('--py', '0');
+    };
+    listenElement(stage, 'pointermove', move, { passive: true });
+    listenElement(stage, 'pointerleave', reset);
+    registry?.add(reset);
+  }
+
+  // Magnetic buttons: a few pixels of pull, never enough to feel loose.
+  document.querySelectorAll<HTMLElement>('.button').forEach((button) => {
+    const move = (event: PointerEvent) => {
+      const rect = button.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+      button.style.transform = `translate(${(x * 8).toFixed(2)}px, ${(y * 6 - 2).toFixed(2)}px)`;
+    };
+    const reset = () => {
+      button.style.transform = '';
+    };
+    listenElement(button, 'pointermove', move, { passive: true });
+    listenElement(button, 'pointerleave', reset);
+    registry?.add(reset);
+  });
+
+  document.querySelectorAll<HTMLElement>('[data-tilt]').forEach((surface) => {
+    const move = (event: PointerEvent) => {
+      const rect = surface.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width;
+      const y = (event.clientY - rect.top) / rect.height;
+      surface.style.transform = `perspective(900px) rotateX(${(0.5 - y) * 3.2}deg) rotateY(${(x - 0.5) * 3.6}deg) translateY(-4px)`;
+    };
+    const reset = () => {
+      surface.style.transform = '';
+    };
+    listenElement(surface, 'pointermove', move, { passive: true });
+    listenElement(surface, 'pointerleave', reset);
+    registry?.add(reset);
+  });
+}
+
 export function initExperience() {
   destroyExperience();
   const currentGeneration = generation;
@@ -465,6 +540,7 @@ export function initExperience() {
   initializeContactForm();
   initializeProjectPreviews();
   initializePointerSurfaces(mode);
+  initializeLaunchSurfaces(mode);
   initializeMotion(mode);
   initializeFilters(mode);
   void initializePortrait(mode, currentGeneration);

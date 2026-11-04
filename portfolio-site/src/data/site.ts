@@ -1,623 +1,207 @@
-export const profile = {
-  name: 'Leo Mabuku',
-  title: 'Software Developer & Computer Science Graduate',
-  shortTitle: 'Software Developer · Computer Science Graduate · Entrepreneur',
-  location: 'Lusaka, Zambia · open to Kitwe and remote',
-  email: 'leokmabuku@gmail.com',
-  phone: '+260770464736',
-  github: 'https://github.com/leomabuku',
-  linkedin: 'https://www.linkedin.com/in/leo-mabuku-7a2645330/',
-  avatar: '/leo-mabuku-portrait.png',
-  intro: 'I build systems end to end — Android apps, web platforms, APIs and the hardware at the edge. My degree is finished and my evidence is shipped, working software.',
-  availability: 'Open to internships, graduate software roles, hackathons, freelance builds and technical collaborations — in Zambia or remote.',
-  status: 'IoT intern at CodeAlpha · Computer Science graduate',
-};
+/**
+ * Single source of truth for site content.
+ *
+ * The data itself lives in JSON files in this directory so it can be edited from
+ * a phone (see `.pages.yml`) or any tooling, not only from a code editor. Every
+ * page — and the résumé generator — reads through this module, so validation
+ * happens once and a malformed edit fails the build instead of shipping.
+ */
+import { z } from 'zod';
 
-export const skillGroups = [
-  { title: 'Languages', items: ['Python', 'JavaScript', 'TypeScript', 'Kotlin', 'C', 'C++', 'PHP', 'SQL', 'HTML', 'CSS'] },
-  { title: 'Frontend & mobile', items: ['React', 'Astro', 'Tailwind CSS', 'Vite', 'Android', 'Jetpack Compose', 'Chart.js', 'Leaflet'] },
-  { title: 'Backend & data', items: ['FastAPI', 'Node.js', 'Express', 'REST APIs', 'PostgreSQL', 'SQLite', 'SQLAlchemy', 'Supabase', 'Firebase'] },
-  { title: 'Networking & hardware', items: ['MikroTik RouterOS automation', 'LAN design', 'Ethernet termination', 'ESP32 IoT', 'Server-Sent Events'] },
-  { title: 'Practice & delivery', items: ['Git & GitHub', 'Linux CLI', 'Automated testing', 'Cloudflare Pages', 'Vercel', 'Power BI', 'Technical documentation'] },
-];
+import profileJson from './profile.json';
+import skillGroupsJson from './skillGroups.json';
+import certificationsJson from './certifications.json';
+import educationJson from './education.json';
+import experienceJson from './experience.json';
+import qualitiesJson from './qualities.json';
+import hackathonsJson from './hackathons.json';
+import projectsJson from './projects.json';
+import resumeJson from './resume.json';
 
-export const certifications = [
-  { name: 'Huawei Datacom Training', issuer: 'Networking and data communications', period: 'Training' },
-  { name: 'Prompt Engineering for Everyone', issuer: 'IBM Skills Network / Cognitive Class', period: 'Oct 2025' },
-  { name: 'Microsoft Power BI', issuer: 'Data analytics workshop', period: 'Workshop' },
-  { name: 'Microsoft Learn Student Ambassadors', issuer: 'AI-powered apps with AI agents · Microsoft Learn and Power Platform', period: 'Workshops' },
-  { name: 'Data Analytics Traineeship', issuer: 'MedTourEasy', period: 'Sep 2025' },
-  { name: 'ICTAZ', issuer: 'Information and Communications Technology Association of Zambia', period: 'Member / participant' },
-  { name: 'Marketing & Sales · Money Skills · Entrepreneurial Skills', issuer: 'Absa Skills', period: 'Business courses' },
-];
+/* ------------------------------------------------------------------ schemas */
 
-export const education = [
-  {
-    qualification: 'Bachelor of Science in Computer Science',
-    institution: 'The Copperbelt University',
-    location: 'Kitwe, Zambia',
-    period: 'Completed 2025',
-    detail: 'Academic programme fully completed and awaiting official degree conferment. Entered through a special academic calendar beginning on 8 May 2023 before joining the mainstream calendar in January 2024.',
-  },
-  {
-    qualification: 'Senior Secondary Certificate',
-    institution: 'St. Raphael’s Secondary School',
-    location: 'Livingstone, Zambia',
-    period: '2019–2021',
-    detail: 'Completed senior secondary education after earning the Junior Secondary Certificate at the same school in 2018.',
-  },
-];
+export const profileSchema = z.object({
+  name: z.string().min(1),
+  title: z.string().min(1),
+  shortTitle: z.string().min(1),
+  location: z.string().min(1),
+  email: z.string().email(),
+  phone: z.string().min(6),
+  github: z.string().url(),
+  linkedin: z.string().url(),
+  avatar: z.string().min(1),
+  intro: z.string().min(1),
+  availability: z.string().min(1),
+  status: z.string().min(1),
+});
 
-export const experience = [
-  {
-    title: 'Internet of Things (IoT) Intern',
-    organisation: 'CodeAlpha',
-    location: 'Remote',
-    period: 'Oct 2026–Present',
-    summary: 'Selected for CodeAlpha’s IoT internship track, running from 20 October to 20 November 2026, focused on applied sensor work, prototyping and technical reporting.',
-    bullets: ['Working through applied IoT tasks spanning sensor simulation, prototype builds and a written case study.', 'Applying ESP32 and telemetry experience from SmartWater Zambia to a structured internship brief.'],
-    document: { label: 'Internship offer letter', url: '/documents/CodeAlpha-Internship-Offer-Letter.pdf' },
-  },
-  {
-    title: 'Founder · Network Service Operator',
-    organisation: 'Starlink Internet Service',
-    location: 'Kopa Street, Kitwe',
-    period: 'Feb 2026–Present',
-    summary: 'Launched and operate a Starlink-powered internet service covering a boarding house and approximately 30 metres beyond the property, currently serving 37 paying subscribers.',
-    bullets: ['Configured Starlink Mini and ARRIS SURFboard Max W121 mesh equipment.', 'Automated subscriber network access through a MikroTik hEX router, so paid subscriptions map to real bandwidth limits.', 'Manage onboarding, payments, subscription periods and connectivity support across 37 paying subscribers.', 'Turned the operation’s record-management and access-control needs into the SubTrack BH Android product.'],
-  },
-  {
-    title: 'Founder · Sales & Operations',
-    organisation: 'Leo M. Suppliers',
-    location: 'Livingstone, Zambia',
-    period: 'Feb 2022–Apr 2026',
-    summary: 'Started as a field-based fleece blanket business, registered with PACRA in June 2022 and opened a shop at Plot 98, John Hunt Way on 14 September 2022. Operations closed in April 2026.',
-    bullets: ['Handled sales, procurement, stock decisions, customer relationships, online marketing and deliveries.', 'Helped move the business from field selling to formal retail operations.', 'Adapted the product model from clothing and bedding to furniture and learned furniture assembly.'],
-  },
-  {
-    title: 'Independent Software Development & Technical Tutoring',
-    organisation: 'Self-employed',
-    location: 'Zambia',
-    period: '2024–Present',
-    summary: 'Provide paid programming guidance, debugging, setup and feature customisation while helping learners understand project structure and code.',
-    bullets: ['Explain programming concepts and software structure.', 'Troubleshoot build, configuration and implementation problems.', 'Support project customisation without misrepresenting assessed work.'],
-  },
-  {
-    title: 'Data Analytics Trainee',
-    organisation: 'MedTourEasy',
-    location: 'Remote',
-    period: 'Sep 2025',
-    summary: 'Completed a four-week training programme and live analytics project.',
-    bullets: ['Applied structured analysis to a practical project.', 'Worked with professional confidentiality expectations and guided training modules.'],
-  },
-];
+export const skillGroupSchema = z.object({
+  title: z.string().min(1),
+  items: z.array(z.string().min(1)).min(1),
+});
 
-export const qualities = [
-  ['Problem analysis', 'I examine the wider system behind a problem instead of treating only the visible symptom.'],
-  ['Fast learning', 'I learn unfamiliar technologies as projects demand them and apply the knowledge through implementation.'],
-  ['Independent learning', 'My technical development is driven by research, experimentation, testing and troubleshooting.'],
-  ['Entrepreneurship', 'I have built, registered, operated and adapted real business ventures.'],
-  ['Adaptability', 'I adjust technical and business plans when operating conditions or requirements change.'],
-  ['Customer awareness', 'Business experience keeps my software focused on real users, constraints and practical value.'],
-];
+export const certificationSchema = z.object({
+  name: z.string().min(1),
+  issuer: z.string().min(1),
+  period: z.string().min(1),
+});
 
-export type Hackathon = {
-  slug: string;
-  name: string;
-  edition: string;
-  organisers: string[];
-  location: string;
-  period: string;
-  startDate: string;
-  format: string;
-  fieldSize: string;
-  result: string;
-  resultShort: string;
-  awardSummary: string;
-  summary: string;
-  projectName: string;
-  projectSlug: string | null;
-  contributions: string[];
-  skills: string[];
-  acknowledgement?: string;
-  certificates: { label: string; issuer: string; image: string | null; alt?: string }[];
-  media: {
-    type: 'image';
-    src: string;
-    alt: string;
-    caption: string;
-    layout?: 'wide' | 'portrait';
-  }[];
-  evidence: string;
-};
+export const educationSchema = z.object({
+  qualification: z.string().min(1),
+  institution: z.string().min(1),
+  location: z.string().min(1),
+  period: z.string().min(1),
+  detail: z.string().min(1),
+});
 
-export const hackathons: Hackathon[] = [
-  {
-    slug: 'greencode-2026',
-    name: 'GreenCode Hackathon',
-    edition: 'Zambia Edition',
-    organisers: ['Garage48', 'BongoHive', 'ESTDEV'],
-    location: 'Lusaka, Zambia',
-    period: '30 Oct – 1 Nov 2026',
-    startDate: '2026-10-30',
-    format: '48-hour green-technology hackathon',
-    fieldSize: 'About 100 builders from Zambia',
-    result: 'Top 6 team',
-    resultShort: 'Top 6',
-    awardSummary:
-      'Finished among the six winning teams, earning follow-on support from Garage48 and BongoHive and a share of the €6,000 award fund.',
-    summary:
-      'Took SmartWater Zambia from an idea pitched on stage to a working prototype in 48 hours, then presented it to the judging panel as part of one of the six teams selected for follow-on support.',
-    projectName: 'SmartWater Zambia',
-    projectSlug: 'smartwater-zambia',
-    contributions: [
-      'Joined a cross-disciplinary team around a practical water problem and helped scope what a credible prototype could deliver inside 48 hours.',
-      'Built and iterated on the SmartWater Zambia prototype through Garage48’s validation, prototyping and pitching process with local and international mentors.',
-      'Pitched the finished prototype to the judging panel and finished in the top six, the group awarded follow-on support and a share of the award fund.',
-    ],
-    skills: ['Rapid prototyping', 'Product validation', 'Team collaboration', 'Pitching', 'Green technology'],
-    acknowledgement:
-      'Built at the GreenCode Hackathon Zambia Edition, run by Garage48 and BongoHive with ESTDEV, in Lusaka from 30 October to 1 November 2026. Thank you to the organisers for putting a hundred Zambian developers, designers and sustainability practitioners in one room with a real brief and real mentors; to the mentors and judges who pushed every team to validate before building; and to the six-team follow-on programme that gives this prototype a route beyond the weekend. Finishing in the top six is an opportunity rather than a trophy — the intent is to keep going: calibrate the hardware, harden the platform and put SmartWater Zambia in front of a Zambian utility or institution as a paid pilot.',
-    certificates: [
-      {
-        label: 'Certificate of participation · Leo Mabuku',
-        issuer: 'GreenCode Hackathon · ESTDEV, BongoHive, Garage48',
-        image: '/images/hackathons/greencode/certificate-individual.jpg',
-        alt: 'GreenCode Hackathon certificate of participation presented to Leo Mabuku, Lusaka, 30 October to 1 November 2026',
-      },
-      {
-        label: 'Team certificate · SmartWater Zambia',
-        issuer: 'GreenCode Hackathon · ESTDEV, BongoHive, Garage48',
-        image: '/images/hackathons/greencode/certificate-team-smartwater-zambia.jpg',
-        alt: 'GreenCode Hackathon team certificate presented to SmartWater Zambia, Lusaka, 30 October to 1 November 2026',
-      },
-    ],
-    media: [
-      {
-        type: 'image',
-        src: '/images/hackathons/greencode/leo-mabuku-certificate.jpg',
-        alt: 'Leo Mabuku holding his GreenCode Hackathon certificate in front of the event backdrop',
-        caption: 'Holding the individual GreenCode Hackathon certificate at the closing ceremony in Lusaka.',
-        layout: 'portrait',
-      },
-      {
-        type: 'image',
-        src: '/images/hackathons/greencode/team-group.jpg',
-        alt: 'Three SmartWater Zambia team members in front of the GreenCode Hackathon backdrop',
-        caption: 'The SmartWater Zambia team at the GreenCode Hackathon Zambia Edition, 30 October – 1 November 2026.',
-        layout: 'wide',
-      },
-    ],
-    evidence:
-      'Held 30 October – 1 November 2026 in Lusaka, Zambia. Participation is evidenced by the individual certificate presented to Leo Mabuku and the team certificate presented to SmartWater Zambia, both issued by the GreenCode Hackathon with ESTDEV, BongoHive and Garage48.',
-  },
-];
+export const experienceSchema = z.object({
+  title: z.string().min(1),
+  organisation: z.string().min(1),
+  location: z.string().min(1),
+  period: z.string().min(1),
+  summary: z.string().min(1),
+  bullets: z.array(z.string().min(1)).default([]),
+  document: z
+    .object({ label: z.string().min(1), url: z.string().min(1) })
+    .optional(),
+});
+
+const mediaSchema = z.object({
+  type: z.enum(['image', 'video']),
+  src: z.string().min(1),
+  alt: z.string().min(1),
+  caption: z.string(),
+  poster: z.string().optional(),
+  layout: z.enum(['wide', 'portrait']).optional(),
+});
+
+export const projectSchema = z.object({
+  slug: z.string().regex(/^[a-z0-9-]+$/, 'slug must be lowercase letters, numbers and hyphens'),
+  name: z.string().min(1),
+  shortDescription: z.string().min(1),
+  category: z.array(z.string().min(1)).min(1),
+  type: z.string().min(1),
+  status: z.string().min(1),
+  year: z.string().min(1),
+  featured: z.boolean(),
+  role: z.string().min(1),
+  technologies: z.array(z.string().min(1)),
+  repository: z.string().url().nullable(),
+  repositoryLabel: z.string().optional(),
+  additionalRepositories: z.array(z.object({ label: z.string(), url: z.string() })).optional(),
+  repositoryVisibility: z.enum(['public', 'private']),
+  hackathonSlug: z.string().optional(),
+  audience: z.array(z.object({ who: z.string(), why: z.string() })).optional(),
+  marketPoints: z.array(z.string()).optional(),
+  productionPath: z.array(z.string()).optional(),
+  limitations: z.array(z.string()).optional(),
+  liveDemo: z.string().url().nullable(),
+  cover: z.string().nullable(),
+  coverAlt: z.string(),
+  updatedOn: z.string().optional(),
+  updateSummary: z.string().optional(),
+  media: z.array(mediaSchema).optional(),
+  problem: z.string().min(1),
+  solution: z.string().min(1),
+  contributions: z.array(z.string()).min(1),
+  features: z.array(z.string()).min(1),
+  challenges: z.array(z.object({ title: z.string(), description: z.string() })),
+  lessons: z.array(z.string()),
+  plannedFeatures: z.array(z.string()),
+  evidence: z.string().min(1),
+});
+
+export const hackathonSchema = z.object({
+  slug: z.string().regex(/^[a-z0-9-]+$/),
+  name: z.string().min(1),
+  edition: z.string().min(1),
+  organisers: z.array(z.string().min(1)).min(1),
+  location: z.string().min(1),
+  period: z.string().min(1),
+  startDate: z.string().min(1),
+  format: z.string().min(1),
+  fieldSize: z.string().min(1),
+  result: z.string().min(1),
+  resultShort: z.string().min(1),
+  awardSummary: z.string().min(1),
+  summary: z.string().min(1),
+  projectName: z.string().min(1),
+  projectSlug: z.string().nullable(),
+  contributions: z.array(z.string()),
+  skills: z.array(z.string()),
+  acknowledgement: z.string().optional(),
+  certificates: z.array(
+    z.object({
+      label: z.string(),
+      issuer: z.string(),
+      image: z.string().nullable(),
+      alt: z.string().optional(),
+    }),
+  ),
+  media: z.array(
+    z.object({
+      type: z.literal('image'),
+      src: z.string(),
+      alt: z.string(),
+      caption: z.string(),
+      layout: z.enum(['wide', 'portrait']).optional(),
+    }),
+  ),
+  evidence: z.string().min(1),
+});
+
+export const resumeSettingsSchema = z.object({
+  /** "generated" renders the PDF from the data below; "uploaded" ships your own file untouched. */
+  source: z.enum(['generated', 'uploaded']),
+  summary: z.string().min(1),
+  projectSlugs: z.array(z.string().min(1)),
+  experienceTitles: z.array(z.string().min(1)),
+  showHackathon: z.boolean(),
+  showCertifications: z.boolean(),
+  uploaded: z.object({
+    file: z.string().min(1),
+    label: z.string().min(1),
+    uploadedOn: z.string().nullable(),
+  }),
+});
+
+/* ------------------------------------------------------------------ parsing */
+
+function load<T extends z.ZodTypeAny>(schema: T, data: unknown, name: string): z.infer<T> {
+  const result = schema.safeParse(data);
+  if (!result.success) {
+    const issues = result.error.issues
+      .map((issue) => `  • ${issue.path.join('.') || '(root)'}: ${issue.message}`)
+      .join('\n');
+    throw new Error(`Invalid content in src/data/${name}.json:\n${issues}`);
+  }
+  return result.data;
+}
+
+export type Profile = z.infer<typeof profileSchema>;
+export type SkillGroup = z.infer<typeof skillGroupSchema>;
+export type Certification = z.infer<typeof certificationSchema>;
+export type Education = z.infer<typeof educationSchema>;
+export type Experience = z.infer<typeof experienceSchema>;
+export type Project = z.infer<typeof projectSchema>;
+export type Hackathon = z.infer<typeof hackathonSchema>;
+export type ResumeSettings = z.infer<typeof resumeSettingsSchema>;
+
+export const profile = load(profileSchema, profileJson, 'profile');
+export const skillGroups = load(z.array(skillGroupSchema), skillGroupsJson, 'skillGroups');
+export const certifications = load(z.array(certificationSchema), certificationsJson, 'certifications');
+export const education = load(z.array(educationSchema), educationJson, 'education');
+export const experience = load(z.array(experienceSchema), experienceJson, 'experience');
+export const qualities = load(z.array(z.tuple([z.string(), z.string()])), qualitiesJson, 'qualities');
+export const hackathons = load(z.array(hackathonSchema), hackathonsJson, 'hackathons');
+export const projects = load(z.array(projectSchema), projectsJson, 'projects');
+export const resumeSettings = load(resumeSettingsSchema, resumeJson, 'resume');
+
+/* ------------------------------------------------------------------ derived */
 
 export const latestHackathon = hackathons[0];
-
-export type Project = {
-  slug: string;
-  name: string;
-  shortDescription: string;
-  category: string[];
-  type: string;
-  status: string;
-  year: string;
-  featured: boolean;
-  role: string;
-  technologies: string[];
-  repository: string | null;
-  repositoryLabel?: string;
-  additionalRepositories?: { label: string; url: string }[];
-  repositoryVisibility: 'public' | 'private';
-  hackathonSlug?: string;
-  audience?: { who: string; why: string }[];
-  marketPoints?: string[];
-  productionPath?: string[];
-  limitations?: string[];
-  liveDemo: string | null;
-  cover: string | null;
-  coverAlt: string;
-  updatedOn?: string;
-  updateSummary?: string;
-  media?: {
-    type: 'image' | 'video';
-    src: string;
-    alt: string;
-    caption: string;
-    poster?: string;
-    layout?: 'wide' | 'portrait';
-  }[];
-  problem: string;
-  solution: string;
-  contributions: string[];
-  features: string[];
-  challenges: { title: string; description: string }[];
-  lessons: string[];
-  plannedFeatures: string[];
-  evidence: string;
-};
-
-export const projects: Project[] = [
-  {
-    slug: 'tongalang',
-    name: 'TongaLang',
-    shortDescription: 'A beginner-focused interpreted programming language with Tonga-derived keywords, guided error recovery and an installable desktop IDE.',
-    category: ['Programming Language', 'Educational Software', 'Python'],
-    type: 'Final-year Computer Science project',
-    status: 'Completed',
-    year: '2025–2026',
-    featured: true,
-    role: 'Developer & Researcher',
-    technologies: ['Python', 'PLY', 'Tkinter', 'Pytest', 'PyInstaller', '.tg files'],
-    repository: 'https://github.com/leomabuku/PROJECT',
-    repositoryLabel: 'Source code and documentation',
-    additionalRepositories: [
-      { label: 'Download TongaLang 0.2.0 for Windows', url: 'https://github.com/leomabuku/PROJECT/releases/download/v0.2.0/TongaLang-Setup-0.2.0.exe' },
-      { label: 'Windows and Linux installation guide', url: 'https://github.com/leomabuku/PROJECT/blob/main/docs/INSTALLATION.md' },
-    ],
-    repositoryVisibility: 'public',
-    liveDemo: null,
-    cover: '/images/projects/tongalang/source-editor.png',
-    coverAlt: 'TongaLang educational IDE showing a Tonga-language source program',
-    updatedOn: '2026-09-11',
-    updateSummary: 'Completed TongaLang 0.2.0 and published its new visual identity, per-user Windows installer, bundled examples and documented Linux setup, alongside guided diagnostics and the shared Problems/Program Input workflow.',
-    media: [
-      {
-        type: 'video',
-        src: '/images/projects/tongalang/tongalang-demo.mp4',
-        poster: '/images/projects/tongalang/source-editor.png',
-        alt: 'Captioned walkthrough of TongaLang beginner diagnostics, program input, settings and project guide',
-        caption: 'A silent, captioned walkthrough from semantic editing and Apply Fix through bala() input, scrolling and the structured About guide.',
-        layout: 'wide',
-      },
-      {
-        type: 'image',
-        src: '/images/projects/tongalang/installer-setup.png',
-        alt: 'TongaLang Setup selecting a per-user Windows installation folder',
-        caption: 'The Windows installer uses the TongaLang identity throughout, installs without administrator access and includes the example programs in the application directory.',
-      },
-      {
-        type: 'image',
-        src: '/images/projects/tongalang/beginner-diagnostics.png',
-        alt: 'TongaLang Problems dock explaining an unnecessary semicolon and offering a guarded Apply Fix action',
-        caption: 'Problems translates a precise source error into bilingual guidance and offers an edit only when the correction is deterministic.',
-      },
-      {
-        type: 'image',
-        src: '/images/projects/tongalang/program-input.png',
-        alt: 'TongaLang Output view with the shared Program Input dock waiting for a bala value',
-        caption: 'When bala() needs a value, TongaLang keeps Output visible, opens one focused input surface and pauses only the interpreter worker.',
-      },
-      {
-        type: 'image',
-        src: '/images/projects/tongalang/output-transcript.png',
-        alt: 'TongaLang Output showing a completed program and the value entered through Program Input',
-        caption: 'Submitted values are echoed into the authoritative Output transcript before execution continues, making interactive programs easier to follow and explain.',
-      },
-      {
-        type: 'image',
-        src: '/images/projects/tongalang/settings-scrolled.png',
-        alt: 'Scrollable TongaLang Settings showing grouped execution controls and semantic syntax colours',
-        caption: 'Scrollable, collapsible settings expose safety limits, language tools and accessible colours without clipping at smaller window sizes.',
-      },
-      {
-        type: 'image',
-        src: '/images/projects/tongalang/about-guide.png',
-        alt: 'Structured TongaLang About screen with author, academic and project information',
-        caption: 'The project guide explains the author, academic context, purpose, architecture, quick start, features and current safety scope.',
-      },
-      {
-        type: 'image',
-        src: '/images/projects/tongalang/light-theme.png',
-        alt: 'TongaLang source editor using the light theme and semantic reserved-word colours',
-        caption: 'Dark and light editor themes give each reserved-word family a consistent semantic colour while preserving string and comment precedence.',
-      },
-      {
-        type: 'image',
-        src: '/images/projects/tongalang/ast-explorer.png',
-        alt: 'TongaLang graphical abstract syntax tree with source-linked nodes',
-        caption: 'The AST explorer connects executable structure back to the learner\'s source code.',
-      },
-      {
-        type: 'image',
-        src: '/images/projects/tongalang/console.png',
-        alt: 'TongaLang internal console showing project and runtime information',
-        caption: 'The internal Console provides a clear place to inspect IDE messages and runtime details without mixing them into learner program output.',
-      },
-      {
-        type: 'image',
-        src: '/images/projects/tongalang/grammar.png',
-        alt: 'TongaLang Grammar reference showing language rules and keyword examples',
-        caption: 'The built-in Grammar reference keeps language rules and examples close to the editor for learners who need a quick reminder.',
-      },
-      {
-        type: 'image',
-        src: '/images/projects/tongalang/test-lab.png',
-        alt: 'TongaLang Test Lab showing all checks passing',
-        caption: 'The Test Lab turns regression results, weakness probes and coverage into visible evidence.',
-      },
-    ],
-    problem: 'Beginner programmers may need to learn programming concepts and interpret unfamiliar English syntax at the same time, adding linguistic and cognitive load.',
-    solution: 'TongaLang combines Tonga-derived vocabulary with a small interpreted language and a guided desktop workspace. Learners see concepts in context, receive a plain-language recovery step when code is wrong, and stay in control of every suggested edit. Version 0.2.0 can be installed directly on Windows, while documented source and native bundle paths support Linux. It remains an educational language rather than a replacement for mainstream production tools.',
-    contributions: ['Researched minimal languages and interpreter construction, then mapped core programming concepts into Tonga-derived vocabulary through linguistic research and native-speaker consultation.', 'Built the lexer, parser, abstract syntax tree, interpreter, runtime environment and native functions before separating the language engine from its Tkinter IDE.', 'Designed a pure diagnostics model with stable codes, exact source spans, bilingual explanations and guarded edits that never execute or silently rewrite learner code.', 'Added debounced live analysis and a collapsible Problems workflow with precise highlighting, Go to Code, Copy Details and undoable Apply Fix actions.', 'Reworked graphical input around one thread-safe shared dock so bala() pauses only the interpreter, keeps the interface responsive and echoes submitted values into Output.', 'Created the TongaLang visual identity and applied it consistently to the IDE window, executable, desktop shortcut and setup experience.', 'Built a reproducible Windows installer that installs per user, includes 17 examples and supports clean uninstallation without requiring administrator access.', 'Documented Linux source installation and native bundle creation, then published the checksum-verified v0.2.0 release with privacy-reviewed product evidence.'],
-    features: ['Custom lexer, parser, AST and interpreter', 'Variables, arithmetic, Boolean logic, conditions, loops, functions and scope', 'Side-effect-free lexical, syntax and semantic diagnostics', 'Bilingual error codes, exact source highlighting and guarded Apply Fix actions', 'Shared Problems/Program Input dock across Editor and Output', 'Responsive bala() pause and resume with a visible input transcript', 'Semantic colours for eight reserved-word groups in dark and light themes', 'Back and Forward history plus a collapsible navigation menu', 'Scrollable grouped Settings and structured About guide', 'AST explorer, Grammar reference, internal console and execution safety limits', 'Windows installer, Start menu entry, desktop shortcut and uninstaller', 'Linux source installer and documented native bundle build', '17 example .tg programs included with source and desktop installations', '179 automated regression, adversarial and GUI integration tests'],
-    challenges: [
-      { title: 'Helpful fixes without unsafe guessing', description: 'The IDE needed broad recovery advice while editing only deterministic mistakes. Suggested edits therefore carry the expected original text, reject stale source and leave ambiguous choices to the learner.' },
-      { title: 'Input without freezing the IDE', description: 'bala() must pause execution, not navigation or scrolling. A worker-thread input provider and single-use queue handoff keep Tkinter responsive and prevent repeated submissions.' },
-      { title: 'One dock across changing views', description: 'Problems and Program Input share state, expansion and sash size while Editor and Output change underneath them. Runtime failures, successful runs, pending input and manual inspection each require a distinct transition.' },
-      { title: 'Growing without regressions', description: 'Diagnostics, tokens, grammar, runtime behaviour, highlighting and existing programs affect one another, so changes are protected by error-contract, adversarial and GUI integration tests.' },
-      { title: 'Packaging a complete learning environment', description: 'The desktop release needed more than a frozen executable. The build now carries the logo, runtime assets and examples into a per-user installer, documents reproducible builds and publishes a checksum for independent verification.' },
-    ],
-    lessons: ['Compiler and interpreter fundamentals', 'Grammar and AST design', 'Beginner-centred diagnostic writing', 'Guarded source-edit design', 'Thread-safe GUI execution', 'Stateful Tkinter workspace architecture', 'Windows and Linux desktop packaging', 'Release checksums and reproducible builds', 'Automated and adversarial testing', 'Accessible educational language design'],
-    plannedFeatures: ['Add progressive beginner lessons, expected output and resettable examples', 'Add keyword and native-function autocomplete with short contextual help', 'Add a variable inspector and simple step-through execution', 'Persist settings, dock sizes, recent files and safe session recovery', 'Arrange a Tonga educator review and formal Narrator or NVDA accessibility testing', 'Add release CI, Windows code signing and distribution packages for major Linux formats'],
-    evidence: 'Public repository verified on 11 September 2026 at merged commit 956909b: TongaLang 0.2.0 includes 17 runnable examples and passes all 179 automated tests. The Windows installer is published with SHA-256 265e4a204bd56d9326b67c144f4fda966484b29bb8ea076a8c3292453b38f0ec. The silent H.264 walkthrough is 1280×720, 30 fps, 52.03 seconds and 4.15 MB.',
-  },
-  {
-    slug: 'smartwater-zambia',
-    name: 'SmartWater Zambia',
-    shortDescription: 'IoT water telemetry and community incident reporting, built as one platform across an ESP32 sensor, an operator dashboard and a native Android app.',
-    category: ['IoT', 'Android', 'Web', 'Water Technology'],
-    type: 'GreenCode Hackathon team project',
-    status: 'Top 6 team · working prototype',
-    year: '2026',
-    featured: true,
-    role: 'Full-stack developer — web dashboard, Android app and API',
-    technologies: ['Kotlin', 'Jetpack Compose', 'React', 'Vite', 'Node.js', 'Express', 'Supabase', 'PostgreSQL', 'Server-Sent Events', 'ESP32'],
-    repository: 'https://github.com/leomabuku/majismart-zambia',
-    repositoryLabel: 'Source code, firmware and architecture notes',
-    repositoryVisibility: 'public',
-    hackathonSlug: 'greencode-2026',
-    liveDemo: null,
-    cover: '/images/projects/smartwater-zambia/web/dashboard-overview.jpg',
-    coverAlt: 'SmartWater Zambia operator dashboard showing station totals, tank states and the latest sensor reading',
-    media: [
-      { type: 'image', src: '/images/projects/smartwater-zambia/web/dashboard-overview.jpg', alt: 'Operator dashboard with active stations, tank state counts, offline devices, open reports and a live reading banner', caption: 'The operator view: station and tank state, offline device count, open reports, and the most recent telemetry reading with device and tank identity.', layout: 'wide' },
-      { type: 'image', src: '/images/projects/smartwater-zambia/web/tank-analytics.jpg', alt: 'Tank analytics page showing current level, period minimum and maximum, paired ESP32 status and a 24-hour trend chart', caption: 'Per-tank analytics: current depth and volume, period minimum and maximum, the paired device and its last contact, and a trend against low and critical thresholds.', layout: 'wide' },
-      { type: 'image', src: '/images/projects/smartwater-zambia/web/incident-map.jpg', alt: 'Leaflet map showing monitoring stations, storage tanks and citizen incident markers across Lusaka', caption: 'Stations, tanks and citizen incidents on one map, so a report and a reservoir can be seen as the same place.', layout: 'wide' },
-      { type: 'image', src: '/images/projects/smartwater-zambia/web/report-detail.jpg', alt: 'Community report detail with description, category, location, map pin, accuracy, photo evidence and directions action', caption: 'A report carries its category, coordinates and accuracy, the citizen\u2019s own description, photo evidence and a directions handoff for the crew.', layout: 'wide' },
-      { type: 'image', src: '/images/projects/smartwater-zambia/web/community-reports.jpg', alt: 'Community water reports table with categories, incident titles, reporters, submission dates, statuses and management actions', caption: 'The report queue: category, incident, reporter, submission time and status, with filters and per-report case management.', layout: 'wide' },
-      { type: 'image', src: '/images/projects/smartwater-zambia/web/report-intelligence.jpg', alt: 'Report intelligence page with totals, open and resolved counts, median response time, category mix and a written analysis', caption: 'Report intelligence turns the queue into a decision: volume, resolution, median first response, dominant issue and the locations carrying the most cases.', layout: 'wide' },
-      { type: 'image', src: '/images/projects/smartwater-zambia/web/tank-grid.jpg', alt: 'Grid of tank cards with level percentages, depth, capacity, device identifiers and timestamps', caption: 'Tank cards label every reading as simulated or live-sensor, so demo data is never mistaken for measured water.', layout: 'wide' },
-      { type: 'image', src: '/images/projects/smartwater-zambia/mobile/levels-overview.jpg', alt: 'Android app levels screen showing telemetry connection, total storage, online sensors and district filters', caption: 'Android · residents see the same telemetry operators do, with district filters and sensor health.', layout: 'portrait' },
-      { type: 'image', src: '/images/projects/smartwater-zambia/mobile/tank-levels.jpg', alt: 'Android app tank cards showing live volume against capacity with tank identifiers and sensor names', caption: 'Android · live volume against capacity per tank, with the tank code and the sensor reporting it.', layout: 'portrait' },
-      { type: 'image', src: '/images/projects/smartwater-zambia/mobile/report-category.jpg', alt: 'Android report form with burst pipe, pipe leak, no water and water quality categories and a location picker', caption: 'Android · reporting starts with a category and a mapped location, not a free-text phone call.', layout: 'portrait' },
-      { type: 'image', src: '/images/projects/smartwater-zambia/mobile/report-evidence.jpg', alt: 'Android report form with GPS pin, photo evidence capture, urgency level and description field', caption: 'Android · GPS pin, photo evidence and urgency, so a crew knows what to expect before it leaves.', layout: 'portrait' },
-      { type: 'image', src: '/images/projects/smartwater-zambia/mobile/my-reports.jpg', alt: 'Android my reports screen showing pending and resolved reports with logged, dispatched and resolved stages and dispatch notes', caption: 'Android · the closure loop: every report carries its status history and the crew note that resolved it.', layout: 'portrait' },
-    ],
-    problem: 'Zambian utilities keep instrumentation at treatment works and district meters but very little between the district meter and the customer, so leaks and shortages surface as phone calls and reconciled bills days later. Residents have no dependable signal for how much water is actually in a shared tank, and incident reports arrive without consistent categories, locations or a record of what was checked.',
-    solution: 'SmartWater Zambia puts three layers on one data contract: an ESP32 ultrasonic sensor posts calibrated readings to an authenticated API, an operator dashboard tracks levels, alerts and community reports in real time, and a native Android app gives residents the same picture plus a route onto the incident map.',
-    contributions: ['Built the Express API behind the platform: JWT role authentication plus per-device API keys, IoT ingestion, threshold alerting, heartbeat and offline detection, and a Server-Sent Events hub with a polling fallback.', 'Built the React administration dashboard: live tank cards, Chart.js history, a Leaflet incident map, community report case management and analytics, the alerts centre, the hardware simulator and the installation and calibration screens.', 'Built the native Android customer app in Kotlin and Jetpack Compose: live level gauges, saved locations, map-based report submission, notifications and Google sign-in.', 'Wired the physical demo: one ESP32 ultrasonic sensor on a real tank streaming into the same API the dashboard and app read, with the remaining tanks simulated so the operator view could be shown at realistic scale.'],
-    features: ['Device-authenticated IoT ingestion with raw payload retention', 'Calibrated depth, tank geometry and volume estimation', 'Live tank levels over Server-Sent Events', 'Threshold alerts and stale-reading detection', 'Community incident reports with photos and coordinates', 'Report case lifecycle with full status history', 'Leaflet incident and installation map', 'Report intelligence with response and category analysis', 'Installation and calibration records per tank', 'Sensor fault logging without fabricated readings', 'Native Android app with live gauges and notifications', 'Role-based access for administrators, customers and technicians', 'Hardware simulator and telemetry presets'],
-    challenges: [
-      { title: 'Telemetry that does not invent data', description: 'A sensor timeout, a bad reading and a genuinely empty tank look similar from a distance. The platform records sensor faults as their own event, flags stale readings instead of repeating the last value, and labels every simulated tank so an operator can separate what was measured from what was seeded.' },
-      { title: 'One contract, three clients', description: 'Firmware, dashboard and Android app had to agree on distance, depth, level and volume while the device side stayed minimal. Calibration and geometry live on the server, so the ESP32 posts centimetres and both clients read the same derived state over REST and SSE.' },
-      { title: 'A 48-hour build that still behaved like a system', description: 'The stack ran on SQLite locally and Supabase PostgreSQL in deployment, so every schema change had to survive both; realtime used SSE with a polling fallback, because a dropped stream must not look like a tank that stopped changing.' },
-    ],
-    lessons: ['IoT ingestion design', 'ESP32 firmware and sensor calibration', 'Realtime delivery with SSE', 'Supabase and PostgreSQL migrations', 'Role-based API security', 'Compose UI state', 'Cross-client data contracts', 'Building to a demo deadline'],
-    plannedFeatures: ['Field calibration of the sensor against manual measurements', 'Per-device provisioning at utility scale', 'SMS and USSD channels for residents without smartphones', 'Integration with utility billing and district-metering systems'],
-    audience: [
-      { who: 'Commercial water utilities', why: 'Zambia’s eleven commercial utilities and six private schemes hold instrumentation at treatment works and district meters, and very little between that and the customer. This targets exactly that gap: storage visibility plus a queue of citizen-reported incidents carrying a location and a photo.' },
-      { who: 'Institutions with stored water', why: 'Campuses, hospitals, boarding houses, hotels, mines and commercial farms all store water in tanks someone has to walk to and read. A sensor and a dashboard replace that trip with a timestamped number and an alert.' },
-      { who: 'Landlords and estate managers', why: 'Buildings with per-block storage can see level and consumption per tank, and route tenant complaints into one case history instead of scattered phone calls.' },
-      { who: 'WASH programmes and funders', why: 'Programmes need verifiable reporting on what was installed, what was measured and what was fixed. The installation, calibration and case-history records exist to produce that trail.' },
-      { who: 'Residents', why: 'The people at the end of the pipe are beneficiaries rather than buyers: see the level in your own tank, report a burst pipe with a pin and a photo, and follow the case to resolution.' },
-    ],
-    marketPoints: [
-      'Sector non-revenue water reached 57% in 2023 against a regulator benchmark of under 20% for good performance — no Zambian utility is close.',
-      'The water that is billed costs about K12.61 per unit to deliver and sells for an average of K7.90, and all eleven utilities sit below 100% cost coverage by collection.',
-      'The national strategy put revenue lost to non-revenue water at ZMW 998.6 million on a 2020 baseline, against a benchmark loss of ZMW 474.5 million.',
-      'Lusaka produced roughly 350,000 m³/day against 480,000 m³/day of demand, dropping to about 265,000 during the 2025 drought — when supply is intermittent, tank-level certainty stops being a convenience.',
-      'Roughly 8.36 million people live inside commercial-utility service areas, and coverage fractions fell as population grew faster than connections. Utilities are running to stand still without better information at the edge.',
-    ],
-    productionPath: [
-      'Field calibration: run the recorded empty/full reference protocol against a physical tank and log the error, because an uncalibrated ultrasonic reading is a guess with a timestamp.',
-      'Hardware hardening: enclosure, power, sensor dead zones and per-device provisioning at scale.',
-      'Security review before exposure: server-side enforcement instead of relying on row-level security alone, authenticated realtime streams and credential rotation.',
-      'Integration with what utilities already run — billing systems and district metering — so a reading becomes revenue or a work order rather than another dashboard.',
-      'Channels that match the user: SMS and USSD paths for residents without smartphones, alongside the Android app.',
-      'A pilot with one institution or one utility zone, with a baseline, a measured outcome and an exit decision.',
-    ],
-    limitations: [
-      'One physical ESP32 sensor was connected at the hackathon and monitored a real tank (TANK_001, the tank used in the live demo). Additional tanks and stations were simulated so the operator view could be shown at realistic scale, and every simulated record is labelled as such in the interface.',
-      'Report-intelligence figures in these captures come from a seeded demo cohort, not a live utility dataset.',
-      'Calibration against manual measurements, production deployment and utility integration are still to be done.',
-    ],
-    evidence: 'Repository audited on 1 November 2026 at commit 3143c77: ESP32 firmware, the Express and Supabase API, the React/Vite dashboard and the Kotlin/Jetpack Compose Android app are all present alongside backend and web test suites. The team placed in the top six at the GreenCode Hackathon Zambia Edition.',
-  },
-  {
-    slug: 'subtrack-bh',
-    name: 'SubTrack BH',
-    shortDescription: 'A local-first Android workspace for operating a boarding-house internet subscription service.',
-    category: ['Android', 'Business Tools', 'Networking'],
-    type: 'Live-operation product',
-    status: 'Live · in daily operation',
-    year: '2026',
-    featured: true,
-    role: 'Founder & Lead Developer',
-    technologies: ['Kotlin', 'Jetpack Compose', 'Room', 'Firebase', 'WorkManager', 'MikroTik RouterOS API', 'Payment webhooks'],
-    repository: 'https://github.com/leomabuku/SubTrackBH',
-    repositoryVisibility: 'public',
-    liveDemo: null,
-    cover: '/images/projects/subtrack-bh/logo.png',
-    coverAlt: 'SubTrack BH internet subscription manager logo',
-    problem: 'Subscriber names, packages, payments, expiry dates, balances and reconnections become unreliable when managed through memory, messages or separate records.',
-    solution: 'SubTrack BH runs Leo’s live Starlink service end to end for 37 paying subscribers: a subscriber signs up, pays, and the platform verifies the payment and provisions or suspends network access on the router automatically. Room is the local source of truth, with Firebase services for accounts and messaging.',
-    contributions: ['Modelled subscribers, rooms, plans, devices, payments, expenses, reminders and subscription windows.', 'Separated administration, subscriber, core, backend and Firebase concerns across project modules.', 'Added accounting, reconciliation, reporting, backup and PDF utilities.', 'Wired payment verification to router automation, so a confirmed subscription maps to real MikroTik bandwidth limits without manual work.', 'Designed the product around the actual workflow of operating the service.'],
-    features: ['Separate admin and subscriber Android apps', 'Room as the admin app\'s local source of truth', 'Subscriber, room, plan and device records', 'Payments, balances and subscription windows', 'Accounting, reports, backups and PDF utilities', 'Firebase authentication, Firestore, Storage and messaging', 'WorkManager background operations', 'Salted PIN security and failed-attempt lockout', 'Payment verification through provider webhooks', 'Automatic MikroTik access provisioning and suspension', 'Google sign-in for subscribers'],
-    challenges: [
-      { title: 'Consistent account state', description: 'Payments, package duration, balances, expiry and reconnection rules must agree across screens instead of relying on a manually edited status label.' },
-      { title: 'Admin/subscriber boundaries', description: 'The subscriber app must expose only account-safe, read-oriented functions while financial writes and business controls remain in the admin app.' },
-      { title: 'Offline-first financial records', description: 'Local operation is essential during connectivity problems, while future synchronisation must avoid duplicate or conflicting financial records.' },
-    ],
-    lessons: ['Local-first Android architecture', 'Business-rule modelling', 'Room persistence', 'App boundary and permission design', 'Operational product development'],
-    plannedFeatures: ['Complete subscriber invoices and payment history', 'Expanded closing, reconciliation and asset-management interfaces'],
-    evidence: 'Fully operational in the live 37-subscriber service as of November 2026: payments are verified and network access is provisioned automatically. The public repository was last audited on 3 August 2026 at commit 19edd62.',
-  },
-  {
-    slug: 'cbu-find',
-    name: 'CBU-FIND',
-    shortDescription: 'A completed cross-platform lost-and-found system that moves campus recovery from scattered group updates into a searchable, verified workflow.',
-    category: ['Android & Web', 'Campus Utility', 'Cloud Platform'],
-    type: 'Cross-platform campus platform',
-    status: 'Completed',
-    year: '2026',
-    featured: true,
-    role: 'Product Designer & Full-Stack Developer',
-    technologies: ['Kotlin', 'Jetpack Compose', 'Vinext / React', 'TypeScript', 'Firebase', 'Cloudflare Workers', 'Cloudinary'],
-    repository: 'https://github.com/leomabuku/CBU-FIND',
-    repositoryLabel: 'Unified Android, web and Worker source',
-    repositoryVisibility: 'public',
-    liveDemo: 'https://cbu-find-web-staging.leokmabuku.workers.dev',
-    cover: '/images/projects/cbu-find/web-report-feed.png',
-    coverAlt: 'Responsive CBU Find report feed populated with meaningful lost and found items and matched report states',
-    updatedOn: '2026-09-11',
-    updateSummary: 'Completed and verified the shared Android/web workflow with meaningful reports, deterministic claim acceptance, private handover conversations, message controls, report resolution, moderation and resilient error states.',
-    media: [
-      {
-        type: 'image',
-        src: '/images/projects/cbu-find/web-report-feed.png',
-        alt: 'CBU Find web report feed showing four meaningful campus reports and matched states',
-        caption: 'The responsive web feed exposes the same searchable lost-and-found records as Android, including clear lost, found, active and matched states.',
-        layout: 'wide',
-      },
-      {
-        type: 'image',
-        src: '/images/projects/cbu-find/create-report.jpg',
-        alt: 'CBU Find Android create-report form for a lost or found item',
-        caption: 'The Android report flow captures type, category, campus location, compressed photos, a useful description and private handover details.',
-        layout: 'portrait',
-      },
-      {
-        type: 'image',
-        src: '/images/projects/cbu-find/web-accepted-claims.png',
-        alt: 'CBU Find claims page showing accepted found-it and ownership claims',
-        caption: 'A deterministic claim must be accepted by the report owner before the matching report changes state and a private conversation becomes available.',
-        layout: 'wide',
-      },
-      {
-        type: 'image',
-        src: '/images/projects/cbu-find/web-private-handover-chat.png',
-        alt: 'CBU Find private handover conversation with meaningful messages and report resolution control',
-        caption: 'Accepted participants can arrange a safe campus handover, edit or delete their own messages, report abuse and close the report when the item is returned.',
-        layout: 'wide',
-      },
-    ],
-    problem: 'Lost-property information shared through chats, noticeboards and word of mouth is fragmented, difficult to search and easy to miss.',
-    solution: 'CBU-FIND gives Android and web users one Firebase-backed campus record for publishing reports, verifying ownership claims, opening private handover chats only after acceptance, and closing the recovery loop when an item is returned.',
-    contributions: ['Designed and built the native Android experience with Kotlin, Jetpack Compose, Material 3 and adaptive light/dark themes.', 'Built the responsive Vinext/React web client against the same authentication, report, claim, conversation and moderation contracts.', 'Implemented a trusted Hono, Zod and JOSE Cloudflare Worker API for validation, rate limiting, notification queues, audit-safe errors and sensitive mutations.', 'Integrated Firebase Authentication, Firestore real-time listeners, Cloud Messaging, App Check and Crashlytics across the system.', 'Implemented short-lived signed Cloudinary uploads for report media and chat attachments while retaining compatibility with legacy URL-only records.', 'Created security rules, additive migration tools and automated Worker, web, Android and Firestore-rule tests.'],
-    features: ['Email/password and Google authentication with password recovery', 'Android and responsive web clients sharing live data', 'Lost/found reports with signed images, search and filters', 'Deterministic found-it and ownership claims', 'Owner acceptance before private messaging', 'Real-time inbox, unread state and media attachments', 'Sender-controlled message editing and deletion', 'Blocking, abuse reporting and privacy-limited moderation', 'Push-notification preferences and private message previews', 'Matched, resolved and reopened report lifecycle', 'Queued account deletion and history anonymisation', 'Light, dark and system appearance modes'],
-    challenges: [
-      { title: 'Real-time reads with trusted writes', description: 'Firestore listeners preserve immediate cross-client updates, while business mutations pass through the Worker so claim races, suspensions, blocks, notifications and audit errors follow one policy.' },
-      { title: 'Compatibility without destructive migration', description: 'Additive schemas and fallback reads preserve existing users, URL-only images, reports and conversations while new records gain structured assets, claims and moderation metadata.' },
-      { title: 'Production behavior on free infrastructure', description: 'The backend combines Firebase Spark, Cloudflare Workers and Queues, and Cloudinary signed media while surfacing quota or connectivity failures as actionable states instead of false empty screens.' },
-    ],
-    lessons: ['Cross-platform contract design', 'Compose and responsive React architecture', 'Firebase real-time security', 'Trusted edge API design', 'Race-safe claim workflows', 'Queued FCM delivery', 'Privacy-limited moderation', 'Legacy schema migration'],
-    plannedFeatures: [],
-    evidence: 'The unified public repository was verified on 11 September 2026. A two-account acceptance run created four meaningful reports, matched reciprocal claims and exchanged three-message private handover conversations through the live web client backed by the same Firebase project used by Android.',
-  },
-  {
-    slug: 'zamtrivia',
-    name: 'ZamTrivia',
-    shortDescription: 'A Zambia-focused Android quiz with timed play, category selection and local leaderboards.',
-    category: ['Android', 'Educational Game', 'Kotlin'],
-    type: 'Personal Android project',
-    status: 'Completed prototype',
-    year: '2026',
-    featured: true,
-    role: 'Android Developer',
-    technologies: ['Kotlin', 'XML layouts', 'ViewBinding', 'ViewModel', 'LiveData', 'Gson', 'SharedPreferences'],
-    repository: 'https://github.com/leomabuku/ZamTrivia1',
-    repositoryVisibility: 'public',
-    liveDemo: null,
-    cover: '/images/projects/zamtrivia/cover.png',
-    coverAlt: 'Dark ZamTrivia app artwork',
-    problem: 'Many quiz applications centre generic international content rather than knowledge that feels locally relevant to Zambian players.',
-    solution: 'ZamTrivia packages Zambia-focused questions across ten categories with random play, timed answers, score calculation and a device-local leaderboard.',
-    contributions: ['Created category and random quiz modes.', 'Implemented timer, scoring, answer feedback, skipping and skipped-question review.', 'Stored leaderboard entries locally with SharedPreferences.', 'Structured packaged questions as JSON and separated UI state through ViewModels.'],
-    features: ['Ten Zambia-focused categories', 'Random and category modes', 'Timed questions', 'Attempt and scoring rules', 'Skip and retry flow', 'Correct/incorrect feedback', 'Results screen', 'Local leaderboard'],
-    challenges: [{ title: 'Quiz state across many paths', description: 'Timer expiry, incorrect attempts, skips and replaying skipped questions all needed to advance consistently without losing the final score.' }],
-    lessons: ['Android fragments and lifecycle', 'ViewModel state', 'Local persistence', 'Timer-driven UX', 'Structured content modelling'],
-    plannedFeatures: [],
-    evidence: 'Public source audited on 3 August 2026 at commit 7509611: ten question categories, timed play, skipped-question review, packaged JSON content and a SharedPreferences leaderboard are implemented.',
-  },
-  {
-    slug: 'serc-mini-os',
-    name: 'SERC Mini-OS',
-    shortDescription: 'A C-based Smart Emergency Response Center simulator for core operating-system concepts.',
-    category: ['Systems', 'C', 'Academic'],
-    type: 'Operating-systems assignment',
-    status: 'Completed academic project',
-    year: '2026',
-    featured: true,
-    role: 'Systems Developer',
-    technologies: ['C', 'Raylib', 'Win32', 'GCC', 'Make'],
-    repository: 'https://github.com/leomabuku/SERC-Mini-OS-system',
-    repositoryVisibility: 'public',
-    liveDemo: null,
-    cover: null,
-    coverAlt: '',
-    problem: 'Operating-system algorithms are difficult to understand when scheduling, allocation and resource state remain abstract.',
-    solution: 'The simulator makes process management, CPU scheduling, memory allocation, IPC and deadlock safety visible through console and graphical interfaces.',
-    contributions: ['Implemented process creation, suspension, resumption and termination.', 'Added FCFS, SJF, Priority and Round Robin scheduling with comparison metrics and persistent Gantt data.', 'Modelled contiguous allocation, paging, IPC and Banker’s Algorithm-style safety checks.', 'Built console, Raylib dashboard and regression-test targets.', 'Customised and delivered 15 builds for 11 paying student clients while keeping the shared core engine stable.'],
-    features: ['PCB process state', 'Four scheduling algorithms', 'Waiting and turnaround metrics', 'Gantt data and replay', 'First/Best/Worst Fit allocation', 'Paging', 'Message-passing IPC', 'Deadlock safety validation', 'File reports and logs', 'Regression tests'],
-    challenges: [{ title: 'Compare without mutating live state', description: 'Scheduler comparison needed to compute multiple outcomes while preserving the active process table and saved Gantt result.' }],
-    lessons: ['Scheduling algorithms', 'Memory-management models', 'IPC and resource safety', 'C modularisation', 'Algorithm visualisation'],
-    plannedFeatures: [],
-    evidence: 'Canonical public repository audited on 3 August 2026 at commit 40e9a7a. Console, Raylib and legacy Win32 implementations are present; the empty duplicate repository remains excluded.',
-  },
-  {
-    slug: 'lifeharmonytracker',
-    name: 'LifeHarmonyTracker',
-    shortDescription: 'A personal productivity prototype combining calendar, focus, finance and screen-time tools.',
-    category: ['JavaScript', 'Productivity', 'Prototype'],
-    type: 'Supporting personal project',
-    status: 'Prototype',
-    year: '2025',
-    featured: false,
-    role: 'Product Developer',
-    technologies: ['JavaScript', 'React Native', 'Flask', 'SQLAlchemy', 'JWT', 'PostgreSQL'],
-    repository: 'https://github.com/leomabuku/LifeHarmonyTracker',
-    repositoryVisibility: 'public',
-    liveDemo: null,
-    cover: null,
-    coverAlt: '',
-    problem: 'Daily planning, focus, spending and screen-time information often live in disconnected tools.',
-    solution: 'A prototype workspace exploring how those personal-management activities could share one interface.',
-    contributions: ['Developed calendar, focus, finance, notification and screen-time modules.', 'Created a Flask API with authentication, persistence and device-synchronisation foundations.', 'Modelled events, expenses, focus sessions, app usage, notifications and device state.'],
-    features: ['React Native dashboard and navigation', 'Calendar and event workflows', 'Focus timer and session records', 'Expense tracking', 'Notifications and screen-time views', 'Flask API and SQLAlchemy models', 'JWT and OAuth-oriented authentication', 'Offline synchronisation and conflict fields'],
-    challenges: [],
-    lessons: ['Feature decomposition', 'Mobile navigation', 'API and data modelling', 'Offline-sync design', 'Product scope management'],
-    plannedFeatures: ['Add automated test coverage', 'Define and validate a stable release scope'],
-    evidence: 'Public repository audited on 3 August 2026 at commit c51a71d: 40 JavaScript files, ten Python files, React Native screens and a Flask/SQLAlchemy backend are present.',
-  },
-  {
-    slug: 'portfolio-website',
-    name: 'Portfolio Website',
-    shortDescription: 'This responsive, content-driven portfolio deployed through Cloudflare Pages.',
-    category: ['Web', 'Astro', 'Personal Brand'],
-    type: 'Live web project',
-    status: 'Live',
-    year: '2026',
-    featured: false,
-    role: 'Designer & Developer',
-    technologies: ['Astro', 'TypeScript', 'CSS', 'GitHub Actions', 'Cloudflare Pages'],
-    repository: 'https://github.com/leomabuku/leo-mabuku-portfolio',
-    repositoryVisibility: 'public',
-    liveDemo: 'https://leo-mabuku-portfolio.pages.dev',
-    cover: '/leo-mabuku-portrait.png',
-    coverAlt: 'Black-and-white portrait used in Leo Mabuku’s portfolio',
-    problem: 'A repository list alone does not communicate technical decisions, entrepreneurial experience or professional direction.',
-    solution: 'A structured portfolio that presents verified project evidence, case studies, experience and contact paths through a distinctive editorial identity.',
-    contributions: ['Designed the content model and multi-page information architecture.', 'Implemented responsive pages, metadata, accessibility support and automated repository refresh.', 'Added Google ownership verification and submitted the generated sitemap for discovery.', 'Deployed through GitHub and Cloudflare Pages.'],
-    features: ['Responsive multi-page site', 'Structured project case studies', 'SEO, sitemap and structured data', 'Google Search Console verification', 'Automated GitHub refresh', 'Reduced-motion support'],
-    challenges: [],
-    lessons: ['Portfolio storytelling', 'Astro content architecture', 'Responsive editorial design', 'Static deployment'],
-    plannedFeatures: ['Custom domain', 'Additional verified project screenshots'],
-    evidence: 'Public Astro repository and Cloudflare Pages deployment verified on 3 August 2026. The site includes seven project case studies, a generated sitemap and Google Search Console verification.',
-  },
-];
-
 export const featuredProjects = projects.filter((project) => project.featured);
 
-export const whatsappUrl = `https://wa.me/${profile.phone.replace('+', '')}?text=${encodeURIComponent('Hello Leo, I found your portfolio and would like to discuss a software, employment or collaboration opportunity.')}`;
+export const whatsappUrl = `https://wa.me/${profile.phone.replace('+', '')}?text=${encodeURIComponent(
+  'Hello Leo, I found your portfolio and would like to discuss a software, employment or collaboration opportunity.',
+)}`;
