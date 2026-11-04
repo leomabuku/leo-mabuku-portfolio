@@ -287,8 +287,28 @@ function generate() {
   });
 }
 
+function readMeta() {
+  const metaPath = path.join(OUT_DIR, 'resume-meta.json');
+  if (!fs.existsSync(metaPath)) return null;
+  try {
+    return JSON.parse(fs.readFileSync(metaPath, 'utf8'));
+  } catch {
+    return null;
+  }
+}
+
 if (resume.source === 'uploaded') {
   useUploaded();
 } else {
-  await generate();
+  const previous = readMeta();
+  const unchanged =
+    previous?.mode === 'generated' &&
+    previous?.dataHash === computeDataHash(DATA) &&
+    fs.existsSync(OUT);
+
+  if (unchanged) {
+    console.log('✔ Résumé: unchanged — keeping the existing PDF');
+  } else {
+    await generate();
+  }
 }
