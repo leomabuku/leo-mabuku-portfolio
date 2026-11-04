@@ -110,3 +110,17 @@ npm run resume:revert                                    # back to the generated
 In `uploaded` mode the generator copies your file to `public/documents/Leo-Mabuku-Resume.pdf` and does not render anything, so a deploy can never overwrite a résumé you uploaded. The download URL never changes, so previously shared links keep working. `scripts/resume-pipeline.test.ts` fails if the generated PDF drifts from the data, or if an uploaded PDF does not match the file it is supposed to ship.
 
 **Images.** Uploads from the CMS go to `public/uploads/` (served at `/uploads/...`). Keep large media there rather than in `public/images/`.
+
+## Footer visit counter
+
+`functions/api/visits.ts` is a Cloudflare Pages Function answering `GET /api/visits` with `{ available, total, today }`. It is aggregate-only: one integer for all time, one for the current UTC day. No IP addresses, no cookies, no user agent, no per-visitor records.
+
+To switch it on, add a KV namespace to the Pages project once:
+
+```sh
+npx wrangler kv namespace create VISITS
+```
+
+Then in the Cloudflare dashboard → **Workers & Pages → leo-mabuku-portfolio → Settings → Functions → KV namespace bindings**, add a binding named `VISITS` pointing at that namespace, and redeploy.
+
+Until the binding exists the endpoint returns `{ available: false }` and the footer counter stays hidden — nothing breaks. KV has no atomic increment, so simultaneous views can occasionally be missed; for a portfolio footer that is the right trade.

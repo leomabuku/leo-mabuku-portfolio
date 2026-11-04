@@ -362,8 +362,7 @@ function initializeMotion(mode: MotionMode) {
     const hero = document.querySelector<HTMLElement>('[data-home-hero]');
     if (hero && mode === 'full') {
       const copy = hero.querySelector<HTMLElement>('.hero-copy');
-      const stage = hero.querySelector<HTMLElement>('[data-stage]');
-      const role = hero.querySelector<HTMLElement>('.role');
+      const portrait = hero.querySelector<HTMLElement>('[data-hero-portrait]');
       const signal = hero.querySelector<HTMLElement>('[data-hero-signal]');
       const scroll = (element: Element | null, vars: gsap.TweenVars) => {
         if (!element) return;
@@ -374,9 +373,8 @@ function initializeMotion(mode: MotionMode) {
         });
       };
 
-      scroll(copy, { yPercent: -7, opacity: 0.6 });
-      scroll(stage, { yPercent: -3, scale: 1.015 });
-      scroll(role, { letterSpacing: '0.22em' });
+      scroll(copy, { yPercent: -6, opacity: 0.55 });
+      scroll(portrait, { yPercent: 4, scale: 1.06 });
       if (signal) {
         gsap.to(signal, {
           scaleX: 1,
@@ -385,10 +383,6 @@ function initializeMotion(mode: MotionMode) {
         });
       }
 
-      hero.querySelectorAll<HTMLElement>('[data-float]').forEach((card) => {
-        const depth = Number(card.dataset.float ?? '1');
-        scroll(card, { yPercent: -9 * depth });
-      });
     }
 
     const strip = document.querySelector<HTMLElement>('.credibility-strip');
@@ -433,6 +427,30 @@ function initializeMotion(mode: MotionMode) {
   });
 }
 
+/** Footer page-view counter. Silently does nothing when the KV binding is absent. */
+async function initializeVisitCounter() {
+  const counter = document.querySelector<HTMLElement>('[data-visit-counter]');
+  if (!counter) return;
+
+  const totalEl = counter.querySelector<HTMLElement>('[data-visit-total]');
+  const todayEl = counter.querySelector<HTMLElement>('[data-visit-today]');
+  if (!totalEl || !todayEl) return;
+
+  try {
+    const response = await fetch('/api/visits', { headers: { accept: 'application/json' } });
+    if (!response.ok) return;
+    const data = (await response.json()) as { available?: boolean; total?: number; today?: number };
+    if (!data.available || typeof data.total !== 'number') return;
+
+    const format = new Intl.NumberFormat();
+    totalEl.textContent = format.format(data.total);
+    todayEl.textContent = format.format(data.today ?? 0);
+    counter.hidden = false;
+  } catch {
+    // No counter is better than a broken one.
+  }
+}
+
 async function initializePortrait(mode: MotionMode, currentGeneration: number) {
   const canvas = document.querySelector<HTMLCanvasElement>('[data-portrait-canvas]');
   const image = document.querySelector<HTMLImageElement>('[data-portrait-image]');
@@ -475,22 +493,22 @@ export function initializeLaunchSurfaces(mode: MotionMode) {
     listenElement(surface, 'pointermove', move, { passive: true });
   });
 
-  // Pointer parallax on the home hero stage: devices drift against the cursor.
-  const stage = document.querySelector<HTMLElement>('[data-stage]');
-  if (stage) {
+  // Pointer parallax: the hero portrait drifts a few pixels against the cursor.
+  const hero = document.querySelector<HTMLElement>('[data-home-hero]');
+  if (hero && hero.querySelector('[data-hero-portrait]')) {
     const move = (event: PointerEvent) => {
-      const rect = stage.getBoundingClientRect();
+      const rect = hero.getBoundingClientRect();
       const x = (event.clientX - rect.left) / rect.width - 0.5;
       const y = (event.clientY - rect.top) / rect.height - 0.5;
-      stage.style.setProperty('--px', x.toFixed(3));
-      stage.style.setProperty('--py', y.toFixed(3));
+      hero.style.setProperty('--px', x.toFixed(3));
+      hero.style.setProperty('--py', y.toFixed(3));
     };
     const reset = () => {
-      stage.style.setProperty('--px', '0');
-      stage.style.setProperty('--py', '0');
+      hero.style.setProperty('--px', '0');
+      hero.style.setProperty('--py', '0');
     };
-    listenElement(stage, 'pointermove', move, { passive: true });
-    listenElement(stage, 'pointerleave', reset);
+    listenElement(hero, 'pointermove', move, { passive: true });
+    listenElement(hero, 'pointerleave', reset);
     registry?.add(reset);
   }
 
@@ -544,6 +562,7 @@ export function initExperience() {
   initializeMotion(mode);
   initializeFilters(mode);
   void initializePortrait(mode, currentGeneration);
+  void initializeVisitCounter();
 
   const refresh = () => ScrollTrigger.refresh();
   window.addEventListener('load', refresh, { once: true });
