@@ -6,36 +6,36 @@
 /* ============================================================
    Signal — design tokens
    ============================================================ */
-/* Oxblood & parchment — espresso-plum ground, parchment type, bronze and
-   burgundy as the two working colours. The raw RGB triplets exist so every
-   translucent wash in the stylesheets can be derived from the tokens instead of
-   hard-coding a colour that only looks right on one ground. */
+/* Navy & champagne — a deep maritime ground, cool parchment type, champagne as
+   the accent and a steel blue as the second colour. The raw RGB triplets exist so
+   every translucent wash can be derived from the tokens rather than hard-coded. */
 :root {
-  --bg: #120c10;
-  --bg-elevated: #171017;
-  --surface: #1c141b;
-  --surface-2: #241a22;
-  --line: #3a2b32;
-  --line-soft: #271c22;
-  --line-strong: #513c45;
-  --text: #f4ede4;
-  --text-dim: #d6c9bd;
-  --muted: #a99a90;
-  --accent: #c99a58;
-  --accent-ink: #120c10;
-  --accent-soft: rgb(201 154 88 / 13%);
-  --accent-line: rgb(201 154 88 / 40%);
-  --accent-2: #8a2a3c;
-  --accent-2-soft: rgb(138 42 60 / 16%);
+  --bg: #070e1a;
+  --bg-elevated: #0a1524;
+  --surface: #0d1b2e;
+  --surface-2: #122438;
+  --line: #1e3550;
+  --line-soft: #14233a;
+  --line-strong: #2e4a6e;
+  --text: #eef2f8;
+  --text-dim: #c6d2e2;
+  --muted: #93a5bd;
+  --accent: #c9a86a;
+  --accent-ink: #070e1a;
+  --accent-soft: rgb(201 168 106 / 13%);
+  --accent-line: rgb(201 168 106 / 40%);
+  --accent-2: #4a7ec0;
+  --accent-2-soft: rgb(74 126 192 / 16%);
 
-  --bg-rgb: 18 12 16;
-  --surface-rgb: 28 20 27;
-  --surface-2-rgb: 36 26 34;
-  --surface-3-rgb: 46 33 41;
-  --accent-rgb: 201 154 88;
-  --accent-2-rgb: 138 42 60;
-  --plum-rgb: 74 22 36;
-  --parchment-rgb: 244 237 228;
+  --bg-rgb: 7 14 26;
+  --surface-rgb: 13 27 46;
+  --surface-2-rgb: 18 36 56;
+  --surface-3-rgb: 24 47 74;
+  --accent-rgb: 201 168 106;
+  --accent-2-rgb: 74 126 192;
+  --deep-rgb: 10 32 62;
+  --parchment-rgb: 238 242 248;
+
   --serif: 'Cormorant Garamond', Georgia, serif;
   --sans: 'DM Sans', Arial, sans-serif;
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -64,12 +64,12 @@ body {
   margin: 0;
   overflow-x: hidden;
   background-color: var(--bg);
-  /* A colour field rather than a flat fill: burgundy sinking in from the top
-     left, bronze catching the right edge, deep plum rising from the footer. */
+  /* A colour field rather than a flat fill: a steel-blue current in the top
+     left, champagne catching the right edge, deep water rising from the footer. */
   background-image:
-    radial-gradient(1200px 820px at 4% -6%, rgb(var(--accent-2-rgb) / 24%), transparent 66%),
-    radial-gradient(900px 640px at 98% 6%, rgb(var(--accent-rgb) / 10%), transparent 70%),
-    radial-gradient(1100px 760px at 52% 106%, rgb(var(--plum-rgb) / 46%), transparent 74%);
+    radial-gradient(1200px 820px at 4% -6%, rgb(var(--accent-2-rgb) / 22%), transparent 66%),
+    radial-gradient(900px 640px at 98% 6%, rgb(var(--accent-rgb) / 9%), transparent 70%),
+    radial-gradient(1100px 760px at 52% 106%, rgb(var(--deep-rgb) / 60%), transparent 74%);
   background-repeat: no-repeat;
   color: var(--text);
   font: 400 15.5px/1.68 var(--sans);
