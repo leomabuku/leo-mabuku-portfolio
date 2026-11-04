@@ -1,8 +1,8 @@
 ---
 const examples = [
-  { label: 'Hello, world', code: 'tandika(“Muli bwanji?”)\\nsonya(“TongaLang is ready.”)', output: 'Muli bwanji?\\nTongaLang is ready.' },
-  { label: 'A small calculation', code: 'ika x = 12\\nika y = 8\\nsonya(x + y)', output: '20' },
-  { label: 'A condition', code: 'ika level = 82\\nsaka (level > 70) {\\n  sonya(“Tank is healthy”)\\n}', output: 'Tank is healthy' },
+  { label: 'Hello, world', code: 'tandika(“Muli bwanji?”)\nsonya(“TongaLang is ready.”)', output: 'Muli bwanji?\nTongaLang is ready.' },
+  { label: 'A small calculation', code: 'ika x = 12\nika y = 8\nsonya(x + y)', output: '20' },
+  { label: 'A condition', code: 'ika level = 82\nsaka (level > 70) {\n  sonya(“Tank is healthy”)\n}', output: 'Tank is healthy' },
 ];
 ---
 <section class="orbital-lab section-shell" id="orbital-lab" data-scene="interactive-lab">
@@ -66,9 +66,9 @@ const examples = [
   if (lab && !lab.hasAttribute('data-lab-ready')) {
     lab.setAttribute('data-lab-ready', 'true');
     const examples = [
-      { code: 'tandika(“Muli bwanji?”)\\nsonya(“TongaLang is ready.”)', output: 'Muli bwanji?\\nTongaLang is ready.' },
-      { code: 'ika x = 12\\nika y = 8\\nsonya(x + y)', output: '20' },
-      { code: 'ika level = 82\\nsaka (level > 70) {\\n  sonya(“Tank is healthy”)\\n}', output: 'Tank is healthy' },
+      { code: 'tandika(“Muli bwanji?”)\nsonya(“TongaLang is ready.”)', output: 'Muli bwanji?\nTongaLang is ready.' },
+      { code: 'ika x = 12\nika y = 8\nsonya(x + y)', output: '20' },
+      { code: 'ika level = 82\nsaka (level > 70) {\n  sonya(“Tank is healthy”)\n}', output: 'Tank is healthy' },
     ];
     const selector = lab.querySelector('#tongalang-example');
     const code = lab.querySelector('[data-tg-code]');
