@@ -857,12 +857,12 @@ main,
   .hero-portrait {
     inset: 0;
     width: 100%;
-    opacity: 0.55;
+    opacity: 0.78;
     mask-image: linear-gradient(to bottom, rgb(0 0 0 / 92%) 0%, rgb(0 0 0 / 40%) 52%, transparent 88%);
     -webkit-mask-image: linear-gradient(to bottom, rgb(0 0 0 / 92%) 0%, rgb(0 0 0 / 40%) 52%, transparent 88%);
   }
   .hero-portrait::after {
-    background: linear-gradient(180deg, rgb(7 8 15 / 58%) 0%, rgb(7 8 15 / 72%) 46%, var(--bg) 96%);
+    background: linear-gradient(180deg, rgb(7 8 15 / 42%) 0%, rgb(7 8 15 / 6%) 34%, rgb(7 8 15 / 62%) 66%, var(--bg) 96%);
   }
   .hero-portrait img { object-position: 62% 12%; }
   .hero-foot { flex-direction: column; align-items: flex-start; gap: 1rem; }
