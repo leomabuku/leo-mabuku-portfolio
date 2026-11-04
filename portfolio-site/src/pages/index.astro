@@ -49,57 +49,41 @@ const projectCountWord = numberWords[projects.length] ?? String(projects.length)
 
 <BaseLayout>
   <section class="hero" data-home-hero data-scene="identity">
+    <div class="hero-portrait" aria-hidden="true" data-hero-portrait>
+      <img src={profile.avatar} alt="" fetchpriority="high" />
+    </div>
+
     <div class="hero-copy" data-motion>
       <p class="hero-status">{profile.status}</p>
       <h1><span class="sr-only">Leo Mabuku — </span><span>Software that</span><em>actually ships.</em></h1>
-      <p class="role">Android · Web · IoT · Systems</p>
-      <div class="rule" data-hero-signal></div>
-      <p class="intro">{profile.intro} Every project below is something a person or a business depends on.</p>
+      <p class="intro">{profile.intro}</p>
       <div class="actions">
         <a class="button" href="#featured">See the work <i class="ph ph-arrow-down" aria-hidden="true"></i></a>
         <a class="button button--ghost" href="/documents/Leo-Mabuku-Resume.pdf" download><i class="ph ph-download-simple" aria-hidden="true"></i> Download résumé</a>
       </div>
+    </div>
+
+    <div class="hero-foot" data-motion>
       <dl class="hero-stats">
         <div><dt data-count={projects.length}>{projects.length}</dt><dd>shipped projects</dd></div>
         <div><dt data-count="37">37</dt><dd>paying subscribers</dd></div>
         <div><dt data-count="6">6</dt><dd>top six · GreenCode</dd></div>
       </dl>
-    </div>
-
-    <div class="hero-stage" data-motion data-stage>
-      <span class="stage-orbit" aria-hidden="true"></span>
-
-      <figure class="portrait-frame" data-stage-card>
-        <img src={profile.avatar} alt="Leo Mabuku in a dark suit, photographed in black and white" fetchpriority="high" />
-        <figcaption class="portrait-tag"><span>Leo Mabuku · Zambia</span><strong>Open to work</strong></figcaption>
-      </figure>
-
-      <figure class="device device--phone device--back" data-stage-card data-float="0.6">
-        <img src="/images/projects/smartwater-zambia/mobile/tank-levels.jpg" alt="SmartWater Zambia app showing live tank levels" loading="lazy" />
-      </figure>
-
-      <figure class="device device--phone device--main" data-stage-card data-float="1">
-        <img src="/images/projects/smartwater-zambia/mobile/my-reports.jpg" alt="SmartWater Zambia app showing a resident's reported water incidents" loading="lazy" />
-      </figure>
-
-      <span class="stage-chip stage-chip--a"><i class="ph ph-users-three" aria-hidden="true"></i>37 paying subscribers</span>
-      <span class="stage-chip stage-chip--c"><i class="ph ph-trophy" aria-hidden="true"></i>Top 6 · GreenCode</span>
-    </div>
-
-    <div class="hero-marquee" aria-hidden="true">
-      <div class="hero-marquee-track">
-        {[...marquee, ...marquee].map((item) => <span>{item}</span>)}
-      </div>
+      <a class="scroll-cue" href="#roles"><span>What I do</span><i class="ph ph-arrow-down" aria-hidden="true"></i></a>
     </div>
   </section>
 
-  <section class="credibility-strip" aria-label="Professional summary" data-motion-stagger>
-    <span>Computer Science graduate · CBU</span>
-    <span>IoT intern · CodeAlpha</span>
-    <span>{profile.location}</span>
-    <span>Web · Android · IoT · Systems</span>
-    <span>Open to graduate roles &amp; remote work</span>
+  <section class="role-band" id="roles" aria-label="What I do">
+    <p class="eyebrow">The work, in one line</p>
+    <p class="role-statement">
+      Android developer<span aria-hidden="true">·</span><em>IoT engineer</em><span aria-hidden="true">·</span>Founder<span aria-hidden="true">·</span>Systems programmer
+    </p>
+    <p class="role-sub">Kotlin, Python and TypeScript in production · embedded hardware at the edge · a business that runs on software I built.</p>
   </section>
+
+  <div class="tech-marquee" aria-hidden="true">
+    <div class="tech-marquee-track">{[...marquee, ...marquee].map((item) => <span>{item}</span>)}</div>
+  </div>
 
   <section class="section-shell services-section" id="capabilities" data-scene="capabilities">
     <div class="section-heading" data-motion>

@@ -72,7 +72,15 @@ const personSchema = {
         <a href={profile.linkedin} target="_blank" rel="noreferrer"><i class="ph ph-linkedin-logo" aria-hidden="true"></i><span>LinkedIn<small>Leo Mabuku</small></span></a>
         <a href={whatsappUrl} target="_blank" rel="noreferrer"><i class="ph ph-whatsapp-logo" aria-hidden="true"></i><span>WhatsApp<small>{profile.phone}</small></span></a>
       </div>
-      <p class="copyright">© {new Date().getFullYear()} Leo Mabuku · {profile.location}</p>
+      <div class="footer-base">
+        <p class="copyright">© {new Date().getFullYear()} Leo Mabuku · {profile.location}</p>
+        <p class="visit-counter" data-visit-counter hidden>
+          <i class="ph ph-eye" aria-hidden="true"></i>
+          <span data-visit-total>—</span> visits
+          <span class="visit-sep" aria-hidden="true">·</span>
+          <span data-visit-today>—</span> today
+        </p>
+      </div>
     </footer>
     <CommandPalette />
     <script>
