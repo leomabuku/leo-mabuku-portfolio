@@ -10,3 +10,5 @@ qa-comparison.png
 
 # Windows-only npm cache path written by local installs
 C:\\Users\\*
+
+public/runtime/

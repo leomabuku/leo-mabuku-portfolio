@@ -1,570 +1,240 @@
-import { gsap } from 'gsap';
-import { Flip } from 'gsap/Flip';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { createCleanupRegistry, type CleanupRegistry } from './lifecycle';
-import { projectMatchesFilter, readMotionSignals, selectMotionMode, shouldPlayFullIntro, type MotionMode } from './motion-mode';
-import type { PortraitSceneController } from './portrait-scene';
-
+import { createCleanupRegistry, type CleanupRegistry } from "./lifecycle";
+import {
+  projectMatchesFilter,
+  readMotionSignals,
+  selectMotionMode,
+} from "./motion-mode";
 let registry: CleanupRegistry | undefined;
-let animationContext: gsap.Context | undefined;
-let portraitScene: PortraitSceneController | undefined;
-let generation = 0;
-
-function listen<K extends keyof DocumentEventMap>(
-  target: Document,
-  event: K,
-  handler: (event: DocumentEventMap[K]) => void,
-  options?: AddEventListenerOptions,
-) {
-  target.addEventListener(event, handler as EventListener, options);
-  registry?.add(() => target.removeEventListener(event, handler as EventListener, options));
-}
-
-function listenElement<K extends keyof HTMLElementEventMap>(
-  target: HTMLElement,
-  event: K,
-  handler: (event: HTMLElementEventMap[K]) => void,
-  options?: AddEventListenerOptions,
-) {
-  target.addEventListener(event, handler as EventListener, options);
-  registry?.add(() => target.removeEventListener(event, handler as EventListener, options));
-}
-
-function safeSessionValue(key: string): string | null {
-  try {
-    return window.sessionStorage.getItem(key);
-  } catch {
-    return null;
-  }
-}
-
-function setSessionValue(key: string, value: string) {
-  try {
-    window.sessionStorage.setItem(key, value);
-  } catch {
-    // Private browsing can block storage; the experience still works without it.
-  }
-}
-
-function initializeHeaderState() {
-  const header = document.querySelector<HTMLElement>('[data-site-header]');
-  if (!header) return;
-  const sync = () => {
-    header.classList.toggle('is-scrolled', window.scrollY > 24);
-  };
-  sync();
-  const options: AddEventListenerOptions = { passive: true };
-  window.addEventListener('scroll', sync, options);
-  registry?.add(() => window.removeEventListener('scroll', sync, options));
-}
-
-function initializeNavigation() {
-  const button = document.querySelector<HTMLButtonElement>('.menu-toggle');
-  const nav = document.querySelector<HTMLElement>('.site-header nav');
-  if (!button || !nav) return;
-
-  const closeMenu = () => {
-    button.setAttribute('aria-expanded', 'false');
-    button.setAttribute('aria-label', 'Open navigation');
-    nav.classList.remove('open');
-    document.body.classList.remove('menu-open');
-  };
-  const toggleMenu = () => {
-    const open = button.getAttribute('aria-expanded') === 'true';
-    button.setAttribute('aria-expanded', String(!open));
-    button.setAttribute('aria-label', open ? 'Open navigation' : 'Close navigation');
-    nav.classList.toggle('open', !open);
-    document.body.classList.toggle('menu-open', !open);
-  };
-  listenElement(button, 'click', toggleMenu);
-  nav.querySelectorAll<HTMLElement>('a').forEach((link) => listenElement(link, 'click', closeMenu));
-  listen(document, 'keydown', (event) => {
-    if (event.key === 'Escape') closeMenu();
-  });
-  registry?.add(closeMenu);
-}
-
-function initializeCommandPalette() {
-  const dialog = document.querySelector<HTMLDialogElement>('[data-command-palette]');
-  const openButtons = document.querySelectorAll<HTMLButtonElement>('[data-command-open]');
-  const closeButton = dialog?.querySelector<HTMLButtonElement>('[data-command-close]');
-  const search = dialog?.querySelector<HTMLInputElement>('[data-command-search]');
-  const items = Array.from(dialog?.querySelectorAll<HTMLElement>('[data-command-item]') ?? []);
-  const empty = dialog?.querySelector<HTMLElement>('[data-command-empty]');
-  if (!dialog || !search) return;
-
-  const reset = () => {
-    search.value = '';
-    items.forEach((item) => { item.hidden = false; });
-    if (empty) empty.hidden = true;
-  };
-  const open = () => {
-    reset();
-    if (typeof dialog.showModal === 'function') dialog.showModal();
-    else dialog.setAttribute('open', '');
-    requestAnimationFrame(() => search.focus());
-  };
-  const close = () => {
-    if (dialog.open && typeof dialog.close === 'function') dialog.close();
-    else dialog.removeAttribute('open');
-  };
-  const filter = () => {
-    const query = search.value.trim().toLowerCase();
-    let visible = 0;
-    items.forEach((item) => {
-      const show = !query || (item.dataset.search ?? '').includes(query);
-      item.hidden = !show;
-      if (show) visible += 1;
-    });
-    if (empty) empty.hidden = visible !== 0;
-  };
-
-  openButtons.forEach((button) => listenElement(button, 'click', open));
-  if (closeButton) listenElement(closeButton, 'click', close);
-  listenElement(search, 'input', filter);
-  dialog.querySelectorAll<HTMLElement>('a').forEach((link) => listenElement(link, 'click', close));
-  listenElement(dialog, 'click', (event) => {
-    if (event.target === dialog) close();
-  });
-  listen(document, 'keydown', (event) => {
-    if (event.key === 'Escape' && dialog.open) {
-      event.preventDefault();
-      close();
-      return;
-    }
-    if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
-      event.preventDefault();
-      dialog.open ? close() : open();
-    }
-  });
-  registry?.add(close);
-}
-
-function initializeContactForm() {
-  const form = document.querySelector<HTMLFormElement>('.contact-form');
-  if (!form) return;
-  const handleSubmit = (event: SubmitEvent) => {
-    event.preventDefault();
-    if (!form.reportValidity()) return;
-    const data = new FormData(form);
-    const body = `Hello Leo,\n\n${data.get('message')}\n\nFrom: ${data.get('name')} (${data.get('email')})`;
-    window.location.href = `mailto:leokmabuku@gmail.com?subject=${encodeURIComponent(String(data.get('subject')))}&body=${encodeURIComponent(body)}`;
-    const status = form.querySelector<HTMLElement>('.form-status');
-    if (status) status.textContent = 'Your email application should now be opening.';
-  };
-  form.addEventListener('submit', handleSubmit);
-  registry?.add(() => form.removeEventListener('submit', handleSubmit));
-
-  form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input, textarea').forEach((field) => {
-    const parent = field.closest<HTMLElement>('label');
-    if (!parent) return;
-    const focus = () => parent.classList.add('field-active');
-    const blur = () => {
-      parent.classList.remove('field-active');
-      parent.classList.toggle('field-complete', Boolean(field.value.trim()));
-    };
-    field.addEventListener('focus', focus);
-    field.addEventListener('blur', blur);
-    registry?.add(() => {
-      field.removeEventListener('focus', focus);
-      field.removeEventListener('blur', blur);
-    });
-  });
-}
-
-function initializePointerSurfaces(mode: MotionMode) {
-  if (mode !== 'full') return;
-
-  document.querySelectorAll<HTMLElement>('[data-project-card]').forEach((card) => {
-    const move = (event: PointerEvent) => {
-      const rect = card.getBoundingClientRect();
-      const x = (event.clientX - rect.left) / rect.width;
-      const y = (event.clientY - rect.top) / rect.height;
-      card.style.setProperty('--pointer-x', `${x * 100}%`);
-      card.style.setProperty('--pointer-y', `${y * 100}%`);
-      card.style.setProperty('--tilt-x', `${(0.5 - y) * 4}deg`);
-      card.style.setProperty('--tilt-y', `${(x - 0.5) * 5}deg`);
-    };
-    const reset = () => {
-      card.style.setProperty('--tilt-x', '0deg');
-      card.style.setProperty('--tilt-y', '0deg');
-    };
-    listenElement(card, 'pointermove', move, { passive: true });
-    listenElement(card, 'pointerleave', reset);
-    registry?.add(reset);
-  });
-
-  const contact = document.querySelector<HTMLElement>('.contact-page');
-  if (contact) {
-    const move = (event: PointerEvent) => {
-      const rect = contact.getBoundingClientRect();
-      const x = (event.clientX - rect.left) / rect.width;
-      const y = (event.clientY - rect.top) / rect.height;
-      contact.style.setProperty('--contact-x', `${48 + (x * 4)}%`);
-      contact.style.setProperty('--contact-y', `${48 + (y * 4)}%`);
-    };
-    listenElement(contact, 'pointermove', move, { passive: true });
-  }
-}
-
-function initializeProjectPreviews() {
-  document.querySelectorAll<HTMLElement>('[data-project-card]').forEach((card) => {
-    const video = card.querySelector<HTMLVideoElement>('[data-project-preview]');
-    if (!video) return;
-    video.muted = true;
-    const play = () => {
-      card.classList.add('preview-active');
-      void video.play().catch(() => undefined);
-    };
-    const pause = () => {
-      card.classList.remove('preview-active');
-      video.pause();
-      video.currentTime = 0;
-    };
-    listenElement(card, 'pointerenter', play);
-    listenElement(card, 'pointerleave', pause);
-    listenElement(card, 'focusin', play);
-    listenElement(card, 'focusout', pause);
-    registry?.add(pause);
-  });
-}
-
-function initializeFilters(mode: MotionMode) {
-  const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-filter]'));
-  const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-project-card]'));
-  const result = document.querySelector<HTMLElement>('.filter-result');
-  const empty = document.querySelector<HTMLElement>('.empty-state');
-  if (!buttons.length || !cards.length) return;
-
-  buttons.forEach((button) => {
-    const activate = () => {
-      const filter = button.dataset.filter || 'all';
-      const state = mode === 'reduced' ? undefined : Flip.getState(cards);
-      let visible = 0;
-      buttons.forEach((item) => {
-        const active = item === button;
-        item.classList.toggle('active', active);
-        item.setAttribute('aria-pressed', String(active));
-      });
-      cards.forEach((card) => {
-        const show = projectMatchesFilter(card.dataset.categories ?? '', filter);
-        card.hidden = !show;
-        if (show) visible += 1;
-      });
-      if (result) result.textContent = filter === 'all'
-        ? `Showing all ${visible} projects`
-        : `Showing ${visible} ${button.textContent?.trim()} project${visible === 1 ? '' : 's'}`;
-      if (empty) empty.hidden = visible !== 0;
-      if (state) {
-        Flip.from(state, {
-          duration: mode === 'full' ? 0.72 : 0.4,
-          ease: 'power3.inOut',
-          absolute: true,
-          onEnter: (elements) => gsap.fromTo(elements, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.38 }),
-          onLeave: (elements) => gsap.to(elements, { opacity: 0, y: -16, duration: 0.24 }),
-        });
-      }
-    };
-    listenElement(button, 'click', activate);
-  });
-}
-
-function initializeIntroduction(mode: MotionMode) {
-  const intro = document.querySelector<HTMLElement>('[data-intro-sequence]');
-  if (!intro) return;
-  const seen = safeSessionValue('leo-portfolio-intro-seen') === '1';
-  const fullIntro = shouldPlayFullIntro(seen, mode);
-  intro.hidden = false;
-  intro.classList.add('intro-active');
-
-  const timeline = gsap.timeline({
-    defaults: { ease: 'power3.out' },
-    onComplete: () => {
-      intro.hidden = true;
-      intro.classList.remove('intro-active');
-    },
-  });
-  if (fullIntro) {
-    setSessionValue('leo-portfolio-intro-seen', '1');
-    timeline
-      .fromTo('[data-intro-mark] span', { yPercent: 120, opacity: 0 }, { yPercent: 0, opacity: 1, stagger: 0.12, duration: 0.5 })
-      .fromTo('[data-intro-line]', { scaleX: 0 }, { scaleX: 1, duration: 0.48 }, '-=0.2')
-      .to('[data-intro-mark]', { letterSpacing: '0.42em', duration: 0.35 }, '-=0.18')
-      .to(intro, { opacity: 0, duration: 0.42, delay: 0.08 });
-  } else {
-    timeline.fromTo(intro, { opacity: 1 }, { opacity: 0, duration: mode === 'reduced' ? 0.01 : 0.22 });
-  }
-}
-
-function initializeMotion(mode: MotionMode) {
-  gsap.registerPlugin(ScrollTrigger, Flip);
-  document.documentElement.classList.add('motion-ready');
-  registry?.add(() => document.documentElement.classList.remove('motion-ready'));
-
-  initializeIntroduction(mode);
-  if (mode === 'reduced') return;
-
-  animationContext = gsap.context(() => {
-    const duration = mode === 'full' ? 0.92 : 0.56;
-    ScrollTrigger.batch('[data-motion]', {
-      start: 'top 88%',
-      once: true,
-      onEnter: (elements) => gsap.fromTo(elements, {
-        opacity: 0,
-        y: mode === 'full' ? 54 : 24,
-        clipPath: 'inset(0 0 12% 0)',
-      }, {
-        opacity: 1,
-        y: 0,
-        clipPath: 'inset(0 0 0% 0)',
-        duration,
-        stagger: 0.08,
-        ease: 'power3.out',
-        clearProps: 'transform,clipPath',
-      }),
-    });
-
-    document.querySelectorAll<HTMLElement>('[data-motion-stagger]').forEach((group) => {
-      gsap.fromTo(Array.from(group.children), { opacity: 0, y: 28 }, {
-        opacity: 1,
-        y: 0,
-        duration: mode === 'full' ? 0.72 : 0.48,
-        stagger: mode === 'full' ? 0.1 : 0.055,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: group, start: 'top 84%', once: true },
-      });
-    });
-
-    document.querySelectorAll<HTMLElement>('[data-count]').forEach((element) => {
-      const target = Number(element.dataset.count);
-      if (!Number.isFinite(target)) return;
-      const counter = { value: 0 };
-      gsap.to(counter, {
-        value: target,
-        duration: mode === 'full' ? 1.5 : 0.8,
-        ease: 'power2.out',
-        snap: { value: 1 },
-        scrollTrigger: { trigger: element, start: 'top 90%', once: true },
-        onUpdate: () => { element.textContent = String(counter.value); },
-      });
-    });
-
-    const rail = document.querySelector<HTMLElement>('[data-experience-progress]');
-    if (rail) {
-      gsap.set(rail, { scaleY: 0, transformOrigin: 'top' });
-      ScrollTrigger.create({
-        start: 0,
-        end: 'max',
-        onUpdate: (self) => gsap.set(rail, { scaleY: self.progress }),
-      });
-    }
-
-    const hero = document.querySelector<HTMLElement>('[data-home-hero]');
-    if (hero && mode === 'full') {
-      const copy = hero.querySelector<HTMLElement>('.hero-copy');
-      const portrait = hero.querySelector<HTMLElement>('[data-hero-portrait]');
-      const signal = hero.querySelector<HTMLElement>('[data-hero-signal]');
-      const scroll = (element: Element | null, vars: gsap.TweenVars) => {
-        if (!element) return;
-        gsap.to(element, {
-          ...vars,
-          ease: 'none',
-          scrollTrigger: { trigger: hero, start: 'top top', end: '+=72%', scrub: 0.6 },
-        });
-      };
-
-      scroll(copy, { yPercent: -6, opacity: 0.55 });
-      scroll(portrait, { yPercent: 4, scale: 1.06 });
-      if (signal) {
-        gsap.to(signal, {
-          scaleX: 1,
-          ease: 'none',
-          scrollTrigger: { trigger: hero, start: 'top top', end: '+=40%', scrub: 0.5 },
-        });
-      }
-
-    }
-
-    const strip = document.querySelector<HTMLElement>('.credibility-strip');
-    if (strip && mode === 'full') {
-      gsap.fromTo(strip.children, { xPercent: 12 }, {
-        xPercent: -12,
-        stagger: 0.05,
-        ease: 'none',
-        scrollTrigger: { trigger: strip, start: 'top bottom', end: 'bottom top', scrub: true },
-      });
-    }
-
-    const pipeline = document.querySelector<HTMLElement>('.architecture ol');
-    if (pipeline) {
-      gsap.fromTo(Array.from(pipeline.children), { opacity: 0.25, y: 20 }, {
-        opacity: 1,
-        y: 0,
-        stagger: 0.16,
-        duration: 0.55,
-        ease: 'power2.out',
-        scrollTrigger: { trigger: pipeline, start: 'top 80%', once: true },
-      });
-    }
-
-    document.querySelectorAll<HTMLElement>('[data-case-section]').forEach((section) => {
-      const id = section.id;
-      const link = document.querySelector<HTMLElement>(`[data-case-link="${id}"]`);
-      if (!link) return;
-      ScrollTrigger.create({
-        trigger: section,
-        start: 'top center',
-        end: 'bottom center',
-        onToggle: (self) => link.classList.toggle('active', self.isActive),
-      });
-    });
-  }, document.body);
-
-  registry?.add(() => {
-    animationContext?.revert();
-    animationContext = undefined;
-    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-  });
-}
-
-/** Footer page-view counter. Silently does nothing when the KV binding is absent. */
-async function initializeVisitCounter() {
-  const counter = document.querySelector<HTMLElement>('[data-visit-counter]');
-  if (!counter) return;
-
-  const totalEl = counter.querySelector<HTMLElement>('[data-visit-total]');
-  const todayEl = counter.querySelector<HTMLElement>('[data-visit-today]');
-  if (!totalEl || !todayEl) return;
-
-  try {
-    const response = await fetch('/api/visits', { headers: { accept: 'application/json' } });
-    if (!response.ok) return;
-    const data = (await response.json()) as { available?: boolean; total?: number; today?: number };
-    if (!data.available || typeof data.total !== 'number') return;
-
-    const format = new Intl.NumberFormat();
-    totalEl.textContent = format.format(data.total);
-    todayEl.textContent = format.format(data.today ?? 0);
-    counter.hidden = false;
-  } catch {
-    // No counter is better than a broken one.
-  }
-}
-
-async function initializePortrait(mode: MotionMode, currentGeneration: number) {
-  const canvas = document.querySelector<HTMLCanvasElement>('[data-portrait-canvas]');
-  const image = document.querySelector<HTMLImageElement>('[data-portrait-image]');
-  if (!canvas || !image || mode !== 'full') return;
-  try {
-    const { createPortraitScene } = await import('./portrait-scene');
-    if (currentGeneration !== generation) return;
-    portraitScene = await createPortraitScene(canvas, image.currentSrc || image.src);
-    if (currentGeneration !== generation) portraitScene.destroy();
-  } catch {
-    canvas.classList.add('portrait-canvas--failed');
-  }
-}
-
-/** Tear down the current route before Astro swaps DOM or starts it again. */
 export function destroyExperience() {
-  generation += 1;
-  portraitScene?.destroy();
-  portraitScene = undefined;
   registry?.run();
   registry = undefined;
-  animationContext?.revert();
-  animationContext = undefined;
 }
-
-/** Initialize every declarative interaction for the currently rendered route. */
-/**
- * Launch layer: pointer spotlight on cards and a light 3D tilt.
- * Deliberately cheap — one pointer listener per surface, no re-layout.
- */
-export function initializeLaunchSurfaces(mode: MotionMode) {
-  if (mode !== 'full') return;
-
-  document.querySelectorAll<HTMLElement>('[data-spotlight]').forEach((surface) => {
-    const move = (event: PointerEvent) => {
-      const rect = surface.getBoundingClientRect();
-      surface.style.setProperty('--mx', `${((event.clientX - rect.left) / rect.width) * 100}%`);
-      surface.style.setProperty('--my', `${((event.clientY - rect.top) / rect.height) * 100}%`);
-    };
-    listenElement(surface, 'pointermove', move, { passive: true });
-  });
-
-  // Pointer parallax: the hero portrait drifts a few pixels against the cursor.
-  const hero = document.querySelector<HTMLElement>('[data-home-hero]');
-  if (hero && hero.querySelector('[data-hero-portrait]')) {
-    const move = (event: PointerEvent) => {
-      const rect = hero.getBoundingClientRect();
-      const x = (event.clientX - rect.left) / rect.width - 0.5;
-      const y = (event.clientY - rect.top) / rect.height - 0.5;
-      hero.style.setProperty('--px', x.toFixed(3));
-      hero.style.setProperty('--py', y.toFixed(3));
-    };
-    const reset = () => {
-      hero.style.setProperty('--px', '0');
-      hero.style.setProperty('--py', '0');
-    };
-    listenElement(hero, 'pointermove', move, { passive: true });
-    listenElement(hero, 'pointerleave', reset);
-    registry?.add(reset);
-  }
-
-  // Magnetic buttons: a few pixels of pull, never enough to feel loose.
-  document.querySelectorAll<HTMLElement>('.button').forEach((button) => {
-    const move = (event: PointerEvent) => {
-      const rect = button.getBoundingClientRect();
-      const x = (event.clientX - rect.left) / rect.width - 0.5;
-      const y = (event.clientY - rect.top) / rect.height - 0.5;
-      button.style.transform = `translate(${(x * 8).toFixed(2)}px, ${(y * 6 - 2).toFixed(2)}px)`;
-    };
-    const reset = () => {
-      button.style.transform = '';
-    };
-    listenElement(button, 'pointermove', move, { passive: true });
-    listenElement(button, 'pointerleave', reset);
-    registry?.add(reset);
-  });
-
-  document.querySelectorAll<HTMLElement>('[data-tilt]').forEach((surface) => {
-    const move = (event: PointerEvent) => {
-      const rect = surface.getBoundingClientRect();
-      const x = (event.clientX - rect.left) / rect.width;
-      const y = (event.clientY - rect.top) / rect.height;
-      surface.style.transform = `perspective(900px) rotateX(${(0.5 - y) * 3.2}deg) rotateY(${(x - 0.5) * 3.6}deg) translateY(-4px)`;
-    };
-    const reset = () => {
-      surface.style.transform = '';
-    };
-    listenElement(surface, 'pointermove', move, { passive: true });
-    listenElement(surface, 'pointerleave', reset);
-    registry?.add(reset);
-  });
-}
-
 export function initExperience() {
   destroyExperience();
-  const currentGeneration = generation;
   registry = createCleanupRegistry();
-  const mode = selectMotionMode(readMotionSignals());
-  document.documentElement.dataset.motionMode = mode;
-  document.body.dataset.motionMode = mode;
-
-  initializeHeaderState();
-  initializeNavigation();
-  initializeCommandPalette();
-  initializeContactForm();
-  initializeProjectPreviews();
-  initializePointerSurfaces(mode);
-  initializeLaunchSurfaces(mode);
-  initializeMotion(mode);
-  initializeFilters(mode);
-  void initializePortrait(mode, currentGeneration);
-  void initializeVisitCounter();
-
-  const refresh = () => ScrollTrigger.refresh();
-  window.addEventListener('load', refresh, { once: true });
-  registry?.add(() => window.removeEventListener('load', refresh));
+  const controller = new AbortController();
+  registry.add(() => controller.abort());
+  const listen = (el: EventTarget, event: string, handler: EventListener) =>
+    el.addEventListener(event, handler, { signal: controller.signal });
+  let motionOverride = false;
+  try {
+    motionOverride = sessionStorage.getItem("reduce-motion") === "true";
+  } catch {
+    /* Storage can be unavailable. */
+  }
+  const motionButton = document.querySelector<HTMLButtonElement>(
+    "[data-motion-toggle]",
+  );
+  const syncMotion = () => {
+    const mode = motionOverride
+      ? "reduced"
+      : selectMotionMode(readMotionSignals());
+    document.documentElement.dataset.motionMode = mode;
+    document.body.dataset.motionMode = mode;
+    if (motionButton) {
+      motionButton.setAttribute("aria-pressed", String(motionOverride));
+      motionButton.textContent = motionOverride
+        ? "Motion: reduced"
+        : "Reduce motion";
+    }
+  };
+  if (motionButton)
+    listen(motionButton, "click", () => {
+      motionOverride = !motionOverride;
+      try {
+        sessionStorage.setItem("reduce-motion", String(motionOverride));
+      } catch {}
+      syncMotion();
+    });
+  const media = matchMedia("(prefers-reduced-motion: reduce)");
+  listen(media, "change", syncMotion);
+  syncMotion();
+  const menu = document.querySelector<HTMLButtonElement>(".menu-toggle");
+  const nav = document.querySelector<HTMLElement>("#primary-nav");
+  const closeMenu = () => {
+    menu?.setAttribute("aria-expanded", "false");
+    menu?.setAttribute("aria-label", "Open navigation");
+    nav?.classList.remove("open");
+  };
+  if (menu && nav) {
+    listen(menu, "click", () => {
+      const open = menu.getAttribute("aria-expanded") !== "true";
+      menu.setAttribute("aria-expanded", String(open));
+      menu.setAttribute(
+        "aria-label",
+        open ? "Close navigation" : "Open navigation",
+      );
+      nav.classList.toggle("open", open);
+    });
+    nav
+      .querySelectorAll("a")
+      .forEach((link) => listen(link, "click", closeMenu));
+    listen(document, "keydown", (event) => {
+      if (
+        (event as KeyboardEvent).key === "Escape" &&
+        menu.getAttribute("aria-expanded") === "true"
+      ) {
+        closeMenu();
+        menu.focus();
+      }
+    });
+    listen(document, "click", (event) => {
+      if (!(event.target as Element).closest(".site-header")) closeMenu();
+    });
+  }
+  const dialog = document.querySelector<HTMLDialogElement>(
+    "[data-command-palette]",
+  );
+  const search = dialog?.querySelector<HTMLInputElement>(
+    "[data-command-search]",
+  );
+  let previousFocus: HTMLElement | null = null;
+  if (dialog && search) {
+    const items = Array.from(
+      dialog.querySelectorAll<HTMLElement>("[data-command-item]"),
+    );
+    const empty = dialog.querySelector<HTMLElement>("[data-command-empty]");
+    const close = () => {
+      dialog.close();
+      previousFocus?.focus();
+    };
+    const open = () => {
+      previousFocus = document.activeElement as HTMLElement;
+      search.value = "";
+      items.forEach((item) => (item.hidden = false));
+      if (empty) empty.hidden = true;
+      dialog.showModal();
+      search.focus();
+    };
+    document
+      .querySelectorAll("[data-command-open]")
+      .forEach((button) => listen(button, "click", open));
+    const closeButton = dialog.querySelector("[data-command-close]");
+    if (closeButton) listen(closeButton, "click", close);
+    listen(search, "input", () => {
+      let count = 0;
+      items.forEach((item) => {
+        item.hidden = !(item.dataset.search ?? "").includes(
+          search.value.trim().toLowerCase(),
+        );
+        if (!item.hidden) count++;
+      });
+      if (empty) empty.hidden = count > 0;
+    });
+    listen(dialog, "click", (event) => {
+      if (event.target === dialog) close();
+    });
+    listen(dialog, "cancel", (event) => {
+      event.preventDefault();
+      close();
+    });
+    dialog
+      .querySelectorAll("a")
+      .forEach((a) => listen(a, "click", () => dialog.close()));
+    listen(document, "keydown", (event) => {
+      const key = event as KeyboardEvent;
+      if ((key.ctrlKey || key.metaKey) && key.key.toLowerCase() === "k") {
+        key.preventDefault();
+        dialog.open ? close() : open();
+      }
+    });
+    registry.add(() => {
+      if (dialog.open) dialog.close();
+    });
+  }
+  const buttons = Array.from(
+    document.querySelectorAll<HTMLButtonElement>("[data-filter]"),
+  );
+  const cards = Array.from(
+    document.querySelectorAll<HTMLElement>("[data-project-card]"),
+  );
+  buttons.forEach((button) =>
+    listen(button, "click", () => {
+      const filter = button.dataset.filter ?? "all";
+      let count = 0;
+      buttons.forEach((b) => {
+        const active = b === button;
+        b.classList.toggle("active", active);
+        b.setAttribute("aria-pressed", String(active));
+      });
+      cards.forEach((card) => {
+        card.hidden = !projectMatchesFilter(
+          card.dataset.categories ?? "",
+          filter,
+        );
+        if (!card.hidden) count++;
+      });
+      const result = document.querySelector(".filter-result");
+      if (result)
+        result.textContent =
+          filter === "all"
+            ? `Showing all ${count} projects`
+            : `Showing ${count} ${button.textContent} project${count === 1 ? "" : "s"}`;
+      const empty = document.querySelector<HTMLElement>(".empty-state");
+      if (empty) empty.hidden = count > 0;
+    }),
+  );
+  const form = document.querySelector<HTMLFormElement>(".contact-form");
+  if (form)
+    listen(form, "submit", (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const data = new FormData(form);
+      const body = `Hello Leo,\n\n${data.get("message")}\n\nFrom: ${data.get("name")} (${data.get("email")})`;
+      const status = form.querySelector(".form-status");
+      if (status)
+        status.textContent =
+          "Your email application should now open. Review the message there before sending.";
+      window.location.href = `mailto:leokmabuku@gmail.com?subject=${encodeURIComponent(String(data.get("subject")))}&body=${encodeURIComponent(body)}`;
+    });
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-revealed");
+            observer.unobserve(entry.target);
+          }
+        }),
+      { threshold: 0.08 },
+    );
+    document
+      .querySelectorAll("[data-motion]")
+      .forEach((el) => observer.observe(el));
+    registry.add(() => observer.disconnect());
+    const chapters = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((entry) => {
+          const link = document.querySelector(
+            `[data-case-link="${entry.target.id}"]`,
+          );
+          link?.classList.toggle("active", entry.isIntersecting);
+        }),
+      { rootMargin: "-20% 0px -45% 0px" },
+    );
+    document
+      .querySelectorAll("[data-case-section]")
+      .forEach((el) => chapters.observe(el));
+    registry.add(() => chapters.disconnect());
+    const story = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          document
+            .querySelectorAll<HTMLAnchorElement>("[data-story-link]")
+            .forEach((link) => {
+              const current = link.dataset.storyLink === entry.target.id;
+              link.classList.toggle("active", current);
+              if (current) link.setAttribute("aria-current", "location");
+              else link.removeAttribute("aria-current");
+            });
+        });
+      },
+      { rootMargin: "-15% 0px -55% 0px", threshold: 0 },
+    );
+    document
+      .querySelectorAll("[data-story-section]")
+      .forEach((el) => story.observe(el));
+    registry.add(() => story.disconnect());
+  }
 }
