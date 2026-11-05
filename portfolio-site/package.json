@@ -13,7 +13,8 @@
     "resume": "node scripts/build-resume.mjs",
     "resume:upload": "node scripts/resume-source.mjs upload",
     "resume:revert": "node scripts/resume-source.mjs revert",
-    "prebuild": "node scripts/build-resume.mjs"
+    "prebuild": "node scripts/prepare-runtime.mjs && node scripts/build-resume.mjs",
+    "predev": "node scripts/prepare-runtime.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -24,12 +25,14 @@
     "astro": "^5.12.8",
     "gsap": "^3.15.0",
     "pdfkit": "^0.20.2",
+    "pyodide": "0.27.7",
     "shiki": "^4.3.1",
     "three": "^0.185.1",
     "typescript": "^5.8.3",
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "axe-core": "4.10.3",
     "vitest": "^3.2.4",
     "wrangler": "^4.120.1"
   }

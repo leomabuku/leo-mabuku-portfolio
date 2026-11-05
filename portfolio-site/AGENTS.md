@@ -1,5 +1,9 @@
 # Prototype Instructions
 
+## Current rebuild decision — 5 November 2026
+
+The user rejected the existing UI and requested a comprehensive rebuild, genuine TongaLang execution, removal of simulated demos, and browser verification. This supersedes the older cinematic/WebGL requirements below. Use one editorial design system: near-black and warm-paper sections, restrained lime, original product evidence, a framed portrait, readable case studies, and lightweight motion. Do not reinstate fake dashboards, canned program output or autoplay previews. The dedicated playground executes the unchanged pinned Python language in a self-hosted Pyodide worker. Keep source provenance and explicitly stated browser limits.
+
 Run the local server yourself and open the preview in the browser available to this environment. Do not give the user server-start instructions when you can run it.
 
 Before making substantial visual changes, use the Product Design plugin's `get-context` skill when the visual source is unclear or no longer matches the current goal. When the user gives durable prototype-specific design feedback, preferences, or decisions, record them in `AGENTS.md`.
@@ -20,3 +24,5 @@ When implementing from a selected generated mock, treat that image as the source
 - November 2026: the site was rebuilt on a "Signal" design system — fixed scroll-aware header, kinetic hero with a capability marquee, editorial project cards, sticky case-study chapters, and a single token-driven stylesheet in `src/styles/global.css`. Preserve the near-black surfaces, warm-white serif display type and electric-lime accent.
 - Motion stays declarative (`data-motion`, `data-motion-stagger`, `data-count`, `data-scene`) so the full/lite/reduced contract keeps working. New sections must use those hooks rather than bespoke scripts.
 - Case studies may carry optional audience, market, production-path and limitations blocks; only publish them when the claims can be backed by evidence or clearly labelled as simulation.
+
+- Latest user direction: make the experience professional, distinctive and story-driven. Reframe copy and components when useful, preserve factual evidence, and use purposeful animation with reduced-motion support. The homepage chapter index and problem-led project introductions implement this direction.
