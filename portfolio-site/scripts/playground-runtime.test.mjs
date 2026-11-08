@@ -24,6 +24,11 @@ function run(source, input = "") {
   );
 }
 describe("actual TongaLang in WebAssembly", () => {
+  it("runs the exact program the homepage hero lab displays", async () => {
+    const { heroProgram } = await import("../src/data/hero-lab.ts");
+    expect(run(heroProgram)).toEqual({ ok: true, output: "20\n96\n" });
+  });
+
   it("evaluates changed arbitrary source rather than canned output", () => {
     expect(run("mulimo matalikilo() { amba(7 * (9 + 3)) }")).toEqual({
       ok: true,

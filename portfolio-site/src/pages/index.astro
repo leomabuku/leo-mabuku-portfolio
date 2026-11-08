@@ -1,14 +1,9 @@
 ---
-import ProjectExplorer from '../components/ProjectExplorer.astro';
+import HeroLab from '../components/HeroLab.astro';
+import ProjectShowcase from '../components/ProjectShowcase.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HackathonSpotlight from '../components/HackathonSpotlight.astro';
-import { profile, projects } from '../data/site';
-const selected = ['tongalang', 'smartwater-zambia', 'subtrack-bh'].map(slug => projects.find(p => p.slug === slug)!);
-const stories = [
-  ['Learning in a familiar language', 'What if a first program began with words you already knew?', 'Tonga-derived keywords became a lexer, a parser and an interpreter—and a desktop environment to help beginners find their way.'],
-  ['Making water problems visible', 'A sensor reading is only useful when someone can act on it.', 'SmartWater connects device telemetry, an operator dashboard and community reporting. Follow the decisions behind the system and the hackathon build.'],
-  ['From daily work to a working tool', 'Running an internet service means keeping track of the details.', 'SubTrack BH brings subscriptions and boarding-house operations into a local-first Android workspace. A practical problem, approached from the operator’s side.'],
-];
+import { profile } from '../data/site';
 const disciplines = [
   ['01', 'Interfaces people use', 'Android apps with Kotlin and Jetpack Compose. Web interfaces with React and Astro.'],
   ['02', 'Systems behind the screen', 'APIs, data models, interpreters and the decisions that connect a product together.'],
@@ -37,22 +32,11 @@ const disciplines = [
         <span class="portrait-index" aria-hidden="true">LM / 26</span>
       </figure>
     </div>
+    <HeroLab />
     <div class="intro-index"><span>Independent thinking.<br/>Practical execution.</span><a href="/playground/">Try TongaLang in your browser <span aria-hidden="true">↗</span></a><span class="index-coordinate">15° S · 28° E</span></div>
   </section>
   <nav class="story-navigation" aria-label="Follow the story"><a href="#beginning" data-story-link="beginning"><span>01</span> The beginning</a><a href="#selected-work" data-story-link="selected-work"><span>02</span> The problems</a><a href="#try-it" data-story-link="try-it"><span>03</span> Try an idea</a><a href="#practice" data-story-link="practice"><span>04</span> What comes next</a></nav>
-  <ProjectExplorer />
-  <section class="selected-work section-shell" id="selected-work" data-story-section>
-    <div class="section-heading section-heading--row"><div><p class="eyebrow">01 / Selected work</p><h2>Built with purpose.<br/><em>Open to inspection.</em></h2></div><a class="text-link" href="/work/">All {projects.length} projects <span aria-hidden="true">↗</span></a></div>
-    <div class="selected-list">
-      {selected.map((project, i) => <article class="selected-project" data-motion>
-        <a class:list={['selected-image', {'selected-image--logo': project.cover?.includes('logo')}]} href={`/work/${project.slug}/`} aria-label={`Read the ${project.name} case study`}>
-          <img src={project.cover!} alt={project.coverAlt} loading="lazy" width="1000" height="650" />
-          <span class="image-label">{project.slug === 'subtrack-bh' ? 'Project identity' : 'From the actual product'}</span>
-        </a>
-        <div class="selected-copy"><p class="project-index">0{i+1} / {stories[i][0]}</p><h3><a href={`/work/${project.slug}/`}>{project.name}</a></h3><p class="project-question">{stories[i][1]}</p><p>{stories[i][2]}</p><span class="status-label">{project.status}</span><div class="tag-list">{project.technologies.slice(0,3).map(t=><span>{t}</span>)}</div><a class="text-link" href={`/work/${project.slug}/`}>Follow the project <span aria-hidden="true">↗</span></a></div>
-      </article>)}
-    </div>
-  </section>
+  <ProjectShowcase />
   <section class="playground-invitation section-shell" id="try-it" data-story-section data-motion>
     <div><p class="eyebrow">02 / An idea you can run</p><h2>A programming language.<br/><em>With Tonga at its heart.</em></h2><p>TongaLang is my final-year project: an interpreted language with Tonga-derived keywords. Edit a program, give it input and see what the real interpreter does.</p><a class="button" href="/playground/">Open the playground <span aria-hidden="true">↗</span></a><a class="text-link" href="/work/tongalang/">Explore the language design</a></div>
     <div class="code-preview" aria-label="TongaLang example source"><div><span>hello.tg</span><span>Source preview</span></div><pre><code>{'mulimo matalikilo() {\n    zina zyina = bala("Your name: ")\n    amba("Hello, " + zyina)\n}'}</code></pre><p>Write. Run. Learn.<span aria-hidden="true">↗</span></p></div>
