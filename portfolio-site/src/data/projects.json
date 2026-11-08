@@ -100,7 +100,7 @@
         "type": "image",
         "src": "/images/projects/tongalang/console.png",
         "alt": "TongaLang internal console showing project and runtime information",
-        "caption": "The internal Console provides a clear place to inspect IDE messages and runtime details without mixing them into learner program output."
+        "caption": "The Console is where IDE messages and interpreter details appear, kept out of the editor."
       },
       {
         "type": "image",
