@@ -16,6 +16,10 @@ export function destroyExperience() {
 export function initExperience() {
   destroyExperience();
   registry = createCleanupRegistry();
+  // These own their own listeners, so they start here and tear down through
+  // destroyExperience rather than through the registry below.
+  initializeHeroLab();
+  initializeLightbox();
   const controller = new AbortController();
   registry.add(() => controller.abort());
   const listen = (el: EventTarget, event: string, handler: EventListener) =>

@@ -126,3 +126,13 @@ Verification: `astro check` 0/0/0, 36 tests, 17-route build, `npm run audit` cle
 - `scripts/lightbox.test.ts` (jsdom) covers opening, section-scoped stepping, the single-photo case, focus restoration, modified clicks and teardown.
 
 Verification: `astro check` 0/0/0, 42 tests, 17-route build, `npm run audit` 18 pages / 702 references clean, axe-core via jsdom over 11 routes with no violations. Not verified in a browser in this environment: the modal's visual appearance and real touch behaviour.
+
+## Wiring fix: the viewer and the hero lab were never started (branch `arena/510a9b74`)
+
+After the photo viewer merged, checking the deployed bundle showed that `src/scripts/experience.ts` imported `initializeLightbox` and `initializeHeroLab` but never called either. Vite tree-shook both modules, so the production JavaScript contained no photo viewer at all. The same was true of the hero interpreter: `initializeHeroLab` had been imported and uncalled since it was written, so the homepage Run button had no handler and never had.
+
+- `initExperience()` now calls `initializeHeroLab()` and `initializeLightbox()` before it sets up the shared listener controller. Both own their own listeners and are torn down through `destroyExperience()`.
+- `scripts/experience-wiring.test.ts` exercises the real entry point rather than the modules: it starts the experience, taps a photo and expects the dialog with the original frame, starts a stub hero lab and expects it to mark itself ready, and checks teardown removes the dialog.
+- Verified against the built markup as well: `dist/about/index.html` yields four viewer items and opens "4 of 4"; `dist/index.html` opens "1 of 3"; selecting the second showcase thumbnail rewrites the lead link to `installer-setup.png` before it opens.
+
+Verification: `astro check` 0/0/0, 45 tests across 7 files, 17-route build, `npm run audit` 18 pages / 702 references clean, and the built bundle now contains the lightbox and hero-lab code (`lightbox-open`, `data-lab-run`). The interpreter run itself still needs a browser, since it downloads Pyodide.
