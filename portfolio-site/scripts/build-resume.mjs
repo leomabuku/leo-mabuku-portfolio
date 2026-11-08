@@ -224,7 +224,7 @@ function generate() {
         .text(degree.qualification, MARGIN, y, { lineBreak: false });
       const w = doc.widthOfString(degree.qualification) + 3;
       doc.font('Helvetica').fontSize(8.7).fillColor(MUTED)
-        .text(` | ${degree.institution} — ${degree.period} (completed; awaiting conferment)`,
+        .text(` | ${degree.institution} · ${degree.period}`,
           MARGIN + w, y, { width: CONTENT_W - w, lineBreak: false });
       y += 11;
     }

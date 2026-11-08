@@ -101,3 +101,18 @@ Implemented after the PR #21 checkpoint, following `NEXT_AGENT_PROMPT.md`. Commi
 - Confirm the hero lab's first-run download behaviour on a slow connection is clearly communicated (the copy states ~14 MB, but this has not been re-measured since the hero gained its own entry point).
 - Consider a second interactive surface on the SmartWater panel (for example a step-through of the telemetry contract) if the user wants deeper evidence than stills and copy.
 - The playground invitation section still repeats some of the hero lab's invitation; it may be worth merging them once the hero lab has been seen in a browser.
+
+## Copy pass and graduate status (branch `arena/7b15fb85`)
+
+The user's feedback was that the writing read like an agent wrote it: em dashes used as a rhythm crutch, provenance language such as "repository metadata", and interface labels written like a system describing itself. They also confirmed the Computer Science results are out, so the site and résumé must describe him as a graduate.
+
+What changed:
+
+- **No em dashes anywhere on the site.** All 30 were rewritten into full stops, colons or commas; the built output now contains zero.
+- **Plain language in place of audit logs.** The per-project evidence paragraphs no longer read "Public repository verified on 11 September 2026 at merged commit 956909b: … SHA-256 … 1280×720, 30 fps". They now say what shipped and what it means, keeping the numbers that matter (17 examples, 179 tests, checksum, top six at GreenCode).
+- **Human interface labels.** "Evidence you can inspect" became "Things that work, and the record behind them"; "Filter / Inspect / Enter case study" became "Pick a problem / See what I built / Read the code"; "Inspect the source" became "Read the source"; "Product evidence" became "Screens"; "The evidence" step became "Where it stands".
+- **Project descriptions rewritten** in first person and plainer terms across all eight projects, along with the lead screenshot captions for TongaLang and SmartWater.
+- **The closing status paragraph on each case study** was one long sentence stranded in an empty band. It is now a labelled block ("Where it stands") with a readable measure, a gold rule and a border, so it reads like a remark rather than a log line.
+- **Graduate status.** `profile.json`, `education.json`, `resume.json` and `scripts/build-resume.mjs` all describe him as a Computer Science graduate, with the degree conferred at the next ceremony and no "awaiting results" framing. The résumé PDF was regenerated (1 page) and the drift test passes.
+
+Verification: `astro check` 0/0/0, 36 tests, 17-route build, `npm run audit` clean across 18 pages and 668 references, and zero em dashes in the built HTML. The résumé PDF was read back with PyMuPDF: 1 page, "Computer Science graduate from The Copperbelt University", "Bachelor of Science in Computer Science | The Copperbelt University · Graduated 2025".

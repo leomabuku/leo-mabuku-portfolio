@@ -2,7 +2,7 @@
   {
     "slug": "tongalang",
     "name": "TongaLang",
-    "shortDescription": "A beginner-focused interpreted programming language with Tonga-derived keywords, guided error recovery and an installable desktop IDE.",
+    "shortDescription": "A programming language for beginners, built on words from Tonga, with a desktop app that explains each mistake instead of only flagging it.",
     "category": [
       "Programming Language",
       "Educational Software",
@@ -52,19 +52,19 @@
         "type": "image",
         "src": "/images/projects/tongalang/installer-setup.png",
         "alt": "TongaLang Setup selecting a per-user Windows installation folder",
-        "caption": "The Windows installer uses the TongaLang identity throughout, installs without administrator access and includes the example programs in the application directory."
+        "caption": "The Windows installer uses the TongaLang name throughout, installs without administrator rights and puts the example programs in the application folder."
       },
       {
         "type": "image",
         "src": "/images/projects/tongalang/beginner-diagnostics.png",
         "alt": "TongaLang Problems dock explaining an unnecessary semicolon and offering a guarded Apply Fix action",
-        "caption": "Problems translates a precise source error into bilingual guidance and offers an edit only when the correction is deterministic."
+        "caption": "Problems explains a source error in English and Tonga, and only offers a fix when the correction is certain."
       },
       {
         "type": "image",
         "src": "/images/projects/tongalang/program-input.png",
         "alt": "TongaLang Output view with the shared Program Input dock waiting for a bala value",
-        "caption": "When bala() needs a value, TongaLang keeps Output visible, opens one focused input surface and pauses only the interpreter worker."
+        "caption": "When bala() needs a value, Output stays visible so you can see what the program already printed."
       },
       {
         "type": "image",
@@ -185,12 +185,12 @@
       "Arrange a Tonga educator review and formal Narrator or NVDA accessibility testing",
       "Add release CI, Windows code signing and distribution packages for major Linux formats"
     ],
-    "evidence": "Public repository verified on 11 September 2026 at merged commit 956909b: TongaLang 0.2.0 includes 17 runnable examples and passes all 179 automated tests. The Windows installer is published with SHA-256 265e4a204bd56d9326b67c144f4fda966484b29bb8ea076a8c3292453b38f0ec. The silent H.264 walkthrough is 1280×720, 30 fps, 52.03 seconds and 4.15 MB."
+    "evidence": "TongaLang 0.2.0 is public on GitHub. It ships with 17 example programs and passes all 179 automated tests. The Windows installer is published with a SHA-256 checksum, and the captioned walkthrough below runs just under a minute."
   },
   {
     "slug": "smartwater-zambia",
     "name": "SmartWater Zambia",
-    "shortDescription": "IoT water telemetry and community incident reporting, built as one platform across an ESP32 sensor, an operator dashboard and a native Android app.",
+    "shortDescription": "Water level sensors, an operator dashboard and a community reporting app, built as one system during the GreenCode Hackathon.",
     "category": [
       "IoT",
       "Android",
@@ -201,7 +201,7 @@
     "status": "Top 6 team · working prototype",
     "year": "2026",
     "featured": true,
-    "role": "Full-stack developer — web dashboard, Android app and API",
+    "role": "Full-stack developer: web dashboard, Android app and API",
     "technologies": [
       "Kotlin",
       "Jetpack Compose",
@@ -226,21 +226,21 @@
         "type": "image",
         "src": "/images/projects/smartwater-zambia/web/dashboard-overview.jpg",
         "alt": "Operator dashboard with active stations, tank state counts, offline devices, open reports and a live reading banner",
-        "caption": "The operator view: station and tank state, offline device count, open reports, and the most recent telemetry reading with device and tank identity.",
+        "caption": "The operator view: how many stations are up, how many tanks are full, which devices are offline, open reports, and the latest reading with its device and tank.",
         "layout": "wide"
       },
       {
         "type": "image",
         "src": "/images/projects/smartwater-zambia/web/tank-analytics.jpg",
         "alt": "Tank analytics page showing current level, period minimum and maximum, paired ESP32 status and a 24-hour trend chart",
-        "caption": "Per-tank analytics: current depth and volume, period minimum and maximum, the paired device and its last contact, and a trend against low and critical thresholds.",
+        "caption": "One tank over time: current depth and volume, the low and high points, the paired device, and a 24-hour trend against the warning thresholds.",
         "layout": "wide"
       },
       {
         "type": "image",
         "src": "/images/projects/smartwater-zambia/web/incident-map.jpg",
         "alt": "Leaflet map showing monitoring stations, storage tanks and citizen incident markers across Lusaka",
-        "caption": "Stations, tanks and citizen incidents on one map, so a report and a reservoir can be seen as the same place.",
+        "caption": "Stations, tanks and community reports on one map, so a report can be read against the tank nearest to it.",
         "layout": "wide"
       },
       {
@@ -383,17 +383,17 @@
       }
     ],
     "marketPoints": [
-      "Sector non-revenue water reached 57% in 2023 against a regulator benchmark of under 20% for good performance — no Zambian utility is close.",
+      "Sector non-revenue water reached 57% in 2023 against a regulator benchmark of under 20% for good performance. No Zambian utility is close.",
       "The water that is billed costs about K12.61 per unit to deliver and sells for an average of K7.90, and all eleven utilities sit below 100% cost coverage by collection.",
       "The national strategy put revenue lost to non-revenue water at ZMW 998.6 million on a 2020 baseline, against a benchmark loss of ZMW 474.5 million.",
-      "Lusaka produced roughly 350,000 m³/day against 480,000 m³/day of demand, dropping to about 265,000 during the 2025 drought — when supply is intermittent, tank-level certainty stops being a convenience.",
+      "Lusaka produced roughly 350,000 m³/day against 480,000 m³/day of demand, dropping to about 265,000 during the 2025 drought. When supply is intermittent, knowing the tank level stops being a nicety.",
       "Roughly 8.36 million people live inside commercial-utility service areas, and coverage fractions fell as population grew faster than connections. Utilities are running to stand still without better information at the edge."
     ],
     "productionPath": [
       "Field calibration: run the recorded empty/full reference protocol against a physical tank and log the error, because an uncalibrated ultrasonic reading is a guess with a timestamp.",
       "Hardware hardening: enclosure, power, sensor dead zones and per-device provisioning at scale.",
       "Security review before exposure: server-side enforcement instead of relying on row-level security alone, authenticated realtime streams and credential rotation.",
-      "Integration with what utilities already run — billing systems and district metering — so a reading becomes revenue or a work order rather than another dashboard.",
+      "Integration with the systems utilities already run, such as billing and district metering, so a reading turns into revenue or a work order instead of another dashboard.",
       "Channels that match the user: SMS and USSD paths for residents without smartphones, alongside the Android app.",
       "A pilot with one institution or one utility zone, with a baseline, a measured outcome and an exit decision."
     ],
@@ -402,12 +402,12 @@
       "Report-intelligence figures in these captures come from a seeded demo cohort, not a live utility dataset.",
       "Calibration against manual measurements, production deployment and utility integration are still to be done."
     ],
-    "evidence": "Repository audited on 1 November 2026 at commit 3143c77: ESP32 firmware, the Express and Supabase API, the React/Vite dashboard and the Kotlin/Jetpack Compose Android app are all present alongside backend and web test suites. The team placed in the top six at the GreenCode Hackathon Zambia Edition."
+    "evidence": "The repository holds the ESP32 firmware, the Express and Supabase API, the React dashboard and the Kotlin Android app, along with the backend and web test suites. We finished in the top six at the GreenCode Hackathon Zambia Edition."
   },
   {
     "slug": "subtrack-bh",
     "name": "SubTrack BH",
-    "shortDescription": "A local-first Android workspace for operating a boarding-house internet subscription service.",
+    "shortDescription": "An Android app I use every day to run a 37-subscriber internet business: payments, expiry dates and router access in one place.",
     "category": [
       "Android",
       "Business Tools",
@@ -479,12 +479,12 @@
       "Complete subscriber invoices and payment history",
       "Expanded closing, reconciliation and asset-management interfaces"
     ],
-    "evidence": "Fully operational in the live 37-subscriber service as of November 2026: payments are verified and network access is provisioned automatically. The public repository was last audited on 3 August 2026 at commit 19edd62."
+    "evidence": "SubTrack runs my internet service today, with 37 paying subscribers. Payments are verified in the app, and network access is provisioned or suspended automatically."
   },
   {
     "slug": "cbu-find",
     "name": "CBU-FIND",
-    "shortDescription": "A completed cross-platform lost-and-found system that moves campus recovery from scattered group updates into a searchable, verified workflow.",
+    "shortDescription": "A lost-and-found app for campus, so a missing item is posted, claimed and handed over in one place instead of scattered across group chats.",
     "category": [
       "Android & Web",
       "Campus Utility",
@@ -591,12 +591,12 @@
       "Legacy schema migration"
     ],
     "plannedFeatures": [],
-    "evidence": "The unified public repository was verified on 11 September 2026. A two-account acceptance run created four meaningful reports, matched reciprocal claims and exchanged three-message private handover conversations through the live web client backed by the same Firebase project used by Android."
+    "evidence": "I tested it with two accounts: four reports filed, reciprocal claims matched, and three-message handover conversations exchanged, all through the live web client on the same Firebase project the Android app uses."
   },
   {
     "slug": "zamtrivia",
     "name": "ZamTrivia",
-    "shortDescription": "A Zambia-focused Android quiz with timed play, category selection and local leaderboards.",
+    "shortDescription": "A Zambia-focused Android quiz with timed rounds, categories to choose from and a local leaderboard.",
     "category": [
       "Android",
       "Educational Game",
@@ -653,12 +653,12 @@
       "Structured content modelling"
     ],
     "plannedFeatures": [],
-    "evidence": "Public source audited on 3 August 2026 at commit 7509611: ten question categories, timed play, skipped-question review, packaged JSON content and a SharedPreferences leaderboard are implemented."
+    "evidence": "The source covers ten question categories, timed play, a review of skipped questions, JSON-based content and a local leaderboard."
   },
   {
     "slug": "serc-mini-os",
     "name": "SERC Mini-OS",
-    "shortDescription": "A C-based Smart Emergency Response Center simulator for core operating-system concepts.",
+    "shortDescription": "An operating systems coursework project with console, Raylib and Win32 builds of the same ideas.",
     "category": [
       "Systems",
       "C",
@@ -716,12 +716,12 @@
       "Algorithm visualisation"
     ],
     "plannedFeatures": [],
-    "evidence": "Canonical public repository audited on 3 August 2026 at commit 40e9a7a. Console, Raylib and legacy Win32 implementations are present; the empty duplicate repository remains excluded."
+    "evidence": "Three builds exist: console, Raylib and legacy Win32. An empty duplicate repository is left out of this list."
   },
   {
     "slug": "lifeharmonytracker",
     "name": "LifeHarmonyTracker",
-    "shortDescription": "A personal productivity prototype combining calendar, focus, finance and screen-time tools.",
+    "shortDescription": "A React Native and Flask app for tracking daily habits, kept as a smaller exercise in mobile and backend work.",
     "category": [
       "JavaScript",
       "Productivity",
@@ -774,12 +774,12 @@
       "Add automated test coverage",
       "Define and validate a stable release scope"
     ],
-    "evidence": "Public repository audited on 3 August 2026 at commit c51a71d: 40 JavaScript files, ten Python files, React Native screens and a Flask/SQLAlchemy backend are present."
+    "evidence": "The repository contains the React Native screens and a Flask/SQLAlchemy backend, with about 40 JavaScript files and ten Python files."
   },
   {
     "slug": "portfolio-website",
     "name": "Portfolio Website",
-    "shortDescription": "This responsive, content-driven portfolio deployed through Cloudflare Pages.",
+    "shortDescription": "This site: an Astro build with a case study for every project, deployed on Cloudflare Pages.",
     "category": [
       "Web",
       "Astro",
@@ -829,6 +829,6 @@
       "Custom domain",
       "Additional verified project screenshots"
     ],
-    "evidence": "Public Astro repository and Cloudflare Pages deployment verified on 3 August 2026. The site includes seven project case studies, a generated sitemap and Google Search Console verification."
+    "evidence": "This site is an Astro project deployed on Cloudflare Pages, with a case study for every project, a generated sitemap and Search Console verification."
   }
 ]

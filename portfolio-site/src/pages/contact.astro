@@ -15,7 +15,7 @@ const links = [
     <div class="contact-panel" data-motion>
       <div class="contact-list" data-motion-stagger>{links.map(([icon, label, value, href]) => <a href={href} target={href.startsWith('http') ? '_blank' : undefined} rel={href.startsWith('http') ? 'noreferrer' : undefined}><i class={`ph ${icon}`} aria-hidden="true"></i><span><small>{label}</small><strong>{value}</strong></span><i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>)}</div>
       <form class="contact-form" aria-labelledby="contact-form-title" action={`mailto:${profile.email}`} method="post" enctype="text/plain">
-        <div><p class="eyebrow">Send an email</p><h2 id="contact-form-title">Tell me what you’re working on.</h2><p>Your email application will open with this message—nothing is stored by this website.</p></div>
+        <div><p class="eyebrow">Send an email</p><h2 id="contact-form-title">Tell me what you’re working on.</h2><p>Your email app opens with the message ready to send. Nothing is saved on this site.</p></div>
         <label>Your name<input name="name" autocomplete="name" required /></label>
         <label>Your email<input name="email" type="email" autocomplete="email" required /></label>
         <label>Opportunity or subject<input name="subject" required /></label>

@@ -35,9 +35,9 @@ const formattedUpdatedOn = project.updatedOn
 const sections = [
   { id: 'context', label: 'Context' },
   { id: 'contribution', label: 'Contribution' },
-  { id: 'capabilities', label: 'Capabilities' },
+  { id: 'capabilities', label: 'What it does' },
   ...(project.audience?.length ? [{ id: 'audience', label: 'Who it is for' }] : []),
-  ...(project.media?.length ? [{ id: 'evidence', label: 'Product evidence' }] : []),
+  ...(project.media?.length ? [{ id: 'evidence', label: 'Screens' }] : []),
   ...(project.marketPoints?.length ? [{ id: 'market', label: 'Why it matters' }] : []),
   ...(project.challenges.length ? [{ id: 'engineering', label: 'Engineering' }] : []),
   ...(project.slug === 'tongalang' ? [{ id: 'pipeline', label: 'Pipeline' }] : []),
@@ -67,7 +67,7 @@ const num = (id: string) => String(sections.findIndex((section) => section.id ==
         <figure class="case-cover" data-motion transition:name={`project-visual-${project.slug}`}>
           <img src={project.cover} alt={project.coverAlt} />
           <span class="case-cover-scan" aria-hidden="true"></span>
-          <figcaption>{project.media?.length ? 'Verified product evidence from the current implementation.' : 'Project cover.'}</figcaption>
+          <figcaption>{project.media?.length ? 'From the current build.' : 'Project cover.'}</figcaption>
         </figure>
       ) : (
         <div class="case-cover case-cover--system" aria-label={`${project.name} system overview`} data-motion transition:name={`project-visual-${project.slug}`}>
@@ -119,7 +119,7 @@ const num = (id: string) => String(sections.findIndex((section) => section.id ==
 
     <section id="capabilities" class="case-features section-shell" data-case-section data-motion>
       <div class="section-heading">
-        <p class="eyebrow">{num('capabilities')} · Implemented evidence</p>
+        <p class="eyebrow">{num('capabilities')} · What it does</p>
         <h2>What it does<br/><em>today.</em></h2>
       </div>
       <div class="feature-grid" data-motion-stagger>
@@ -151,9 +151,9 @@ const num = (id: string) => String(sections.findIndex((section) => section.id ==
     {project.media && project.media.length > 0 && (
       <section id="evidence" class="project-media section-shell" data-case-section data-motion>
         <div class="section-heading">
-          <p class="eyebrow">{num('evidence')} · Product evidence</p>
+          <p class="eyebrow">{num('evidence')} · Screens</p>
           <h2>See it<br/><em>working.</em></h2>
-          <p>Original product captures and walkthroughs, preserved with their context.</p>
+          <p>Screenshots and recordings from the real build, with the notes that belong to them.</p>
         </div>
         <div class="media-grid" data-motion-stagger>
           {project.media.map((item) => (
@@ -231,11 +231,14 @@ const num = (id: string) => String(sections.findIndex((section) => section.id ==
             <ul>{project.plannedFeatures.map((item) => <li>{item}</li>)}</ul>
           </div>
         )}
-        <p class="evidence-note"><i class="ph ph-seal-check" aria-hidden="true"></i>{project.evidence}</p>
+        <div class="evidence-note">
+          <p class="evidence-note-label"><i class="ph ph-seal-check" aria-hidden="true"></i>Where it stands</p>
+          <p>{project.evidence}</p>
+        </div>
         {hackathon && (
           <p class="hackathon-reference">
             <i class="ph ph-trophy" aria-hidden="true"></i>
-            <span>Built at the <a href="/about/#hackathons">{hackathon.name} · {hackathon.edition}</a>, {hackathon.period} in {hackathon.location} — {hackathon.result.toLowerCase()}. {hackathon.acknowledgement}</span>
+            <span>Built at the <a href="/about/#hackathons">{hackathon.name} · {hackathon.edition}</a>, {hackathon.period} in {hackathon.location}. Result: {hackathon.result.toLowerCase()}. {hackathon.acknowledgement}</span>
           </p>
         )}
       </div>
@@ -243,8 +246,8 @@ const num = (id: string) => String(sections.findIndex((section) => section.id ==
 
     <section class="case-links section-shell" data-motion>
       <div>
-        <p class="eyebrow">Project access</p>
-        <h2>{project.repositoryVisibility === 'public' ? 'Inspect the source.' : 'Source remains private.'}</h2>
+        <p class="eyebrow">The code</p>
+        <h2>{project.repositoryVisibility === 'public' ? 'Read the source.' : 'The source stays private.'}</h2>
       </div>
       <div class="actions">
         {repositories.length ? repositories.map((repository, index) => (

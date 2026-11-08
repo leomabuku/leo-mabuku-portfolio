@@ -6,9 +6,9 @@ import { heroProgramLines as program, heroWords as words } from '../data/hero-la
   <div class="lab-words">
     <p class="eyebrow" id="hero-lab-title">Tonga words, real Python</p>
     <p class="lab-lede">
-      TongaLang is my final-year project: an educational language with Tonga-derived
-      keywords over a Python lexer, parser and interpreter. Pick a word, then run the
-      actual interpreter in your browser.
+      TongaLang was my final-year project at CBU. The words are borrowed from Tonga,
+      and underneath it is a Python lexer, parser and interpreter. Pick a word to see
+      where it lands, then run the program for real.
     </p>
     <ul class="lab-keys" aria-label="TongaLang keywords">
       {words.map((entry) => (
@@ -28,7 +28,7 @@ import { heroProgramLines as program, heroWords as words } from '../data/hero-la
   <figure class="lab-code">
     <figcaption>
       <span>main.tg</span>
-      <span>6 lines · runs the pinned build</span>
+      <span>6 lines · the real thing</span>
     </figcaption>
     <pre><code>{program.map((line, index) => (
       <span data-lab-line={index}>{line}</span>
