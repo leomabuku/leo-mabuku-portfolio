@@ -48,3 +48,13 @@ Applied navy/silver/cyan/gold identity, sans-serif headings and a responsive thr
 ### Hero/handoff checkpoint validation
 
 The hero achievement addition was browser-checked at 1358px and 390px: axe reported zero violations, zero broken images and no page overflow on both. Screenshot captured outside repository. Dedicated handoff files added at root NEXT_AGENT_PROMPT.md and docs/CREATIVE_DIRECTION_AND_HANDOFF.md. No new runtime behavior changed in this checkpoint.
+
+## Hero lab + consolidated showcase — 8 November 2026
+
+Branch `arena/757b66f6-leo-mabuku-portfolio`, commit `71cbaa0`.
+
+- The homepage hero now carries the real interpreter behind an explicit Run control; the exact program shown is executed by `scripts/playground-runtime.test.mjs` in WebAssembly Python (output `20` / `96`).
+- `ProjectExplorer` and the old selected-project list were replaced by `ProjectShowcase`; both previous sections described the same three projects.
+- `astro check` 0/0/0 · `vitest` 36 tests · 17-route production build · `npm run audit` 18 pages and 668 internal references clean.
+- axe-core via jsdom over 11 routes with all tab panels forced visible: no violations. `color-contrast` and `region` were disabled (no layout engine in jsdom); contrast verified arithmetically instead (muted 8.1:1, accent 11.2:1, gold 9.7:1, output text 14.5:1).
+- Boundaries: this pass had no browser. No screenshots, no physical-device or screen-reader checks, no full-motion appearance check and no viewport screenshots were produced for this phase. Treat visual sign-off as outstanding until a browser session confirms it.
