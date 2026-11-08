@@ -146,7 +146,7 @@
     "challenges": [
       {
         "title": "Helpful fixes without unsafe guessing",
-        "description": "The IDE needed broad recovery advice while editing only deterministic mistakes. Suggested edits therefore carry the expected original text, reject stale source and leave ambiguous choices to the learner."
+        "description": "The IDE had to give broad advice while only editing mistakes it could be certain about. A suggested fix carries the exact text it expects to replace, refuses to apply to source that has changed, and leaves ambiguous cases for the learner to decide."
       },
       {
         "title": "Input without freezing the IDE",
