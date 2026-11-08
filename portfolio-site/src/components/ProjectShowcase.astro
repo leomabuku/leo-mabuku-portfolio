@@ -10,6 +10,7 @@ import { projects } from '../data/site';
 type ShowcaseLink = { href: string; label: string; primary: boolean };
 type ShowcaseRecord = {
   slug: string;
+  leadShot?: string;
   number: string;
   question: string;
   approach: string;
@@ -21,6 +22,7 @@ const records: ShowcaseRecord[] = [
   {
     slug: 'tongalang',
     number: '01',
+    leadShot: '/images/projects/tongalang/beginner-diagnostics.png',
     question: 'What if a first program started with words you already knew?',
     approach:
       'A lexer, PLY parser, AST and interpreter for Tonga-derived keywords, paired with a desktop IDE that explains mistakes in bilingual guidance rather than only reporting them.',
@@ -60,8 +62,14 @@ const items = records.map((record) => {
   const project = projects.find((entry) => entry.slug === record.slug);
   if (!project) throw new Error(`Unknown showcase project: ${record.slug}`);
   const images = (project.media ?? []).filter((media) => media.type === 'image');
-  const shots = images.length
-    ? images.slice(0, 3).map((media) => ({
+  const lead = record.leadShot
+    ? images.find((media) => media.src === record.leadShot)
+    : undefined;
+  const ordered = lead
+    ? [lead, ...images.filter((media) => media !== lead)]
+    : images;
+  const shots = ordered.length
+    ? ordered.slice(0, 3).map((media) => ({
         src: media.src,
         alt: media.alt,
         caption: media.caption ?? '',
