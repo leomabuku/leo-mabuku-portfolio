@@ -1,0 +1,207 @@
+---
+/**
+ * Consolidated selected-work section: one project at a time, with original
+ * screenshots that can be swapped, the problem → approach → evidence chain and
+ * one documented engineering decision per project. Replaces the earlier
+ * explorer + selected-project pair, which said the same three things twice.
+ */
+import { projects } from '../data/site';
+
+type ShowcaseLink = { href: string; label: string; primary: boolean };
+type ShowcaseRecord = {
+  slug: string;
+  number: string;
+  question: string;
+  approach: string;
+  kicker: string;
+  links: ShowcaseLink[];
+};
+
+const records: ShowcaseRecord[] = [
+  {
+    slug: 'tongalang',
+    number: '01',
+    question: 'What if a first program started with words you already knew?',
+    approach:
+      'A lexer, PLY parser, AST and interpreter for Tonga-derived keywords, paired with a desktop IDE that explains mistakes in bilingual guidance rather than only reporting them.',
+    kicker: 'The language',
+    links: [
+      { href: '/work/tongalang/', label: 'Read the TongaLang case study', primary: true },
+      { href: '/playground/', label: 'Run it in the playground', primary: false },
+    ],
+  },
+  {
+    slug: 'smartwater-zambia',
+    number: '02',
+    question: 'How does a sensor reading become something a community can act on?',
+    approach:
+      'ESP32 telemetry, an Express and Supabase API, an operator dashboard and a Kotlin Android app built as a single system across 48 hours of the GreenCode Hackathon.',
+    kicker: 'Connected systems',
+    links: [
+      { href: '/work/smartwater-zambia/', label: 'Read the SmartWater case study', primary: true },
+      { href: '/work/', label: 'See the wider work', primary: false },
+    ],
+  },
+  {
+    slug: 'subtrack-bh',
+    number: '03',
+    question: 'What would make running an internet service less fragile?',
+    approach:
+      'A local-first Android workspace where a subscriber pays, the payment is verified and network access is provisioned or suspended without a manual status label.',
+    kicker: 'Everyday operations',
+    links: [
+      { href: '/work/subtrack-bh/', label: 'Read the SubTrack BH case study', primary: true },
+      { href: '/about/', label: 'The business behind it', primary: false },
+    ],
+  },
+];
+
+const items = records.map((record) => {
+  const project = projects.find((entry) => entry.slug === record.slug);
+  if (!project) throw new Error(`Unknown showcase project: ${record.slug}`);
+  const images = (project.media ?? []).filter((media) => media.type === 'image');
+  const shots = images.length
+    ? images.slice(0, 3).map((media) => ({
+        src: media.src,
+        alt: media.alt,
+        caption: media.caption ?? '',
+      }))
+    : [{ src: project.cover!, alt: project.coverAlt, caption: '' }];
+  const decision = project.challenges?.[0];
+  return {
+    ...record,
+    project,
+    shots,
+    decisionTitle: decision?.title,
+    decisionBody: decision?.description,
+    hasInterfaceShots: images.length > 0,
+  };
+});
+---
+
+<section class="showcase section-shell" id="selected-work" data-showcase data-story-section aria-labelledby="showcase-title">
+  <div class="section-heading section-heading--row">
+    <div>
+      <p class="eyebrow">01 / Selected work</p>
+      <h2 id="showcase-title">Three problems.<br /><em>Three working systems.</em></h2>
+    </div>
+    <a class="text-link" href="/work/">All {projects.length} projects <span aria-hidden="true">↗</span></a>
+  </div>
+
+  <div class="showcase-tabs" role="tablist" aria-label="Choose a project" aria-describedby="showcase-hint">
+    {items.map((item, index) => (
+      <button
+        type="button"
+        role="tab"
+        id={`showcase-tab-${item.project.slug}`}
+        aria-controls={`showcase-panel-${item.project.slug}`}
+        aria-selected={index === 0 ? 'true' : 'false'}
+        tabindex={index === 0 ? 0 : -1}
+        data-showcase-tab={index}
+      >
+        <span>{item.number}</span>
+        <span class="showcase-tab-name">{item.project.name}</span>
+        <span class="showcase-tab-kicker">{item.kicker}</span>
+      </button>
+    ))}
+  </div>
+
+  <p class="showcase-hint" id="showcase-hint">Use <kbd>←</kbd> <kbd>→</kbd> to move between projects; <kbd>Tab</kbd> reaches the screenshots and links.</p>
+
+  {items.map((item, index) => (
+    <div
+      class="showcase-panel"
+      id={`showcase-panel-${item.project.slug}`}
+      role="tabpanel"
+      aria-labelledby={`showcase-tab-${item.project.slug}`}
+      tabindex="0"
+      hidden={index !== 0}
+      data-showcase-panel={index}
+    >
+      <div class="showcase-media">
+        <figure class="showcase-figure">
+          <div class="showcase-frame">
+            <img
+              src={item.shots[0].src}
+              alt={item.shots[0].alt}
+              width="1200"
+              height="750"
+              loading={index === 0 ? 'eager' : 'lazy'}
+              data-showcase-image
+            />
+          </div>
+          <figcaption data-showcase-caption>{item.shots[0].caption}</figcaption>
+        </figure>
+        {item.shots.length > 1 && (
+          <div class="showcase-thumbs" role="group" aria-label={`More ${item.project.name} screenshots`}>
+            {item.shots.map((shot, shotIndex) => (
+              <button
+                type="button"
+                aria-pressed={shotIndex === 0 ? 'true' : 'false'}
+                aria-label={`Show screenshot ${shotIndex + 1} of ${item.shots.length}`}
+                data-showcase-thumb
+                data-src={shot.src}
+                data-alt={shot.alt}
+                data-caption={shot.caption}
+              >
+                <img src={shot.src} alt="" width="320" height="200" loading="lazy" />
+              </button>
+            ))}
+          </div>
+        )}
+        <p class="showcase-source">
+          {item.hasInterfaceShots
+            ? `Original ${item.project.name} interface, captured from the project.`
+            : `Project identity. Interface screenshots for ${item.project.name} are not published; the case study documents the build instead.`}
+        </p>
+      </div>
+
+      <div class="showcase-copy">
+        <p class="showcase-index">{item.number} / {item.kicker} · {item.project.type}</p>
+        <h3>{item.project.name}</h3>
+        <p class="showcase-question">{item.question}</p>
+
+        <ol class="showcase-steps">
+          <li>
+            <span>01 / The problem</span>
+            <p>{item.project.shortDescription}</p>
+          </li>
+          <li>
+            <span>02 / The approach</span>
+            <p>{item.approach}</p>
+          </li>
+          <li>
+            <span>03 / The evidence</span>
+            <p>{item.project.evidence}</p>
+          </li>
+        </ol>
+
+        {item.decisionTitle && (
+          <div class="showcase-decision">
+            <span>Engineering decision</span>
+            <strong>{item.decisionTitle}</strong>
+            <p>{item.decisionBody}</p>
+          </div>
+        )}
+
+        <dl class="showcase-meta">
+          <div><dt>Status</dt><dd>{item.project.status}</dd></div>
+          <div><dt>Stack</dt><dd>{item.project.technologies.slice(0, 4).join(' · ')}</dd></div>
+          <div><dt>Role</dt><dd>{item.project.role}</dd></div>
+        </dl>
+
+        <div class="showcase-links">
+          {item.links.map((link) => (
+            link.primary
+              ? <a class="button" href={link.href}>{link.label} <span aria-hidden="true">↗</span></a>
+              : <a class="text-link" href={link.href}>{link.label} <span aria-hidden="true">↗</span></a>
+          ))}
+        </div>
+      </div>
+    </div>
+  ))}
+
+  <noscript>
+    <p class="showcase-noscript">All three projects are documented in the <a href="/work/">work collection</a>.</p>
+  </noscript>
+</section>

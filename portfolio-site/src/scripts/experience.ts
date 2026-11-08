@@ -1,4 +1,5 @@
 import { createCleanupRegistry, type CleanupRegistry } from "./lifecycle";
+import { destroyHeroLab, initializeHeroLab } from "./hero-lab";
 import {
   projectMatchesFilter,
   readMotionSignals,
@@ -6,6 +7,7 @@ import {
 } from "./motion-mode";
 let registry: CleanupRegistry | undefined;
 export function destroyExperience() {
+  destroyHeroLab();
   registry?.run();
   registry = undefined;
 }
@@ -16,21 +18,64 @@ export function initExperience() {
   registry.add(() => controller.abort());
   const listen = (el: EventTarget, event: string, handler: EventListener) =>
     el.addEventListener(event, handler, { signal: controller.signal });
+  const showcaseTabs = Array.from(
+    document.querySelectorAll<HTMLButtonElement>("[data-showcase-tab]"),
+  );
+  const showcasePanels = Array.from(
+    document.querySelectorAll<HTMLElement>("[data-showcase-panel]"),
+  );
+  const activateShowcase = (index: number, moveFocus = false) => {
+    showcaseTabs.forEach((tab, position) => {
+      const selected = position === index;
+      tab.setAttribute("aria-selected", String(selected));
+      tab.tabIndex = selected ? 0 : -1;
+      if (selected && moveFocus) tab.focus();
+    });
+    showcasePanels.forEach((panel, position) => {
+      const selected = position === index;
+      panel.hidden = !selected;
+      if (!selected) return;
+      panel.classList.remove("is-entering");
+      void panel.offsetWidth;
+      panel.classList.add("is-entering");
+    });
+  };
+  showcaseTabs.forEach((tab, index) => {
+    listen(tab, "click", () => activateShowcase(index));
+    listen(tab, "keydown", (event) => {
+      const key = (event as KeyboardEvent).key;
+      const last = showcaseTabs.length - 1;
+      let next = -1;
+      if (key === "ArrowRight" || key === "ArrowDown") next = index === last ? 0 : index + 1;
+      if (key === "ArrowLeft" || key === "ArrowUp") next = index === 0 ? last : index - 1;
+      if (key === "Home") next = 0;
+      if (key === "End") next = last;
+      if (next < 0) return;
+      event.preventDefault();
+      activateShowcase(next, true);
+    });
+  });
+
   document
-    .querySelectorAll<HTMLButtonElement>("[data-explorer-choice]")
-    .forEach((button) => {
-      listen(button, "click", () => {
-        const choice = button.dataset.explorerChoice;
-        document
-          .querySelectorAll("[data-explorer-choice]")
-          .forEach((item) =>
-            item.setAttribute("aria-pressed", String(item === button)),
+    .querySelectorAll<HTMLElement>("[data-showcase-panel]")
+    .forEach((panel) => {
+      const image = panel.querySelector<HTMLImageElement>("[data-showcase-image]");
+      const caption = panel.querySelector<HTMLElement>("[data-showcase-caption]");
+      const thumbs = Array.from(
+        panel.querySelectorAll<HTMLButtonElement>("[data-showcase-thumb]"),
+      );
+      thumbs.forEach((thumb) => {
+        listen(thumb, "click", () => {
+          if (!image) return;
+          const nextSource = thumb.dataset.src ?? "";
+          if (!nextSource) return;
+          image.src = nextSource;
+          image.alt = thumb.dataset.alt ?? "";
+          if (caption) caption.textContent = thumb.dataset.caption ?? "";
+          thumbs.forEach((item) =>
+            item.setAttribute("aria-pressed", String(item === thumb)),
           );
-        document
-          .querySelectorAll<HTMLElement>("[data-explorer-panel]")
-          .forEach((panel) => {
-            panel.hidden = panel.dataset.explorerPanel !== choice;
-          });
+        });
       });
     });
   let motionOverride = false;

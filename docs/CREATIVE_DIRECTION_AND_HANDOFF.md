@@ -65,3 +65,39 @@ Use available browser/computer tools for real running verification. Start local 
 ### Checkpoint verification update
 
 The hero badge passed local browser axe checks at 1358px desktop and 390px mobile, with no detected violations, broken images or page overflow. New source changes are limited to the factual hero achievement and its styling; deeper interaction recommendations remain future work. Root prompt and this handoff are included in the same delivery. Consult Git history/PR checks for the final production build and deployment result.
+
+## Phase delivered — hero lab + evidence-led showcase (branch `arena/757b66f6`)
+
+Implemented after the PR #21 checkpoint, following `NEXT_AGENT_PROMPT.md`. Commit `71cbaa0` on the Arena session branch (the session is pinned to that branch; a separate `codex/` branch cannot be created from inside it).
+
+**Phase 1 — the hero demonstrates a working idea.**
+- New `src/components/HeroLab.astro` sits inside the hero, under the portrait grid: three TongaLang keywords (`mulimo`, `zina`, `amba()`), the six-line program they belong to, and a Run control.
+- Selecting a word highlights its lines and explains it; Escape clears the highlight.
+- Run boots the real pinned interpreter in `public/tongalang-worker.js` and prints its actual output (`20`, `96`). Nothing is downloaded until Run is pressed, so homepage arrival still costs nothing. Staged loading messages, a Stop control, the 5 s execution deadline and the 5-minute download deadline are the same as the playground.
+- The displayed program and the executed source are one string in `src/data/hero-lab.ts`. A new runtime test executes that exact string in WebAssembly Python and asserts the output, so the hero cannot show code it does not actually run.
+- The documented hackathon result remains in the hero as the gold achievement card added at the previous checkpoint.
+
+**Phase 2 — one evidence-led project section.**
+- `ProjectShowcase.astro` replaces `ProjectExplorer.astro` and the old `selected-work` list, which described the same three projects twice and made the homepage longer than it needed to be.
+- Each panel carries a real screenshot with swap-able thumbnails and the original captions, the problem → approach → evidence chain, one documented engineering decision (drawn from the project's own `challenges` data), status, stack, role and the case-study link.
+- Tabs are real tabs: `role=tablist/tab/tabpanel`, `aria-selected`, roving `tabindex`, Arrow/Home/End, a visible keyboard hint, and an enter transition that respects both the OS preference and the site's own reduced-motion switch.
+- SubTrack BH publishes no interface screenshots, so its panel names the project identity and says the case study documents the build rather than implying an image exists.
+
+**Phase 3 — rhythm and state.**
+- Gold-ruled engineering-decision callouts, caption min-heights so switching screenshots cannot jump the layout, breakpoints at 1024/720, and a pulsing status dot that only animates when motion is allowed.
+
+**Phase 4 — verification tooling.**
+- `scripts/audit-html.mjs` (`npm run audit`) checks the built site: single `h1`, alt text, duplicate ids, unnamed links/buttons, tab wiring, and 668 internal references.
+
+### Verification for this phase (honest scope)
+
+- `astro check`: 0 errors, 0 warnings, 0 hints. `vitest`: 36 tests pass (35 prior + the hero program executed in WebAssembly Python). Production build: 17 routes. `npm run audit`: 18 pages, 668 internal references, no problems.
+- axe-core run through jsdom over 11 routes (home, work, about, contact, resume, notes, playground, three case studies, 404) with every hidden tab panel forced visible: no violations. `color-contrast` and `region` were disabled because jsdom has no layout engine, so contrast was checked arithmetically instead — muted-on-surface 8.1:1, accent-on-surface 11.2:1, gold-on-surface 9.7:1, output text 14.5:1.
+- **Not verified here:** this environment has no browser, so there is no screenshot, no real keyboard/focus walkthrough, no mobile viewport check and no full-motion appearance check for this phase. Those remain for a session with a browser, and the deployed build should be inspected before this phase is treated as visually signed off.
+
+### Remaining work
+
+- Browser verification of the hero lab and showcase at 1366px, 390px and 320px, including full-motion and reduced-motion appearance.
+- Confirm the hero lab's first-run download behaviour on a slow connection is clearly communicated (the copy states ~14 MB, but this has not been re-measured since the hero gained its own entry point).
+- Consider a second interactive surface on the SmartWater panel (for example a step-through of the telemetry contract) if the user wants deeper evidence than stills and copy.
+- The playground invitation section still repeats some of the hero lab's invitation; it may be worth merging them once the hero lab has been seen in a browser.
