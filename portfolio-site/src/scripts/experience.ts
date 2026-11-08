@@ -1,5 +1,6 @@
 import { createCleanupRegistry, type CleanupRegistry } from "./lifecycle";
 import { destroyHeroLab, initializeHeroLab } from "./hero-lab";
+import { destroyLightbox, initializeLightbox } from "./lightbox";
 import {
   projectMatchesFilter,
   readMotionSignals,
@@ -8,6 +9,7 @@ import {
 let registry: CleanupRegistry | undefined;
 export function destroyExperience() {
   destroyHeroLab();
+  destroyLightbox();
   registry?.run();
   registry = undefined;
 }
@@ -72,6 +74,11 @@ export function initExperience() {
           image.src = nextSource;
           image.alt = thumb.dataset.alt ?? "";
           if (caption) caption.textContent = thumb.dataset.caption ?? "";
+          const link = panel.querySelector<HTMLAnchorElement>("[data-showcase-link]");
+          if (link) {
+            link.href = nextSource;
+            link.dataset.caption = thumb.dataset.caption ?? "";
+          }
           thumbs.forEach((item) =>
             item.setAttribute("aria-pressed", String(item === thumb)),
           );
