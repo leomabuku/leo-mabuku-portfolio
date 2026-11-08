@@ -129,14 +129,22 @@ const items = records.map((record) => {
       <div class="showcase-media">
         <figure class="showcase-figure">
           <div class="showcase-frame">
-            <img
-              src={item.shots[0].src}
-              alt={item.shots[0].alt}
-              width="1200"
-              height="750"
-              loading={index === 0 ? 'eager' : 'lazy'}
-              data-showcase-image
-            />
+            <a
+              class="photo-open"
+              href={item.shots[0].src}
+              data-lightbox-item
+              data-caption={item.shots[0].caption}
+              data-showcase-link
+            >
+              <img
+                src={item.shots[0].src}
+                alt={item.shots[0].alt}
+                width="1200"
+                height="750"
+                loading={index === 0 ? 'eager' : 'lazy'}
+                data-showcase-image
+              />
+            </a>
           </div>
           <figcaption data-showcase-caption>{item.shots[0].caption}</figcaption>
         </figure>

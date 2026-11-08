@@ -116,3 +116,13 @@ What changed:
 - **Graduate status.** `profile.json`, `education.json`, `resume.json` and `scripts/build-resume.mjs` all describe him as a Computer Science graduate, with the degree conferred at the next ceremony and no "awaiting results" framing. The résumé PDF was regenerated (1 page) and the drift test passes.
 
 Verification: `astro check` 0/0/0, 36 tests, 17-route build, `npm run audit` clean across 18 pages and 668 references, and zero em dashes in the built HTML. The résumé PDF was read back with PyMuPDF: 1 page, "Computer Science graduate from The Copperbelt University", "Bachelor of Science in Computer Science | The Copperbelt University · Graduated 2025".
+
+## Photo viewer and uncropped evidence photos (branch `arena/510a9b74`)
+
+- The GreenCode team photo is 1800×1350. It was being forced into a `max-height: 550px` box with `object-fit: cover`, which cropped about 185px off the top and bottom — the heads in the screenshot were the casualty. Evidence photos now keep their own aspect ratio (`object-fit: fill`, no height clamp), the wide team shot is capped at 880px wide, and portrait photos are height-capped and centred rather than cropped.
+- Every evidence photo is now a real link (`a.photo-open[data-lightbox-item]`) wrapping the image, so it opens the file with JavaScript disabled.
+- `src/scripts/lightbox.ts` intercepts the click and opens a native `<dialog>` viewer: original frame uncropped, caption, "Open original", counter, prev/next within the same section, arrow keys, Escape, backdrop click to close, and focus returned to the photo that opened it. The full-size file is fetched only when the viewer opens.
+- Viewer markup is created by the script, so it is torn down with the rest of the experience on Astro view-transition swaps.
+- `scripts/lightbox.test.ts` (jsdom) covers opening, section-scoped stepping, the single-photo case, focus restoration, modified clicks and teardown.
+
+Verification: `astro check` 0/0/0, 42 tests, 17-route build, `npm run audit` 18 pages / 702 references clean, axe-core via jsdom over 11 routes with no violations. Not verified in a browser in this environment: the modal's visual appearance and real touch behaviour.
