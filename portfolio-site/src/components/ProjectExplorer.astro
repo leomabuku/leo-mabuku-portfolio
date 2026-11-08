@@ -1,0 +1,16 @@
+---
+const paths = [
+  {name:'Language & learning', project:'TongaLang', question:'What if programming began with familiar words?', approach:'Bring programming concepts into Tonga through an educational language, with a lexer, parser and interpreter behind every program.', proof:'Inspect the language design, then edit and execute a real program in your browser.', stack:'Python / PLY / interpreter design', href:'/work/tongalang/', action:'Explore TongaLang', number:'01'},
+  {name:'Connected systems', project:'SmartWater Zambia', question:'How does a sensor reading become useful action?', approach:'Connect device telemetry with an operator dashboard and community reporting, shaped around the people who need the information.', proof:'Follow the hackathon build and inspect the documented interface and system decisions.', stack:'IoT / telemetry / web interfaces', href:'/work/smartwater-zambia/', action:'Explore SmartWater', number:'02'},
+  {name:'Everyday operations', project:'SubTrack BH', question:'What would make daily operations easier to manage?', approach:'Bring subscriptions and boarding-house operations into a local-first Android workspace, informed by the practical details of running a service.', proof:'Explore the product structure, original project evidence and implementation status.', stack:'Kotlin / Android / local-first data', href:'/work/subtrack-bh/', action:'Explore SubTrack', number:'03'},
+];
+---
+<section class="project-explorer section-shell" aria-labelledby="explorer-title" data-explorer>
+  <div class="section-heading"><p class="eyebrow">Choose a problem. Follow the thinking.</p><h2 id="explorer-title">Take a closer look.</h2><p>Three different challenges. Explore how I connect an idea to its implementation.</p></div>
+  <div class="explorer-controls" role="group" aria-label="Choose a project perspective">{paths.map((p,i)=><button type="button" data-explorer-choice={i} aria-pressed={i===0}><span>{p.number}</span>{p.name}<span aria-hidden="true">↗</span></button>)}</div>
+  {paths.map((p,i)=><article class="explorer-panel" data-explorer-panel={i} hidden={i!==0} aria-label={p.project}>
+    <div class="explorer-question"><p class="eyebrow">{p.project} / The question</p><h3>{p.question}</h3><a class="button" href={p.href}>{p.action} <span aria-hidden="true">↗</span></a></div>
+    <div class="explorer-method"><div><span>01 / Approach</span><p>{p.approach}</p></div><div><span>02 / Inspect the work</span><p>{p.proof}</p></div><p class="explorer-stack">{p.stack}</p></div>
+  </article>)}
+  <noscript><p>Explore each project in the <a href="/work/">work collection</a>.</p></noscript>
+</section>

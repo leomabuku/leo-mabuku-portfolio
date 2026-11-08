@@ -16,6 +16,23 @@ export function initExperience() {
   registry.add(() => controller.abort());
   const listen = (el: EventTarget, event: string, handler: EventListener) =>
     el.addEventListener(event, handler, { signal: controller.signal });
+  document
+    .querySelectorAll<HTMLButtonElement>("[data-explorer-choice]")
+    .forEach((button) => {
+      listen(button, "click", () => {
+        const choice = button.dataset.explorerChoice;
+        document
+          .querySelectorAll("[data-explorer-choice]")
+          .forEach((item) =>
+            item.setAttribute("aria-pressed", String(item === button)),
+          );
+        document
+          .querySelectorAll<HTMLElement>("[data-explorer-panel]")
+          .forEach((panel) => {
+            panel.hidden = panel.dataset.explorerPanel !== choice;
+          });
+      });
+    });
   let motionOverride = false;
   try {
     motionOverride = sessionStorage.getItem("reduce-motion") === "true";

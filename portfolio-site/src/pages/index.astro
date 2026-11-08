@@ -1,4 +1,5 @@
 ---
+import ProjectExplorer from '../components/ProjectExplorer.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HackathonSpotlight from '../components/HackathonSpotlight.astro';
 import { profile, projects } from '../data/site';
@@ -20,7 +21,7 @@ const disciplines = [
     <div class="identity-grid">
       <div class="identity-copy">
         <p class="eyebrow">Hello, I’m Leo.</p>
-        <h1>Ideas into<br/><em>working systems.</em></h1>
+        <h1>From a question.<br/><em>To a working system.</em></h1>
         <p class="identity-description">I build the app, the API, and the connections in between. Computer Science graduate. Business operator. Curious about what technology can do for people.</p>
         <div class="actions"><a class="button" href="#selected-work">Explore my work <span aria-hidden="true">↘</span></a><a class="text-link" href="/about/">The story behind it <span aria-hidden="true">↗</span></a></div>
         <p class="identity-current"><span class="status-dot" aria-hidden="true"></span>{profile.status}</p>
@@ -34,6 +35,7 @@ const disciplines = [
     <div class="intro-index"><span>Independent thinking.<br/>Practical execution.</span><a href="/playground/">Try TongaLang in your browser <span aria-hidden="true">↗</span></a><span class="index-coordinate">15° S · 28° E</span></div>
   </section>
   <nav class="story-navigation" aria-label="Follow the story"><a href="#beginning" data-story-link="beginning"><span>01</span> The beginning</a><a href="#selected-work" data-story-link="selected-work"><span>02</span> The problems</a><a href="#try-it" data-story-link="try-it"><span>03</span> Try an idea</a><a href="#practice" data-story-link="practice"><span>04</span> What comes next</a></nav>
+  <ProjectExplorer />
   <section class="selected-work section-shell" id="selected-work" data-story-section>
     <div class="section-heading section-heading--row"><div><p class="eyebrow">01 / Selected work</p><h2>Built with purpose.<br/><em>Open to inspection.</em></h2></div><a class="text-link" href="/work/">All {projects.length} projects <span aria-hidden="true">↗</span></a></div>
     <div class="selected-list">

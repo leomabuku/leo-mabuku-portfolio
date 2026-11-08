@@ -1,3 +1,7 @@
+## Current direction — 8 November 2026
+
+The user requests midnight navy, silver, restrained gold and neon cyan; professional technical typography; story-driven interactions demonstrating implementation skill. This supersedes older lime/warm-paper instructions. Preserve native scrolling/cursor, keyboard access, reduced motion and factual evidence. TongaLang is an educational programming language rooted in Tonga.
+
 # Prototype Instructions
 
 ## Current rebuild decision — 5 November 2026
