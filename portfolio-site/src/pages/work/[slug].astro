@@ -55,6 +55,7 @@ const num = (id: string) => String(sections.findIndex((section) => section.id ==
         <p class="eyebrow">{project.type}</p>
         <h1 transition:name={`project-title-${project.slug}`}>{project.name}</h1>
         <p>{project.shortDescription}</p>
+        {project.slug === 'tongalang' && <a class="button case-playground-link" href="/playground/">Run TongaLang in your browser ↗</a>}
         <div class="case-badges">
           <span>{project.status}</span>
           {hackathon && <a class="case-badge-accent" href="/about/#hackathons">{hackathon.resultShort} · {hackathon.name} {hackathon.edition}</a>}
@@ -82,10 +83,10 @@ const num = (id: string) => String(sections.findIndex((section) => section.id ==
         <div><dt>Stack</dt><dd>{project.technologies.join(' · ')}</dd></div>
       </dl>
       {project.updatedOn && (
-        <aside class="project-update" data-motion>
+        <div class="project-update" data-motion>
           <p class="eyebrow">Latest project update</p>
           <div><time datetime={project.updatedOn}>{formattedUpdatedOn}</time><p>{project.updateSummary}</p></div>
-        </aside>
+        </div>
       )}
     </header>
 
@@ -152,7 +153,7 @@ const num = (id: string) => String(sections.findIndex((section) => section.id ==
         <div class="section-heading">
           <p class="eyebrow">{num('evidence')} · Product evidence</p>
           <h2>See it<br/><em>working.</em></h2>
-          <p>Captures from the current build — operator dashboard, Android app and the states in between.</p>
+          <p>Original product captures and walkthroughs, preserved with their context.</p>
         </div>
         <div class="media-grid" data-motion-stagger>
           {project.media.map((item) => (
@@ -253,7 +254,7 @@ const num = (id: string) => String(sections.findIndex((section) => section.id ==
         )) : (
           <span class="private-access"><i class="ph ph-lock-key" aria-hidden="true"></i>Private repository · details shared without exposing source</span>
         )}
-        {project.liveDemo && <a class="text-link" href={project.liveDemo} target="_blank" rel="noreferrer">View live project <i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>}
+        {project.liveDemo && <a class="text-link" href={project.liveDemo} target="_blank" rel="noreferrer">{project.slug === 'cbu-find' ? 'Open web app (account required)' : 'View live project'} <i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>}
       </div>
     </section>
 

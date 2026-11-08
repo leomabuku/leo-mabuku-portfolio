@@ -4,7 +4,8 @@ import { fileURLToPath } from 'node:url';
 import { chooseFeatured, contentHash, safeSummary, validateProfile } from './content-utils.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const projectsPath = path.join(root, 'src/data/projects.json');
+// Repository metadata must never overwrite the curated, schema-validated case studies.
+const projectsPath = path.join(root, 'src/data/repository-cache.json');
 const cachePath = path.join(root, 'src/data/summary-cache.json');
 const profilePath = path.join(root, 'src/data/profile.json');
 const headers = {'Accept':'application/vnd.github+json','User-Agent':'leo-mabuku-portfolio','X-GitHub-Api-Version':'2022-11-28'};
