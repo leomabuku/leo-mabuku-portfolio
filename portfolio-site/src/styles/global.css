@@ -2457,3 +2457,9 @@ h2 em {
 }
 :root { --ink:#061c24; }
 .project-cover-meta { color:var(--text); }
+.hero-achievement { display:flex; align-items:center; gap:1rem; max-width:490px; margin:1.5rem 0; padding:1rem 1.1rem; border:1px solid #dfbf8060; border-radius:8px; background:linear-gradient(110deg,#dfbf8010,#101c3060); }
+.hero-achievement-mark { color:var(--gold); font-size:1.6rem; }
+.hero-achievement strong { display:block; color:var(--gold); font-size:.9rem; font-weight:600; }
+.hero-achievement small { display:block; color:var(--text-dim); font-size:.72rem; line-height:1.65; margin-top:.2rem; }
+.hero-achievement>span:last-child { margin-left:auto; color:var(--gold); }
+.hero-achievement:hover { border-color:var(--gold); }
