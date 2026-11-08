@@ -24,7 +24,7 @@ export const heroWords = [
     word: 'zina',
     gloss: 'declare a variable',
     lines: [1, 2],
-    note: 'zina binds a name to a value — here two numbers, twelve and eight.',
+    note: 'zina gives a name to a value. Here it holds two numbers, twelve and eight.',
   },
   {
     word: 'amba()',

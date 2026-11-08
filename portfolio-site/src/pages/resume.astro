@@ -22,7 +22,7 @@ const resumeMeta = {
     <section class="resume-section" data-motion><p class="eyebrow">Education</p><div class="timeline" data-motion-stagger>{education.map((item) => <article><div class="timeline-meta"><span>{item.period}</span><small>{item.location}</small></div><div><h3>{item.qualification}</h3><h4>{item.institution}</h4><p>{item.detail}</p></div></article>)}</div></section>
     <section class="resume-section" id="hackathons" data-motion><p class="eyebrow">Hackathons &amp; awards</p><div class="timeline" data-motion-stagger>{hackathons.map((item) => <HackathonRecord hackathon={item} />)}</div></section>
     <section class="resume-section" data-motion><p class="eyebrow">Professional development</p><div class="timeline" data-motion-stagger>{certifications.map((item) => <article><div class="timeline-meta"><span>{item.period}</span></div><div><h3>{item.name}</h3><h4>{item.issuer}</h4></div></article>)}</div></section>
-    <section class="resume-section" data-motion><p class="eyebrow">Selected project evidence</p><div class="resume-projects" data-motion-stagger>{resumeProjects.map((project) => <a href={`/work/${project.slug}/`}><span><strong>{project.name}</strong><small>{project.role} · {project.status}</small></span><i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>)}</div></section>
+    <section class="resume-section" data-motion><p class="eyebrow">Selected projects</p><div class="resume-projects" data-motion-stagger>{resumeProjects.map((project) => <a href={`/work/${project.slug}/`}><span><strong>{project.name}</strong><small>{project.role} · {project.status}</small></span><i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>)}</div></section>
   </div>
   <AvailabilityBanner />
 </BaseLayout>

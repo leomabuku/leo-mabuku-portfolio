@@ -25,7 +25,7 @@ const records: ShowcaseRecord[] = [
     leadShot: '/images/projects/tongalang/beginner-diagnostics.png',
     question: 'What if a first program started with words you already knew?',
     approach:
-      'A lexer, PLY parser, AST and interpreter for Tonga-derived keywords, paired with a desktop IDE that explains mistakes in bilingual guidance rather than only reporting them.',
+      'A lexer, PLY parser, AST and interpreter for keywords borrowed from Tonga, plus a desktop app that explains mistakes in English and Tonga instead of only flagging them.',
     kicker: 'The language',
     links: [
       { href: '/work/tongalang/', label: 'Read the TongaLang case study', primary: true },
@@ -114,7 +114,7 @@ const items = records.map((record) => {
     ))}
   </div>
 
-  <p class="showcase-hint" id="showcase-hint">Use <kbd>←</kbd> <kbd>→</kbd> to move between projects; <kbd>Tab</kbd> reaches the screenshots and links.</p>
+  <p class="showcase-hint" id="showcase-hint">Arrow keys switch projects. <kbd>Tab</kbd> moves into the details.</p>
 
   {items.map((item, index) => (
     <div
@@ -159,8 +159,8 @@ const items = records.map((record) => {
         )}
         <p class="showcase-source">
           {item.hasInterfaceShots
-            ? `Original ${item.project.name} interface, captured from the project.`
-            : `Project identity. Interface screenshots for ${item.project.name} are not published; the case study documents the build instead.`}
+            ? `Screens from the real ${item.project.name} app.`
+            : `No screenshots here. I have not published SubTrack’s screens, so the case study explains how it works instead.`}
         </p>
       </div>
 
@@ -175,11 +175,11 @@ const items = records.map((record) => {
             <p>{item.project.shortDescription}</p>
           </li>
           <li>
-            <span>02 / The approach</span>
+            <span>02 / What I built</span>
             <p>{item.approach}</p>
           </li>
           <li>
-            <span>03 / The evidence</span>
+            <span>03 / Where it stands</span>
             <p>{item.project.evidence}</p>
           </li>
         </ol>
