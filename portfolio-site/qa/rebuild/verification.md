@@ -34,3 +34,9 @@ The shared production interaction bundle is 5.17 kB (2.01 kB gzip); Astro's clie
 Automated axe results are not an accessibility certification. Browser testing used Chrome on this Windows machine with viewport emulation, not physical iOS/Android devices or a screen reader. Account-protected project workflows were not exercised. Existing project achievements and implementation status were preserved, not independently re-certified. The playground requires JavaScript/WebAssembly and downloads Python on first use; it is not the desktop IDE.
 
 Screenshots in this directory show the actual local running experience. Historical QA files elsewhere predate this rebuild.
+
+## Production follow-up — 8 November 2026
+
+PR #18 merged as `570a587` and Cloudflare deployed it successfully. The new homepage was verified in Edge. The production first-run check exposed a 90-second download timeout on the current connection. Direct asset measurements returned HTTP 200 with correct MIME types but took 104 seconds for the standard library and 109 seconds for WebAssembly. The hosted preview had previously completed input execution in 50.58 seconds.
+
+The follow-up bundles the unchanged language source into one JSON request, downloads it alongside Python, reports loading stages, and allows five minutes for downloading. The five-second program execution limit is unchanged. All 35 tests pass against the generated source bundle, including all 17 original programs.

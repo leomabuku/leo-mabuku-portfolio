@@ -17,4 +17,5 @@ for every run. Browser limits: 20,000 source characters, 10,000 input characters
 64,000 output characters, 1,000 iterations per loop, call depth 50, 2.5 seconds
 cooperative execution, and a 5-second worker termination deadline after loading.
 The UI can terminate the worker during loading or execution. First load has a
-90-second deadline. A new worker is created after cancellation or load failure.
+five-minute download deadline. A new worker is created after cancellation or load failure.
+

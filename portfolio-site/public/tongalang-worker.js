@@ -1,40 +1,36 @@
 /* Runs the original Python implementation off the UI thread. */
 let engine;
 async function loadEngine() {
+  self.postMessage({
+    type: "loading",
+    message:
+      "Downloading Python and language files. On a slow connection, the first run may take a few minutes. Stop is available.",
+  });
+  // Begin both downloads together. The generated JSON contains unchanged source text.
+  const sourcesPromise = fetch("/runtime/tongalang-sources.json").then(
+    async (response) => {
+      if (!response.ok)
+        throw new Error("Could not download the language source.");
+      return response.json();
+    },
+  );
+  // Attach a rejection handler immediately while the synchronous loader imports.
+  sourcesPromise.catch(() => {});
   importScripts("/runtime/pyodide.js");
-  const py = await loadPyodide({ indexURL: "/runtime/" });
-  const modules = {
-    tongalang: [
-      "__init__.py",
-      "ast_nodes.py",
-      "environment.py",
-      "errors.py",
-      "interpreter.py",
-      "lexer.py",
-      "native_functions.py",
-      "parser.py",
-      "runner.py",
-      "diagnostics.py",
-    ],
-    ply: ["__init__.py", "lex.py", "yacc.py"],
-  };
-  for (const [name, files] of Object.entries(modules)) {
-    py.FS.mkdirTree("/home/pyodide/" + name);
-    await Promise.all(
-      files.map(async (file) => {
-        const response = await fetch("/vendor/" + name + "/" + file);
-        if (!response.ok)
-          throw new Error("Could not load " + name + "/" + file);
-        py.FS.writeFile(
-          "/home/pyodide/" + name + "/" + file,
-          await response.text(),
-        );
-      }),
-    );
+  const [py, sources] = await Promise.all([
+    loadPyodide({ indexURL: "/runtime/" }),
+    sourcesPromise,
+  ]);
+  self.postMessage({
+    type: "loading",
+    message: "Python loaded. Preparing the TongaLang interpreter…",
+  });
+  for (const [path, source] of Object.entries(sources)) {
+    if (path === "runner.py") continue;
+    py.FS.mkdirTree("/home/pyodide/" + path.split("/")[0]);
+    py.FS.writeFile("/home/pyodide/" + path, source);
   }
-  const response = await fetch("/vendor/runner.py");
-  if (!response.ok) throw new Error("Could not load the input/output adapter.");
-  py.runPython(await response.text());
+  py.runPython(sources["runner.py"]);
   return py;
 }
 self.onmessage = async ({ data }) => {
