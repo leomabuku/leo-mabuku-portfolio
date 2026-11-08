@@ -103,7 +103,7 @@ export function initializePlayground() {
     output.textContent = "Preparing the interpreter…";
     status.textContent = worker
       ? "Preparing program…"
-      : "Loading Python. First run can take a moment…";
+      : "Loading Python. First run may take a few minutes on a slow connection…";
     try {
       if (!worker) {
         worker = new Worker("/tongalang-worker.js");
@@ -112,7 +112,9 @@ export function initializePlayground() {
             "The Python worker could not start. Check your connection and run again.",
           );
         worker.onmessage = ({ data }) => {
-          if (data.type === "running") {
+          if (data.type === "loading") {
+            status.textContent = data.message;
+          } else if (data.type === "running") {
             clearTimeout(timer);
             status.textContent = "Running your program…";
             timer = setTimeout(() => {
@@ -140,7 +142,7 @@ export function initializePlayground() {
           fail(
             "The runtime download timed out. Check your connection and run again.",
           ),
-        90000,
+        300000,
       );
       worker.postMessage({ source: editor.value, input: input.value });
     } catch (error) {

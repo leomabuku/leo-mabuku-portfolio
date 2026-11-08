@@ -4,19 +4,17 @@ import { readFileSync, readdirSync } from "node:fs";
 import { resolve } from "node:path";
 let py;
 beforeAll(async () => {
+  await import("./prepare-runtime.mjs");
   py = await loadPyodide({ indexURL: resolve("node_modules/pyodide") + "/" });
-  for (const name of ["tongalang", "ply"]) {
-    py.FS.mkdirTree("/home/pyodide/" + name);
-    for (const file of readdirSync(resolve("public/vendor", name)).filter((f) =>
-      f.endsWith(".py"),
-    )) {
-      py.FS.writeFile(
-        "/home/pyodide/" + name + "/" + file,
-        readFileSync(resolve("public/vendor", name, file), "utf8"),
-      );
-    }
+  const sources = JSON.parse(
+    readFileSync("public/runtime/tongalang-sources.json", "utf8"),
+  );
+  for (const [path, source] of Object.entries(sources)) {
+    if (path === "runner.py") continue;
+    py.FS.mkdirTree("/home/pyodide/" + path.split("/")[0]);
+    py.FS.writeFile("/home/pyodide/" + path, source);
   }
-  py.runPython(readFileSync("public/vendor/runner.py", "utf8"));
+  py.runPython(sources["runner.py"]);
 }, 120000);
 function run(source, input = "") {
   py.globals.set("source_under_test", source);
