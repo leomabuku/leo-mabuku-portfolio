@@ -44,3 +44,7 @@ The follow-up bundles the unchanged language source into one JSON request, downl
 ## Midnight rebrand — 8 November 2026
 
 Applied navy/silver/cyan/gold identity, sans-serif headings and a responsive three-perspective project explorer. Updated TongaLang introduction to its educational Tonga-language purpose. Browser-tested desktop switching and mobile switching at 390px, with no page overflow. Desktop axe checks passed homepage, work, about, contact, resume, notes, playground, all eight case studies and 404. Mobile axe checks passed homepage, work, about, contact, resume, notes, playground and TongaLang case study. Fixed cyan-background text and project-cover metadata contrast regressions. Existing 35 tests and 17-route production build pass. Reduced-motion mode active during browser testing. Full-motion appearance and physical-device testing remain outside this pass. Development axe dependency is prebundled to avoid a stale dynamic import after Vite reoptimization.
+
+### Hero/handoff checkpoint validation
+
+The hero achievement addition was browser-checked at 1358px and 390px: axe reported zero violations, zero broken images and no page overflow on both. Screenshot captured outside repository. Dedicated handoff files added at root NEXT_AGENT_PROMPT.md and docs/CREATIVE_DIRECTION_AND_HANDOFF.md. No new runtime behavior changed in this checkpoint.
