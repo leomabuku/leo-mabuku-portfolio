@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const published = '13 November 2026';
+const readingTime = '8 min read';
+---
+<BaseLayout
+  title="Designing a Beginner-Friendly Programming IDE for TongaLang | Leo Mabuku"
+  description="How TongaLang's desktop IDE combines bilingual diagnostics, safe suggested fixes, an AST explorer and responsive interactive input."
+>
+  <article>
+    <section class="page-hero" data-motion data-scene="notes">
+      <p class="eyebrow">Notes · {published} · {readingTime}</p>
+      <h1>An error should teach,<br/><em>not just interrupt.</em></h1>
+      <p>Building the TongaLang desktop IDE meant treating diagnostics, input and navigation as part of the learning experience—not decoration around an interpreter.</p>
+      <div class="page-hero-status" aria-hidden="true"><span>Explain</span><span>Navigate</span><span>Recover</span></div>
+    </section>
+    <section class="section-shell"><div class="prose" data-motion>
+      <p>A beginner can write a program with a single misplaced symbol and end up staring at an error message that assumes they already understand the language. That is a poor feedback loop. The tool has identified a problem, but it has not necessarily helped the learner recover.</p>
+      <p>While building TongaLang, I treated the desktop IDE as part of the language's educational design. The interpreter executes programs; the IDE helps a learner write, inspect, run and correct them. Its job is not to hide every difficulty. It is to make the next useful step visible.</p>
+      <h2>Diagnostics with context</h2>
+      <p>TongaLang's diagnostics cover lexical, syntax and semantic issues. A diagnostic is more useful when it can identify the exact source location, explain the issue in language a learner can understand, and provide a hint that points toward a correction.</p>
+      <p>The language engine records source positions and stable diagnostic codes. The IDE uses those details to highlight the relevant text and present a Problems pane. Explanations can be shown in English and Tonga, reflecting the project's goal of making the language experience more approachable.</p>
+      <p>The distinction between an error and a hint matters. A diagnostic should say what the implementation knows; a hint should help the learner investigate. The interface should not pretend to know more than the parser or runtime can establish.</p>
+      <h2>Safe fixes, not silent rewriting</h2>
+      <p>Where the correction is deterministic, TongaLang can offer a guarded one-click fix. The user sees the proposed action and chooses whether to apply it. The change is undoable, and the IDE protects against applying a stale suggestion after the source has changed.</p>
+      <p>This is a deliberate boundary. An educational tool should not quietly rewrite a learner's work and leave them unsure why the program changed. When a correction is ambiguous, the better response is to explain the problem and let the learner decide what to do.</p>
+      <h2>One place to inspect problems</h2>
+      <p>The collapsible Problems pane groups diagnostics into a workflow. A learner can navigate to the relevant code, copy diagnostic details when asking for help, and apply a safe fix when one is offered. Keyboard navigation and source highlighting help keep the workflow usable beyond a mouse-only interaction.</p>
+      <p>The pane is not a substitute for understanding the grammar. It is a bridge between the language engine's precise report and the learner's next action.</p>
+      <h2>Making the AST visible</h2>
+      <p>The abstract syntax tree is often hidden inside an interpreter implementation. TongaLang includes a graphical AST explorer so learners can inspect the structure produced by parsing. Nodes retain source locations, connecting the tree back to the text in the editor.</p>
+      <p>This makes an abstract idea tangible. A conditional is no longer only a block of text with braces; it is a structured node with a condition and branches. A function declaration has a name, parameters and a body. The AST view can help explain how a parser sees a program.</p>
+      <h2>Interactive input without freezing the window</h2>
+      <p>Input exposed a different class of problem. When a TongaLang program calls <code>bala()</code>, execution needs to wait for the learner's response. A naive implementation can block the GUI event loop, making the whole window appear frozen.</p>
+      <p>I built a shared, resizable Program Input dock for the Editor and Output views. When a running program requests input, the dock becomes available while the rest of the interface remains responsive. Submitted values are echoed into the Output transcript before execution continues, so the learner can see both the program's output and the input that shaped it.</p>
+      <p>Keeping one input workflow also avoids scattering controls across multiple screens. The learner should not have to guess which panel owns the next interaction.</p>
+      <h2>Small interface decisions matter</h2>
+      <p>The IDE includes dark and light themes with semantic colours for language constructs, grouped and scrollable settings, Back and Forward view history, a collapsible navigation menu, a grammar reference and an internal console. These features are not the central research question, but they determine whether the environment remains usable as the project grows.</p>
+      <p>For example, scrollable settings matter when a window is short. Semantic colours matter when learners need to distinguish language constructs at a glance. A console matters because internal messages should not be mixed into the source editor.</p>
+      <h2>How I tested the experience</h2>
+      <p>The repository documents tests for diagnostics, safe fixes, stale edits, input handoff, repeated and blank input, visible transcripts, navigation, scrolling, themes and GUI recovery workflows. The project README records 179 passing automated tests across the current suite.</p>
+      <p>That does not prove the IDE is effective for every learner. Usability with actual beginner cohorts still needs structured evaluation. Automated tests establish that expected software behaviours work; learner studies would help establish whether those behaviours improve understanding.</p>
+      <h2>Try the IDE</h2>
+      <ul>
+        <li><a href="https://github.com/leomabuku/PROJECT">TongaLang source code and screenshots</a></li>
+        <li><a href="https://github.com/leomabuku/PROJECT/blob/main/docs/INSTALLATION.md">Installation instructions</a></li>
+        <li><a href="https://github.com/leomabuku/PROJECT/releases/latest">Latest release</a></li>
+        <li><a href="/work/tongalang/">TongaLang project case study</a></li>
+      </ul>
+      <p>The principle behind the IDE is simple: useful feedback should help a learner understand the program, not just tell them that the program failed. That is the standard I want TongaLang's tools to keep moving toward.</p>
+      <p class="article-byline">Written by Leo Mabuku · Software developer and Computer Science graduate · <a href="/contact/">Get in touch</a></p>
+    </div></section>
+  </article>
+</BaseLayout>
