@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const published = '11 November 2026';
+const readingTime = '8 min read';
+---
+
+<BaseLayout
+  title="TongaLang: Building a Programming Language with Tonga-Derived Syntax | Leo Mabuku"
+  description="How I built TongaLang, an interpreted educational programming language using Tonga-derived keywords, with a Python interpreter and a guided desktop IDE."
+>
+  <article>
+    <section class="page-hero" data-motion data-scene="notes">
+      <p class="eyebrow">Notes · {published} · {readingTime}</p>
+      <h1>What if a programming language<br/><em>spoke closer to home?</em></h1>
+      <p>TongaLang is my attempt to explore that question through a small interpreted language, a Python runtime and a desktop environment designed to help beginners understand their mistakes.</p>
+      <div class="page-hero-status" aria-hidden="true"><span>Language</span><span>Interpreter</span><span>Learning</span></div>
+    </section>
+
+    <section class="section-shell">
+      <div class="prose" data-motion>
+        <p>Most people encounter programming through languages whose keywords, documentation and learning material are built around English. That is not inherently a problem with those languages. But it raises an interesting question for computer science education in multilingual communities: what would it look like to introduce programming concepts through vocabulary that is more familiar to a learner?</p>
+
+        <p>That question became <strong>TongaLang</strong>, an interpreted educational programming language I developed using Tonga-derived keywords. It is a practical software project, but it is also an exploration of language, abstraction and access: can the vocabulary around a programming concept make the first steps into programming feel less distant?</p>
+
+        <p>I built TongaLang as a complete, small language rather than a syntax-colouring demonstration. It has a lexer, parser, abstract syntax tree, runtime environment, interpreter and a desktop IDE. The project is deliberately educational in scope. It is not intended to replace Python, Java or other general-purpose languages in production systems.</p>
+
+        <h2>Why build a language at all?</h2>
+        <p>A programming language is an interface between a human idea and the precise operations a computer can execute. For a beginner, learning to program means learning several things at once: how to break a problem down, how variables and control flow work, how to express those ideas in a formal syntax, and how to interpret errors when the program does not behave as expected.</p>
+
+        <p>For learners who are also navigating unfamiliar technical vocabulary, those demands can stack up. TongaLang explores one part of that challenge by using Tonga-derived words for language constructs. The aim is not to claim that changing keywords solves every barrier to programming education. It is to investigate whether a familiar linguistic starting point can make core programming ideas easier to approach.</p>
+
+        <p>The project grew from my Computer Science work at The Copperbelt University. I treated the language as an engineering problem: define a small grammar, implement the execution pipeline, build a usable environment, and test the behaviour rather than stopping when a few sample programs run.</p>
+
+        <h2>Designing a small language surface</h2>
+        <p>I kept the language intentionally compact. TongaLang uses braces to group blocks and parentheses for conditions and function calls. It does not require semicolons, and programs use a defined main entry point. For repetition, it includes range-based loops rather than copying the full syntax of a language such as C.</p>
+
+        <p>A conditional follows this general shape:</p>
+        <pre><code>kuti (x inda 5) {
+    // statements inside the block
+}</code></pre>
+
+        <p>The main entry point is written as:</p>
+        <pre><code>mulimo matalikilo() {
+    // program statements
+}</code></pre>
+
+        <p>These examples show the style of the language, not a claim that every word in a programming language can be translated one-to-one from English. Language design involves choices about consistency, readability, ambiguity and what a learner is expected to understand. I had to think about how words work as tokens, how constructs fit together, and how the grammar should reject invalid combinations.</p>
+
+        <h2>From source code to execution</h2>
+        <p>The interpreter follows a familiar compiler-style pipeline, even though TongaLang is interpreted rather than compiled to native machine code.</p>
+
+        <ol>
+          <li><strong>Lexing:</strong> the lexer reads source text and groups characters into tokens such as identifiers, keywords, operators and literals.</li>
+          <li><strong>Parsing:</strong> the parser checks whether those tokens follow the language grammar and builds a structured representation of the program.</li>
+          <li><strong>Abstract syntax tree:</strong> the AST represents the program as meaningful operations and relationships rather than a flat sequence of characters.</li>
+          <li><strong>Interpretation:</strong> the runtime evaluates those nodes, manages environments and executes the program's operations.</li>
+        </ol>
+
+        <p>I implemented the lexer and parser with PLY in Python. The AST gives the interpreter a structured view of the program, while the runtime environment handles values, scope and execution. Keeping these pieces separate also made it possible to use the same language engine from the command-line runner and the graphical IDE.</p>
+
+        <p>This separation matters. If the language rules live inside the user interface, the project becomes harder to test and harder to extend. By keeping the engine independent, I could test language behaviour without needing to open a desktop window for every case.</p>
+
+        <h2>The IDE is part of the learning experience</h2>
+        <p>A language can have an interesting syntax and still be difficult to learn if the tools around it provide little help. That is why TongaLang includes a Tkinter desktop IDE rather than only a command-line interpreter.</p>
+
+        <p>The IDE brings together source editing, syntax highlighting, program execution, interactive input and output. It also includes an AST explorer so a learner can inspect how source code becomes a structured program. The grammar reference and examples keep the language rules close to the place where code is written.</p>
+
+        <p>One feature I spent particular effort on is the diagnostics workflow. Instead of only displaying an error message, TongaLang can show lexical, syntax and semantic problems with source locations and explanations. Where a correction is deterministic, the IDE can offer a guarded fix. The user remains in control: the tool does not silently rewrite code or execute a suggested change.</p>
+
+        <p>Interactive programs introduced another usability challenge. When a program calls <code>bala()</code> to request input, the IDE needs to wait for the learner without freezing the rest of the interface. I built a shared Program Input dock for the Editor and Output views, so the learner can enter a value while still seeing the program's output transcript.</p>
+
+        <h2>Testing the language beyond happy paths</h2>
+        <p>It is easy to demonstrate an interpreter with a handful of programs that are known to work. That does not tell you much about what happens when a learner makes a mistake, enters unexpected input or combines language features in an unusual way.</p>
+
+        <p>The repository includes 17 example programs covering variables, conditionals, loops, functions, input, arithmetic, Boolean logic, conversion and scope. It also includes automated regression, adversarial and GUI integration tests. The current project documentation records 179 passing automated tests.</p>
+
+        <p>I added a Test Lab to make regression and weakness-probe results visible in the IDE. The goal is not to suggest that a test count proves a language is defect-free. It is to make the behaviour more inspectable and to catch changes that break previously working features.</p>
+
+        <h2>Packaging it for people to try</h2>
+        <p>A project is more useful when someone else can run it without reconstructing the developer's environment. TongaLang 0.2.0 includes a per-user Windows installer, bundled examples and documentation, plus Linux source-install and standalone-build instructions. The Windows installer does not require administrator access.</p>
+
+        <p>The current Windows release is not digitally code-signed, so Windows SmartScreen may show an unrecognized-app warning. The repository provides a SHA-256 checksum and explains how to verify the installer. I would rather document that limitation clearly than imply that a checksum is the same thing as a code-signing certificate.</p>
+
+        <h2>What TongaLang is—and what it is not</h2>
+        <p>TongaLang is an educational programming language and IDE built to explore Tonga-derived syntax and beginner-oriented tooling. It is a working interpreter with a documented grammar, examples, tests and installable desktop distribution.</p>
+
+        <p>It is not a general-purpose replacement for established programming languages, and I am not presenting it as a complete solution to language barriers in education. There is more work involved in evaluating how learners understand the syntax, how the language performs in actual teaching settings, and how linguistic choices should be reviewed and maintained over time.</p>
+
+        <p>Those boundaries are important. A project like this should be judged by what it actually implements, what evidence exists, and what remains to be validated—not by a grand claim about being the first or the only one of its kind.</p>
+
+        <h2>Explore the project</h2>
+        <p>The source code, examples, screenshots, installation instructions and release are publicly available. If you want to understand how the language works, start with the repository README and then explore the implementation.</p>
+
+        <ul>
+          <li><a href="https://github.com/leomabuku/PROJECT">TongaLang source code and documentation on GitHub</a></li>
+          <li><a href="https://github.com/leomabuku/PROJECT/blob/main/docs/INSTALLATION.md">Windows and Linux installation guide</a></li>
+          <li><a href="https://github.com/leomabuku/PROJECT/releases/latest">Download the latest TongaLang release</a></li>
+          <li><a href="/work/tongalang/">TongaLang project case study</a></li>
+        </ul>
+
+        <p>For me, TongaLang sits at the intersection of programming language implementation and a question about who feels invited into computing. I wanted to build something concrete enough to run, inspect and test—not just describe an idea. The next meaningful step is to put the language in front of more learners, gather structured feedback, and let that evidence guide what comes next.</p>
+
+        <p class="article-byline">Written by Leo Mabuku · Software developer and Computer Science graduate · <a href="/contact/">Get in touch</a></p>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
