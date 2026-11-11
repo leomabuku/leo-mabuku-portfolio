@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const published = '14 November 2026';
+const readingTime = '9 min read';
+---
+<BaseLayout
+  title="Building Smart Water Zambia: Connecting IoT, Mobile and Web Applications | Leo Mabuku"
+  description="An engineering walkthrough of Smart Water Zambia's ESP32 telemetry, Node.js API, React dashboard, Android client and community reporting workflow."
+>
+  <article>
+    <section class="page-hero" data-motion data-scene="notes">
+      <p class="eyebrow">Notes · {published} · {readingTime}</p>
+      <h1>One water problem,<br/><em>multiple software layers.</em></h1>
+      <p>How Smart Water Zambia brings together sensor telemetry, an operator dashboard, a customer Android app and community incident reporting.</p>
+      <div class="page-hero-status" aria-hidden="true"><span>Sense</span><span>Understand</span><span>Respond</span></div>
+    </section>
+    <section class="section-shell"><div class="prose" data-motion>
+      <p>Water infrastructure is difficult to manage when information is fragmented. An operator may need to know the last measured level in a tank, whether a device is online, where an incident was reported and whether anyone has acted on it. Residents need a way to report problems and understand what happened next.</p>
+      <p><strong>Smart Water Zambia</strong> is a software and IoT prototype exploring how those information flows can be brought into one system. The project connects an ESP32 telemetry path, a shared backend API, a web dashboard and a native Android customer application. It also includes a community reporting workflow for leaks, shortages and other water-related incidents.</p>
+      <h2>The system at a glance</h2>
+      <p>The architecture has four main layers:</p>
+      <ol>
+        <li><strong>Device layer:</strong> ESP32 firmware reads an ultrasonic sensor and sends measurement data over Wi-Fi.</li>
+        <li><strong>Backend layer:</strong> a Node.js and Express API authenticates devices, validates readings, stores data and manages alerts and reports.</li>
+        <li><strong>Operator layer:</strong> a React and Vite dashboard presents stations, tanks, readings, alerts and community incidents.</li>
+        <li><strong>Customer layer:</strong> a Kotlin and Jetpack Compose Android application gives residents access to their assigned water information and reporting workflow.</li>
+      </ol>
+      <p>The important design decision is that the clients share the same backend. The web dashboard and Android app should not maintain separate versions of the truth about a tank or report.</p>
+      <h2>From sensor distance to a water-level estimate</h2>
+      <p>The firmware measures the distance between the sensor and the water surface. That raw distance is not itself a water-level percentage. The backend needs installation geometry and calibration references to convert it into an estimate of depth, percentage and volume.</p>
+      <p>In the current telemetry design, a device sends its identity, tank identity, raw distance and optional measurement timestamp to the authenticated ingestion endpoint. The server checks that the device is known, active and assigned to the expected tank. It also validates the configured geometry and rejects measurements outside the accepted sensor range.</p>
+      <p>This separation is important: the device reports what it measured; the backend applies the installation model and determines what that measurement means. It avoids trusting a client-supplied percentage or status as if it were independently verified.</p>
+      <h2>Provisioning and calibration are not optional details</h2>
+      <p>The installation workflow associates a tank with measured geometry, a device and calibration evidence. A newly configured installation begins in an awaiting-calibration state. Calibration tests compare calculated depth with manual measurements across low, middle and high depth bands. Approval is an administrative decision based on a configured tolerance.</p>
+      <p>The documentation is explicit that passing those checks is not a guarantee of hardware accuracy. Real equipment still needs appropriate installation, repeatable measurements and physical validation. A dashboard showing a percentage is only as trustworthy as the measurement chain behind it.</p>
+      <h2>The backend coordinates the workflow</h2>
+      <p>The Express API handles authentication, device ingestion, stations, tanks, reports, alerts and analytics. It stores the time series of readings and evaluates threshold transitions. Device credentials are provisioned rather than allowing unknown devices to register themselves.</p>
+      <p>The realtime channel uses server-sent events to notify web clients that data has changed. The current implementation sends invalidations rather than broadcasting full records, so clients refetch the data they are authorised to see. This is a useful security boundary: a realtime notification should not become a second, less-controlled data API.</p>
+      <h2>Two different user experiences</h2>
+      <p>The operator dashboard is designed around oversight. It brings together infrastructure, current and last-known conditions, alerts and the lifecycle of community reports. The Android application is a customer-facing experience: it presents the user's assigned tank information and provides a way to submit and follow up on reports.</p>
+      <p>That distinction matters. A resident should not need access to utility-wide operational analytics to report a burst pipe. Equally, an operator needs a broader view than an individual customer screen can provide.</p>
+      <h2>Simulated data must be labelled honestly</h2>
+      <p>A system like this needs a way to exercise its data pipeline before every sensor is installed. Smart Water Zambia includes a command-line simulator and a demo telemetry path. The newer design tracks provenance such as operational, simulated, test and unknown readings, and excludes simulated and test readings from operational telemetry analytics.</p>
+      <p>This is not just a presentation detail. If simulated readings are mixed into operational reporting, the resulting averages and incident counts can mislead whoever makes a decision from them. A prototype should clearly distinguish a simulated demonstration from validated field data.</p>
+      <h2>What is implemented, and what still needs validation</h2>
+      <p>The repository contains the web, backend, Android and firmware projects, along with deployment and telemetry documentation. It also records important outstanding work: the newer telemetry changes require their database migrations to be applied before deployment; the Android changes need a fresh build; and firmware compilation, physical hardware testing, PostgreSQL validation and broader security review remain necessary.</p>
+      <p>I am deliberately stating those limitations. A source repository and a working local demonstration are not the same as a production deployment. Real-world water infrastructure requires field calibration, reliable connectivity, device security, privacy controls, maintenance processes and validation with the people who would operate the system.</p>
+      <h2>Explore Smart Water Zambia</h2>
+      <ul>
+        <li><a href="https://github.com/leomabuku/majismart-zambia">Smart Water Zambia repository</a> (repository currently retains some legacy MajiSmart naming)</li>
+        <li><a href="https://github.com/leomabuku/majismart-zambia/blob/main/ARCHITECTURE.md">System architecture and telemetry specification</a></li>
+        <li><a href="https://github.com/leomabuku/majismart-zambia/blob/main/docs/INTEGRATED_TELEMETRY.md">Integrated telemetry and installation notes</a></li>
+        <li><a href="/work/smartwater-zambia/">Smart Water Zambia case study</a></li>
+      </ul>
+      <p>My main engineering takeaway is that an IoT product is not just a sensor connected to a chart. It is a chain of measurement, identity, validation, storage, interpretation and response. If any link is weak, the interface can look convincing while the information underneath is unreliable.</p>
+      <p class="article-byline">Written by Leo Mabuku · Software developer and Computer Science graduate · <a href="/contact/">Get in touch</a></p>
+    </div></section>
+  </article>
+</BaseLayout>
