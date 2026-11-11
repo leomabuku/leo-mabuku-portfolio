@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const published = '15 November 2026';
+const readingTime = '8 min read';
+---
+<BaseLayout
+  title="Mapping Water Infrastructure and Community Reports in Smart Water Zambia | Leo Mabuku"
+  description="How Smart Water Zambia uses geographic coordinates and Leaflet mapping to display stations, tanks and community incidents, and what a deeper GIS workflow would require."
+>
+  <article>
+    <section class="page-hero" data-motion data-scene="notes">
+      <p class="eyebrow">Notes · {published} · {readingTime}</p>
+      <h1>Water data has a place.<br/><em>Put it on the map.</em></h1>
+      <p>Smart Water Zambia already has a geographic view of infrastructure and community reports. Here is what that map does today—and what meaningful GIS analysis would add.</p>
+      <div class="page-hero-status" aria-hidden="true"><span>Locate</span><span>Compare</span><span>Investigate</span></div>
+    </section>
+    <section class="section-shell"><div class="prose" data-motion>
+      <p>A water-level reading is useful, but it becomes more actionable when an operator can connect it to a place. A tank with a low reading is one data point. Several low tanks in the same area, alongside reports of dry taps, may point to a wider supply problem worth investigating.</p>
+      <p>That is the motivation behind the geographic component of <strong>Smart Water Zambia</strong>. The current web dashboard includes a map view for monitoring stations, tanks and community incidents. It is built with Leaflet and OpenStreetMap tiles, and it plots records that have valid stored coordinates.</p>
+      <h2>What the current map displays</h2>
+      <p>The map supports two main layers. The infrastructure layer displays monitoring stations and tanks. The incident layer displays community reports with their category, location name, status and available location accuracy. Operators can toggle the layers to focus on infrastructure or reports.</p>
+      <p>Tank markers communicate the last-known condition, including normal, low, critical, offline or sensor-error states. A popup shows the tank identity, last-known level and timestamp. A station marker is deliberately distinct from a tank marker: a station's location is not a substitute for the actual tank's location or measurement.</p>
+      <p>Incident markers distinguish resolved from unresolved reports. Their popups can show the report category, description, location, coordinates and accuracy, with a directions link for navigation. This makes the map a practical way to inspect where reports were submitted, not merely a decorative map background.</p>
+      <h2>Coordinates need validation</h2>
+      <p>Displaying a pin is easy. Knowing whether the pin is trustworthy is harder. The current geographic helper checks that latitude and longitude are present, numeric, within valid geographic ranges and not the default zero-zero coordinate. It also formats accuracy values where they are available.</p>
+      <p>Even a syntactically valid coordinate is not proof that a tank or incident is physically located there. The map code explicitly treats stored coordinates as locations that have not necessarily been verified. That distinction matters when an operator uses the map to make a field decision.</p>
+      <h2>From a map to a GIS workflow</h2>
+      <p>A map becomes a more complete geographic information system when spatial data is connected to analysis and operational questions. Smart Water Zambia's current map is a foundation, not a claim that every GIS capability is already implemented.</p>
+      <p>Useful next analytical layers could include:</p>
+      <ul>
+        <li><strong>Incident clustering:</strong> identify concentrations of shortage, leak and burst-pipe reports over a defined time window.</li>
+        <li><strong>Service-area context:</strong> compare incidents and tank conditions with verified service boundaries or neighbourhood polygons.</li>
+        <li><strong>Temporal comparison:</strong> examine whether incidents repeatedly occur in the same locations or after particular supply conditions.</li>
+        <li><strong>Field response:</strong> help teams navigate to reports and record whether a location was visited and verified.</li>
+        <li><strong>Data-quality overlays:</strong> distinguish verified coordinates from approximate, manually entered or unverified locations.</li>
+      </ul>
+      <p>These features require suitable source data. A service-area analysis needs authoritative boundary information. A cluster analysis needs enough correctly located reports and a clear definition of what counts as a cluster. A route optimisation feature needs operational constraints such as road access, team availability and priority—not just pins on a map.</p>
+      <h2>Do not turn demo data into evidence</h2>
+      <p>Smart Water Zambia includes simulated telemetry for exercising the application before a complete physical deployment. Simulated readings are useful for testing dashboards, alerts and data flow, but they must not be presented as measured water conditions in a real community.</p>
+      <p>The newer telemetry design tracks reading provenance and excludes simulated, test, unknown and historic readings from operational telemetry aggregation. The same discipline should apply to geographic reporting: test reports, approximate coordinates and verified field observations must remain distinguishable.</p>
+      <h2>Privacy belongs in the map design</h2>
+      <p>Community reports can contain descriptions, photos and location details. Not every user should be able to see every report or its full submission data. The map should display only information that the viewer is authorised to access, and public-facing maps should avoid exposing personal details or precise household locations unnecessarily.</p>
+      <p>There is also an external service dependency: the current location search uses OpenStreetMap's Nominatim service. Search text is sent to that service, so usage policy and availability need to be considered. Manual coordinate entry and map selection remain available in the current design.</p>
+      <h2>What needs to happen before operational GIS use</h2>
+      <p>Before relying on spatial insights, the project needs verified infrastructure coordinates, clear location-accuracy metadata, consistent incident categories, enough real reports to support analysis, and an agreed process for confirming field observations. The data model and map should make uncertainty visible rather than hiding it behind a precise-looking pin.</p>
+      <p>More advanced GIS work should also be evaluated against actual decisions. A heat map is only useful if it helps someone prioritise a response. A service-area overlay is only useful if its boundaries are trustworthy. A route is only useful if it reflects how field teams can actually travel.</p>
+      <h2>Explore the geographic implementation</h2>
+      <ul>
+        <li><a href="https://github.com/leomabuku/majismart-zambia/blob/main/WEB/src/pages/IncidentMap.jsx">Leaflet incident and infrastructure map</a></li>
+        <li><a href="https://github.com/leomabuku/majismart-zambia/blob/main/WEB/src/utils/geo.js">Coordinate validation and map helpers</a></li>
+        <li><a href="https://github.com/leomabuku/majismart-zambia/blob/main/ARCHITECTURE.md">Smart Water Zambia architecture</a></li>
+        <li><a href="/work/smartwater-zambia/">Smart Water Zambia case study</a></li>
+      </ul>
+      <p>The useful next step is not to add GIS features because they look impressive. It is to connect reliable locations, verified events and water-system data to decisions that utilities and communities actually need to make.</p>
+      <p class="article-byline">Written by Leo Mabuku · Software developer and Computer Science graduate · <a href="/contact/">Get in touch</a></p>
+    </div></section>
+  </article>
+</BaseLayout>
