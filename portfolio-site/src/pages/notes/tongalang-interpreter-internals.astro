@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const published = '12 November 2026';
+const readingTime = '9 min read';
+---
+<BaseLayout
+  title="Inside TongaLang: How I Built an Interpreter in Python | Leo Mabuku"
+  description="A technical walkthrough of TongaLang's lexer, PLY parser, abstract syntax tree, runtime environment and interpreter architecture."
+>
+  <article>
+    <section class="page-hero" data-motion data-scene="notes">
+      <p class="eyebrow">Notes · {published} · {readingTime}</p>
+      <h1>Inside TongaLang:<br/><em>from text to execution.</em></h1>
+      <p>A look at the interpreter pipeline behind my Tonga-derived educational programming language, and why I separated the language engine from its desktop IDE.</p>
+      <div class="page-hero-status" aria-hidden="true"><span>Lexing</span><span>Parsing</span><span>Runtime</span></div>
+    </section>
+    <section class="section-shell"><div class="prose" data-motion>
+      <p>When someone writes a program, the computer does not understand the source file as a human does. The text has to be broken into meaningful units, checked against a grammar, represented in a structure the runtime can process, and then evaluated. That pipeline is the heart of an interpreter.</p>
+      <p>For TongaLang, I implemented that pipeline in Python using PLY. The project is an educational language with Tonga-derived keywords, but its internal architecture uses the same broad ideas found in many language implementations: lexical analysis, parsing, an abstract syntax tree and an execution environment.</p>
+      <h2>1. The lexer: recognising the language's vocabulary</h2>
+      <p>The lexer reads source characters and groups them into tokens. A token has a type and a value. For example, a variable declaration, a number, an arithmetic operator and a conditional keyword should not all be treated as interchangeable strings.</p>
+      <p>In TongaLang, the lexer defines token categories for identifiers, numbers, strings, arithmetic and comparison operators, logical operators, grouping symbols and reserved words. It also maps the language's reserved vocabulary to token types. This gives later stages a consistent representation to work with.</p>
+      <p>Identifiers are case-insensitive: names such as <code>Age</code>, <code>AGE</code> and <code>age</code> resolve to the same normalized identifier. The lexer also handles comments, string escapes and line tracking. When it encounters an invalid character or malformed string, it raises a language-specific lexical error with a location and an explanatory message.</p>
+      <h2>2. The parser: checking structure</h2>
+      <p>Tokens alone do not tell us whether a program is valid. The parser checks how those tokens fit together. A number followed by an operator and another number can form an expression; a conditional keyword must be followed by a condition and a block; a function declaration has its own required structure.</p>
+      <p>TongaLang uses PLY's Yacc component to define grammar productions. The grammar describes statements such as variable declarations, assignments, output, conditionals, loops, function declarations, returns and expressions. Operator precedence is also defined so that expressions are grouped consistently.</p>
+      <p>For example, multiplication and division bind more tightly than addition and subtraction. Logical OR and AND have their own precedence levels, and unary operators are handled separately. Without these rules, the same expression could be interpreted in different ways depending on how the parser happened to reduce it.</p>
+      <h2>3. The AST: representing meaning, not punctuation</h2>
+      <p>After parsing, TongaLang builds an abstract syntax tree. The AST removes much of the surface punctuation and represents the program in terms of operations and relationships: a variable declaration has a name and initializer; a conditional has branches; a loop has a condition or range and a body; a binary expression has a left operand, operator and right operand.</p>
+      <p>This structure is useful for more than execution. It gives the IDE something meaningful to display in its AST explorer, and it provides a place to attach source locations so the interface can connect a node back to the code the learner wrote.</p>
+      <h2>4. The runtime: environments and evaluation</h2>
+      <p>The interpreter evaluates the AST. Runtime environments hold variable bindings and support scope. When a declaration is evaluated, the interpreter stores its value in the appropriate environment. When an expression is evaluated, it resolves its operands and applies the requested operation. Function calls create the execution context needed for parameters and return values.</p>
+      <p>Control-flow nodes determine which statements run. A conditional evaluates its condition and selects a branch. A loop repeatedly evaluates its body according to its condition or range. Return and break operations alter the normal flow of execution and need to be handled deliberately rather than treated as ordinary expression values.</p>
+      <p>The language engine also provides native functions for interaction with the outside world, including output and input. The <code>bala()</code> input workflow is particularly important in the desktop IDE because execution must pause for a value without making the entire interface unresponsive.</p>
+      <h2>5. Why the engine is separate from the IDE</h2>
+      <p>I kept the lexer, parser, AST and interpreter outside the Tkinter interface. The command-line runner and the graphical IDE use the same language engine. That means a program should not behave differently simply because it was launched from a different front end.</p>
+      <p>It also makes testing more direct. Language rules can be tested without opening a window, while GUI tests can focus on editor behaviour, diagnostics, input and output. This separation reduces the number of moving parts in each test and makes failures easier to locate.</p>
+      <h2>6. Errors are part of the language design</h2>
+      <p>A parser that rejects invalid code is doing its job, but an educational language should also help a learner understand what went wrong. TongaLang's lexical and syntax errors carry line and column information, stable error codes, English and Tonga explanations, and hints where the implementation can provide them.</p>
+      <p>That is why source locations are captured during parsing rather than added as an afterthought. The IDE can use them to highlight the relevant code and connect a diagnostic to the learner's current file.</p>
+      <h2>7. Testing the pipeline</h2>
+      <p>The repository includes example programs that exercise variables, conditions, loops, functions, input, arithmetic, Boolean logic and scope. The documented test suite also covers regressions, adversarial cases and GUI workflows. The current README records 179 passing automated tests.</p>
+      <p>A passing test suite is evidence of tested behaviour, not proof that every possible program is correct. The point is to make the implementation repeatable and to catch known failure modes as the language evolves.</p>
+      <h2>Explore the implementation</h2>
+      <ul>
+        <li><a href="https://github.com/leomabuku/PROJECT/blob/main/tongalang/lexer.py">Lexer implementation</a></li>
+        <li><a href="https://github.com/leomabuku/PROJECT/blob/main/tongalang/parser.py">Parser and grammar productions</a></li>
+        <li><a href="https://github.com/leomabuku/PROJECT/tree/main/tongalang">Language engine source</a></li>
+        <li><a href="https://github.com/leomabuku/PROJECT">Complete TongaLang repository</a></li>
+      </ul>
+      <p>Building an interpreter taught me that a programming language is not just a list of keywords. It is a coordinated set of rules, data structures and runtime decisions. The vocabulary is what a learner sees first; the engineering underneath is what makes the language behave consistently.</p>
+      <p class="article-byline">Written by Leo Mabuku · Software developer and Computer Science graduate · <a href="/contact/">Get in touch</a></p>
+    </div></section>
+  </article>
+</BaseLayout>
