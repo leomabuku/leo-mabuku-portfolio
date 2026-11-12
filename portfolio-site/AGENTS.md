@@ -1,5 +1,11 @@
 ## Current direction — 8 November 2026
 
+## Business evidence update — 12 November 2026
+
+Publication follow-up: Leo requests a clear visual growth sequence (empty premises → unpacking/assembly → stocked shop) and a prominent “Explore the Facebook page” button identifying the page as where he advertised. He has explicitly authorized publishing this work. Keep undated archive images distinct from confirmed dates and avoid inventing sales growth metrics.
+
+Leo requests a photo-led Leo M. Suppliers experience page with a strong factual narrative and emphasis on business, employee management and customer-facing skills. Updated owner-confirmed history supersedes older copy: finished high school November 2021, returned to pandemic-era cupcake field selling; bedding business February 2022; PACRA registration June 2022; found premises 31 August 2022 (red-shirt empty-shop photo specifically dated by Leo); shop opening and furniture introduction 14 September 2022; closure April 2026. Do not invent a closure reason, commercial metrics or employee counts. Other WhatsApp photo filenames are export dates, not historical dates. Preserve family support attribution. Original images are in output/photos; public curated copies and metadata support /experience/leo-m-suppliers/. Use the existing accessible lightbox and motion system. Historical signage phone numbers are not current contact details. Facebook page contents have not been independently verified.
+
 The user requests midnight navy, silver, restrained gold and neon cyan; professional technical typography; story-driven interactions demonstrating implementation skill. This supersedes older lime/warm-paper instructions. Preserve native scrolling/cursor, keyboard access, reduced motion and factual evidence. TongaLang is an educational programming language rooted in Tonga.
 
 # Prototype Instructions
@@ -30,3 +36,5 @@ When implementing from a selected generated mock, treat that image as the source
 - Case studies may carry optional audience, market, production-path and limitations blocks; only publish them when the claims can be backed by evidence or clearly labelled as simulation.
 
 - Latest user direction: make the experience professional, distinctive and story-driven. Reframe copy and components when useful, preserve factual evidence, and use purposeful animation with reduced-motion support. The homepage chapter index and problem-led project introductions implement this direction.
+
+- November 2026: long-form first-person articles use one story system defined at the end of `src/styles/global.css`: a milestone waypoint rail under the hero, gold-ruled pull quotes, framed evidence figures that open in the shared photo viewer, a fenced code block with a file bar, and a linked "Explore" panel. Keep narrative notes in `.prose`, keep em dashes out of all copy, and link each story back from the project case study it belongs to.

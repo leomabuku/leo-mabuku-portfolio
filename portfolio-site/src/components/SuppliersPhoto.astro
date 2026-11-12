@@ -1,0 +1,21 @@
+---
+import photos from '../data/suppliers-photos.json';
+const { photo, eager = false, label } = Astro.props as { photo: keyof typeof photos; eager?: boolean; label?: string };
+const item = photos[photo];
+---
+<figure class="suppliers-photo">
+  <a href={item.src} data-lightbox-item data-caption={item.caption} aria-label={`Enlarge photograph: ${item.alt}`}>
+    <img src={item.src} width={item.width} height={item.height} alt={item.alt} loading={eager ? 'eager' : 'lazy'} decoding="async" fetchpriority={eager ? 'high' : 'auto'} />
+    <span class="photo-expand" aria-hidden="true">View photograph ↗</span>
+  </a>
+  <figcaption>{label && <span>{label}</span>}{item.caption}</figcaption>
+</figure>
+<style>
+  .suppliers-photo { min-width: 0; }
+  a { display:block; position:relative; overflow:hidden; background:var(--surface); }
+  img { width:100%; height:auto; }
+  .photo-expand { position:absolute; right:.7rem; bottom:.7rem; padding:.35rem .65rem; background:#080e1ce8; color:#fff; font: .65rem var(--mono); border:1px solid #ffffff45; }
+  a:focus-visible { outline:3px solid var(--accent); outline-offset:5px; }
+  figcaption { padding-top:.85rem; color:var(--muted); font-size:.82rem; line-height:1.65; max-width:64ch; }
+  figcaption span { display:block; color:var(--text); font: .65rem var(--mono); text-transform:uppercase; letter-spacing:.12em; margin-bottom:.35rem; }
+</style>

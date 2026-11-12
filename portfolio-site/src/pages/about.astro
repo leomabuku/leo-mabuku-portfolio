@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import AvailabilityBanner from '../components/AvailabilityBanner.astro';
 import HackathonRecord from '../components/HackathonRecord.astro';
 import HackathonEvidence from '../components/HackathonEvidence.astro';
+import SuppliersPhoto from '../components/SuppliersPhoto.astro';
 import { qualities, hackathons } from '../data/site';
 const focus = ['Completing the CodeAlpha IoT internship (Oct–Nov 2026)', 'Turning shipped projects into a first professional role', 'Extending TongaLang and SubTrack BH', 'Operating and improving the Starlink internet service', 'Taking SmartWater Zambia toward a field pilot', 'Deepening networking and IoT practice']
 ---
@@ -12,9 +13,10 @@ const focus = ['Completing the CodeAlpha IoT internship (Oct–Nov 2026)', 'Turn
     <div class="story-summary" data-motion><p class="eyebrow">The short version</p><p class="story-lede">Computer Science graduate working toward systems software, and building a business of my own along the way.</p><span class="story-signal" aria-hidden="true"></span></div>
     <div class="prose story-timeline" data-motion>
       <h2 data-story-step="01">Business came first.</h2>
-      <p>In February 2022, I started Leo M. Suppliers as a field-based fleece blanket business. The products were sourced from Botswana with help from my father, while my mother and sister supported field sales. Working directly through communities taught me the value of trust, visibility and customer relationships.</p>
-      <p>The business was registered with PACRA in June 2022. On 14 September, we opened a physical shop at Plot 98, John Hunt Way in Livingstone. It initially operated as a clothing and bedding store before transitioning into furniture toward the end of that year.</p>
-      <p>As owner and an active sales representative, I handled customer engagement, ordering, stock decisions, marketing, deliveries and day-to-day operations. I also learned furniture assembly as the product range changed. The business closed in April 2026.</p>
+      <p>After finishing high school in November 2021, I returned to the cupcake field selling I had tried during the pandemic. By February 2022, I was selling fleece blankets and duvets. My father helped source products from Botswana, while my mother and sister supported field sales.</p>
+      <p>I registered Leo M. Suppliers with PACRA in June 2022 and found a store on 31 August. On 14 September, the shop opened at Plot 98, John Hunt Way in Livingstone, and I introduced furniture alongside the existing range.</p>
+      <p>I handled customer engagement, ordering, stock decisions, marketing, deliveries and daily operations. I managed employees supporting field operations and in-store attendance, and learned furniture assembly. The business closed in April 2026.</p>
+      <p><a class="text-link" href="/experience/leo-m-suppliers/">Explore the shop’s story in photographs ↗</a></p>
       <h2 data-story-step="02">Computer Science connected the pieces.</h2>
       <p>I began a Bachelor of Science in Computer Science at The Copperbelt University through a special academic calendar on 8 May 2023. After completing the accelerated first-year calendar in December, the cohort joined the mainstream academic calendar in January 2024.</p>
       <p>Software became the place where the analytical and the practical met. I finished the degree in 2025, and my work now runs from programming languages and Android apps to IoT telemetry, an operating-system exercise and tools I built because a job needed them.</p>
@@ -23,6 +25,10 @@ const focus = ['Completing the CodeAlpha IoT internship (Oct–Nov 2026)', 'Turn
       <p>Since 20 October 2026 I have also been completing an Internet of Things internship with CodeAlpha, working through applied sensor, prototyping and reporting tasks. The <a class="text-link" href="/documents/CodeAlpha-Internship-Offer-Letter.pdf" target="_blank" rel="noreferrer">offer letter is published here</a>.</p>
       <p>My process starts with research and documentation. I break the problem into features and relationships, create a working core, test failure paths and then refine the experience. When a project requires unfamiliar technology, I learn it in context and apply it directly.</p>
     </div>
+  </section>
+  <section class="suppliers-preview section-shell" aria-labelledby="suppliers-preview-title">
+    <div data-motion><p class="eyebrow">Business experience / 2022–2026</p><h2 id="suppliers-preview-title">An empty room.<br/><em>A business of my own.</em></h2><p>From field sales to a Livingstone store: the photographs and responsibilities behind Leo M. Suppliers.</p><a class="button" href="/experience/leo-m-suppliers/">Read the business story ↗</a></div>
+    <div data-motion><SuppliersPhoto photo="shop-sign" /></div>
   </section>
   <section class="hackathon-section section-shell" id="hackathons" data-scene="recognition">
     <div class="section-heading" data-motion><p class="eyebrow">Hackathons &amp; awards</p><h2>Prototypes built<br/><em>under pressure.</em></h2><p>Forty-eight hours, a real brief and a working demo to defend at the end of it.</p></div>
@@ -33,3 +39,8 @@ const focus = ['Completing the CodeAlpha IoT internship (Oct–Nov 2026)', 'Turn
   <section class="current-focus section-shell" data-motion data-scene="focus"><div><p class="eyebrow">Currently focused on</p><h2>Building capability<br/><em>that compounds.</em></h2></div><ul data-motion-stagger>{focus.map((item) => <li><i class="ph ph-arrow-up-right" aria-hidden="true"></i>{item}</li>)}</ul></section>
   <AvailabilityBanner />
 </BaseLayout>
+<style>
+  .suppliers-preview { display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:clamp(2rem,6vw,6rem); padding-block:var(--section-y); border-block:1px solid var(--line); background:var(--paper); }
+  .suppliers-preview p:not(.eyebrow) { max-width:44ch; color:var(--text-dim); }
+  @media(max-width:760px) { .suppliers-preview { grid-template-columns:1fr; } }
+</style>

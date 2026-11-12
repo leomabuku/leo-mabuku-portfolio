@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SuppliersPhoto from '../../components/SuppliersPhoto.astro';
+import photos from '../../data/suppliers-photos.json';
+import '../../styles/suppliers.css';
+const chapters = [['beginnings','01','Finding a way'],['premises','02','An empty shop'],['furniture','03','Opening the boxes'],['operations','04','Running the business'],['next','05','What stayed with me']];
+const archive: (keyof typeof photos)[] = ['store-aisle','television-display','three-stools','two-chairs','white-tv-unit','black-tv-unit','clothing-furniture','owner-wide','entrance','mirror-portrait','personal-archive'];
+const responsibilities = [
+  ['Customers & sales','I worked directly with customers, from field selling to conversations in the shop. Customer engagement and service were part of my daily work.'],
+  ['People & coordination','I managed employees who helped with field operations and in-store attendance. Running the business meant coordinating people as well as products.'],
+  ['Stock & procurement','I handled ordering and stock decisions, and arranged products in the shop as the range expanded from bedding into furniture and household goods.'],
+  ['Marketing & delivery','I handled marketing and deliveries alongside the daily operation of the shop, taking responsibility beyond the point of sale.'],
+];
+---
+<BaseLayout title="Leo M. Suppliers: Business Experience | Leo Mabuku" description="From field sales to a Livingstone shop: Leo Mabuku’s photographic account of building and operating Leo M. Suppliers, February 2022–April 2026." image={photos['shop-sign'].src}>
+  <article class="suppliers-story">
+    <header class="suppliers-hero section-shell">
+      <a class="text-link" href="/about/">← Back to my story</a>
+      <div class="suppliers-topline"><p class="eyebrow">Leo M. Suppliers / A personal business archive</p><span>Livingstone, Zambia · 2022–2026</span></div>
+      <div class="suppliers-hero-grid">
+        <div class="suppliers-hero-copy">
+          <h1>Before the code,<br/>there was<br/><em>a shop.</em></h1>
+          <p class="suppliers-intro">From selling in the field to running a store. This is where I learned to work with customers, make stock decisions and take responsibility for a business of my own.</p>
+          <dl class="suppliers-facts"><div><dt>My role</dt><dd>Founder · Sales & Operations</dd></div><div><dt>Business operated</dt><dd>February 2022–April 2026</dd></div><div><dt>The place</dt><dd>Plot 98, John Hunt Way<br/>Livingstone, Zambia</dd></div></dl>
+          <a class="text-link" href="#beginnings">Follow the story ↓</a>
+        </div>
+        <div class="suppliers-hero-photo"><SuppliersPhoto photo="empty-shop" eager label="The space before the stock / 31 August 2022" /></div>
+      </div>
+    </header>
+
+    <nav class="suppliers-chapters" aria-label="Business story chapters">{chapters.map(([id,n,title])=><a href={`#${id}`}><span>{n}</span>{title}</a>)}</nav>
+
+    <section class="suppliers-growth section-shell" aria-labelledby="growth-title">
+      <p class="eyebrow">The growth, in photographs</p>
+      <h2 id="growth-title">An empty room.<br/><em>A working shop.</em></h2>
+      <p class="suppliers-photo-note">The change is visible: bare shelves, furniture being unpacked, then a shop filled with products. Each stage brought more to organise, more practical work and more responsibility.</p>
+      <div class="suppliers-growth-grid" data-motion-stagger>
+        <SuppliersPhoto photo="empty-shop" label="01 / The starting point · 31 August 2022" />
+        <SuppliersPhoto photo="assembly" label="02 / Building the furniture range" />
+        <SuppliersPhoto photo="stocked-store" label="03 / Bringing the shop to life" />
+      </div>
+      <p class="suppliers-photo-note">A visual account of the business taking shape. Only the empty-shop photograph has a confirmed capture date; the setup and stocked-shop images are from my undated business archive.</p>
+    </section>
+
+    <section id="beginnings" class="suppliers-chapter section-shell">
+      <div class="suppliers-chapter-heading" data-motion><p class="eyebrow">01 / November 2021 → June 2022</p><h2>Finding a way<br/><em>to earn.</em></h2></div>
+      <div class="suppliers-copy" data-motion>
+        <p class="suppliers-lede">When I finished high school in November 2021, I started looking for an income stream. I returned to something I had already tried during the pandemic: selling cupcakes in the field.</p>
+        <p>By February 2022, I had moved into bedding, selling fleece blankets and duvets. The business grew quickly. My father helped source products from Botswana, while my mother and sister supported field sales.</p>
+        <p>By June, I had registered Leo M. Suppliers with PACRA. What began as a way to earn was becoming a business I was responsible for running.</p>
+        <div class="suppliers-milestones"><div><span>Nov 2021</span><p>Finished school.<br/>Returned to field selling.</p></div><div><span>Feb 2022</span><p>Started selling<br/>blankets and duvets.</p></div><div><span>Jun 2022</span><p>Registered<br/>Leo M. Suppliers.</p></div></div>
+      </div>
+    </section>
+
+    <section id="premises" class="suppliers-chapter suppliers-place section-shell">
+      <div class="suppliers-chapter-heading" data-motion><p class="eyebrow">02 / 31 August 2022</p><h2>A name.<br/>An address.<br/><em>A responsibility.</em></h2><p>I had found a store at Plot 98, John Hunt Way in Livingstone. The photograph at the beginning of this story is me standing inside that empty space on 31 August.</p><p>Bare shelves and a garment rack came before the stocked displays. The next step was preparing the space to trade.</p><span class="suppliers-location">Livingstone / Shop No. 3</span></div>
+      <div data-motion><SuppliersPhoto photo="shop-sign" label="The business, in its own name" /></div>
+    </section>
+
+    <section id="furniture" class="suppliers-furniture section-shell">
+      <div class="suppliers-chapter suppliers-chapter--inset"><div class="suppliers-chapter-heading" data-motion><p class="eyebrow">03 / 14 September 2022</p><h2>Opening the shop.<br/><em>Opening the boxes.</em></h2></div><div class="suppliers-copy" data-motion><p class="suppliers-lede">14 September was a turning point: the shop opened and I introduced furniture.</p><p>That brought a different kind of practical work. I learned furniture assembly as the range expanded, alongside the ordering, displays and customer service involved in running the store.</p><p>The photograph below records the setup work: cartons, parts, tools and packaging before the finished display.</p></div></div>
+      <div class="suppliers-wide-photo" data-motion><SuppliersPhoto photo="assembly" label="Behind the finished furniture / Setup archive" /></div>
+      <div class="suppliers-photo-pair" data-motion-stagger><SuppliersPhoto photo="clothing" label="An existing range" /><SuppliersPhoto photo="dining-set" label="A new direction" /></div>
+      <p class="suppliers-photo-note">Furniture joined the range; clothing, bedding and household goods remained part of the shop. These archive photographs document the mix, rather than a precisely dated sequence of stock changes.</p>
+    </section>
+
+    <section id="operations" class="suppliers-operations section-shell">
+      <div class="suppliers-chapter suppliers-chapter--inset"><div class="suppliers-chapter-heading" data-motion><p class="eyebrow">04 / The work behind the displays</p><h2>A shop is more<br/><em>than its stock.</em></h2></div><div class="suppliers-copy" data-motion><p class="suppliers-lede">I was the owner and an active sales representative. My responsibilities reached from ordering products to supporting customers and managing the people helping run the business.</p><p>Employees helped with field operations and in-store attendance. Coordinating that work became part of my experience of business management.</p></div></div>
+      <div class="suppliers-operations-grid"><div data-motion><SuppliersPhoto photo="stocked-store" label="The shop in operation" /><div class="suppliers-secondary-photo"><SuppliersPhoto photo="mixed-display" label="Adapting the product range" /></div></div><div class="suppliers-responsibilities" data-motion-stagger>{responsibilities.map(([title,copy],i)=><div><span>0{i+1}</span><h3>{title}</h3><p>{copy}</p></div>)}</div></div>
+      <aside class="suppliers-facebook" aria-labelledby="facebook-title">
+        <div><p class="eyebrow">Taking the shop online</p><h3 id="facebook-title">From the shop floor<br/>to the Facebook page.</h3><p>I used the Leo M. Suppliers Facebook page to advertise the business and its products. It was another part of my work: presenting what we sold beyond the physical store.</p></div>
+        <a class="button" href="https://www.facebook.com/share/181rq8yLBS/" target="_blank" rel="noopener noreferrer">Explore the Facebook page ↗</a>
+      </aside>
+    </section>
+
+    <section id="next" class="suppliers-chapter suppliers-reflection section-shell">
+      <div class="suppliers-owner" data-motion><SuppliersPhoto photo="owner" label="Leo Mabuku / Founder & operator" /></div>
+      <div class="suppliers-copy" data-motion><p class="eyebrow">05 / April 2026 → What I carry forward</p><h2>The shop closed.<br/><em>The experience stayed.</em></h2><p class="suppliers-lede">Leo M. Suppliers closed in April 2026. It remains an important part of how I approach work.</p><p>I had sold directly to customers, managed employees, made stock decisions and learned a practical skill as the business changed. Those responsibilities gave me experience of the people and daily work behind a product.</p><p>Today, I bring that perspective to software and to operating my internet service. SubTrack BH grew out of another practical need: keeping subscribers, payments and service access organised.</p><a class="button" href="/work/subtrack-bh/">The next chapter: SubTrack BH ↗</a><a class="text-link" href="/resume/">See my full experience ↗</a></div>
+    </section>
+
+    <section class="suppliers-archive section-shell" aria-labelledby="archive-title">
+      <div class="suppliers-archive-heading"><div><p class="eyebrow">Photographs & public record</p><h2 id="archive-title">From the shop archive.</h2></div><a class="text-link" href="https://www.facebook.com/share/181rq8yLBS/" target="_blank" rel="noopener noreferrer">Explore the Facebook page ↗</a></div>
+      <p class="suppliers-photo-note">Original photographs from my business archive. The empty-shop photograph is dated 31 August 2022 from my own record; the other photographs are not individually dated. Phone numbers on the historical shop sign are part of that record, not current contact details.</p>
+      <details><summary>Explore 11 more photographs <span aria-hidden="true">+</span></summary><div class="suppliers-archive-grid">{archive.map(photo=><SuppliersPhoto photo={photo} />)}</div></details>
+      <div class="suppliers-end"><span>Leo M. Suppliers · Operated February 2022–April 2026</span><a class="text-link" href="/contact/">Contact me about my work ↗</a></div>
+    </section>
+  </article>
+</BaseLayout>
