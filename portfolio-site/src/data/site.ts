@@ -17,6 +17,7 @@ import qualitiesJson from './qualities.json';
 import hackathonsJson from './hackathons.json';
 import projectsJson from './projects.json';
 import resumeJson from './resume.json';
+import leoMSuppliersJson from './leo-m-suppliers.json';
 
 /* ------------------------------------------------------------------ schemas */
 
@@ -165,6 +166,50 @@ export const resumeSettingsSchema = z.object({
   }),
 });
 
+
+const businessPhotoSchema = z.object({
+  image: z.string().min(1),
+  alt: z.string().min(1),
+  caption: z.string().min(1),
+  layout: z.enum(['wide', 'tall', 'full']).optional(),
+});
+
+const businessStoryLinkSchema = z.object({
+  label: z.string().min(1),
+  href: z.string().min(1),
+  text: z.string().min(1),
+});
+
+export const businessStorySchema = z.object({
+  name: z.string().min(1),
+  role: z.string().min(1),
+  location: z.string().min(1),
+  period: z.string().min(1),
+  headline: z.string().min(1),
+  intro: z.string().min(1),
+  summary: z.string().min(1),
+  facebook: z.object({ label: z.string().min(1), url: z.string().url() }),
+  hero: businessPhotoSchema,
+  photoNote: z.string().min(1),
+  milestones: z.array(z.object({ date: z.string().min(1), text: z.string().min(1) })).min(1),
+  chapters: z
+    .array(
+      z.object({
+        id: z.string().regex(/^[a-z0-9-]+$/),
+        label: z.string().min(1),
+        title: z.string().min(1),
+        body: z.array(z.string().min(1)).min(1),
+        photos: z.array(businessPhotoSchema).min(1),
+      }),
+    )
+    .min(1),
+  responsibilities: z.array(z.object({ title: z.string().min(1), text: z.string().min(1) })).min(1),
+  reading: z.object({ title: z.string().min(1), body: z.array(z.string().min(1)).min(1) }),
+  reflection: z.object({ title: z.string().min(1), body: z.array(z.string().min(1)).min(1) }),
+  archive: z.array(businessPhotoSchema).min(1),
+  next: z.array(businessStoryLinkSchema).min(1),
+});
+
 /* ------------------------------------------------------------------ parsing */
 
 function load<T extends z.ZodTypeAny>(schema: T, data: unknown, name: string): z.infer<T> {
@@ -186,6 +231,8 @@ export type Experience = z.infer<typeof experienceSchema>;
 export type Project = z.infer<typeof projectSchema>;
 export type Hackathon = z.infer<typeof hackathonSchema>;
 export type ResumeSettings = z.infer<typeof resumeSettingsSchema>;
+export type BusinessStory = z.infer<typeof businessStorySchema>;
+export type BusinessPhoto = z.infer<typeof businessPhotoSchema>;
 
 export const profile = load(profileSchema, profileJson, 'profile');
 export const skillGroups = load(z.array(skillGroupSchema), skillGroupsJson, 'skillGroups');
@@ -196,6 +243,7 @@ export const qualities = load(z.array(z.tuple([z.string(), z.string()])), qualit
 export const hackathons = load(z.array(hackathonSchema), hackathonsJson, 'hackathons');
 export const projects = load(z.array(projectSchema), projectsJson, 'projects');
 export const resumeSettings = load(resumeSettingsSchema, resumeJson, 'resume');
+export const leoMSuppliers = load(businessStorySchema, leoMSuppliersJson, 'leo-m-suppliers');
 
 /* ------------------------------------------------------------------ derived */
 

@@ -1,0 +1,46 @@
+---
+import { Image } from 'astro:assets';
+import { businessImage, businessOriginal } from '../data/business-images';
+
+interface Props {
+  image: string;
+  alt: string;
+  caption: string;
+  layout?: 'wide' | 'tall' | 'full';
+  /** Only the opening photograph loads eagerly. */
+  priority?: boolean;
+  sizes?: string;
+  /** Compact captions for the archive grid. */
+  archive?: boolean;
+}
+
+const { image, alt, caption, layout = 'wide', priority = false, sizes, archive = false } = Astro.props;
+
+const source = businessImage(image);
+const original = businessOriginal(image);
+
+/** Never ask the optimiser for a width the phone photo does not have. */
+const steps = [420, 720, 1100, 1600];
+const widths = [...new Set([...steps.filter((width) => width < source.width), source.width])].sort(
+  (a, b) => a - b,
+);
+const defaultSizes =
+  layout === 'full'
+    ? '(max-width: 900px) 100vw, 1180px'
+    : '(max-width: 760px) 100vw, (max-width: 1100px) 60vw, 680px';
+---
+
+<figure class:list={['story-photo', `story-photo--${layout}`, archive && 'story-photo--archive']}>
+  <a class="photo-open" href={original} data-lightbox-item data-caption={caption}>
+    <Image
+      src={source}
+      alt={alt}
+      widths={widths}
+      sizes={sizes ?? defaultSizes}
+      loading={priority ? 'eager' : 'lazy'}
+      fetchpriority={priority ? 'high' : 'auto'}
+      decoding="async"
+    />
+  </a>
+  <figcaption>{caption}</figcaption>
+</figure>

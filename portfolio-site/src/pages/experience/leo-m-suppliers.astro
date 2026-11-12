@@ -1,0 +1,167 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BusinessPhoto from '../../components/BusinessPhoto.astro';
+import AvailabilityBanner from '../../components/AvailabilityBanner.astro';
+import { leoMSuppliers as story } from '../../data/site';
+
+const description =
+  'Leo M. Suppliers was a home-goods and furniture shop in Livingstone, Zambia, run by Leo Mabuku from February 2022 until operations closed in April 2026. Photographs from the shop and what the work involved.';
+const facts = [
+  { term: 'Role', detail: story.role },
+  { term: 'Location', detail: story.location },
+  { term: 'Trading', detail: story.period },
+  { term: 'Registered', detail: 'PACRA, June 2022' },
+];
+---
+
+<BaseLayout title="Leo M. Suppliers | Business experience | Leo Mabuku" description={description} image="/images/portrait.webp">
+  <article class="biz-story">
+    <header class="biz-hero section-shell" data-motion>
+      <div class="biz-hero-copy">
+        <a class="back-link" href="/about/">← About Leo</a>
+        <p class="eyebrow">Business experience · {story.location}</p>
+        <h1>Leo M. <em>Suppliers</em></h1>
+        <p class="biz-headline">{story.headline}</p>
+        <p class="biz-intro">{story.intro}</p>
+        <dl class="biz-facts">
+          {facts.map((fact) => (
+            <div><dt>{fact.term}</dt><dd>{fact.detail}</dd></div>
+          ))}
+        </dl>
+        <div class="actions">
+          <a class="text-link" href="#the-shop">Follow the photographs <i class="ph ph-arrow-down" aria-hidden="true"></i></a>
+          <a class="text-link" href={story.facebook.url} target="_blank" rel="noreferrer">{story.facebook.label} <i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>
+        </div>
+      </div>
+      <div class="biz-hero-media">
+        <BusinessPhoto
+          image={story.hero.image}
+          alt={story.hero.alt}
+          caption={story.hero.caption}
+          layout="tall"
+          priority
+          sizes="(max-width: 900px) 100vw, 44vw"
+        />
+      </div>
+    </header>
+
+    <section class="biz-timeline section-shell" id="the-shop" data-motion aria-labelledby="biz-timeline-title">
+      <div class="biz-timeline-head">
+        <p class="eyebrow">01 / The business</p>
+        <h2 id="biz-timeline-title">Four years on the same street.</h2>
+        <p class="biz-note-copy">{story.photoNote}</p>
+      </div>
+      <ol class="biz-milestones">
+        {story.milestones.map((milestone) => (
+          <li>
+            <span class="biz-milestone-date">{milestone.date}</span>
+            <p>{milestone.text}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <div class="biz-chapters">
+      {story.chapters.map((chapter, index) => (
+        <section
+          class:list={['biz-chapter', 'section-shell', index % 2 === 1 && 'biz-chapter--flip']}
+          id={chapter.id}
+          data-motion
+          aria-labelledby={`${chapter.id}-title`}
+        >
+          <div class="biz-chapter-copy">
+            <p class="eyebrow">{chapter.label}</p>
+            <h2 id={`${chapter.id}-title`}>{chapter.title}</h2>
+            {chapter.body.map((paragraph) => <p>{paragraph}</p>)}
+          </div>
+          <div class="biz-chapter-media">
+            {chapter.photos.map((photo) => (
+              <BusinessPhoto
+                image={photo.image}
+                alt={photo.alt}
+                caption={photo.caption}
+                layout={photo.layout ?? 'wide'}
+                sizes={chapter.photos.length > 1 ? '(max-width: 760px) 100vw, 40vw' : '(max-width: 760px) 100vw, 55vw'}
+              />
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <section class="biz-work section-shell" data-motion aria-labelledby="biz-work-title">
+      <div class="section-heading">
+        <p class="eyebrow">02 / The work</p>
+        <h2 id="biz-work-title">What running the shop actually meant.</h2>
+        <p>{story.summary}</p>
+      </div>
+      <div class="biz-work-grid">
+        {story.responsibilities.map((item, index) => (
+          <article>
+            <span class="biz-work-index">{String(index + 1).padStart(2, '0')}</span>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
+        ))}
+      </div>
+      <div class="evidence-note">
+        <p class="evidence-note-label"><i class="ph ph-info" aria-hidden="true"></i>{story.reading.title}</p>
+        {story.reading.body.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+    </section>
+
+    <section class="biz-reflection section-shell" data-motion aria-labelledby="biz-reflection-title">
+      <div class="biz-reflection-head">
+        <p class="eyebrow">03 / After the shop</p>
+        <h2 id="biz-reflection-title">{story.reflection.title}</h2>
+      </div>
+      <div class="biz-reflection-body">
+        {story.reflection.body.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+    </section>
+
+    <section class="biz-next section-shell" data-motion aria-labelledby="biz-next-title">
+      <div class="section-heading">
+        <p class="eyebrow">04 / Where it led</p>
+        <h2 id="biz-next-title">The problems moved, the work stayed the same.</h2>
+      </div>
+      <div class="biz-next-grid">
+        {story.next.map((link) => (
+          <a href={link.href}>
+            <strong>{link.label}</strong>
+            <span>{link.text}</span>
+            <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+          </a>
+        ))}
+      </div>
+      <div class="biz-facebook">
+        <p>
+          Old posts from the shop are still up on{' '}
+          <a class="text-link" href={story.facebook.url} target="_blank" rel="noreferrer">{story.facebook.label}<i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>.
+          I have not checked or endorsed anything else published there.
+        </p>
+      </div>
+    </section>
+
+    <section class="biz-archive section-shell" data-motion aria-labelledby="biz-archive-title">
+      <div class="section-heading">
+        <p class="eyebrow">05 / Archive</p>
+        <h2 id="biz-archive-title">More from the shop floor.</h2>
+        <p>The rest of the useful frames, kept smaller. Every photograph opens at its own size.</p>
+      </div>
+      <div class="biz-archive-grid">
+        {story.archive.map((photo) => (
+          <BusinessPhoto
+            image={photo.image}
+            alt={photo.alt}
+            caption={photo.caption}
+            layout="tall"
+            archive
+            sizes="(max-width: 560px) 100vw, (max-width: 900px) 45vw, 23vw"
+          />
+        ))}
+      </div>
+    </section>
+  </article>
+  <AvailabilityBanner />
+</BaseLayout>

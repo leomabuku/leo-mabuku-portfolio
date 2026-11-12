@@ -2801,3 +2801,514 @@ html.lightbox-open {
     transition: none;
   }
 }
+
+/* ============================================================
+   Business story: Leo M. Suppliers
+   The photographs are the page. Nothing here crops them, tints them or
+   turns them into decoration; the layout bends around each frame instead.
+   ============================================================ */
+
+.biz-story {
+  padding-bottom: var(--section-y);
+}
+
+.biz-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.85fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+  padding-block: clamp(2rem, 4vw, 3.5rem) clamp(2.5rem, 6vw, 5rem);
+}
+
+.biz-hero h1 {
+  margin-block: 0.8rem 1.2rem;
+  max-width: 14ch;
+}
+
+.biz-headline {
+  max-width: 26ch;
+  font-size: clamp(1.35rem, 2.3vw, 1.9rem);
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  color: var(--text);
+}
+
+.biz-intro {
+  max-width: 60ch;
+  color: var(--text-dim);
+}
+
+.biz-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.1rem 2rem;
+  margin: 2rem 0 0;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--line);
+}
+
+.biz-facts dt {
+  font: 0.6rem/1.5 var(--mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+
+.biz-facts dd {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--text);
+}
+
+.biz-hero-media .story-photo img {
+  max-height: min(74vh, 660px);
+  width: auto;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+/* ------------------------------------------------------------ photographs */
+
+.story-photo {
+  margin: 0;
+  display: grid;
+  gap: 0.7rem;
+  align-content: start;
+}
+
+.story-photo .photo-open {
+  display: grid;
+  place-items: center;
+  background: #0a1220;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.story-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: fill;
+}
+
+.story-photo--tall img {
+  width: auto;
+  max-width: 100%;
+  max-height: 620px;
+}
+
+.story-photo figcaption {
+  max-width: 56ch;
+  font: 0.7rem/1.65 var(--mono);
+  color: var(--muted);
+}
+
+.story-photo--archive img {
+  max-height: 300px;
+}
+
+/* ------------------------------------------------------------ timeline */
+
+.biz-timeline {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  padding-block: var(--section-y) clamp(2rem, 4vw, 3rem);
+  border-bottom: 1px solid var(--line);
+}
+
+.biz-timeline-head h2 {
+  margin-bottom: 1.2rem;
+}
+
+.biz-note-copy {
+  max-width: 46ch;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.biz-milestones {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: milestone;
+}
+
+.biz-milestones li {
+  display: grid;
+  grid-template-columns: 11.5rem minmax(0, 1fr);
+  gap: 0.5rem 1.5rem;
+  margin: 0;
+  padding: 1.1rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.biz-milestones li:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.biz-milestone-date {
+  font: 0.68rem/1.6 var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.biz-milestones p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--text-dim);
+}
+
+/* ------------------------------------------------------------ chapters */
+
+.biz-chapters {
+  padding-block: clamp(1rem, 3vw, 2rem);
+}
+
+.biz-chapter {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+  padding-block: clamp(2.5rem, 6vw, 5rem);
+}
+
+.biz-chapter + .biz-chapter {
+  border-top: 1px solid var(--line-soft);
+}
+
+.biz-chapter--flip .biz-chapter-copy {
+  order: 2;
+}
+
+.biz-chapter-copy h2 {
+  margin-bottom: 1.3rem;
+  max-width: 24ch;
+}
+
+.biz-chapter-copy p:not(.eyebrow) {
+  max-width: 56ch;
+  color: var(--text-dim);
+}
+
+/* Photographs stack in the story column. A two-up grid left an empty cell
+   whenever a tall frame followed a wide one, which read as a mistake. */
+.biz-chapter-media {
+  display: grid;
+  gap: clamp(1rem, 2vw, 1.6rem);
+  align-content: start;
+}
+
+.biz-chapter-media .story-photo--tall img {
+  max-height: 560px;
+}
+
+/* ------------------------------------------------------------ the work */
+
+.biz-work {
+  padding-block: var(--section-y);
+  border-top: 1px solid var(--line);
+}
+
+.biz-work-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin-bottom: 2.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.biz-work-grid article {
+  padding: 1.6rem 1.5rem 1.8rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.biz-work-grid article + article {
+  padding-left: 1.5rem;
+  border-left: 1px solid var(--line);
+}
+
+.biz-work-index {
+  display: block;
+  margin-bottom: 0.8rem;
+  font: 0.62rem/1.5 var(--mono);
+  letter-spacing: 0.14em;
+  color: var(--gold);
+}
+
+.biz-work-grid h3 {
+  margin-bottom: 0.6rem;
+  font-size: 1.05rem;
+}
+
+.biz-work-grid p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+/* ------------------------------------------------------------ reflection */
+
+.biz-reflection {
+  display: grid;
+  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  padding-block: var(--section-y);
+  border-top: 1px solid var(--line);
+}
+
+.biz-reflection-head h2 {
+  max-width: 18ch;
+}
+
+.biz-reflection-body {
+  padding-left: clamp(1rem, 3vw, 2.2rem);
+  border-left: 2px solid var(--gold);
+}
+
+.biz-reflection-body p {
+  max-width: 62ch;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: var(--text-dim);
+}
+
+.biz-reflection-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* ------------------------------------------------------------ where it led */
+
+.biz-next {
+  padding-block: var(--section-y);
+  border-top: 1px solid var(--line);
+}
+
+.biz-next-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.biz-next-grid a {
+  display: grid;
+  gap: 0.55rem;
+  padding: 1.4rem 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: rgb(22 36 59 / 35%);
+  transition:
+    border-color 0.2s,
+    transform 0.2s;
+}
+
+.biz-next-grid a:hover,
+.biz-next-grid a:focus-visible {
+  border-color: var(--accent-line);
+  transform: translateY(-2px);
+}
+
+.biz-next-grid strong {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.biz-next-grid span {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.biz-next-grid i {
+  color: var(--accent);
+  font-size: 0.9rem;
+}
+
+.biz-facebook {
+  margin-top: 2rem;
+  max-width: 68ch;
+}
+
+.biz-facebook p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.biz-facebook .text-link {
+  color: var(--accent);
+}
+
+/* ------------------------------------------------------------ archive */
+
+.biz-archive {
+  padding-block: var(--section-y);
+  border-top: 1px solid var(--line);
+}
+
+.biz-archive-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.6rem 1.2rem;
+}
+
+.biz-archive-grid .story-photo figcaption {
+  font-size: 0.64rem;
+}
+
+/* The photo affordance cannot rely on hover on a phone. */
+@media (hover: none) {
+  .photo-open::after {
+    opacity: 0.85;
+  }
+}
+
+@media (max-width: 1000px) {
+  .biz-hero,
+  .biz-timeline,
+  .biz-reflection {
+    grid-template-columns: 1fr;
+  }
+  .biz-chapter {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+  }
+  .biz-chapter--flip .biz-chapter-copy {
+    order: 0;
+  }
+  .biz-work-grid,
+  .biz-next-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .biz-work-grid article:nth-child(2n + 1) {
+    padding-left: 0;
+    border-left: 0;
+  }
+  .biz-work-grid article:nth-child(2n) {
+    padding-left: 1.5rem;
+    border-left: 1px solid var(--line);
+  }
+  .biz-archive-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .biz-hero-media .story-photo img {
+    max-height: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .biz-facts {
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+  .biz-milestones li {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+  }
+  .biz-work-grid,
+  .biz-next-grid {
+    grid-template-columns: 1fr;
+  }
+  .biz-work-grid article,
+  .biz-work-grid article:nth-child(2n),
+  .biz-work-grid article + article {
+    padding: 1.3rem 0;
+    border-left: 0;
+  }
+  .biz-archive-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.2rem 0.9rem;
+  }
+  .biz-reflection-body {
+    padding-left: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .biz-next-grid a {
+    transition: none;
+  }
+  .biz-next-grid a:hover,
+  .biz-next-grid a:focus-visible {
+    transform: none;
+  }
+}
+
+/* The About preview: one photograph, no cropping, and a plain invitation. */
+.prose a.story-preview {
+  color: inherit;
+  text-decoration: none;
+}
+
+.story-preview {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1.3rem;
+  margin: 1.8rem 0 2.4rem;
+  padding: 1rem 1.3rem 1rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: rgb(22 36 59 / 35%);
+  transition:
+    border-color 0.2s,
+    transform 0.2s;
+}
+
+.story-preview:hover,
+.story-preview:focus-visible {
+  border-color: var(--accent-line);
+  transform: translateY(-2px);
+}
+
+.story-preview-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+}
+
+.story-preview-copy {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.story-preview-copy small {
+  font: 0.6rem/1.5 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.story-preview-copy strong {
+  font-size: 1.02rem;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+
+.story-preview-copy span {
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+
+.story-preview > i {
+  color: var(--accent);
+}
+
+.resume-role-story {
+  margin-top: 0.6rem;
+}
+
+@media (max-width: 640px) {
+  .story-preview {
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+    gap: 1rem;
+    padding: 0.9rem;
+  }
+  .story-preview > i {
+    display: none;
+  }
+}
