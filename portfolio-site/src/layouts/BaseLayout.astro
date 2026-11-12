@@ -14,9 +14,19 @@ const path = Astro.url.pathname;
 const nav = [['/work/', 'Work'], ['/about/', 'About'], ['/playground/', 'Playground'], ['/resume/', 'Resume'], ['/notes/', 'Notes'], ['/contact/', 'Contact']];
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const socialImage = new URL(image, Astro.site);
+const websiteSchema = path === '/' ? {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': new URL('/#website', Astro.site).toString(),
+  name: 'Leo Mabuku',
+  alternateName: ['Leo Mabuku Portfolio', 'leomabuku.me'],
+  url: Astro.site?.toString(),
+  publisher: { '@id': new URL('/#person', Astro.site).toString() },
+} : null;
 const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
+  '@id': new URL('/#person', Astro.site).toString(),
   name: profile.name,
   jobTitle: 'Software Developer and Computer Science Graduate',
   email: `mailto:${profile.email}`,
@@ -47,6 +57,7 @@ const personSchema = {
     <meta name="twitter:image" content={socialImage} />
     <title>{title}</title>
     <ClientRouter fallback="animate" />
+    {websiteSchema && <script type="application/ld+json" is:inline set:html={JSON.stringify(websiteSchema)} />}
     <script type="application/ld+json" is:inline set:html={JSON.stringify(personSchema)} />
   </head>
   <body data-page={path === '/' ? 'home' : path.split('/').filter(Boolean)[0] ?? 'home'}>
