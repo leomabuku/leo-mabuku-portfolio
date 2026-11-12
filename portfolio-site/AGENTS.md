@@ -30,3 +30,5 @@ When implementing from a selected generated mock, treat that image as the source
 - Case studies may carry optional audience, market, production-path and limitations blocks; only publish them when the claims can be backed by evidence or clearly labelled as simulation.
 
 - Latest user direction: make the experience professional, distinctive and story-driven. Reframe copy and components when useful, preserve factual evidence, and use purposeful animation with reduced-motion support. The homepage chapter index and problem-led project introductions implement this direction.
+
+- November 2026: long-form first-person articles use one story system defined at the end of `src/styles/global.css`: a milestone waypoint rail under the hero, gold-ruled pull quotes, framed evidence figures that open in the shared photo viewer, a fenced code block with a file bar, and a linked "Explore" panel. Keep narrative notes in `.prose`, keep em dashes out of all copy, and link each story back from the project case study it belongs to.
