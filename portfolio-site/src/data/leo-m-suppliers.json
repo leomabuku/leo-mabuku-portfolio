@@ -1,0 +1,234 @@
+{
+  "name": "Leo M. Suppliers",
+  "role": "Founder · Sales & Operations",
+  "location": "Livingstone, Zambia",
+  "period": "February 2022 – April 2026",
+  "headline": "From an empty shop to everyday responsibility.",
+  "intro": "Before I built software around everyday operations, I ran them. Leo M. Suppliers started as a field-based fleece-blanket business in February 2022 and became a shop on John Hunt Way in Livingstone. I sold, ordered stock, arranged the displays, carried deliveries out and learned furniture assembly as the range changed. Operations closed in April 2026.",
+  "summary": "Leo M. Suppliers began with field sales in February 2022 and grew into a physical store in Livingstone. I handled customer relationships, stock decisions, marketing and deliveries, and learned furniture assembly as the business evolved. Operations closed in April 2026, and the experience remains part of how I approach practical problems and the people affected by them.",
+  "facebook": {
+    "label": "Leo M. Suppliers on Facebook",
+    "url": "https://www.facebook.com/share/181rq8yLBS/"
+  },
+  "hero": {
+    "image": "portrait-inside",
+    "alt": "Leo Mabuku standing in a pale-blue shirt and tie between furniture displays inside the shop",
+    "caption": "Inside the shop during its operating years."
+  },
+  "photoNote": "The photographs come from the shop’s working years and are not dated. The milestones below use the dates I can stand behind, and the chapters describe the shop rather than a dated sequence.",
+  "milestones": [
+    {
+      "date": "February 2022",
+      "text": "Started selling fleece blankets in the field. The blankets were sourced from Botswana with help from my father, and my mother and sister supported field sales."
+    },
+    {
+      "date": "June 2022",
+      "text": "Registered the business with PACRA."
+    },
+    {
+      "date": "14 September 2022",
+      "text": "Opened a shop at Plot 98, John Hunt Way, Livingstone. The window sign carries the shop’s own numbering, Shop No. 3, alongside the street address."
+    },
+    {
+      "date": "Late 2022",
+      "text": "The range moved from clothing and bedding toward furniture. The change was gradual, and both kinds of stock shared the floor for a while."
+    },
+    {
+      "date": "April 2026",
+      "text": "Closed operations."
+    }
+  ],
+  "chapters": [
+    {
+      "id": "setting-up",
+      "label": "01 / Setting up the shop",
+      "title": "Containers, shelving and a floor to fill.",
+      "body": [
+        "Setting up meant packaging and shelving before it meant selling. Furniture arrived flat-packed, so part of the job was opening each box, checking what was inside and putting the pieces together before anything could go on display.",
+        "I learned the room as I went: which corner suited the taller pieces, how much space a walkway needs, and what had to sit near the window so people passing on the street could see it."
+      ],
+      "photos": [
+        {
+          "image": "assembly-parts",
+          "layout": "wide",
+          "alt": "Cardboard boxes, furniture panels, tools and packaging spread across the shop floor, with clothes hanging on a rail behind",
+          "caption": "Parts, packaging and tools on the shop floor while furniture was being prepared for display."
+        }
+      ]
+    },
+    {
+      "id": "display",
+      "label": "02 / Building the display",
+      "title": "Clothing, curtains and household goods, arranged to be found.",
+      "body": [
+        "The shop opened with clothing and bedding. I hung rails along the wall, stacked curtains and blankets where customers could handle them, and kept the smaller household goods within reach near the front.",
+        "What people picked up changed the layout. Anything a customer turned over and put back told me how to explain it better the next time, and where it should sit."
+      ],
+      "photos": [
+        {
+          "image": "textiles-clothing",
+          "layout": "tall",
+          "alt": "Clothing on wall rails, patterned curtain rolls, wire racks of kitchenware and plastic laundry baskets inside the shop",
+          "caption": "Shirts, dresses, curtain rolls and kitchen racks along the back wall."
+        },
+        {
+          "image": "interior-mixed",
+          "layout": "wide",
+          "alt": "Cabinets, glass-top stands, rugs, towels and hanging clothes sharing one shop floor",
+          "caption": "Cabinets, glass-top stands, textiles and clothing sharing one floor as the range widened."
+        }
+      ]
+    },
+    {
+      "id": "furniture",
+      "label": "03 / The furniture chapter",
+      "title": "A harder product to sell, and a better one to learn from.",
+      "body": [
+        "Furniture changed the work. A blanket is easy to compare; a dining set is not. I had to learn the differences between pieces, what each one was made of, and how to talk about size and finish to someone standing in the room.",
+        "Assembly became part of the job. Glass tops, pedestal bases, TV brackets and drawer runners all had to be checked before a customer took anything away, because one missing screw turns a sale into a second trip."
+      ],
+      "photos": [
+        {
+          "image": "dining-set",
+          "layout": "wide",
+          "alt": "A glass-top dining table with six black chairs on the shop floor, packaging still on the seat frames",
+          "caption": "A glass-top dining table and six chairs, set up on the floor and still partly wrapped for sale."
+        },
+        {
+          "image": "stocked-overview",
+          "layout": "wide",
+          "alt": "A stocked shop interior with a ceiling fan, television, glass furniture, clothing and boxed goods",
+          "caption": "A later layout: furniture, clothing, bedding and household goods under one ceiling."
+        },
+        {
+          "image": "tv-stand-white",
+          "layout": "tall",
+          "alt": "A white television unit with a black wall bracket mounted on it, photographed outside the shop window",
+          "caption": "A television unit with its mounting bracket fitted, photographed against the shop window."
+        }
+      ]
+    },
+    {
+      "id": "person",
+      "label": "04 / Person and place",
+      "title": "The shop was one person answering the questions.",
+      "body": [
+        "I opened up, priced the stock, answered the same questions about price and delivery, carried goods out to customers and locked the door at the end of the day. The photographs with me in them are the honest version of that: one person, a room full of stock and someone waiting for a straight answer."
+      ],
+      "photos": [
+        {
+          "image": "portrait-entrance",
+          "layout": "tall",
+          "alt": "Leo Mabuku in a blue shirt and tie standing at the glazed shop entrance, with a red stool and the shop interior behind him",
+          "caption": "At the shop entrance during the years the business was running."
+        },
+        {
+          "image": "sign-cabinet",
+          "layout": "wide",
+          "alt": "A white unit outside the shop below a window sign reading Leo M Suppliers, Shop No. 3, for all your home furniture",
+          "caption": "The window sign for “all your home furniture”, with the shop numbering and the phone numbers used at the time."
+        }
+      ]
+    }
+  ],
+  "responsibilities": [
+    {
+      "title": "Sourcing and ordering",
+      "text": "Blankets came from Botswana at the start. Later orders were chosen around what customers kept asking for and what was already moving."
+    },
+    {
+      "title": "Stock decisions",
+      "text": "Which pieces to hold, what to reorder and what had sat too long. The floor was the record of those decisions."
+    },
+    {
+      "title": "Displays",
+      "text": "Arranging the shop so a customer could see the range, compare pieces and find the cheaper option without asking."
+    },
+    {
+      "title": "Sales and customers",
+      "text": "Explaining materials, sizes and finishes, agreeing a price and following up when someone said they would come back."
+    },
+    {
+      "title": "Assembly",
+      "text": "Learning flat-pack construction as the range changed, and checking every piece before it left the shop."
+    },
+    {
+      "title": "Deliveries and records",
+      "text": "Taking goods to customers, keeping the paperwork straight and handling the day-to-day running of a registered business."
+    }
+  ],
+  "reading": {
+    "title": "What the photographs show",
+    "body": [
+      "They show the shop’s stock, how it was arranged and the person running it. They do not measure sales, revenue, profit or customer numbers, and neither does this page.",
+      "The uploads arrived with messaging-app timestamps, which say nothing about when the shop was photographed. That is why the chapters carry labels instead of dates."
+    ]
+  },
+  "reflection": {
+    "title": "What I took from it",
+    "body": [
+      "Running the shop is where I learned that a system is only as good as its state. A stock count that is wrong once costs a customer, and a payment record that is wrong once costs trust. That is the problem I keep solving in software: what is true, when, and for whom.",
+      "Talking to customers every day taught me to explain before persuading. Half of the job was translating what a piece is made of, what fits a small room and why the cheaper option might not last. I write documentation and interface copy with that in mind.",
+      "The shop closed in April 2026. What stayed is the habit of checking the details a customer will notice and the ones a system quietly depends on."
+    ]
+  },
+  "archive": [
+    {
+      "image": "stocked-shopfront",
+      "alt": "A densely stocked shop interior seen in portrait format, with cabinets, walkers, fans and boxed goods",
+      "caption": "A later layout with walkers, stands and boxed stock packed into the same footprint."
+    },
+    {
+      "image": "interior-tv-wall",
+      "alt": "Cabinets and glass furniture along the inside wall of the shop, with a television switched on",
+      "caption": "Cabinets and glass furniture against the inside wall, with a television switched on."
+    },
+    {
+      "image": "chairs-pedestal",
+      "alt": "A black and an orange upholstered pedestal chair standing on the shop floor",
+      "caption": "Two upholstered pedestal chairs from the furniture range."
+    },
+    {
+      "image": "stools-outside",
+      "alt": "Three pedestal stools in black, white and red standing outside the shop window",
+      "caption": "Pedestal stools set out in front of the shop window."
+    },
+    {
+      "image": "tv-stand-black",
+      "alt": "A black glass television stand with a mounting frame, photographed outside the shop window",
+      "caption": "A black glass unit with its mounting frame, shot outside the shop."
+    },
+    {
+      "image": "furniture-clothing",
+      "alt": "Clothing rails, folded towels, fans and glass furniture together in the shop",
+      "caption": "Clothing rails, towels and glass furniture together in one of the mixed layouts."
+    },
+    {
+      "image": "portrait-wide",
+      "alt": "Leo Mabuku in a pale-blue shirt and tie standing among furniture inside the shop",
+      "caption": "Another frame from the same sitting inside the shop."
+    },
+    {
+      "image": "mirror-portrait",
+      "alt": "A mirror photograph of Leo Mabuku in a football shirt, with fans and hanging clothes behind him",
+      "caption": "A photograph in the shop mirror, taken during the operating years."
+    }
+  ],
+  "next": [
+    {
+      "label": "The SubTrack BH case study",
+      "href": "/work/subtrack-bh/",
+      "text": "The same operational problems in a different form: subscribers instead of stock, expiry dates instead of shelf space."
+    },
+    {
+      "label": "About Leo",
+      "href": "/about/",
+      "text": "The full path from running a business to building software."
+    },
+    {
+      "label": "Resume",
+      "href": "/resume/",
+      "text": "Dates, roles and the downloadable one-page version."
+    }
+  ]
+}

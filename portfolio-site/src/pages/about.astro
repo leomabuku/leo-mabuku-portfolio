@@ -1,9 +1,12 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import AvailabilityBanner from '../components/AvailabilityBanner.astro';
 import HackathonRecord from '../components/HackathonRecord.astro';
 import HackathonEvidence from '../components/HackathonEvidence.astro';
-import { qualities, hackathons } from '../data/site';
+import { qualities, hackathons, leoMSuppliers } from '../data/site';
+import { businessImage } from '../data/business-images';
+const shopSign = businessImage('sign-cabinet');
 const focus = ['Completing the CodeAlpha IoT internship (Oct–Nov 2026)', 'Turning shipped projects into a first professional role', 'Extending TongaLang and SubTrack BH', 'Operating and improving the Starlink internet service', 'Taking SmartWater Zambia toward a field pilot', 'Deepening networking and IoT practice']
 ---
 <BaseLayout title="About Leo Mabuku | Developer and Entrepreneur" description="Leo Mabuku’s path from entrepreneurship into Computer Science, software development and practical technology products.">
@@ -15,6 +18,17 @@ const focus = ['Completing the CodeAlpha IoT internship (Oct–Nov 2026)', 'Turn
       <p>In February 2022, I started Leo M. Suppliers as a field-based fleece blanket business. The products were sourced from Botswana with help from my father, while my mother and sister supported field sales. Working directly through communities taught me the value of trust, visibility and customer relationships.</p>
       <p>The business was registered with PACRA in June 2022. On 14 September, we opened a physical shop at Plot 98, John Hunt Way in Livingstone. It initially operated as a clothing and bedding store before transitioning into furniture toward the end of that year.</p>
       <p>As owner and an active sales representative, I handled customer engagement, ordering, stock decisions, marketing, deliveries and day-to-day operations. I also learned furniture assembly as the product range changed. The business closed in April 2026.</p>
+      <a class="story-preview" href="/experience/leo-m-suppliers/">
+        <span class="story-preview-media">
+          <Image src={shopSign} alt="A white unit outside the shop below the Leo M Suppliers window sign" widths={[320, 640]} sizes="(max-width: 720px) 100vw, 260px" loading="lazy" decoding="async" />
+        </span>
+        <span class="story-preview-copy">
+          <small>Photo story · {leoMSuppliers.period}</small>
+          <strong>{leoMSuppliers.headline}</strong>
+          <span>Seventeen photographs from the shop floor, with what running it actually involved.</span>
+        </span>
+        <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+      </a>
       <h2 data-story-step="02">Computer Science connected the pieces.</h2>
       <p>I began a Bachelor of Science in Computer Science at The Copperbelt University through a special academic calendar on 8 May 2023. After completing the accelerated first-year calendar in December, the cohort joined the mainstream academic calendar in January 2024.</p>
       <p>Software became the place where the analytical and the practical met. I finished the degree in 2025, and my work now runs from programming languages and Android apps to IoT telemetry, an operating-system exercise and tools I built because a job needed them.</p>

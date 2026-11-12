@@ -136,3 +136,28 @@ After the photo viewer merged, checking the deployed bundle showed that `src/scr
 - Verified against the built markup as well: `dist/about/index.html` yields four viewer items and opens "4 of 4"; `dist/index.html` opens "1 of 3"; selecting the second showcase thumbnail rewrites the lead link to `installer-setup.png` before it opens.
 
 Verification: `astro check` 0/0/0, 45 tests across 7 files, 17-route build, `npm run audit` 18 pages / 702 references clean, and the built bundle now contains the lightbox and hero-lab code (`lightbox-open`, `data-lab-run`). The interpreter run itself still needs a browser, since it downloads Pyodide.
+
+## Leo M. Suppliers business story (branch `arena/e07e22eb`)
+
+A dedicated retrospective at `/experience/leo-m-suppliers/`, built from the photographs Leo supplied and his written account. It is a business-story page inside a developer portfolio, not a shop, not a LocalBusiness listing.
+
+**Structure.** Hero (name, role, dates, one portrait), five dated milestones (Feb 2022 field sales, PACRA June 2022, shop opened 14 September 2022, late-2022 range shift, closed April 2026), four photographic chapters (setting up, the display, the furniture chapter, person and place), a "what running the shop meant" grid, a note on what the photographs do and do not show, a reflection, three onward links, and an eight-photo archive. Seventeen of the nineteen uploads are used; the two byte-identical duplicates (stools and the sign cabinet) were dropped.
+
+**Files.**
+- `src/pages/experience/leo-m-suppliers.astro`: the page.
+- `src/components/BusinessPhoto.astro`: one figure = anchor + responsive image + caption. Reuses the existing `photo-open` / `data-lightbox-item` contract, so the photo viewer works here with no new script.
+- `src/data/leo-m-suppliers.json`: all copy, milestones, chapters, captions and alt text. Validated by `businessStorySchema` in `src/data/site.ts`.
+- `src/data/business-images.ts`: globs `src/assets/leo-m-suppliers/*.jpg` twice, once for display metadata and once for the untouched original that the viewer opens.
+- `src/assets/leo-m-suppliers/`: the seventeen kept originals, named after what is in the frame rather than the messaging-app timestamp.
+
+**Deliberate choices.**
+- No generated substitutes, no stock imagery, no invented dates. Only the five milestones carry dates; the chapters are labelled because the upload timestamps say nothing about when anything was photographed.
+- The phone numbers on the shop sign stay in the photograph and out of the contact details. There is no click-to-call, no map pin and no opening hours.
+- The Facebook link is labelled "Leo M. Suppliers on Facebook" and the page says plainly that nothing else published there has been checked.
+- No sales, revenue, profit, growth or customer counts appear anywhere, and a test enforces it.
+- The closing in April 2026 is stated without a reason, because no reason was given.
+
+**Known gap.** The upload set is missing `15.55.41`, the empty-shop frame Leo described as the opening of the story, and `15.55.32`. Chapter 01 therefore opens on the unpacking and assembly photograph. If the empty shop arrives, it becomes the first image of chapter 01 without changing any copy.
+
+**Verification.** `astro check` 0/0/0; 52 tests across 8 files, including seven new checks in `scripts/business-story.test.ts` (no duplicate photographs, every image resolves to a file, every photograph has distinct alt text and caption, captions carry no dates, no invented metrics, site voice, links resolve); 18-page build; `npm run audit` 19 pages / 790 references clean; axe-core via jsdom on the new route, `/about/`, `/resume/` and the homepage with no violations. Not verified: the page in a real browser at any width, and real touch behaviour of the photo viewer, since this environment has no browser.
+
