@@ -136,3 +136,22 @@ After the photo viewer merged, checking the deployed bundle showed that `src/scr
 - Verified against the built markup as well: `dist/about/index.html` yields four viewer items and opens "4 of 4"; `dist/index.html` opens "1 of 3"; selecting the second showcase thumbnail rewrites the lead link to `installer-setup.png` before it opens.
 
 Verification: `astro check` 0/0/0, 45 tests across 7 files, 17-route build, `npm run audit` 18 pages / 702 references clean, and the built bundle now contains the lightbox and hero-lab code (`lightbox-open`, `data-lab-run`). The interpreter run itself still needs a browser, since it downloads Pyodide.
+
+## Story article: "From an idea to TongaLang" (branch `arena/4119f5fb`)
+
+The user supplied a first-person account of building TongaLang, from the first question in January 2026 through the proposal defence on 18 February, the working interpreter in April, version 0.1 in June, the Tkinter IDE in August, the final defence and an A grade in Project Seminars, to the September release notes and going public.
+
+What shipped:
+
+- **New note at `/notes/from-an-idea-to-tongalang/`** (`src/pages/notes/from-an-idea-to-tongalang.astro`), dated 12 November 2026, 12 minute read. It keeps the user's narrative headings and voice, and keeps the technical detail: PLY, lexer/parser, AST, runtime environments, interpreter, Tkinter IDE, automatic test suites, Test Lab, the Windows installer and 179 passing tests.
+- **A milestone waypoint rail** under the hero (Jan, 18 Feb, Apr, Jun, Aug, final defence, Sep) with real anchor links to the matching sections. It scrolls horizontally rather than wrapping.
+- **Three real screenshots** (Test Lab, AST explorer, Windows installer) in the shared photo viewer with their own captions, plus a code figure showing an excerpt of the real `06_milimo.tg` example.
+- **A pull quote** for the panel lecturer's words, attributed only as "One of the lecturers on the proposal panel" at that point in the story. Dr George Mufungulwa is named later, as in the user's text.
+- **An "Explore TongaLang" panel** linking the repository, releases, the case study and the playground, plus the closing line and byline.
+- **Cross-links:** the story is first in `src/pages/notes/index.astro`, and the TongaLang case study now links to it from the Reflection section (`src/pages/work/[slug].astro`, `.case-story-link`).
+- **Shared styles** appended to `src/styles/global.css`: the story block, plus missing `.prose pre`, `.prose code`, `.prose h3` and list styles that also fix the code samples in the five earlier notes.
+- **Six em dashes removed** from three earlier notes that broke the site-wide "no em dashes" rule.
+
+Verification: `astro check` 0/0/0; 45 tests pass; 23-route production build; `npm run audit` clean across 24 pages and 902 internal references; axe-core through jsdom on the new note, the notes index and the TongaLang case study reports no violations (contrast and region disabled, as in earlier runs); zero em dashes in `src` and in the built HTML.
+
+Not verified: this environment has no browser, so there is no screenshot, no real keyboard walkthrough, no 390px visual check and no full-motion appearance check for the waypoint rail and the new figures. Contrast for the new colours was reasoned from existing tokens, not measured in a browser. Inspect the deployed build before treating the article as visually signed off.

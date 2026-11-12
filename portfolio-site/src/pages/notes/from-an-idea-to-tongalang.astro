@@ -1,0 +1,245 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const published = '12 November 2026';
+const readingTime = '12 min read';
+
+const waypoints = [
+  { date: 'Jan 2026', label: 'The question', href: '#the-question' },
+  { date: '18 Feb 2026', label: 'Proposal defence', href: '#the-defence' },
+  { date: 'Apr 2026', label: 'First prototype', href: '#the-interpreter' },
+  { date: 'Jun 2026', label: 'Version 0.1', href: '#the-interpreter' },
+  { date: 'Aug 2026', label: 'The IDE', href: '#the-ide' },
+  { date: 'Final defence', label: 'An A grade', href: '#the-final-defence' },
+  { date: 'Sep 2026', label: 'Public release', href: '#beyond-university' },
+];
+---
+
+<BaseLayout
+  title="From an Idea to TongaLang: Building a Programming Language in Zambia | Leo Mabuku"
+  description="How a question in my final year at university became TongaLang: the research, the proposal defence, the lexer, parser, interpreter, the desktop IDE, the tests and the public release."
+>
+  <article class="story-article">
+    <header class="page-hero" data-motion data-scene="notes">
+      <p class="eyebrow">Notes · TongaLang · {published} · {readingTime}</p>
+      <h1>From an idea<br/><em>to TongaLang.</em></h1>
+      <p>How a simple question during my final year at university led me into the world of programming language design, research and engineering.</p>
+      <div class="page-hero-status" aria-hidden="true"><span>Zambia</span><span>Language design</span><span>Python · PLY</span></div>
+    </header>
+
+    <nav class="story-waypoints" aria-label="Milestones in this story">
+      {waypoints.map((point) => (
+        <a class="story-waypoint" href={point.href}>
+          <span class="story-waypoint-date">{point.date}</span>
+          <span class="story-waypoint-label">{point.label}</span>
+        </a>
+      ))}
+    </nav>
+
+    <section class="section-shell">
+      <div class="prose" data-motion>
+        <p id="the-question" class="story-opening">In January 2026, as I was preparing to undertake my final-year project, I knew I wanted to work on something related to <strong>ICT for Education (ICT4ED)</strong>.</p>
+
+        <p>I wanted to build something meaningful, something that would challenge me technically while exploring how technology could contribute to education.</p>
+
+        <p>At some point, a question came to mind:</p>
+
+        <p class="story-question">How are programming languages actually created?</p>
+
+        <p>Throughout our studies, we had been introduced to the theory behind programming languages, compilers, interpreters and related concepts. But I wanted to go beyond the classroom explanations. I wanted to understand the process by actually building one myself.</p>
+
+        <p>That curiosity became the starting point of what is now <strong>TongaLang</strong>.</p>
+
+        <h2>Finding a direction</h2>
+        <p>Initially, my goal was simply to develop my own programming language.</p>
+
+        <p>But as I started researching existing programming languages and their implementations, I became interested in another question: why weren’t more programming languages being developed around the indigenous languages spoken in my country, Zambia?</p>
+
+        <p>There are many languages spoken across Zambia, yet the programming tools we commonly encounter in education are largely based on English terminology.</p>
+
+        <p>I began exploring the possibility of building a programming language that used vocabulary from a local language.</p>
+
+        <p>That is how the idea for TongaLang was born.</p>
+
+        <p>I took the concept to my project supervisor, explained what I wanted to achieve, and received his support.</p>
+
+        <p>At that point, I had an approved direction, but I was still far from understanding the full amount of work ahead of me.</p>
+
+        <p><strong>I was stepping into a field I had never explored at this depth before.</strong> I knew it would be difficult. I also knew that if I was going to pursue it, I needed to start early.</p>
+
+        <h2>Researching what I had signed up for</h2>
+        <p>I spent a considerable amount of time researching programming language implementation.</p>
+
+        <p>I studied existing attempts at indigenous-language programming languages, explored different implementation approaches, and tried to understand how the major components of a language fit together.</p>
+
+        <p>I looked into lexical analysis, parsing, grammar design, abstract syntax trees, interpreters and runtime environments.</p>
+
+        <p>I wanted to understand the process rather than simply take an existing language and replace its keywords.</p>
+
+        <p>Eventually, I settled on developing my own language implementation using Python and <strong>PLY (Python Lex-Yacc)</strong>. PLY would provide tools for lexical analysis and parsing, but I still had to design the language grammar, build its interpreter, implement its runtime behaviour, and decide how programs would be executed.</p>
+
+        <p>The more I researched, the more I understood why building a programming language was not a small undertaking. But by then, I had made my decision.</p>
+
+        <h2 id="the-defence">18 February: defending the idea</h2>
+        <p>After completing my research and preparing my project proposal, I received approval from my supervisor. On <strong>18 February 2026</strong>, I faced the next challenge: presenting and defending the proposal before a panel of lecturers.</p>
+
+        <p>The format was straightforward but demanding: five minutes to present the project, followed by five minutes of technical examination and defence.</p>
+
+        <p>I’ll admit something here. <strong>Public speaking has never been one of my strongest areas.</strong></p>
+
+        <p>I was nervous. My presentation wasn’t perfect. I stammered at certain points, and I knew I could have delivered it better. But I delivered it.</p>
+
+        <p>Then came the technical questions.</p>
+
+        <p>The panel questioned the feasibility of the project, the complexity of what I was proposing, and whether I fully understood what I was getting myself into. It was a tough examination.</p>
+
+        <p>However, I had spent time researching the topic, studying different implementations, and understanding the technical requirements. Even though my presentation had been shaky, I was confident in my research and able to defend the engineering decisions behind the proposal.</p>
+
+        <p>I stood my ground. By the time I walked out of that room, <strong>the panel had approved my project</strong>.</p>
+
+        <p>One lecturer in particular had taken a strong interest in what I was proposing. I still remember his words:</p>
+
+        <blockquote class="story-quote">
+          <p>This is a complex system you’re working on. You seem confident in what you’ve decided to do. I’m looking forward to seeing this project. Hope you deliver.</p>
+          <footer>One of the lecturers on the proposal panel</footer>
+        </blockquote>
+
+        <p>Those words stayed with me. I knew that one of the toughest examiners had his eyes on my project, and I had given myself something serious to deliver. There was no time to waste.</p>
+
+        <h2 id="the-interpreter">From research to a working interpreter</h2>
+        <p>After the proposal defence, I moved straight into development.</p>
+
+        <p>My first priority was getting the foundations of the language working. I started with the lexer, which breaks source code into tokens, and the parser, which checks whether those tokens follow the grammar of the language.</p>
+
+        <p>From there, I worked on the abstract syntax tree (AST), runtime environments, and the interpreter responsible for executing programs.</p>
+
+        <p>Each component introduced its own challenges. A change to the grammar could affect the parser. A new language feature could expose weaknesses in how the interpreter handled variables, functions or execution flow.</p>
+
+        <figure class="story-figure story-figure--code">
+          <div class="story-code-bar"><span>06_milimo.tg</span><span>Excerpt from the bundled examples</span></div>
+          <pre><code>{`mulimo yungizya(a, b) {
+    pilula a + b
+}
+
+mulimo matalikilo() {
+    zina zyoonse = yungizya(10, 20)
+    amba("Zyoonse: " + zyoonse)
+}`}</code></pre>
+          <figcaption>An excerpt from one of the 17 bundled example programs. <code>yungizya</code> returns <code>30</code>, and <code>amba()</code> prints the result.</figcaption>
+        </figure>
+
+        <p>By <strong>April 2026</strong>, I had developed a basic working prototype. That was an important milestone because I could finally begin seeing the results of the research in something executable. But I was nowhere near finished.</p>
+
+        <p>I continued expanding the language, adding programming constructs and improving how the different components interacted.</p>
+
+        <p>I also began giving more attention to the experience of someone learning to program. It wasn’t enough for TongaLang to execute code correctly. I wanted it to provide useful feedback when something went wrong. That led me to work on clearer error messages, source locations, and explanations that could help beginners identify mistakes.</p>
+
+        <p>By late June, I had a fully working prototype that I considered <strong>TongaLang version 0.1</strong>.</p>
+
+        <h2>Why testing became one of the most important parts</h2>
+        <p>As TongaLang grew, I encountered another engineering challenge.</p>
+
+        <p>Every time I introduced a new feature or modified the interpreter, I needed to confirm that existing functionality still worked. Initially, I could manually run example programs and inspect their output. But as the language became more complex, manually testing everything after every change was no longer efficient.</p>
+
+        <p>I needed a more reliable approach.</p>
+
+        <p>That pushed me into developing automated test suites covering different parts of the language. I also built the <strong>TongaLang Test Lab</strong>, which became part of the development environment. The Test Lab helped me identify failures more quickly and examine how changes affected the language. It became particularly useful as I continued refining the grammar, interpreter, error handling and other features.</p>
+
+        <figure class="story-figure">
+          <a class="photo-open" href="/images/projects/tongalang/test-lab.png" data-lightbox-item data-caption="The TongaLang Test Lab turns regression results, weakness probes and coverage into visible evidence.">
+            <img src="/images/projects/tongalang/test-lab.png" alt="TongaLang Test Lab showing all checks passing" loading="lazy" />
+          </a>
+          <figcaption>The Test Lab turns regression results, weakness probes and coverage into visible evidence.</figcaption>
+        </figure>
+
+        <p>This was one of the biggest lessons I took from the project. Building a feature is one part of engineering. Making sure that feature continues to work as the system evolves is another.</p>
+
+        <p>The automated tests and the Test Lab became essential tools in improving the reliability of TongaLang.</p>
+
+        <h2 id="the-ide">Building the TongaLang IDE</h2>
+        <p>With continued development and guidance from my supervisor, the language had become much more polished by early August.</p>
+
+        <p>I also developed a graphical integrated development environment (IDE) for TongaLang. I wanted people to interact with the language through something more accessible than a command-line interface alone.</p>
+
+        <p>The IDE, built using Python’s <strong>Tkinter</strong> library, brought together source editing, syntax highlighting, program execution, input and output, and other developer tools.</p>
+
+        <figure class="story-figure">
+          <a class="photo-open" href="/images/projects/tongalang/ast-explorer.png" data-lightbox-item data-caption="The AST explorer connects executable structure back to the learner’s source code.">
+            <img src="/images/projects/tongalang/ast-explorer.png" alt="TongaLang graphical abstract syntax tree with source-linked nodes" loading="lazy" />
+          </a>
+          <figcaption>The AST explorer connects executable structure back to the learner’s source code.</figcaption>
+        </figure>
+
+        <p>One feature I particularly value is the AST explorer. When learning about programming languages, abstract syntax trees can feel like concepts that exist only in diagrams and textbooks. The AST explorer makes it possible to see how TongaLang represents a program internally.</p>
+
+        <p>Over time, the IDE also gained improved diagnostics, guided error handling, visual settings and a Test Lab for examining the system’s behaviour.</p>
+
+        <p>What had started as a question about how programming languages were created had become a language with its own interpreter and development environment.</p>
+
+        <h2 id="the-final-defence">The final project defence</h2>
+        <p>Eventually, the day of our final-year project presentations and demonstrations arrived. It was also my last day at university.</p>
+
+        <p>When the list of examiners was released, I checked who had been assigned to evaluate my work. And there it was.</p>
+
+        <p><strong>Dr George Mufungulwa.</strong> The same lecturer whose words had stayed with me since the proposal presentation.</p>
+
+        <p>I had a feeling our paths would cross again during the final examination, and now it was confirmed. I remembered his challenge: he was looking forward to seeing the project, and he hoped I would deliver.</p>
+
+        <p>This time, I had a working system to demonstrate.</p>
+
+        <p>The presentations and project demonstrations went smoothly with my examiners. I was able to show the language, explain its architecture, demonstrate its functionality and defend the engineering work behind it.</p>
+
+        <p>After months of research, development, debugging, testing and improvement, it was rewarding to see everything come together.</p>
+
+        <p><strong>My academic project received an A grade in the Project Seminars course.</strong> That meant a great deal to me, not simply because of the grade, but because I knew how much work had gone into building the system. I had challenged myself to explore something unfamiliar, dealt with the uncertainty of developing a complex system, and followed the idea through to a working implementation.</p>
+
+        <h2 id="beyond-university">TongaLang beyond university</h2>
+        <p>Although TongaLang began as my final-year project, I don’t want the journey to end with an academic submission. I want to take the work further.</p>
+
+        <p>The language currently uses Tonga-derived programming keywords and includes support for variables, conditional statements, loops, functions, expressions, input and output. It has its own lexer, parser, abstract syntax tree and interpreter, implemented in Python using PLY.</p>
+
+        <p>The project has also grown to include a desktop IDE, automated testing, technical documentation and executable example programs.</p>
+
+        <figure class="story-figure">
+          <a class="photo-open" href="/images/projects/tongalang/installer-setup.png" data-lightbox-item data-caption="The Windows installer uses the TongaLang name throughout, installs without administrator rights and puts the example programs in the application folder.">
+            <img src="/images/projects/tongalang/installer-setup.png" alt="TongaLang Setup selecting a per-user Windows installation folder" loading="lazy" />
+          </a>
+          <figcaption>The Windows installer installs without administrator rights and puts the example programs in the application folder.</figcaption>
+        </figure>
+
+        <p>In September 2026, I documented further improvements, including the Windows installation package and a test suite reporting <strong>179 passing tests</strong>.</p>
+
+        <p>There is still more to explore, particularly around language design, accessibility, educational evaluation, and making the software easier for others to use. I don’t consider TongaLang a finished answer to programming education. I see it as a foundation that can be studied, tested, improved and built upon.</p>
+
+        <h2>Bringing TongaLang to the world</h2>
+        <p>I’m now making TongaLang available beyond the university environment. Anyone interested in exploring the project can access its public GitHub repository, review the source code, examine the language documentation and try the available examples.</p>
+
+        <p>A Windows installer is available through the project’s GitHub Releases page. The project has also been tested on Linux, with source installation and build instructions provided in the documentation. Further distribution and improvements are ongoing.</p>
+
+        <p>I welcome contributions from software developers, programming-language enthusiasts, educators, researchers, and anyone interested in exploring how local languages can be represented in programming tools. Whether it’s testing the language, reporting bugs, contributing code, reviewing the grammar or sharing ideas about educational applications, there is room for collaboration.</p>
+
+        <div class="story-links">
+          <p class="eyebrow">Explore TongaLang</p>
+          <ul>
+            <li><a href="https://github.com/leomabuku/PROJECT"><span>GitHub repository</span><small>Source code, grammar, tests and documentation</small></a></li>
+            <li><a href="https://github.com/leomabuku/PROJECT/releases/latest"><span>Download releases</span><small>Windows installer and release notes</small></a></li>
+            <li><a href="/work/tongalang/"><span>Project overview</span><small>The case study on this site</small></a></li>
+            <li><a href="/playground/"><span>Interactive playground</span><small>Run TongaLang in your browser</small></a></li>
+          </ul>
+        </div>
+
+        <p>Looking back, the journey started with a simple question: <em>how are programming languages created?</em></p>
+
+        <p>I didn’t fully understand what I was signing up for when I decided to answer that question by building one. But I knew I wanted to learn, and I was willing to put in the work.</p>
+
+        <p>From that first idea in January, through a nervous proposal defence in February, to a working interpreter in April, version 0.1 in June, and a polished project by August, TongaLang has been one of the most demanding and rewarding engineering experiences I’ve undertaken.</p>
+
+        <p>I am proud of how far the project has come, and I’m looking forward to seeing what it can become.</p>
+
+        <p class="story-closing">This is TongaLang. And the journey continues.</p>
+
+        <p class="article-byline">Written by Leo Mabuku · Software developer and Computer Science graduate · <a href="/contact/">Get in touch</a></p>
+      </div>
+    </section>
+  </article>
+</BaseLayout>

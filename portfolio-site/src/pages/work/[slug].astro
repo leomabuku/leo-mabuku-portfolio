@@ -237,6 +237,12 @@ const num = (id: string) => String(sections.findIndex((section) => section.id ==
           <p class="evidence-note-label"><i class="ph ph-seal-check" aria-hidden="true"></i>Where it stands</p>
           <p>{project.evidence}</p>
         </div>
+        {project.slug === 'tongalang' && (
+          <p class="case-story-link">
+            <i class="ph ph-book-open" aria-hidden="true"></i>
+            <span>I wrote the whole story behind this project, from the first question to the public release: <a href="/notes/from-an-idea-to-tongalang/">From an idea to TongaLang</a>.</span>
+          </p>
+        )}
         {hackathon && (
           <p class="hackathon-reference">
             <i class="ph ph-trophy" aria-hidden="true"></i>
