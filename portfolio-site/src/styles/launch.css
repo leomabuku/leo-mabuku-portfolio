@@ -935,8 +935,15 @@ main,
   background:
     linear-gradient(100deg, rgb(var(--accent-2-rgb) / 30%), rgb(var(--deep-rgb) / 34%)),
     linear-gradient(100deg, rgb(var(--surface-rgb) / 90%), rgb(var(--surface-rgb) / 66%)),
-    url('/about-copperbelt-background.png') center / cover fixed;
+    url('/about-copperbelt-background.jpg') center / cover scroll;
   box-shadow: var(--shadow-lift);
+}
+
+/* Fixed backgrounds jitter on touch devices, so keep the parallax on desktop only. */
+@media (min-width: 801px) and (pointer: fine) {
+  .business-proof {
+    background-attachment: fixed;
+  }
 }
 
 .business-proof dl {

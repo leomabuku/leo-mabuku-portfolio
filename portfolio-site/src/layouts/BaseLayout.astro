@@ -69,6 +69,7 @@ const personSchema = {
         {nav.map(([href, label]) => <a href={href} aria-current={path.startsWith(href) ? 'page' : undefined} class:list={{ active: path.startsWith(href) }}>{label}</a>)}
       </nav>
       <div class="header-actions">
+        <a class="header-cta" href="/contact/">Hire me</a>
         <button type="button" class="command-trigger" data-command-open aria-label="Open quick navigation"><i class="ph ph-magnifying-glass" aria-hidden="true"></i></button>
         <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-nav"><i class="ph ph-list" aria-hidden="true"></i></button>
       </div>

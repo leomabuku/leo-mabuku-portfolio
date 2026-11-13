@@ -184,7 +184,7 @@ Keep the honest wording here — never let the profile imply the degree has been
 
 Add in this order (most relevant first):
 
-1. **GreenCode Hackathon — Top Six Team**, Garage48 × BongoHive × ESTDEV, Nov 2026
+1. **GreenCode Hackathon — Top Six Team (selected for acceleration)**, Garage48 × BongoHive × ESTDEV, Nov 2026
 2. **Huawei Datacom Training**, Huawei
 3. **Prompt Engineering for Everyone**, IBM Skills Network / Cognitive Class, Oct 2025
 4. **Data Analytics Traineeship**, MedTourEasy, Sep 2025

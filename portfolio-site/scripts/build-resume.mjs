@@ -125,16 +125,16 @@ function generate() {
 
   const sectionTitle = (text) => {
     if (y > BOTTOM - 60) return false;
-    y += 8;
-    doc.font('Helvetica-Bold').fontSize(7.6).fillColor(ACCENT)
+    y += 6;
+    doc.font('Helvetica-Bold').fontSize(8.4).fillColor(ACCENT)
       .text(text.toUpperCase(), MARGIN, y, { characterSpacing: 0.9 });
     y += 10;
-    rule('#b9bdb4', 0.8, 0, 4);
+    rule('#b9bdb4', 0.8, 0, 3);
     return true;
   };
 
   const paragraph = (text, opts = {}) => {
-    const size = opts.size ?? 8.4;
+    const size = opts.size ?? 9;
     const leading = opts.leading ?? size * 1.32;
     doc.font(opts.bold ? 'Helvetica-Bold' : 'Helvetica').fontSize(size)
       .fillColor(opts.color ?? INK);
@@ -146,7 +146,7 @@ function generate() {
   };
 
   const bullet = (text) => {
-    const size = 8.3;
+    const size = 9;
     const leading = size * 1.3;
     doc.font('Helvetica').fontSize(size).fillColor(INK);
     const width = CONTENT_W - 12;
@@ -168,37 +168,40 @@ function generate() {
     'leo-mabuku-portfolio.pages.dev',
     'linkedin.com/in/leo-mabuku-7a2645330',
   ];
-  doc.font('Helvetica').fontSize(7.4).fillColor(MUTED);
-  let cy = y + 4;
+  const contactSize = 8.2;
+  const contactStep = 11.2;
+  doc.font('Helvetica').fontSize(contactSize).fillColor(MUTED);
+  let cy = y + 3;
   for (const line of contactLines) {
     doc.text(line, MARGIN, cy, { width: CONTENT_W, align: 'right', lineBreak: false });
-    cy += 9.2;
+    cy += contactStep;
   }
-  y += nameHeight;
-  doc.font('Helvetica-Bold').fontSize(8).fillColor(ACCENT)
+  // Keep the title line and rule clear of the contact column, whichever is taller.
+  y = Math.max(y + nameHeight, cy) + 3;
+  doc.font('Helvetica-Bold').fontSize(8.8).fillColor(ACCENT)
     .text(profile.shortTitle.toUpperCase(), MARGIN, y, { characterSpacing: 0.7 });
-  y += 12;
+  y += 13;
   rule(INK, 1, 2, 8);
 
-  paragraph(resume.summary, { size: 8.5, leading: 11.6, after: 2 });
+  paragraph(resume.summary, { size: 9.2, leading: 12.2, after: 2 });
 
   /* experience */
   sectionTitle('Experience');
   for (const role of pick(experience, resume.experienceTitles)) {
     if (y > BOTTOM - 46) break;
-    doc.font('Helvetica-Bold').fontSize(9.1).fillColor(INK)
+    doc.font('Helvetica-Bold').fontSize(9.8).fillColor(INK)
       .text(`${role.title}`, MARGIN, y, { width: CONTENT_W, lineBreak: false });
     const titleWidth = doc.widthOfString(role.title) + 3;
-    doc.font('Helvetica').fontSize(9.1).fillColor(MUTED)
+    doc.font('Helvetica').fontSize(9.8).fillColor(MUTED)
       .text(` | ${role.organisation}`, MARGIN + titleWidth, y, { lineBreak: false });
-    y += 11.4;
-    doc.font('Helvetica').fontSize(7.5).fillColor(MUTED)
+    y += 12.2;
+    doc.font('Helvetica').fontSize(8.4).fillColor(MUTED)
       .text(`${role.period} · ${role.location}`, MARGIN, y);
-    y += 9.6;
+    y += 10.6;
     for (const line of [role.summary, ...(role.bullets ?? []).slice(0, 2)]) {
       if (!bullet(line)) break;
     }
-    y += 2.4;
+    y += 2.8;
   }
 
   /* projects */
@@ -206,13 +209,13 @@ function generate() {
     for (const project of pick(projects, resume.projectSlugs)) {
       if (y > BOTTOM - 34) break;
       const desc = project.shortDescription.replace(/\s+/g, ' ');
-      doc.font('Helvetica-Bold').fontSize(8.6).fillColor(INK)
+      doc.font('Helvetica-Bold').fontSize(9.3).fillColor(INK)
         .text(project.name, MARGIN, y, { width: CONTENT_W, lineBreak: false });
       const w = doc.widthOfString(project.name) + 3;
-      doc.font('Helvetica').fontSize(8.6).fillColor(MUTED)
+      doc.font('Helvetica').fontSize(9.3).fillColor(MUTED)
         .text(` | ${project.technologies.slice(0, 5).join(', ')}`, MARGIN + w, y, { lineBreak: false });
-      y += 10.4;
-      if (!paragraph(desc, { size: 8.1, leading: 10.4, color: MUTED, after: 3.4 })) break;
+      y += 11.2;
+      if (!paragraph(desc, { size: 8.8, leading: 11.4, color: MUTED, after: 3.4 })) break;
     }
   }
 
@@ -220,48 +223,46 @@ function generate() {
   if (sectionTitle('Education')) {
     const degree = education[0];
     if (degree) {
-      doc.font('Helvetica-Bold').fontSize(8.7).fillColor(INK)
+      doc.font('Helvetica-Bold').fontSize(9.4).fillColor(INK)
         .text(degree.qualification, MARGIN, y, { lineBreak: false });
       const w = doc.widthOfString(degree.qualification) + 3;
-      doc.font('Helvetica').fontSize(8.7).fillColor(MUTED)
+      doc.font('Helvetica').fontSize(9.4).fillColor(MUTED)
         .text(` | ${degree.institution} · ${degree.period}`,
           MARGIN + w, y, { width: CONTENT_W - w, lineBreak: false });
-      y += 11;
+      y += 11.8;
     }
     if (resume.showCertifications) {
       const training = certifications.map((c) => `${c.name}${c.period && c.period !== 'Training' ? ` (${c.period})` : ''}`);
-      paragraph(training.join(' · '), { size: 7.8, leading: 10.2, color: MUTED, after: 2 });
+      paragraph(training.join(' · '), { size: 8.4, leading: 11, color: MUTED, after: 2 });
     }
   }
 
   /* hackathon */
   const hackathon = hackathons[0];
-  if (resume.showHackathon && hackathon && y < BOTTOM - 26) {
-    sectionTitle('Recognition');
-    doc.font('Helvetica-Bold').fontSize(8.7).fillColor(INK)
+  if (resume.showHackathon && hackathon && y < BOTTOM - 26 && sectionTitle('Recognition')) {
+    doc.font('Helvetica-Bold').fontSize(9.4).fillColor(INK)
       .text(hackathon.name, MARGIN, y, { lineBreak: false });
     const w = doc.widthOfString(hackathon.name) + 3;
-    doc.font('Helvetica').fontSize(8.7).fillColor(MUTED)
-      .text(` | ${hackathon.result} of ${hackathon.fieldSize.toLowerCase()} — ${hackathon.period}`,
-        MARGIN + w, y, { lineBreak: false });
-    y += 11.4;
-    paragraph(hackathon.awardSummary, { size: 8, leading: 10.4, color: MUTED, after: 2 });
+    doc.font('Helvetica').fontSize(9.4).fillColor(MUTED)
+      .text(` | ${hackathon.period}`, MARGIN + w, y, { lineBreak: false });
+    y += 12;
+    paragraph(`${hackathon.result} out of ${hackathon.fieldSize}.`, { size: 8.8, leading: 11.4, color: MUTED, after: 2 });
+    paragraph(hackathon.awardSummary, { size: 8.8, leading: 11.4, color: MUTED, after: 2 });
   }
 
   /* skills line */
-  if (y < BOTTOM - 34) {
-    sectionTitle('Toolkit');
+  if (y < BOTTOM - 34 && sectionTitle('Toolkit')) {
     const toolkit = skillGroups
       .slice(0, 4)
       .map((group) => `${group.title}: ${group.items.join(', ')}`)
       .join('   ·   ');
-    paragraph(toolkit, { size: 7.8, leading: 10.2, color: MUTED, after: 0 });
+    paragraph(toolkit, { size: 8.4, leading: 11, color: MUTED, after: 0 });
   }
 
   /* footer */
   // Footer is written into the bottom margin, so relax it briefly to avoid a page break.
   doc.page.margins.bottom = 0;
-  doc.font('Helvetica').fontSize(7).fillColor('#9aa09a')
+  doc.font('Helvetica').fontSize(7.8).fillColor('#9aa09a')
     .text(
       `${profile.github.replace('https://', '')}  ·  ${profile.email}  ·  ${profile.phone}`,
       MARGIN,

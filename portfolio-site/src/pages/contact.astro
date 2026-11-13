@@ -7,11 +7,52 @@ const links = [
   ['ph-linkedin-logo', 'LinkedIn', 'Leo Mabuku', profile.linkedin],
   ['ph-whatsapp-logo', 'WhatsApp', profile.phone, whatsappUrl],
 ];
+const paths = [
+  {
+    icon: 'ph-briefcase',
+    title: 'Hire for a role',
+    copy: 'Graduate software roles, internships and full-time engineering positions, in Zambia or remote. Resume and references on request.',
+    cta: 'Email me about a role',
+    href: `mailto:${profile.email}?subject=${encodeURIComponent('Role enquiry for Leo Mabuku')}`,
+  },
+  {
+    icon: 'ph-hammer',
+    title: 'Commission a build',
+    copy: 'Freelance Android, web, API and IoT builds, from a 48-hour prototype to a maintained product, with clear milestones and honest limits.',
+    cta: 'Describe your project',
+    href: `mailto:${profile.email}?subject=${encodeURIComponent('Project enquiry for Leo Mabuku')}`,
+  },
+  {
+    icon: 'ph-handshake',
+    title: 'Collaborate or mentor',
+    copy: 'Hackathon teams, technical collaborations, code review and paid tutoring for learners who want to understand their own code.',
+    cta: 'Start a collaboration',
+    href: `mailto:${profile.email}?subject=${encodeURIComponent('Collaboration enquiry for Leo Mabuku')}`,
+  },
+];
 ---
 <BaseLayout title="Contact Leo Mabuku" description="Contact Leo Mabuku about graduate software roles, internships, freelance development and technical collaborations.">
   <section class="contact-page" data-scene="contact">
     <div class="contact-page-signal" aria-hidden="true"><span>Available</span><b>Lusaka · Kitwe · Remote</b></div>
     <div class="page-hero" data-motion><p class="eyebrow">Contact · Open channel</p><h1>Let’s start a<br/><em>useful conversation.</em></h1><p>{profile.availability}</p><p class="contact-location"><i class="ph ph-map-pin" aria-hidden="true"></i>{profile.location}</p></div>
+    <section class="contact-paths" id="ways-to-work" aria-label="Ways to work with Leo" data-motion>
+      {paths.map((path) => (
+        <article>
+          <i class={`ph ${path.icon}`} aria-hidden="true"></i>
+          <h2>{path.title}</h2>
+          <p>{path.copy}</p>
+          <a class="text-link" href={path.href}>{path.cta} <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+        </article>
+      ))}
+      <div class="contact-paths-note">
+        <p class="eyebrow">Prefer to read first?</p>
+        <p>The one-page resume covers experience, projects, education and the GreenCode Hackathon result.</p>
+        <div class="actions">
+          <a class="button button--ghost" href="/documents/Leo-Mabuku-Resume.pdf" download><i class="ph ph-download-simple" aria-hidden="true"></i> Download CV (PDF)</a>
+          <a class="text-link" href={whatsappUrl} target="_blank" rel="noreferrer">Message on WhatsApp <i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>
+        </div>
+      </div>
+    </section>
     <div class="contact-panel" data-motion>
       <div class="contact-list" data-motion-stagger>{links.map(([icon, label, value, href]) => <a href={href} target={href.startsWith('http') ? '_blank' : undefined} rel={href.startsWith('http') ? 'noreferrer' : undefined}><i class={`ph ${icon}`} aria-hidden="true"></i><span><small>{label}</small><strong>{value}</strong></span><i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>)}</div>
       <form class="contact-form" aria-labelledby="contact-form-title" action={`mailto:${profile.email}`} method="post" enctype="text/plain">
