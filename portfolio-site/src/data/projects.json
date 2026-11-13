@@ -21,16 +21,16 @@
       "PyInstaller",
       ".tg files"
     ],
-    "repository": "https://github.com/leomabuku/PROJECT",
+    "repository": "https://github.com/leomabuku/TongaLang",
     "repositoryLabel": "Source code and documentation",
     "additionalRepositories": [
       {
         "label": "Download TongaLang 0.2.0 for Windows",
-        "url": "https://github.com/leomabuku/PROJECT/releases/download/v0.2.0/TongaLang-Setup-0.2.0.exe"
+        "url": "https://github.com/leomabuku/TongaLang/releases/download/v0.2.0/TongaLang-Setup-0.2.0.exe"
       },
       {
         "label": "Windows and Linux installation guide",
-        "url": "https://github.com/leomabuku/PROJECT/blob/main/docs/INSTALLATION.md"
+        "url": "https://github.com/leomabuku/TongaLang/blob/main/docs/INSTALLATION.md"
       }
     ],
     "repositoryVisibility": "public",
