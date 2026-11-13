@@ -18,14 +18,20 @@ const repositories = [
   ...(project.additionalRepositories ?? []),
 ];
 
+const projectUrl = new URL(`/work/${project.slug}/`, Astro.site).toString();
+const creatorId = new URL('/#person', Astro.site).toString();
+
 const projectSchema = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareSourceCode',
+  '@id': `${projectUrl}#software`,
   name: project.name,
   description: project.shortDescription,
+  url: projectUrl,
   codeRepository: project.repository || undefined,
   programmingLanguage: project.technologies,
-  author: { '@type': 'Person', name: 'Leo Mabuku' },
+  author: { '@type': 'Person', '@id': creatorId, name: 'Leo Mabuku', url: Astro.site?.toString() },
+  creator: { '@type': 'Person', '@id': creatorId, name: 'Leo Mabuku', url: Astro.site?.toString() },
 };
 
 const formattedUpdatedOn = project.updatedOn
@@ -55,6 +61,9 @@ const num = (id: string) => String(sections.findIndex((section) => section.id ==
         <p class="eyebrow">{project.type}</p>
         <h1 transition:name={`project-title-${project.slug}`}>{project.name}</h1>
         <p>{project.shortDescription}</p>
+        {project.slug === 'tongalang' && (
+          <p class="project-creator">Created by <a href="/about/">Leo Mabuku</a> · Zambia</p>
+        )}
         {project.slug === 'tongalang' && <a class="button case-playground-link" href="/playground/">Run TongaLang in your browser ↗</a>}
         <div class="case-badges">
           <span>{project.status}</span>
