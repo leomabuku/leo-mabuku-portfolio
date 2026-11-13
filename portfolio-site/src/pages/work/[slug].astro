@@ -62,7 +62,7 @@ const num = (id: string) => String(sections.findIndex((section) => section.id ==
         <h1 transition:name={`project-title-${project.slug}`}>{project.name}</h1>
         <p>{project.shortDescription}</p>
         {project.slug === 'tongalang' && (
-          <p class="project-creator">Created by <a href="/about/">Leo Mabuku</a> · Zambia</p>
+          <p class="eyebrow project-creator">Created by <a href="/about/">Leo Mabuku</a> · Zambia</p>
         )}
         {project.slug === 'tongalang' && <a class="button case-playground-link" href="/playground/">Run TongaLang in your browser ↗</a>}
         <div class="case-badges">
