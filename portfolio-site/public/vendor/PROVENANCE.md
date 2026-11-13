@@ -1,6 +1,6 @@
 # TongaLang browser runtime
 
-TongaLang source: https://github.com/leomabuku/PROJECT
+TongaLang source: https://github.com/leomabuku/TongaLang
 Pinned revision: `956909b5f64d9114b2796397727be4f665726703` (v0.2.0).
 The Python files and 17 examples are copied unchanged from that revision.
 The portfolio and language repositories belong to Leo Mabuku. No third-party license is inferred for TongaLang.
